@@ -1,0 +1,22 @@
+{
+    "name": "kr-solutions/krcms-bundle",
+    "type": "symfony-bundle",
+    "description": "Content Management System bundle for symfony 2",
+    "homepage": "https://www.kr-solutions.nl/",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Rudy Adamse",
+            "email": "r.adamse@kr-solutions.nl"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "friendsofsymfony/user-bundle": "~2.0@dev"
+    },
+    "autoload": {
+        "psr-4" : {
+            "KRSolutions\\Bundle\\KRCMSBundle\\" : ""
+        }
+    }
+}

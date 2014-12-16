@@ -1,0 +1,15 @@
+.brand-logo {
+	background: url("../images/logo-thumb.png") no-repeat scroll left center transparent;
+	display: block;
+	text-indent: 100px;
+	height: 100px;
+	font-weight: 200;
+	font-size: 28px;
+	line-height: 120px;
+	padding: 0px 15px;
+}
+
+.table-row-dragged td,
+.table-row-dragged th {
+	background-color: #eeddee !important;
+}

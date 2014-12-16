@@ -1,0 +1,23 @@
+{
+  "name": "kr-solutions/krcms-bundle",
+  "version": "1.0.0",
+  "authors": [
+    "Rudy Adamse <r.adamse@kr-solutions.nl>"
+  ],
+  "description": "Content Management System bundle for Symfony 2",
+  "license": "proprietary",
+  "homepage": "https://www.kr-solutions.nl/",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "Resources/public/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "bootstrap": "~3.3.1"
+  }
+}

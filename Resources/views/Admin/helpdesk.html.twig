@@ -1,0 +1,27 @@
+{% extends 'KRSolutionsKRCMSBundle:Admin:layout.html.twig' %}
+
+
+{% block title %}Helpdesk - Content Management Systeem{% endblock %}
+{% block content %}
+
+<header class="jumbotron subhead">
+	<h1>Helpdesk</h1>
+	<p class="lead">Heeft u vragen over het beheren van uw website? Of wilt u een wijziging in uw website die u zelf niet kunt doen? Gebruik dan dit formulier om in contact te komen met uw website ontwikkelaar (K&amp;R Solutions). Uw vraag wordt binnen 24 uur behandeld.</p>
+</header>
+
+<div class="row-fluid">
+	<div class="span12">
+		<div class="well">
+			<form method="post" action="{{ path ('kr_solutions_krcms_helpdesk') }}" {{ form_enctype(contactForm) }}>
+				{{ form_rest(contactForm) }}
+				<input type="submit" value="Versturen" />
+			</form>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+{% endblock %}

@@ -1,0 +1,54 @@
+KRSolutions\Bundle\KRCMSBundle\Entity\Menu:
+    type: entity
+    repositoryClass: KRSolutions\Bundle\KRCMSBundle\Repository\MenuRepository
+    table: krcms_menus
+    indexes:
+        name:
+            columns:
+                - name
+        site_id:
+            columns:
+                - site_id
+    uniqueConstraints:
+        site_id_2:
+            columns:
+                - site_id
+                - name
+    id:
+        id:
+            type: integer
+            nullable: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            comment: ''
+        description:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            comment: ''
+    oneToMany:
+        pages:
+            targetEntity: Page
+            mappedBy: menu
+            orderBy:
+            orderId: asc
+    manyToOne:
+        site:
+            targetEntity: Site
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                site_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,206 @@
+KRSolutions\Bundle\KRCMSBundle\Entity\Page:
+    type: entity
+    repositoryClass: KRSolutions\Bundle\KRCMSBundle\Repository\PageRepository
+    table: krcms_pages
+    indexes:
+        parent_id:
+            columns:
+                - parent_id
+        created_by:
+            columns:
+                - created_by
+        updated_by:
+            columns:
+                - updated_by
+        order_id:
+            columns:
+                - order_id
+        page_type_id:
+            columns:
+                - page_type_id
+        menu_id:
+            columns:
+                - menu_id
+        permalink:
+            columns:
+                - permalink
+        site_id:
+            columns:
+                - site_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        orderId:
+            type: integer
+            nullable: false
+            comment: ''
+            default: '0'
+            column: order_id
+        createdAt:
+            type: datetime
+            nullable: false
+            comment: ''
+            default: CURRENT_TIMESTAMP
+            column: created_at
+        updatedAt:
+            type: datetime
+            nullable: false
+            comment: ''
+            default: '0000-00-00 00:00:00'
+            column: updated_at
+        publishAt:
+            type: datetime
+            nullable: true
+            comment: ''
+            column: publish_at
+        publishTill:
+            type: datetime
+            nullable: true
+            comment: ''
+            column: publish_till
+        permalink:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+            comment: ''
+        menuTitle:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+            comment: ''
+            column: menu_title
+        title:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            comment: ''
+        content:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            comment: ''
+        metaKeywords:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+            comment: ''
+            column: meta_keywords
+        metaDescription:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+            comment: ''
+            column: meta_description
+    manyToOne:
+        menu:
+            targetEntity: Menu
+            cascade: {  }
+            mappedBy: null
+            inversedBy: pages
+            joinColumns:
+                menu_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        site:
+            targetEntity: Site
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                site_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        createdBy:
+            targetEntity: User
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                created_by:
+                    referencedColumnName: id
+            orphanRemoval: false
+        updatedBy:
+            targetEntity: User
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                updated_by:
+                    referencedColumnName: id
+            orphanRemoval: false
+        pageType:
+            targetEntity: PageType
+            cascade: {  }
+            mappedBy: null
+            inversedBy: pages
+            joinColumns:
+                page_type_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        parent:
+            targetEntity: Page
+            cascade: {  }
+            mappedBy: null
+            inversedBy: pages
+            joinColumns:
+                parent_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    manyToMany:
+        categories:
+            targetEntity: Category
+            cascade: {  }
+            mappedBy: null
+            inversedBy: pages
+            joinTable:
+                name: krcms_pages_categories
+                joinColumns:
+                    -
+                        name: page_id
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: category_id
+                        referencedColumnName: id
+            orderBy: null
+        tags:
+            targetEntity: Tag
+            cascade: {  }
+            mappedBy: null
+            inversedBy: pages
+            joinTable:
+                name: krcms_pages_tags
+                joinColumns:
+                    -
+                        name: page_id
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: tag_id
+                        referencedColumnName: id
+            orderBy: null
+    oneToMany:
+        pages:
+            targetEntity: Page
+            mappedBy: parent
+            orderBy:
+                orderId: asc
+        files:
+            targetEntity: File
+            mappedBy: page
+            cascade: ["all"]
+            orderBy:
+                orderId: asc
+    lifecycleCallbacks: {  }

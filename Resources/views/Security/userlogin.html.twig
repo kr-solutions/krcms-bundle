@@ -1,0 +1,57 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}K&amp;R Solutions Content Management - Inloggen{% endblock %}
+{% block stylesheets %}
+<link href="{{ asset('bundles/krsolutionskrcms/css/login.css') }}" rel="stylesheet" type="text/css" media="all" />
+<meta name="robots" content="noindex, nofollow" />
+{% endblock %}
+
+{% block body %}
+<div id="wrapper">
+    <div id="mainCntr">
+        <div id="contentCntr">
+            {% set username = "Email adres" %}
+
+            {% if last_username == username %}
+                {% set last_username = "" %}
+            {% endif %}
+
+            {% if last_username != "" %}
+				{% set username = last_username %}
+            {% endif %}
+
+            <form action="{{ path('kr_solutions_krcms_login_check') }}" method="post">
+                <fieldset>
+                    <legend>Inloggen</legend>
+                    <ul>
+                    {% if error %}
+                        <li class="error">{{ error.message|trans }}</li>
+                    {% endif %}
+                        <li>
+                            <label for="username">E-mail adres:</label>
+                            <input type="text" id="username" name="_username" value="{{ username }}" class="field" {% if last_username == "" %} onblur="if (this.value=='') this.value = this.defaultValue" onfocus="if (this.value==this.defaultValue) this.value = ''" {% endif %} />
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <label for="password">Wachtwoord:</label>
+                            <input type="password" id="password" name="_password" class="field" value="********" onblur="if (this.value=='') this.value = this.defaultValue" onfocus="if (this.value==this.defaultValue) this.value = ''" />
+                            <div class="clear"></div>
+                        </li>
+                    </ul>
+
+                    <input type="submit" name="login" value="Inloggen" class="button" />
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+
+<script type="text/javascript">
+	document.getElementById("username").focus();
+</script>
+		
+{% endblock %}

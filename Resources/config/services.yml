@@ -1,0 +1,20 @@
+services:
+#    kr_solutions_krcms.example:
+#        class: KRSolutions\Bundle\KRCMSBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+    kr_solutions_krcms.page_handler.page:
+        class: KRSolutions\Bundle\KRCMSBundle\PageHandler\PageHandler
+        calls:
+            - [setContainer, ["@service_container"]]
+
+    kr_solutions_krcms.menu_twig_extension:
+        class: KRSolutions\Bundle\KRCMSBundle\TwigExtension\MenuTwigExtension
+        arguments: ["@service_container"]
+        tags:
+            - { name: twig.extension }
+
+    kr_solutions_krcms.excerpt_twig_extension:
+        class: KRSolutions\Bundle\KRCMSBundle\TwigExtension\ExcerptTwigExtension
+        tags:
+            - { name: twig.extension }

@@ -1,0 +1,17 @@
+kr_solutions_krcms_homepage:
+    pattern:  /
+    defaults: { _controller: KRSolutionsKRCMSBundle:Default:page, site_permalink: '' }
+
+kr_solutions_krcms_sitemap:
+    pattern:  /sitemap.xml
+    defaults: { _controller: KRSolutionsKRCMSBundle:Default:sitemap, site_permalink: '' }
+
+kr_solutions_krcms_page:
+    pattern:  /{permalink}
+    defaults: { _controller: KRSolutionsKRCMSBundle:Default:page, site_permalink: '', permalink: '' }
+
+kr_solutions_krcms_blog:
+    pattern:  /{permalink}/{pageNumber}
+    defaults: { _controller: KRSolutionsKRCMSBundle:Default:page, site_permalink: '' }
+    requirements:
+        pageNumber: \d+

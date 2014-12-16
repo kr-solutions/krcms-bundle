@@ -1,0 +1,118 @@
+kr_solutions_krcms_dashboard:
+    pattern: /
+    defaults: { _controller: KRSolutionsKRCMSBundle:Admin:dashboard }
+
+kr_solutions_krcms_helpdesk:
+    pattern: /helpdesk
+    defaults: { _controller: KRSolutionsKRCMSBundle:Admin:helpdesk }
+
+# Pagina's
+kr_solutions_krcms_pages_index:
+    pattern: /paginas/{siteId}/{parentPageId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:Page:index, parentPageId: null }
+
+kr_solutions_krcms_pages_add:
+    pattern: /toevoegen/{siteId}/{pageType}
+    defaults: { _controller: KRSolutionsKRCMSBundle:Page:edit }
+
+kr_solutions_krcms_pages_edit:
+    pattern: /wijzigen/{pageId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:Page:edit }
+    requirements:
+        pageId: \d+
+
+kr_solutions_krcms_pages_remove:
+    pattern: /verwijderen/{pageId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:Page:remove }
+
+kr_solutions_krcms_pages_generate_permalink:
+    pattern: /generate-permalink
+    defaults: { _controller: KRSolutionsKRCMSBundle:Page:generatePermalink }
+
+kr_solutions_krcms_pages_change_order:
+    pattern: /change-pages-order
+    defaults: { _controller: KRSolutionsKRCMSBundle:Page:changeOrder }
+
+# Files
+kr_solutions_krcms_files:
+    pattern: /bestanden/{pageId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:Page:files }
+    requirements:
+        pageId: \d+
+
+kr_solutions_krcms_files_remove:
+    pattern: /bestand-verwijderen
+    defaults: { _controller: KRSolutionsKRCMSBundle:Page:removeFile }
+
+# Menu's
+kr_solutions_krcms_menus_index:
+    pattern: /menus
+    defaults: { _controller: KRSolutionsKRCMSBundle:Menu:index }
+
+kr_solutions_krcms_menu_remove:
+    pattern: /menu-verwijderen/{menuId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:Menu:remove }
+
+kr_solutions_krcms_menu_edit:
+    pattern: /menu-wijzigen/{menuId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:Menu:edit }
+    requirements:
+        menuId: \d+
+
+# Gebruikers
+kr_solutions_krcms_users_index:
+    pattern: /gebruikers
+    defaults: { _controller: KRSolutionsKRCMSBundle:User:index }
+
+kr_solutions_krcms_user_remove:
+    pattern: /gebruiker-verwijderen/{userId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:User:remove }
+
+kr_solutions_krcms_user_edit:
+    pattern: /gebruiker-wijzigen/{userId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:User:edit }
+    requirements:
+        userId: \d+
+
+# Gebruikersrechten
+kr_solutions_krcms_privileges_index:
+    pattern: /gebruikers-rechten
+    defaults: { _controller: KRSolutionsKRCMSBundle:Privilege:index }
+
+kr_solutions_krcms_privilege_remove:
+    pattern: /gebruikers-recht-verwijderen/{privilegeId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:Privilege:remove }
+
+kr_solutions_krcms_privilege_edit:
+    pattern: /gebruikers-recht-wijzigen/{privilegeId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:Privilege:edit }
+
+# Categoriën
+kr_solutions_krcms_categories_index:
+    pattern: /categorien
+    defaults: { _controller: KRSolutionsKRCMSBundle:Categories:index }
+
+kr_solutions_krcms_category_remove:
+    pattern: /categorie-verwijderen/{categoryId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:Category:remove }
+
+kr_solutions_krcms_category_edit:
+    pattern: /categorie-wijzigen/{categoryId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:Category:edit }
+    requirements:
+        categoryId: \d+
+
+# Sites
+kr_solutions_krcms_sites_index:
+    pattern: /sites
+    defaults: { _controller: KRSolutionsKRCMSBundle:Site:index }
+
+kr_solutions_krcms_sites_remove:
+    pattern: /site-verwijderen/{siteId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:Site:remove }
+
+kr_solutions_krcms_sites_edit:
+    pattern: /site-wijzigen/{siteId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:Site:edit }
+    requirements:
+        siteId: \d+

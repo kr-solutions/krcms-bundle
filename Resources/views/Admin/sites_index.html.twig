@@ -1,0 +1,152 @@
+{% extends 'KRSolutionsKRCMSBundle:Admin:layout.html.twig' %}
+
+{% block title %}Pagina's - Content Management Systeem{% endblock %}
+
+{% block content %}
+
+<header class="jumbotron subhead">
+	<h1>{% if parentPage is null %}Pagina's{% else %}Pagina's onder de hoofpagina {{ parentPage.title }}{% endif %}</h1>
+	<p class="lead">Gebruik dit scherm om uw pagina's te beheren. Klik op een pagina om deze te wijzigen en gebruik het menu aan de linkerkant om pagina's toe te voegen.</p>
+</header>
+
+<div class="row-fluid">
+	<div class="span3">
+		<div class="well">
+			{% include 'KRSolutionsKRCMSBundle:Admin:sites_menu.html.twig' %}
+		</div>
+	</div>
+	<div class="span9">
+		<div class="well">
+			<div class="pages_order_success alert alert-block alert-success" style="display: none;">
+				<a class="close" data-dismiss="alert" href="#">×</a>
+				De nieuwe pagina volgorde is opgeslagen!
+			</div>
+
+			{% if parentPage is null or pages|length > 0 %}
+			<table id="pages_table" class="table table-striped">
+				<thead>
+					<tr>
+						<th style="width: 20%;">Titel</th>
+						<th>Item</th>
+						<th>Datum</th>
+						<th>Onderliggende pagina's</th>
+						<th></th>
+					</tr>
+				</thead>
+
+			{% if parentPage is not null %}
+				{% set pageCollections = [parentPage] %}
+			{% else %}
+				{% set pageCollections = menus %}
+			{% endif %}
+
+			{% for pageCollection in pageCollections %}
+				<tbody>
+					{% if pageCollection.name is defined%}<tr class="nodrop nodrag"><th colspan="5">Menu: {{ pageCollection.name }}</th></tr>{% endif %}
+				{% set order_id = 1 %}
+				{% for page in pageCollection.pages %}
+					<tr id="{{ page.id ~ '.' ~ order_id }}">
+						<td><a href="{{ path('kr_solutions_krcms_pages_edit', { 'pageId': page.id }) }}" title="Pagina wijzigen"><b>{{ page.title }}</b></a></td>
+						<td>{{ page.pageType.name }}</td>
+						<td>{{ page.createdAt|date("d-m-Y") }}</td>
+						<td>{% if page.pageType.hasChildren == true %}<a href="{{ path('kr_solutions_krcms_pages_index', { 'siteId': site.id, 'parentPageId': page.id }) }}">Bekijk pagina's</a>{% else %}Geen{% endif %}</td>
+						<td class="btn-toolbar">
+							<div class="btn-group pull-right">
+							{% if true == page.pageType.hasFiles %}
+								<a class="btn" href="{{ path('kr_solutions_krcms_files', { 'pageId': page.id }) }}" title="Bestanden beheren"><i class="icon-folder-open"></i> Bestanden beheren</a>
+							{% endif %}
+								<a class="btn" href="{{ path('kr_solutions_krcms_pages_edit', { 'pageId': page.id }) }}" title="Pagina wijzigen"><i class="icon-edit"></i> Wijzigen</a>
+							{% if true == page.pageType.isUserGranted(app.user) %}
+								<a class="pages_remove btn" id="pages_remove_{{ page.id }}" href="javascript:void(0)"><i class="icon-trash"></i> Verwijderen</a>
+							{% endif %}
+							</div>
+						</td>
+					</tr>
+					{% set order_id = order_id + 1 %}
+				{% endfor %}
+				</tbody>
+			{% endfor %}
+			{% if parentPage is null and pages|length > 0 %}
+				<tbody>
+					<tr class="nodrop nodrag"><th colspan="5">Losse pagina's</th></tr>
+				{% for page in pages %}
+					{% set order_id = 1 %}
+					<tr  class="nodrop nodrag" id="{{ page.id ~ '.' ~ order_id }}">
+						<td><a href="{{ path('kr_solutions_krcms_pages_edit', { 'pageId': page.id }) }}" title="Pagina wijzigen"><b>{{ page.title }}</b></a></td>
+						<td>{{ page.pageType.name }}</td>
+						<td>{{ page.createdAt|date("d-m-Y") }}</td>
+						<td>{% if page.pageType.hasChildren == true %}<a href="{{ path('kr_solutions_krcms_pages_index', { 'siteId': site.id, 'parentPageId': page.id }) }}">Bekijk pagina's</a>{% else %}Geen{% endif %}</td>
+						<td class="btn-toolbar">
+							<div class="btn-group pull-right">
+							{% if true == page.pageType.hasFiles %}
+								<a class="btn" href="{{ path('kr_solutions_krcms_files', { 'pageId': page.id }) }}" title="Bestanden beheren"><i class="icon-folder-open"></i> Bestanden beheren</a>
+							{% endif %}
+								<a class="btn" href="{{ path('kr_solutions_krcms_pages_edit', { 'pageId': page.id }) }}" title="Pagina wijzigen"><i class="icon-edit"></i> Wijzigen</a>
+							{% if true == page.pageType.isUserGranted(app.user) %}
+								<a class="pages_remove btn" id="pages_remove_{{ page.id }}" href="javascript:void(0)"><i class="icon-trash"></i> Verwijderen</a>
+							{% endif %}
+							</div>
+						</td>
+					</tr>
+					{% set order_id = order_id + 1 %}
+				{% endfor %}
+				</tbody>
+			{% endif %}
+			</table>
+			{% else %}
+				<p>Er zijn nog geen {% if parentPage is null %}pagina's{% else %}items aan {{ parentPage.pageType.name }} <strong>"{{ parentPage.title }}"</strong>{% endif %} toegevoegd.</p>
+				<p>Klik op <strong>
+				{% if parentPage is null %}"Pagina toevoegen"{% else %}
+					{% if parentPage.pageType.pageTypeChildren|length == 1 %}
+					"{{ parentPage.pageType.pageTypeChildren[0].name }} toevoegen"
+					{% elseif parentPage.pageType.pageTypeChildren|length > 1 %}
+						{% for key, pageChild in parentPage.pageType.pageTypeChildren %}
+							{% if key != 0 %}<small>of</small>{% endif %} "{{ pageChild.name }} toevoegen"
+						{% endfor %}
+					{% else %}
+					&eacute;&eacute;n van de toevoegen-linkjes
+					{% endif %}
+				{% endif %}</strong> aan de linkerkant om een {% if parentPage is null %}pagina{% else %} item aan {{ parentPage.pageType.name }} <strong>"{{ parentPage.title }}"</strong>{% endif %} toe te voegen.</p>
+			{% endif %}
+		</div>
+	</div>
+</div>
+
+{# Modals #}
+<div class="modal hide" id="pages_remove_modal">
+    <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">×</button>
+		<h3>Site verwijderen</h3>
+    </div>
+    <div class="modal-body">
+		<p>Weet u zeker dat u deze site wilt verwijderen?</p>
+		<p><small>Alle eventueel gekoppelde pagina's onder deze site worden verborgen! Deze dient u indien nodig zelf opnieuw te koppelen aan een andere site.</small></p>
+    </div>
+    <div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Annuleren</a>
+		<a href="#" class="btn btn-danger" id="pages_remove_action">Verwijderen</a>
+    </div>
+</div>
+{# End modals #}
+
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript" src="{{ asset('bundles/krsolutionskrcms/tablednd/js/jquery.tablednd.0.7.min.js') }}"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			// Initialise the table
+
+			$('.pages_remove').on('click', function() {
+				var page_id = this.id.replace('pages_remove_', '');
+				var remove_url_holder = '{{ path('kr_solutions_krcms_pages_remove', {'pageId': 'page_ID_PLACE_HOLDER'}) }}';
+
+				$('#pages_remove_action').attr('href', remove_url_holder.replace('page_ID_PLACE_HOLDER', page_id));
+				$('#pages_remove_modal').modal('show');
+			});
+
+			$("a[rel=popover]").popover();
+		});
+	</script>
+{% endblock %}

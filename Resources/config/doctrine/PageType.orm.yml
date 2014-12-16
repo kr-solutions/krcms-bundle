@@ -1,0 +1,130 @@
+KRSolutions\Bundle\KRCMSBundle\Entity\PageType:
+    type: entity
+    repositoryClass: KRSolutions\Bundle\KRCMSBundle\Repository\PageTypeRepository
+    table: krcms_page_types
+    id:
+        id:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            comment: ''
+        description:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            comment: ''
+        pageHandler:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+            comment: ''
+            column: page_handler
+        template:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+            comment: ''
+        adminForm:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+            comment: ''
+            column: admin_form
+        adminTemplate:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+            comment: ''
+            column: admin_template
+        adminFormHandler:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+            comment: ''
+            column: admin_form_handler
+        isChild:
+            type: boolean
+            nullable: false
+            comment: ''
+            default: '0'
+            column: is_child
+        hasChildren:
+            type: boolean
+            nullable: false
+            comment: ''
+            default: '0'
+            column: has_children
+        childrenOrderBy:
+            type: string
+            length: 25
+            nullable: true
+            comment: ''
+            fixed: false
+            column: children_order_by
+        childrenOrderDirection:
+            type: string
+            length: 4
+            nullable: true
+            comment: ''
+            fixed: false
+            column: children_order_direction
+        hasFiles:
+            type: boolean
+            nullable: false
+            comment: ''
+            default: '0'
+            column: has_files
+        hasContent:
+            type: boolean
+            nullable: false
+            comment: ''
+            default: '1'
+            column: has_content
+        roles:
+            type: array
+            nullable: true
+            comment: ''
+    manyToMany:
+        pageTypeParents:
+            targetEntity: PageType
+            mappedBy: pageTypeChildren
+        pageTypeChildren:
+            targetEntity: PageType
+            cascade: {  }
+            mappedBy: null
+            inversedBy: pageTypeParents
+            joinTable:
+                name: krcms_page_type_children
+                joinColumns:
+                    -
+                        name: parent_page_type_id
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: child_page_type_id
+                        referencedColumnName: id
+            orderBy: null
+    oneToMany:
+        pages:
+            targetEntity: Page
+            mappedBy: pageType
+            orderBy:
+                orderId: asc
+    lifecycleCallbacks: {  }

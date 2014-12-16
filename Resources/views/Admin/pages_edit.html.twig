@@ -1,0 +1,160 @@
+{% extends 'KRSolutionsKRCMSBundle:Admin:layout.html.twig' %}
+
+{% block title %}{{ page.pageType.name }} {% if action == 'new' %}toevoegen{% else %}wijzigen{% endif %} - Content Management Systeem{% endblock %}
+
+{% block content %}
+
+<header class="jumbotron subhead">
+	<h1>{% if action == 'new' %}Nieuwe{% else %}Wijzig{% endif %} {{ page.pageType.name }}{% if page.title %} <small>{{ page.title }}</small>{% endif %}</h1>
+</header>
+
+<div class="row-fluid">
+	<div class="span9">
+		<div class="well">
+			<form id="pageForm" action="{% if action == 'new' %}{{ path('kr_solutions_krcms_pages_add', { 'siteId': site.id, 'pageType': page.pageType.id }) }}{% else %}{{ path('kr_solutions_krcms_pages_edit', { 'pageId': page.id }) }}{% endif %}" method="post" id="pageForm" {{ form_enctype(pageForm) }} novalidate="novalidate">
+				<fieldset>
+					<legend>{{ page.pageType.name }} {% if action == 'new' %}toevoegen{% else %}wijzigen{% endif %}</legend>
+
+					{% if form_errors(pageForm) %}
+					<div class="alert alert-error">
+						<a class="close" data-dismiss="alert" href="#">×</a>
+						<h4 class="alert-heading">Fout!</h4>
+						{{ form_errors(pageForm) }}
+					</div>
+					{% endif %}
+
+					<div class="control-group{% if pageForm.title.vars.errors|length %} error{% endif %}">
+						{{ form_label(pageForm.title) }}
+						{{ form_widget(pageForm.title, { 'attr': {'class': 'span10'} }) }}
+					</div>
+
+					<div class="control-group{% if pageForm.truePermalink.vars.errors|length %} error{% endif %}">
+						{{ form_label(pageForm.truePermalink) }}
+						{{ form_widget(pageForm.truePermalink, { 'attr': {'class': 'span10'} }) }}
+					</div>
+
+					{% if pageForm.menu is defined %}
+					<div class="control-group{% if pageForm.menu.vars.errors|length %} error{% endif %}">
+						{{ form_label(pageForm.menu) }}
+						{{ form_widget(pageForm.menu, { 'attr': {'class': 'span10'} }) }}
+					</div>
+
+					<div class="control-group{% if pageForm.menuTitle.vars.errors|length %} error{% endif %}">
+						{{ form_label(pageForm.menuTitle) }}
+						{{ form_widget(pageForm.menuTitle, { 'attr': {'class': 'span10'} }) }}
+					</div>
+					{% endif %}
+
+					{% if pageForm['parent'] is defined %}
+					<div class="control-group{% if pageForm.parent.vars.errors|length %} error{% endif %}">
+						{{ form_label(pageForm.parent) }}
+						{{ form_widget(pageForm.parent, { 'attr': {'class': 'span10'} }) }}
+					</div>
+					{% endif %}
+
+					{% if pageForm.content is defined %}
+					<div class="control-group{% if form_errors(pageForm.content) %} error{% endif %}">
+						{{ form_label(pageForm.content) }}
+						{{ form_widget(pageForm.content, { 'attr': {'class': 'span10'} }) }}
+					</div>
+					{% endif %}
+
+					<div class="control-group{% if form_errors(pageForm.metaDescription) %} error{% endif %}">
+						{{ form_label(pageForm.metaDescription) }}
+						{{ form_widget(pageForm.metaDescription, { 'attr': {'class': 'span10'} }) }}
+					</div>
+
+					{{ form_rest(pageForm) }}
+				</fieldset>
+				<input class="btn btn-primary" type="submit" value="{{ page.pageType.name }} opslaan" />
+			</form>
+		</div>
+	</div>
+	<div class="span3">
+		<div class="well">
+			<ul class="unstyled">
+				<li><h3>Pagina</h3></li>
+				<li>
+					<div class="btn-group">
+						<a id="save_page" class="btn btn-primary" href="javascript:void(0)"><i class="icon-ok icon-white"></i> Opslaan</a>
+						<a class="btn" href="{{ path('kr_solutions_krcms_pages_index', { 'siteId': site.id }) }}" title="Terug naar paginaoverzicht"><i class="icon-stop"></i> Annuleren</a>
+					</div>
+				</li>
+
+				<li><h3>Details</h3></li>
+				{% if page.createdBy is not null %}
+				<li style="margin-bottom: 10px;"><span class="clearfix">Gemaakt door:</span> <strong>{{ page.createdBy.email }}</strong></li>
+				{% endif %}
+				{% if page.createdAt is not null %}
+				<li style="margin-bottom: 10px;"><span class="clearfix">Gemaakt op:</span> <strong>{{ page.createdAt|date('d-m-Y') }}</strong> om <strong>{{ page.createdAt|date('G:i:s') }}</strong> uur</li>
+				{% endif %}
+				{% if page.updatedBy is not null %}
+				<li style="margin-bottom: 10px;"><span class="clearfix">Gewijzigd door:</span> <strong>{{ page.updatedBy.email }}</strong></li>
+				{% endif %}
+				{% if page.updatedAt is not null %}
+				<li style="margin-bottom: 10px;"><span class="clearfix">Gewijzigd op:</span> <strong>{{ page.updatedAt|date('d-m-Y') }}</strong> om <strong>{{ page.updatedAt|date('G:i:s') }}</strong> uur</li>
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+{% if pageForm.content is defined %}<script type="text/javascript" src="{{ asset('bundles/krsolutionskrcms/ckeditor/ckeditor.js') }}"></script>{% endif %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#page_title').change(function() {
+			{% if page.id is not null %}{% set page_id = page.id %}{% else %}{% set page_id = 'null' %}{% endif %}
+            $.post('{{ path('kr_solutions_krcms_pages_generate_permalink') }}', { text: $('#page_title').val(), page_id: {{ page_id }} },
+                function(data) {
+                    $('#page_truePermalink').val(data);
+                });
+        });
+
+		$('#save_page').on('click', function() {
+			$('#pageForm').submit();
+		});
+	});
+
+	{% if pageForm.content is defined %}
+    /* <![CDATA[ */
+    // This is a check for the CKEditor class. If not defined, the paths must be checked.
+    if ( typeof CKEDITOR == 'undefined' )
+    {
+        document.write(
+            '<strong><span style="color: #ff0000">Error</span>: CKEditor not found</strong>.' +
+            'This sample assumes that CKEditor (not included with CKFinder) is installed in' +
+            'the "/ckeditor/" path. If you have it installed in a different place, just edit' +
+            'this file, changing the wrong paths in the &lt;head&gt; (line 5) and the "BasePath"' +
+            'value (line 32).' );
+    }
+    else
+    {
+        var editor = CKEDITOR.replace( 'page_content',
+		{
+			toolbar :
+			[
+				{ name: 'document', items : [ 'Source','-','Save','NewPage','DocProps','Preview','Print','-','Templates' ] },
+				{ name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
+				{ name: 'editing', items : [ 'Find','Replace','-','SelectAll' ] },
+				{ name: 'tools', items : [ 'Maximize', 'ShowBlocks' ] },
+				'/',
+				{ name: 'paragraph', items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv',
+				'-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl' ] },
+				{ name: 'links', items : [ 'Link','Unlink','Anchor' ] },
+				{ name: 'insert', items : [ 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak','Iframe' ] },
+				'/',
+				{ name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] },
+				{ name: 'styles', items : [ 'Format' ] },
+				{ name: 'colors', items : [ 'TextColor','BGColor' ] }
+			]
+		});
+        editor.setData( '{{ page.content|raw }}');
+    }
+    /* ]]> */
+	{% endif %}
+</script>
+{% endblock %}

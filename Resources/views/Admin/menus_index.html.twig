@@ -1,0 +1,116 @@
+{% extends 'KRSolutionsKRCMSBundle:Admin:layout.html.twig' %}
+
+{% block title %}Menu's - Content Management Systeem{% endblock %}
+
+{% block content %}
+
+<header class="jumbotron subhead">
+	<h1>Menu's</h1>
+	<p class="lead">Gebruik dit scherm om uw menu's te beheren. Om een nieuw menu aan te maken klikt u op <span class="label label-info">Menu toevoegen</span></p>
+</header>
+
+<div class="row-fluid">
+	<div class="span4">
+		<div class="well">
+			<form action="{{ path('kr_solutions_krcms_menus_index') }}" method="post" {{ form_enctype(menuForm) }} novalidate="novalidate">
+				<fieldset>
+					<legend>Menu toevoegen</legend>
+
+					{% if form_errors(menuForm) %}
+					<div class="alert alert-error">
+						<a class="close" data-dismiss="alert" href="#">×</a>
+						<h4 class="alert-heading">Fout!</h4>
+						{{ form_errors(menuForm) }}
+					</div>
+					{% endif %}
+
+					<div class="control-group{% if menuForm.name.vars.errors|length %} error{% endif %}">
+						{{ form_label(menuForm.name) }}
+						{{ form_widget(menuForm.name, { 'attr': {'class': 'span10'} }) }}
+					</div>
+
+					<div class="control-group{% if menuForm.site.vars.errors|length %} error{% endif %}">
+						{{ form_label(menuForm.site) }}
+						{{ form_widget(menuForm.site, { 'attr': {'class': 'span10'} }) }}
+					</div>
+
+					<div class="control-group{% if form_errors(menuForm.description) %} error{% endif %}">
+						{{ form_label(menuForm.description) }}
+						{{ form_widget(menuForm.description, { 'attr': {'class': 'span10'} }) }}
+					</div>
+
+					{{ form_rest(menuForm) }}
+				</fieldset>
+				<input class="btn btn-primary" type="submit" value="Menu toevoegen" />
+			</form>
+		</div>
+	</div>
+	<div class="span8">
+		<div class="well">
+			{% if menus|length > 0 %}
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th style="width: 20%;">Naam</th>
+						<th>Omschrijving</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for menu in menus %}
+					<tr>
+						<td><a href="{{ path('kr_solutions_krcms_menu_edit', { 'menuId': menu.id }) }}" title="Menu wijzigen"><b>{{ menu.name }}</b></a></td>
+						<td>{{ menu.description }}</td>
+						<td class="btn-toolbar">
+							<div class="btn-group pull-right">
+								<a id="Menus_edit_{{ menu.id }}" href="{{ path('kr_solutions_krcms_menu_edit', { 'menuId': menu.id }) }}" class="Menus_edit btn"><i class="icon-edit"></i> Wijzigen</a>
+								<a id="Menus_remove_{{ menu.id }}" href="javascript:void(0)" class="Menus_remove btn"><i class="icon-trash"></i> Verwijderen</a>
+							</div>
+						</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+			{% else %}
+				<p>Er zijn nog geen menu's toegevoegd.</p>
+				<p>Klik op <strong>"Menu toevoegen"</strong> aan de rechterkant om een menu toe te voegen.</p>
+			{% endif %}
+		</div>
+	</div>
+</div>
+
+{# Modals #}
+<div class="modal hide" id="Menus_remove_modal">
+    <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">×</button>
+		<h3>Menu verwijderen</h3>
+    </div>
+    <div class="modal-body">
+		<p>Weet u zeker dat u dit menu wilt verwijderen?</p>
+		<p><small>Alle pagina's onder dit menu worden verborgen! Deze dient u zelf opnieuw te koppelen aan een ander menu.</small></p>
+    </div>
+    <div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Annuleren</a>
+		<a href="#" class="btn btn-danger" id="Menu_remove_action">Verwijderen</a>
+    </div>
+</div>
+{# End modals#}
+
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+
+<script type="text/javascript" lang="javascript">
+	$(document).ready(function() {
+		$('.Menus_remove').on('click', function() {
+			var menu_id = this.id.replace('Menus_remove_', '');
+			var remove_url_holder = '{{ path('kr_solutions_krcms_menu_remove', {'menuId': 'MENU_ID_PLACE_HOLDER'}) }}';
+
+			$('#Menu_remove_action').attr('href', remove_url_holder.replace('MENU_ID_PLACE_HOLDER', menu_id));
+			$('#Menus_remove_modal').modal('show');
+		});
+	});
+</script>
+
+{% endblock %}
