@@ -12,11 +12,11 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "friendsofsymfony/user-bundle": "~2.0@dev"
+        "kr-solutions/kruser-bundle": "dev-master"
     },
     "autoload": {
-        "psr-4" : {
-            "KRSolutions\\Bundle\\KRCMSBundle\\" : ""
+        "psr-4": {
+            "KRSolutions\\Bundle\\KRCMSBundle\\": ""
         }
     }
 }

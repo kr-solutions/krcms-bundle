@@ -71,7 +71,7 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Site:
             column: is_active
     manyToOne:
         createdBy:
-            targetEntity: User
+            targetEntity: KRSolutions\Bundle\KRUserBundle\Entity\User
             cascade: {  }
             mappedBy: null
             inversedBy: null
@@ -80,7 +80,7 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Site:
                     referencedColumnName: id
             orphanRemoval: false
         updatedBy:
-            targetEntity: User
+            targetEntity: KRSolutions\Bundle\KRUserBundle\Entity\User
             cascade: {  }
             mappedBy: null
             inversedBy: null
@@ -99,7 +99,7 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Site:
             orphanRemoval: false
     manyToMany:
         users:
-            targetEntity: User
+            targetEntity: KRSolutions\Bundle\KRUserBundle\Entity\User
             cascade: {  }
             mappedBy: null
             inversedBy: null

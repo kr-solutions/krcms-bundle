@@ -9,7 +9,6 @@ use KRSolutions\Bundle\KRCMSBundle\Repository\PageRepository;
 use KRSolutions\Bundle\KRCMSBundle\Repository\PageTypeRepository;
 use KRSolutions\Bundle\KRCMSBundle\Repository\SiteRepository;
 use KRSolutions\Bundle\KRCMSBundle\Repository\TagRepository;
-use KRSolutions\Bundle\KRCMSBundle\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 

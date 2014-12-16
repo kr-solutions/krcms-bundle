@@ -123,7 +123,7 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Page:
                     referencedColumnName: id
             orphanRemoval: false
         createdBy:
-            targetEntity: User
+            targetEntity: KRSolutions\Bundle\KRUserBundle\Entity\User
             cascade: {  }
             mappedBy: null
             inversedBy: null
@@ -132,7 +132,7 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Page:
                     referencedColumnName: id
             orphanRemoval: false
         updatedBy:
-            targetEntity: User
+            targetEntity: KRSolutions\Bundle\KRUserBundle\Entity\User
             cascade: {  }
             mappedBy: null
             inversedBy: null

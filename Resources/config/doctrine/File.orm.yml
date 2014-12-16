@@ -65,7 +65,7 @@ KRSolutions\Bundle\KRCMSBundle\Entity\File:
             column: order_id
     manyToOne:
         createdBy:
-            targetEntity: User
+            targetEntity: KRSolutions\Bundle\KRUserBundle\Entity\User
             cascade: {  }
             mappedBy: null
             inversedBy: null
@@ -74,7 +74,7 @@ KRSolutions\Bundle\KRCMSBundle\Entity\File:
                     referencedColumnName: id
             orphanRemoval: false
         updatedBy:
-            targetEntity: User
+            targetEntity: KRSolutions\Bundle\KRUserBundle\Entity\User
             cascade: {  }
             mappedBy: null
             inversedBy: null
