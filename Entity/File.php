@@ -68,6 +68,16 @@ class File
 	private $page;
 
 	/**
+	 * File constructor
+	 */
+	public function __construct()
+	{
+		$this->createdAt = new \DateTime('now');
+		$this->updatedAt = new \DateTime('now');
+		$this->orderId = 0;
+	}
+
+	/**
 	 * Get id
 	 *
 	 * @return integer

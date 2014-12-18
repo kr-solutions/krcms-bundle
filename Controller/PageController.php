@@ -231,11 +231,12 @@ class PageController extends AbstractKRCMSController
 	/**
 	 * filesAction
 	 *
-	 * @param int $pageId
+	 * @param Request $request
+	 * @param int     $pageId
 	 *
 	 * @return Response
 	 */
-	public function filesAction($pageId)
+	public function filesAction(Request $request, $pageId)
 	{
 		$_SESSION['KCFINDER'] = array();
 		$_SESSION['KCFINDER']['disabled'] = false;
@@ -260,28 +261,22 @@ class PageController extends AbstractKRCMSController
 
 		$fileForm->setData($newFile);
 
-		if ($this->getRequest()->getMethod() == 'POST') {
-			$now = new DateTime('now');
+		$fileForm->handleRequest($request);
 
-			$fileForm->bindRequest($this->getRequest());
 
-			if ($fileForm->isValid()) {
-				$em = $this->getDoctrine()->getManager();
+		if ($fileForm->isValid()) {
+			$em = $this->getDoctrine()->getManager();
 
-				$newFile->setUri(str_replace('/' . $this->container->getParameter('upload_dir'), '', $newFile->getUri()));
-				$newFile->setCreatedBy($this->getUser());
-				$newFile->setCreatedAt($now);
-				$newFile->setUpdatedAt($now);
-				$newFile->setPage($page);
-				$newFile->setOrderId(0);
+			$newFile->setUri(str_replace('/' . $this->container->getParameter('upload_dir'), '', $newFile->getUri()));
+			$newFile->setCreatedBy($this->getUser());
+			$newFile->setPage($page);
 
-				$em->persist($newFile);
-				$em->flush();
+			$em->persist($newFile);
+			$em->flush();
 
-				$this->getRequest()->getSession()->getFlashBag()->add('alert-success', 'Het bestand is toegevoegd!');
+			$this->getRequest()->getSession()->getFlashBag()->add('alert-success', 'Het bestand is toegevoegd!');
 
-				return $this->redirect($this->generateUrl('kr_solutions_krcms_files', array('pageId' => $pageId)));
-			}
+			return $this->redirect($this->generateUrl('kr_solutions_krcms_files', array('pageId' => $pageId)));
 		}
 
 		return $this->render('KRSolutionsKRCMSBundle:Admin:files.html.twig', array('page' => $page, 'fileForm' => $fileForm->createView()));
