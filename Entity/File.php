@@ -2,7 +2,8 @@
 
 namespace KRSolutions\Bundle\KRCMSBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use DateTime;
+use KRSolutions\Bundle\KRUserBundle\Entity\User;
 
 
 /**
@@ -22,12 +23,12 @@ class File
 	private $name;
 
 	/**
-	 * @var \DateTime
+	 * @var DateTime
 	 */
 	private $createdAt;
 
 	/**
-	 * @var \DateTime
+	 * @var DateTime
 	 */
 	private $updatedAt;
 
@@ -52,17 +53,17 @@ class File
 	private $orderId;
 
 	/**
-	 * @var \KRSolutions\Bundle\KRCMSBundle\Entity\User
+	 * @var User
 	 */
 	private $createdBy;
 
 	/**
-	 * @var \KRSolutions\Bundle\KRCMSBundle\Entity\User
+	 * @var User
 	 */
 	private $updatedBy;
 
 	/**
-	 * @var \KRSolutions\Bundle\KRCMSBundle\Entity\Page
+	 * @var Page
 	 */
 	private $page;
 
@@ -103,7 +104,7 @@ class File
 	/**
 	 * Set createdAt
 	 *
-	 * @param \DateTime $createdAt
+	 * @param DateTime $createdAt
 	 *
 	 * @return File
 	 */
@@ -117,7 +118,7 @@ class File
 	/**
 	 * Get createdAt
 	 *
-	 * @return \DateTime
+	 * @return DateTime
 	 */
 	public function getCreatedAt()
 	{
@@ -127,7 +128,7 @@ class File
 	/**
 	 * Set updatedAt
 	 *
-	 * @param \DateTime $updatedAt
+	 * @param DateTime $updatedAt
 	 *
 	 * @return File
 	 */
@@ -141,7 +142,7 @@ class File
 	/**
 	 * Get updatedAt
 	 *
-	 * @return \DateTime
+	 * @return DateTime
 	 */
 	public function getUpdatedAt()
 	{
@@ -247,11 +248,11 @@ class File
 	/**
 	 * Set createdBy
 	 *
-	 * @param \KRSolutions\Bundle\KRCMSBundle\Entity\User $createdBy
+	 * @param User $createdBy
 	 *
 	 * @return File
 	 */
-	public function setCreatedBy(\KRSolutions\Bundle\KRCMSBundle\Entity\User $createdBy = null)
+	public function setCreatedBy(User $createdBy = null)
 	{
 		$this->createdBy = $createdBy;
 
@@ -261,7 +262,7 @@ class File
 	/**
 	 * Get createdBy
 	 *
-	 * @return \KRSolutions\Bundle\KRCMSBundle\Entity\User
+	 * @return User
 	 */
 	public function getCreatedBy()
 	{
@@ -271,11 +272,11 @@ class File
 	/**
 	 * Set updatedBy
 	 *
-	 * @param \KRSolutions\Bundle\KRCMSBundle\Entity\User $updatedBy
+	 * @param User $updatedBy
 	 *
 	 * @return File
 	 */
-	public function setUpdatedBy(\KRSolutions\Bundle\KRCMSBundle\Entity\User $updatedBy = null)
+	public function setUpdatedBy(User $updatedBy = null)
 	{
 		$this->updatedBy = $updatedBy;
 
@@ -285,7 +286,7 @@ class File
 	/**
 	 * Get updatedBy
 	 *
-	 * @return \KRSolutions\Bundle\KRCMSBundle\Entity\User
+	 * @return User
 	 */
 	public function getUpdatedBy()
 	{
@@ -295,11 +296,11 @@ class File
 	/**
 	 * Set page
 	 *
-	 * @param \KRSolutions\Bundle\KRCMSBundle\Entity\Page $page
+	 * @param Page $page
 	 *
 	 * @return File
 	 */
-	public function setPage(\KRSolutions\Bundle\KRCMSBundle\Entity\Page $page = null)
+	public function setPage(Page $page = null)
 	{
 		$this->page = $page;
 
@@ -309,11 +310,21 @@ class File
 	/**
 	 * Get page
 	 *
-	 * @return \KRSolutions\Bundle\KRCMSBundle\Entity\Page
+	 * @return Page
 	 */
 	public function getPage()
 	{
 		return $this->page;
+	}
+
+	/**
+	 * File title
+	 *
+	 * @return string
+	 */
+	public function __toString()
+	{
+		return $this->title;
 	}
 
 }

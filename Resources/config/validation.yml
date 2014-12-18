@@ -1,0 +1,28 @@
+KRSolutions\Bundle\KRCMSBundle\Entity\Menu:
+#    constraints:
+#        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+#            fields: name
+#            message: "De naam van het menu moet uniek zijn"
+
+    properties:
+        name:
+            - NotBlank:
+                message: "Naam kan niet leeg zijn"
+            - Length:
+                max: 255
+
+KRSolutions\Bundle\KRCMSBundle\Entity\Page:
+    properties:
+        title:
+            - NotBlank:
+                message: "De titel van de pagina is verplicht"
+            - Length:
+                max: 255
+
+KRSolutions\Bundle\KRCMSBundle\Entity\File:
+    properties:
+        uri:
+            - NotBlank:
+                message: "U heeft geen bestand geselecteerd"
+            - Length:
+                max: 255

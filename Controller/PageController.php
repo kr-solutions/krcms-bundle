@@ -144,6 +144,7 @@ class PageController extends AbstractKRCMSController
 
 		if ($pageForm->isValid()) {
 			$em = $this->getDoctrine()->getManager();
+			$flashMessages = array();
 
 			if (null !== $formHandler) {
 				$formHandler->handleForm();
@@ -152,12 +153,12 @@ class PageController extends AbstractKRCMSController
 			if (null === $pageId) {
 				$em->persist($page);
 
-				$this->getRequest()->getSession()->getFlashBag()->add('alert-success', $pageType->getName() . ' \'' . $page->getTitle() . '\' is toegevoegd.');
+				$flashMessages['alert-success'][] = $pageType->getName() . ' \'' . $page->getTitle() . '\' is toegevoegd.';
 			} else {
 				$page->setUpdatedAt($now);
 				$page->setUpdatedBy($this->getUser());
 
-				$this->getRequest()->getSession()->getFlashBag()->add('alert-success', $pageType->getName() . ' \'' . $page->getTitle() . '\' is gewijzigd.');
+				$flashMessages['alert-success'][] = $pageType->getName() . ' \'' . $page->getTitle() . '\' is gewijzigd.';
 			}
 
 			foreach ($page->getFiles() as $file) {
@@ -165,6 +166,12 @@ class PageController extends AbstractKRCMSController
 			}
 
 			$em->flush();
+
+			foreach ($flashMessages as $type => $flashMessage) {
+				foreach ($flashMessage as $message) {
+					$this->getRequest()->getSession()->getFlashBag()->add($type, $message);
+				}
+			}
 
 			if (null !== $page->getParent()) {
 				$parentPageId = $page->getParent()->getId();

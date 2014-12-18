@@ -585,4 +585,14 @@ class PageType
 		return false;
 	}
 
+	/**
+	 * PageType name
+	 *
+	 * @return string
+	 */
+	public function __toString()
+	{
+		return $this->name;
+	}
+
 }

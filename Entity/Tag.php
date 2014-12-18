@@ -2,7 +2,8 @@
 
 namespace KRSolutions\Bundle\KRCMSBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 
 /**
@@ -22,7 +23,7 @@ class Tag
 	private $name;
 
 	/**
-	 * @var \Doctrine\Common\Collections\Collection
+	 * @var Collection
 	 */
 	private $pages;
 
@@ -31,7 +32,7 @@ class Tag
 	 */
 	public function __construct()
 	{
-		$this->pages = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->pages = new ArrayCollection();
 	}
 
 	/**
@@ -71,11 +72,11 @@ class Tag
 	/**
 	 * Add page
 	 *
-	 * @param \KRSolutions\Bundle\KRCMSBundle\Entity\Page $page
+	 * @param Page $page
 	 *
 	 * @return Tag
 	 */
-	public function addPage(\KRSolutions\Bundle\KRCMSBundle\Entity\Page $page)
+	public function addPage(Page $page)
 	{
 		$this->pages[] = $page;
 
@@ -85,9 +86,9 @@ class Tag
 	/**
 	 * Remove page
 	 *
-	 * @param \KRSolutions\Bundle\KRCMSBundle\Entity\Page $page
+	 * @param Page $page
 	 */
-	public function removePage(\KRSolutions\Bundle\KRCMSBundle\Entity\Page $page)
+	public function removePage(Page $page)
 	{
 		$this->pages->removeElement($page);
 	}
@@ -95,11 +96,21 @@ class Tag
 	/**
 	 * Get pages
 	 *
-	 * @return \Doctrine\Common\Collections\Collection
+	 * @return Collection
 	 */
 	public function getPages()
 	{
 		return $this->pages;
+	}
+
+	/**
+	 * Tag name
+	 *
+	 * @return string
+	 */
+	public function __toString()
+	{
+		return $this->name;
 	}
 
 }

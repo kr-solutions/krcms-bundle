@@ -3,7 +3,7 @@
 namespace KRSolutions\Bundle\KRCMSBundle\Controller;
 
 use DateTime;
-use KRSolutions\Bundle\KRCMSBundle\Entity\User;
+use KRSolutions\Bundle\KRUserBundle\Entity\User;
 use KRSolutions\Bundle\KRCMSBundle\Form\Type\UserType;
 use Symfony\Component\HttpFoundation\Response;
 

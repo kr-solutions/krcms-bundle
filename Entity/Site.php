@@ -2,7 +2,10 @@
 
 namespace KRSolutions\Bundle\KRCMSBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use KRSolutions\Bundle\KRUserBundle\Entity\User;
 
 
 /**
@@ -37,12 +40,12 @@ class Site
 	private $siteUrl;
 
 	/**
-	 * @var \DateTime
+	 * @var DateTime
 	 */
 	private $createdAt;
 
 	/**
-	 * @var \DateTime
+	 * @var DateTime
 	 */
 	private $updatedAt;
 
@@ -52,22 +55,22 @@ class Site
 	private $isActive;
 
 	/**
-	 * @var \KRSolutions\Bundle\KRCMSBundle\Entity\User
+	 * @var User
 	 */
 	private $createdBy;
 
 	/**
-	 * @var \KRSolutions\Bundle\KRCMSBundle\Entity\User
+	 * @var User
 	 */
 	private $updatedBy;
 
 	/**
-	 * @var \KRSolutions\Bundle\KRCMSBundle\Entity\Page
+	 * @var Page
 	 */
 	private $homepage;
 
 	/**
-	 * @var \Doctrine\Common\Collections\Collection
+	 * @var Collection
 	 */
 	private $users;
 
@@ -76,7 +79,7 @@ class Site
 	 */
 	public function __construct()
 	{
-		$this->users = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->users = new ArrayCollection();
 	}
 
 	/**
@@ -188,7 +191,7 @@ class Site
 	/**
 	 * Set createdAt
 	 *
-	 * @param \DateTime $createdAt
+	 * @param DateTime $createdAt
 	 *
 	 * @return Site
 	 */
@@ -202,7 +205,7 @@ class Site
 	/**
 	 * Get createdAt
 	 *
-	 * @return \DateTime
+	 * @return DateTime
 	 */
 	public function getCreatedAt()
 	{
@@ -212,7 +215,7 @@ class Site
 	/**
 	 * Set updatedAt
 	 *
-	 * @param \DateTime $updatedAt
+	 * @param DateTime $updatedAt
 	 *
 	 * @return Site
 	 */
@@ -226,7 +229,7 @@ class Site
 	/**
 	 * Get updatedAt
 	 *
-	 * @return \DateTime
+	 * @return DateTime
 	 */
 	public function getUpdatedAt()
 	{
@@ -260,11 +263,11 @@ class Site
 	/**
 	 * Set createdBy
 	 *
-	 * @param \KRSolutions\Bundle\KRCMSBundle\Entity\User $createdBy
+	 * @param User $createdBy
 	 *
 	 * @return Site
 	 */
-	public function setCreatedBy(\KRSolutions\Bundle\KRCMSBundle\Entity\User $createdBy = null)
+	public function setCreatedBy(User $createdBy = null)
 	{
 		$this->createdBy = $createdBy;
 
@@ -274,7 +277,7 @@ class Site
 	/**
 	 * Get createdBy
 	 *
-	 * @return \KRSolutions\Bundle\KRCMSBundle\Entity\User
+	 * @return User
 	 */
 	public function getCreatedBy()
 	{
@@ -284,11 +287,11 @@ class Site
 	/**
 	 * Set updatedBy
 	 *
-	 * @param \KRSolutions\Bundle\KRCMSBundle\Entity\User $updatedBy
+	 * @param User $updatedBy
 	 *
 	 * @return Site
 	 */
-	public function setUpdatedBy(\KRSolutions\Bundle\KRCMSBundle\Entity\User $updatedBy = null)
+	public function setUpdatedBy(User $updatedBy = null)
 	{
 		$this->updatedBy = $updatedBy;
 
@@ -298,7 +301,7 @@ class Site
 	/**
 	 * Get updatedBy
 	 *
-	 * @return \KRSolutions\Bundle\KRCMSBundle\Entity\User
+	 * @return User
 	 */
 	public function getUpdatedBy()
 	{
@@ -308,11 +311,11 @@ class Site
 	/**
 	 * Set homepage
 	 *
-	 * @param \KRSolutions\Bundle\KRCMSBundle\Entity\Page $homepage
+	 * @param Page $homepage
 	 *
 	 * @return Site
 	 */
-	public function setHomepage(\KRSolutions\Bundle\KRCMSBundle\Entity\Page $homepage = null)
+	public function setHomepage(Page $homepage = null)
 	{
 		$this->homepage = $homepage;
 
@@ -322,7 +325,7 @@ class Site
 	/**
 	 * Get homepage
 	 *
-	 * @return \KRSolutions\Bundle\KRCMSBundle\Entity\Page
+	 * @return Page
 	 */
 	public function getHomepage()
 	{
@@ -332,11 +335,11 @@ class Site
 	/**
 	 * Add user
 	 *
-	 * @param \KRSolutions\Bundle\KRCMSBundle\Entity\User $user
+	 * @param User $user
 	 *
 	 * @return Site
 	 */
-	public function addUser(\KRSolutions\Bundle\KRCMSBundle\Entity\User $user)
+	public function addUser(User $user)
 	{
 		$this->users[] = $user;
 
@@ -346,9 +349,9 @@ class Site
 	/**
 	 * Remove user
 	 *
-	 * @param \KRSolutions\Bundle\KRCMSBundle\Entity\User $user
+	 * @param User $user
 	 */
-	public function removeUser(\KRSolutions\Bundle\KRCMSBundle\Entity\User $user)
+	public function removeUser(User $user)
 	{
 		$this->users->removeElement($user);
 	}
@@ -356,7 +359,7 @@ class Site
 	/**
 	 * Get users
 	 *
-	 * @return \Doctrine\Common\Collections\Collection
+	 * @return Collection
 	 */
 	public function getUsers()
 	{

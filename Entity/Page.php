@@ -2,7 +2,10 @@
 
 namespace KRSolutions\Bundle\KRCMSBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use KRSolutions\Bundle\KRUserBundle\Entity\User;
 
 
 /**
@@ -22,22 +25,22 @@ class Page
 	private $orderId;
 
 	/**
-	 * @var \DateTime
+	 * @var DateTime
 	 */
 	private $createdAt;
 
 	/**
-	 * @var \DateTime
+	 * @var DateTime
 	 */
 	private $updatedAt;
 
 	/**
-	 * @var \DateTime
+	 * @var DateTime
 	 */
 	private $publishAt;
 
 	/**
-	 * @var \DateTime
+	 * @var DateTime
 	 */
 	private $publishTill;
 
@@ -72,52 +75,52 @@ class Page
 	private $metaDescription;
 
 	/**
-	 * @var \Doctrine\Common\Collections\Collection
+	 * @var Collection
 	 */
 	private $pages;
 
 	/**
-	 * @var \Doctrine\Common\Collections\Collection
+	 * @var Collection
 	 */
 	private $files;
 
 	/**
-	 * @var \KRSolutions\Bundle\KRCMSBundle\Entity\Menu
+	 * @var Menu
 	 */
 	private $menu;
 
 	/**
-	 * @var \KRSolutions\Bundle\KRCMSBundle\Entity\Site
+	 * @var Site
 	 */
 	private $site;
 
 	/**
-	 * @var \KRSolutions\Bundle\KRCMSBundle\Entity\User
+	 * @var User
 	 */
 	private $createdBy;
 
 	/**
-	 * @var \KRSolutions\Bundle\KRCMSBundle\Entity\User
+	 * @var User
 	 */
 	private $updatedBy;
 
 	/**
-	 * @var \KRSolutions\Bundle\KRCMSBundle\Entity\PageType
+	 * @var PageType
 	 */
 	private $pageType;
 
 	/**
-	 * @var \KRSolutions\Bundle\KRCMSBundle\Entity\Page
+	 * @var Page
 	 */
 	private $parent;
 
 	/**
-	 * @var \Doctrine\Common\Collections\Collection
+	 * @var Collection
 	 */
 	private $categories;
 
 	/**
-	 * @var \Doctrine\Common\Collections\Collection
+	 * @var Collection
 	 */
 	private $tags;
 
@@ -126,10 +129,13 @@ class Page
 	 */
 	public function __construct()
 	{
-		$this->pages = new \Doctrine\Common\Collections\ArrayCollection();
-		$this->files = new \Doctrine\Common\Collections\ArrayCollection();
-		$this->categories = new \Doctrine\Common\Collections\ArrayCollection();
-		$this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->pages = new ArrayCollection();
+		$this->files = new ArrayCollection();
+		$this->categories = new ArrayCollection();
+		$this->tags = new ArrayCollection();
+
+		$this->createdAt = new \DateTime('now');
+		$this->updatedAt = new \DateTime('now');
 	}
 
 	/**
@@ -169,7 +175,7 @@ class Page
 	/**
 	 * Set createdAt
 	 *
-	 * @param \DateTime $createdAt
+	 * @param DateTime $createdAt
 	 *
 	 * @return Page
 	 */
@@ -183,7 +189,7 @@ class Page
 	/**
 	 * Get createdAt
 	 *
-	 * @return \DateTime
+	 * @return DateTime
 	 */
 	public function getCreatedAt()
 	{
@@ -193,7 +199,7 @@ class Page
 	/**
 	 * Set updatedAt
 	 *
-	 * @param \DateTime $updatedAt
+	 * @param DateTime $updatedAt
 	 *
 	 * @return Page
 	 */
@@ -207,7 +213,7 @@ class Page
 	/**
 	 * Get updatedAt
 	 *
-	 * @return \DateTime
+	 * @return DateTime
 	 */
 	public function getUpdatedAt()
 	{
@@ -217,7 +223,7 @@ class Page
 	/**
 	 * Set publishAt
 	 *
-	 * @param \DateTime $publishAt
+	 * @param DateTime $publishAt
 	 *
 	 * @return Page
 	 */
@@ -231,7 +237,7 @@ class Page
 	/**
 	 * Get publishAt
 	 *
-	 * @return \DateTime
+	 * @return DateTime
 	 */
 	public function getPublishAt()
 	{
@@ -241,7 +247,7 @@ class Page
 	/**
 	 * Set publishTill
 	 *
-	 * @param \DateTime $publishTill
+	 * @param DateTime $publishTill
 	 *
 	 * @return Page
 	 */
@@ -255,7 +261,7 @@ class Page
 	/**
 	 * Get publishTill
 	 *
-	 * @return \DateTime
+	 * @return DateTime
 	 */
 	public function getPublishTill()
 	{
@@ -439,11 +445,11 @@ class Page
 	/**
 	 * Add page
 	 *
-	 * @param \KRSolutions\Bundle\KRCMSBundle\Entity\Page $page
+	 * @param Page $page
 	 *
 	 * @return Page
 	 */
-	public function addPage(\KRSolutions\Bundle\KRCMSBundle\Entity\Page $page)
+	public function addPage(Page $page)
 	{
 		$this->pages[] = $page;
 
@@ -453,9 +459,9 @@ class Page
 	/**
 	 * Remove page
 	 *
-	 * @param \KRSolutions\Bundle\KRCMSBundle\Entity\Page $page
+	 * @param Page $page
 	 */
-	public function removePage(\KRSolutions\Bundle\KRCMSBundle\Entity\Page $page)
+	public function removePage(Page $page)
 	{
 		$this->pages->removeElement($page);
 	}
@@ -463,7 +469,7 @@ class Page
 	/**
 	 * Get pages
 	 *
-	 * @return \Doctrine\Common\Collections\Collection
+	 * @return Collection
 	 */
 	public function getPages()
 	{
@@ -473,11 +479,11 @@ class Page
 	/**
 	 * Add file
 	 *
-	 * @param \KRSolutions\Bundle\KRCMSBundle\Entity\File $file
+	 * @param File $file
 	 *
 	 * @return Page
 	 */
-	public function addFile(\KRSolutions\Bundle\KRCMSBundle\Entity\File $file)
+	public function addFile(File $file)
 	{
 		$this->files[] = $file;
 
@@ -487,9 +493,9 @@ class Page
 	/**
 	 * Remove file
 	 *
-	 * @param \KRSolutions\Bundle\KRCMSBundle\Entity\File $file
+	 * @param File $file
 	 */
-	public function removeFile(\KRSolutions\Bundle\KRCMSBundle\Entity\File $file)
+	public function removeFile(File $file)
 	{
 		$this->files->removeElement($file);
 	}
@@ -497,7 +503,7 @@ class Page
 	/**
 	 * Get files
 	 *
-	 * @return \Doctrine\Common\Collections\Collection
+	 * @return Collection
 	 */
 	public function getFiles()
 	{
@@ -507,11 +513,11 @@ class Page
 	/**
 	 * Set menu
 	 *
-	 * @param \KRSolutions\Bundle\KRCMSBundle\Entity\Menu $menu
+	 * @param Menu $menu
 	 *
 	 * @return Page
 	 */
-	public function setMenu(\KRSolutions\Bundle\KRCMSBundle\Entity\Menu $menu = null)
+	public function setMenu(Menu $menu = null)
 	{
 		$this->menu = $menu;
 
@@ -521,7 +527,7 @@ class Page
 	/**
 	 * Get menu
 	 *
-	 * @return \KRSolutions\Bundle\KRCMSBundle\Entity\Menu
+	 * @return Menu
 	 */
 	public function getMenu()
 	{
@@ -531,11 +537,11 @@ class Page
 	/**
 	 * Set site
 	 *
-	 * @param \KRSolutions\Bundle\KRCMSBundle\Entity\Site $site
+	 * @param Site $site
 	 *
 	 * @return Page
 	 */
-	public function setSite(\KRSolutions\Bundle\KRCMSBundle\Entity\Site $site = null)
+	public function setSite(Site $site = null)
 	{
 		$this->site = $site;
 
@@ -545,7 +551,7 @@ class Page
 	/**
 	 * Get site
 	 *
-	 * @return \KRSolutions\Bundle\KRCMSBundle\Entity\Site
+	 * @return Site
 	 */
 	public function getSite()
 	{
@@ -555,11 +561,11 @@ class Page
 	/**
 	 * Set createdBy
 	 *
-	 * @param \KRSolutions\Bundle\KRCMSBundle\Entity\User $createdBy
+	 * @param User $createdBy
 	 *
 	 * @return Page
 	 */
-	public function setCreatedBy(\KRSolutions\Bundle\KRCMSBundle\Entity\User $createdBy = null)
+	public function setCreatedBy(User $createdBy = null)
 	{
 		$this->createdBy = $createdBy;
 
@@ -569,7 +575,7 @@ class Page
 	/**
 	 * Get createdBy
 	 *
-	 * @return \KRSolutions\Bundle\KRCMSBundle\Entity\User
+	 * @return User
 	 */
 	public function getCreatedBy()
 	{
@@ -579,11 +585,11 @@ class Page
 	/**
 	 * Set updatedBy
 	 *
-	 * @param \KRSolutions\Bundle\KRCMSBundle\Entity\User $updatedBy
+	 * @param User $updatedBy
 	 *
 	 * @return Page
 	 */
-	public function setUpdatedBy(\KRSolutions\Bundle\KRCMSBundle\Entity\User $updatedBy = null)
+	public function setUpdatedBy(User $updatedBy = null)
 	{
 		$this->updatedBy = $updatedBy;
 
@@ -593,7 +599,7 @@ class Page
 	/**
 	 * Get updatedBy
 	 *
-	 * @return \KRSolutions\Bundle\KRCMSBundle\Entity\User
+	 * @return User
 	 */
 	public function getUpdatedBy()
 	{
@@ -603,11 +609,11 @@ class Page
 	/**
 	 * Set pageType
 	 *
-	 * @param \KRSolutions\Bundle\KRCMSBundle\Entity\PageType $pageType
+	 * @param PageType $pageType
 	 *
 	 * @return Page
 	 */
-	public function setPageType(\KRSolutions\Bundle\KRCMSBundle\Entity\PageType $pageType = null)
+	public function setPageType(PageType $pageType = null)
 	{
 		$this->pageType = $pageType;
 
@@ -617,7 +623,7 @@ class Page
 	/**
 	 * Get pageType
 	 *
-	 * @return \KRSolutions\Bundle\KRCMSBundle\Entity\PageType
+	 * @return PageType
 	 */
 	public function getPageType()
 	{
@@ -627,11 +633,11 @@ class Page
 	/**
 	 * Set parent
 	 *
-	 * @param \KRSolutions\Bundle\KRCMSBundle\Entity\Page $parent
+	 * @param Page $parent
 	 *
 	 * @return Page
 	 */
-	public function setParent(\KRSolutions\Bundle\KRCMSBundle\Entity\Page $parent = null)
+	public function setParent(Page $parent = null)
 	{
 		$this->parent = $parent;
 
@@ -641,7 +647,7 @@ class Page
 	/**
 	 * Get parent
 	 *
-	 * @return \KRSolutions\Bundle\KRCMSBundle\Entity\Page
+	 * @return Page
 	 */
 	public function getParent()
 	{
@@ -651,11 +657,11 @@ class Page
 	/**
 	 * Add category
 	 *
-	 * @param \KRSolutions\Bundle\KRCMSBundle\Entity\Category $category
+	 * @param Category $category
 	 *
 	 * @return Page
 	 */
-	public function addCategory(\KRSolutions\Bundle\KRCMSBundle\Entity\Category $category)
+	public function addCategory(Category $category)
 	{
 		$this->categories[] = $category;
 
@@ -665,9 +671,9 @@ class Page
 	/**
 	 * Remove category
 	 *
-	 * @param \KRSolutions\Bundle\KRCMSBundle\Entity\Category $category
+	 * @param Category $category
 	 */
-	public function removeCategory(\KRSolutions\Bundle\KRCMSBundle\Entity\Category $category)
+	public function removeCategory(Category $category)
 	{
 		$this->categories->removeElement($category);
 	}
@@ -675,7 +681,7 @@ class Page
 	/**
 	 * Get categories
 	 *
-	 * @return \Doctrine\Common\Collections\Collection
+	 * @return Collection
 	 */
 	public function getCategories()
 	{
@@ -685,11 +691,11 @@ class Page
 	/**
 	 * Add tag
 	 *
-	 * @param \KRSolutions\Bundle\KRCMSBundle\Entity\Tag $tag
+	 * @param Tag $tag
 	 *
 	 * @return Page
 	 */
-	public function addTag(\KRSolutions\Bundle\KRCMSBundle\Entity\Tag $tag)
+	public function addTag(Tag $tag)
 	{
 		$this->tags[] = $tag;
 
@@ -699,9 +705,9 @@ class Page
 	/**
 	 * Remove tag
 	 *
-	 * @param \KRSolutions\Bundle\KRCMSBundle\Entity\Tag $tag
+	 * @param Tag $tag
 	 */
-	public function removeTag(\KRSolutions\Bundle\KRCMSBundle\Entity\Tag $tag)
+	public function removeTag(Tag $tag)
 	{
 		$this->tags->removeElement($tag);
 	}
@@ -709,7 +715,7 @@ class Page
 	/**
 	 * Get tags
 	 *
-	 * @return \Doctrine\Common\Collections\Collection
+	 * @return Collection
 	 */
 	public function getTags()
 	{
@@ -717,7 +723,7 @@ class Page
 	}
 
 	/**
-	 * Page to string
+	 * Page title
 	 *
 	 * @return string
 	 */

@@ -55,8 +55,7 @@ class PageTypeRepository extends EntityRepository
 	{
 		$qb = $this->createQueryBuilder('pageTypes');
 
-		$qb->leftJoin('pageTypes.pageTypeParents', 'pageTypeParents');
-		$qb->andWhere('pageTypeParents.id IS NULL');
+		$qb->where('pageTypes.isChild <> true');
 
 		return $qb->getQuery()->getResult();
 	}
