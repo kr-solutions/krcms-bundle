@@ -1,0 +1,55 @@
+{% extends 'KRSolutionsKRCMSBundle:Admin:layout.html.twig' %}
+
+{% block title %}Pagina type "{{ pageType.name }}" wijzigen - Content Management Systeem{% endblock %}
+
+{% block content %}
+
+	<header class="jumbotron subhead">
+		<h1>Wijzig pagina type "{{ pageType.name }}"</h1>
+	</header>
+
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="well">
+				<form id="pageTypeForm" method="post" action="{{ path('kr_solutions_krcms_page_types_edit', { 'pageTypeId': pageType.id }) }}" {{ form_enctype(pageTypeForm) }} novalidate="novalidate">
+					<fieldset>
+						<legend>Pagina type "{{ pageType.name }}" wijzigen</legend>
+
+						{% if form_errors(pageTypeForm) %}
+							<div class="alert alert-error">
+								<a class="close" data-dismiss="alert" href="#">×</a>
+								<h4 class="alert-heading">Fout!</h4>
+								{{ form_errors(pageTypeForm) }}
+							</div>
+						{% endif %}
+
+						<div class="control-group{% if pageTypeForm.name.vars.errors|length %} error{% endif %}">
+							{{ form_label(pageTypeForm.name) }}
+							{{ form_widget(pageTypeForm.name, { 'attr': {'class': 'span10'} }) }}
+						</div>
+
+						<div class="control-group{% if pageTypeForm.description.vars.errors|length %} error{% endif %}">
+							{{ form_label(pageTypeForm.description) }}
+							{{ form_widget(pageTypeForm.description, { 'attr': {'class': 'span10'} }) }}
+						</div>
+
+						{{ form_rest(pageTypeForm) }}
+					</fieldset>
+					<input class="btn btn-primary" type="submit" value="{{ pageType.name }} opslaan" />
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#save_page').on('click', function () {
+				$('#pageTypeForm').submit();
+			});
+		});
+	</script>
+{% endblock %}

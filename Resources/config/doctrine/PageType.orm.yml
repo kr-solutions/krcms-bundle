@@ -4,10 +4,8 @@ KRSolutions\Bundle\KRCMSBundle\Entity\PageType:
     table: krcms_page_types
     id:
         id:
-            type: string
+            type: integer
             nullable: false
-            length: 255
-            fixed: false
             comment: ''
             id: true
             generator:

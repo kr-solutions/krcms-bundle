@@ -33,6 +33,23 @@ kr_solutions_krcms_pages_change_order:
     pattern: /change-pages-order
     defaults: { _controller: KRSolutionsKRCMSBundle:Page:changeOrder }
 
+# PageTypes
+kr_solutions_krcms_page_types_index:
+    pattern: /pagina-types
+    defaults: { _controller: KRSolutionsKRCMSBundle:PageType:index }
+
+kr_solutions_krcms_page_types_edit:
+    pattern: /pagina-type-wijzigen/{pageTypeId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:PageType:edit }
+    requirements:
+        pageId: \d+
+
+kr_solutions_krcms_page_types_remove:
+    pattern: /pagina-type-verwijderen/{pageTypeId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:PageType:remove }
+    requirements:
+        pageId: \d+
+
 # Files
 kr_solutions_krcms_files:
     pattern: /bestanden/{pageId}

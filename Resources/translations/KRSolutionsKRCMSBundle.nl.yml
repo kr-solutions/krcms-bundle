@@ -1,0 +1,34 @@
+form:
+   type:
+       pageType:
+           name:
+               label: "Naam"
+           description:
+               label: "Omschrijving"
+           isChild:
+               label: "Moet verplicht subpagina zijn?"
+           hasChildren:
+               label: "Heeft subpagina's?"
+           hasContent:
+               label: "Heeft inhoud?"
+           hasFiles:
+               label: "Heeft bestand/afbeeldingen?"
+           childrenOrderBy:
+               label: "Subpagina's sorteren op"
+               choices:
+                   orderId: "Pagina volgorde"
+                   createdAt: "Datum aangemaakt"
+                   updatedAt: "Datum gewijzigd"
+                   title: "Titel"
+                   permalink: "Permalink"
+           childrenOrderDirection:
+               label: "Subpagina sorteer richting"
+               choices:
+                   desc: "Aflopend"
+                   asc: "Oplopend"
+           template:
+               label: "Template locatie"
+           pageHandler:
+               label: "Service id voor dit pagina type"
+           yes: "Ja"
+           no: "Nee"

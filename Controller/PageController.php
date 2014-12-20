@@ -45,9 +45,9 @@ class PageController extends AbstractKRCMSController
 		}
 
 		$childablePages = $this->getPageRepository()->getAllChildablePagesBySite($site);
-		$childPageTypes = $this->getPageTypeRepository()->getAllPossibleChildPageTypesBySite($site);
-		$parentPageTypes = $this->getPageTypeRepository()->getAllPossibleParentPageTypesBySite($site);
-		$pageTypes = array_merge($childPageTypes, $parentPageTypes);
+//		$childPageTypes = $this->getPageTypeRepository()->getAllPossibleChildPageTypesBySite($site);
+		$pageTypes = $this->getPageTypeRepository()->getAllPossibleParentPageTypesBySite($site);
+//		$pageTypes = array_merge($childPageTypes, $parentPageTypes);
 
 		return $this->render('KRSolutionsKRCMSBundle:Admin:pages_index.html.twig', array('site' => $site, 'pages' => $pages, 'menus' => $menus, 'childablePages' => $childablePages, 'parentPage' => $parentPage, 'pageTypes' => $pageTypes));
 	}

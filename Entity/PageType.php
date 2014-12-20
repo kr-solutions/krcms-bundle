@@ -14,7 +14,7 @@ class PageType
 {
 
 	/**
-	 * @var string
+	 * @var integer
 	 */
 	private $id;
 
@@ -111,12 +111,14 @@ class PageType
 		$this->pages = new ArrayCollection();
 		$this->pageTypeParents = new ArrayCollection();
 		$this->pageTypeChildren = new ArrayCollection();
+
+		$this->pageHandler = 'kr_solutions_krcms.page_handler.page';
 	}
 
 	/**
 	 * Get id
 	 *
-	 * @return string
+	 * @return integer
 	 */
 	public function getId()
 	{

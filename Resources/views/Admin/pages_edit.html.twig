@@ -72,7 +72,7 @@
 	</div>
 	<div class="span3">
 		<div class="well">
-			<ul class="unstyled">
+
 				<li><h3>Pagina</h3></li>
 				<li>
 					<div class="btn-group">
@@ -91,10 +91,10 @@
 				{% if page.updatedBy is not null %}
 				<li style="margin-bottom: 10px;"><span class="clearfix">Gewijzigd door:</span> <strong>{{ page.updatedBy.email }}</strong></li>
 				{% endif %}
-				{% if page.updatedAt is not null %}
+				{% if page.updatedAt is not null and page.updatedAt != page.createdAt %}
 				<li style="margin-bottom: 10px;"><span class="clearfix">Gewijzigd op:</span> <strong>{{ page.updatedAt|date('d-m-Y') }}</strong> om <strong>{{ page.updatedAt|date('G:i:s') }}</strong> uur</li>
 				{% endif %}
-			</ul>
+
 		</div>
 	</div>
 </div>

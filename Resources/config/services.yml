@@ -18,3 +18,8 @@ services:
         class: KRSolutions\Bundle\KRCMSBundle\TwigExtension\ExcerptTwigExtension
         tags:
             - { name: twig.extension }
+
+    kr_solutions_krcms.form.type.page_type:
+        class: KRSolutions\Bundle\KRCMSBundle\Form\Type\PageTypeType
+        tags:
+            - { name: form.type, alias: page_type }

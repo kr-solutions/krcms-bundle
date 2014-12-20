@@ -3,12 +3,6 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Site:
     repositoryClass: KRSolutions\Bundle\KRCMSBundle\Repository\SiteRepository
     table: krcms_sites
     indexes:
-        created_by:
-            columns:
-                - created_by
-        updated_by:
-            columns:
-                - updated_by
         homepage_id:
             columns:
                 - homepage_id
@@ -32,37 +26,12 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Site:
             length: 255
             fixed: false
             comment: ''
-        template:
-            type: string
-            nullable: false
-            length: 255
-            fixed: false
-            comment: ''
         title:
             type: string
             nullable: false
             length: 255
             fixed: false
             comment: ''
-        siteUrl:
-            type: string
-            nullable: false
-            length: 255
-            fixed: false
-            comment: ''
-            column: site_url
-        createdAt:
-            type: datetime
-            nullable: false
-            comment: ''
-            default: CURRENT_TIMESTAMP
-            column: created_at
-        updatedAt:
-            type: datetime
-            nullable: false
-            comment: ''
-            default: '0000-00-00 00:00:00'
-            column: updated_at
         isActive:
             type: boolean
             nullable: false
@@ -70,24 +39,6 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Site:
             default: '1'
             column: is_active
     manyToOne:
-        createdBy:
-            targetEntity: KRSolutions\Bundle\KRUserBundle\Entity\User
-            cascade: {  }
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                created_by:
-                    referencedColumnName: id
-            orphanRemoval: false
-        updatedBy:
-            targetEntity: KRSolutions\Bundle\KRUserBundle\Entity\User
-            cascade: {  }
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                updated_by:
-                    referencedColumnName: id
-            orphanRemoval: false
         homepage:
             targetEntity: Page
             cascade: {  }

@@ -1,0 +1,111 @@
+{% extends 'KRSolutionsKRCMSBundle:Admin:layout.html.twig' %}
+
+{% block title %}Pagina types - Content Management Systeem{% endblock %}
+
+{% block content %}
+
+<header class="jumbotron subhead">
+	<h1>Pagina types</h1>
+	<p class="lead">Maak een nieuw pagina type aan <span class="label label-info">Pagina type toevoegen</span></p>
+</header>
+
+<div class="row-fluid">
+	<div class="span4">
+		<div class="well">
+			<form action="{{ path('kr_solutions_krcms_page_types_index') }}" method="post" {{ form_enctype(pageTypeForm) }} novalidate="novalidate">
+				<fieldset>
+					<legend>Pagina type toevoegen</legend>
+
+					{% if form_errors(pageTypeForm) %}
+					<div class="alert alert-error">
+						<a class="close" data-dismiss="alert" href="#">×</a>
+						<h4 class="alert-heading">Fout!</h4>
+						{{ form_errors(pageTypeForm) }}
+					</div>
+					{% endif %}
+
+					<div class="control-group{% if pageTypeForm.name.vars.errors|length %} error{% endif %}">
+						{{ form_label(pageTypeForm.name) }}
+						{{ form_widget(pageTypeForm.name, { 'attr': {'class': 'span10'} }) }}
+					</div>
+
+					<div class="control-group{% if form_errors(pageTypeForm.description) %} error{% endif %}">
+						{{ form_label(pageTypeForm.description) }}
+						{{ form_widget(pageTypeForm.description, { 'attr': {'class': 'span10'} }) }}
+					</div>
+
+					{{ form_rest(pageTypeForm) }}
+				</fieldset>
+				<input class="btn btn-primary" type="submit" value="Pagina type toevoegen" />
+			</form>
+		</div>
+	</div>
+	<div class="span8">
+		<div class="well">
+			{% if pageTypes|length > 0 %}
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th style="width: 20%;">Naam</th>
+						<th>Omschrijving</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for pageType in pageTypes %}
+					<tr>
+						<td><a href="{{ path('kr_solutions_krcms_page_types_edit', { 'pageTypeId': pageType.id }) }}" title="Pagina type wijzigen"><b>{{ pageType.name }}</b></a></td>
+						<td>{{ pageType.description }}</td>
+						<td class="btn-toolbar">
+							<div class="btn-group pull-right">
+								<a id="page_type_edit_{{ pageType.id }}" href="{{ path('kr_solutions_krcms_page_types_edit', { 'pageTypeId': pageType.id }) }}" class="page_type_edit btn"><i class="icon-edit"></i> Wijzigen</a>
+								<a id="page_type_remove_{{ pageType.id }}" href="javascript:void(0)" class="page_type_remove btn"><i class="icon-trash"></i> Verwijderen</a>
+							</div>
+						</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+			{% else %}
+				<p>Er zijn nog geen pagina types toegevoegd.</p>
+				<p>Klik op <strong>"Pagina type toevoegen"</strong> aan de rechterkant om een pagina type toe te voegen.</p>
+			{% endif %}
+		</div>
+	</div>
+</div>
+
+{# Modals #}
+<div class="modal hide" id="page_type_remove_modal">
+    <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">×</button>
+		<h3>Pagina type verwijderen</h3>
+    </div>
+    <div class="modal-body">
+		<p>Weet u zeker dat u deze pagina type wilt verwijderen?</p>
+		<p><small>Pagina's die aangemaakt zijn onder dit type pagina zullen niet meer werken, u dient deze een ander pagina type te geven.</small></p>
+    </div>
+    <div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Annuleren</a>
+		<a href="#" class="btn btn-danger" id="page_type_remove_action">Verwijderen</a>
+    </div>
+</div>
+{# End modals #}
+
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+
+<script type="text/javascript" lang="javascript">
+	$(document).ready(function() {
+		$('.page_type_remove').on('click', function() {
+			var page_type_id = this.id.replace('page_type_remove_', '');
+			var remove_url_holder = '{{ path('kr_solutions_krcms_page_types_remove', {'pageTypeId': 'page_type_ID_PLACE_HOLDER'}) }}';
+
+			$('#page_type_remove_action').attr('href', remove_url_holder.replace('page_type_ID_PLACE_HOLDER', page_type_id));
+			$('#page_type_remove_modal').modal('show');
+		});
+	});
+</script>
+
+{% endblock %}

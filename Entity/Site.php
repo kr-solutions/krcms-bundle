@@ -27,11 +27,6 @@ class Site
 	/**
 	 * @var string
 	 */
-	private $template;
-
-	/**
-	 * @var string
-	 */
 	private $title;
 
 	/**
@@ -40,29 +35,9 @@ class Site
 	private $siteUrl;
 
 	/**
-	 * @var DateTime
-	 */
-	private $createdAt;
-
-	/**
-	 * @var DateTime
-	 */
-	private $updatedAt;
-
-	/**
 	 * @var boolean
 	 */
 	private $isActive;
-
-	/**
-	 * @var User
-	 */
-	private $createdBy;
-
-	/**
-	 * @var User
-	 */
-	private $updatedBy;
 
 	/**
 	 * @var Page
@@ -117,30 +92,6 @@ class Site
 	}
 
 	/**
-	 * Set template
-	 *
-	 * @param string $template
-	 *
-	 * @return Site
-	 */
-	public function setTemplate($template)
-	{
-		$this->template = $template;
-
-		return $this;
-	}
-
-	/**
-	 * Get template
-	 *
-	 * @return string
-	 */
-	public function getTemplate()
-	{
-		return $this->template;
-	}
-
-	/**
 	 * Set title
 	 *
 	 * @param string $title
@@ -189,54 +140,6 @@ class Site
 	}
 
 	/**
-	 * Set createdAt
-	 *
-	 * @param DateTime $createdAt
-	 *
-	 * @return Site
-	 */
-	public function setCreatedAt($createdAt)
-	{
-		$this->createdAt = $createdAt;
-
-		return $this;
-	}
-
-	/**
-	 * Get createdAt
-	 *
-	 * @return DateTime
-	 */
-	public function getCreatedAt()
-	{
-		return $this->createdAt;
-	}
-
-	/**
-	 * Set updatedAt
-	 *
-	 * @param DateTime $updatedAt
-	 *
-	 * @return Site
-	 */
-	public function setUpdatedAt($updatedAt)
-	{
-		$this->updatedAt = $updatedAt;
-
-		return $this;
-	}
-
-	/**
-	 * Get updatedAt
-	 *
-	 * @return DateTime
-	 */
-	public function getUpdatedAt()
-	{
-		return $this->updatedAt;
-	}
-
-	/**
 	 * Set isActive
 	 *
 	 * @param boolean $isActive
@@ -258,54 +161,6 @@ class Site
 	public function getIsActive()
 	{
 		return $this->isActive;
-	}
-
-	/**
-	 * Set createdBy
-	 *
-	 * @param User $createdBy
-	 *
-	 * @return Site
-	 */
-	public function setCreatedBy(User $createdBy = null)
-	{
-		$this->createdBy = $createdBy;
-
-		return $this;
-	}
-
-	/**
-	 * Get createdBy
-	 *
-	 * @return User
-	 */
-	public function getCreatedBy()
-	{
-		return $this->createdBy;
-	}
-
-	/**
-	 * Set updatedBy
-	 *
-	 * @param User $updatedBy
-	 *
-	 * @return Site
-	 */
-	public function setUpdatedBy(User $updatedBy = null)
-	{
-		$this->updatedBy = $updatedBy;
-
-		return $this;
-	}
-
-	/**
-	 * Get updatedBy
-	 *
-	 * @return User
-	 */
-	public function getUpdatedBy()
-	{
-		return $this->updatedBy;
 	}
 
 	/**
