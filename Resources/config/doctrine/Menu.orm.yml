@@ -40,7 +40,7 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Menu:
             targetEntity: Page
             mappedBy: menu
             orderBy:
-            orderId: asc
+                orderId: asc
     manyToOne:
         site:
             targetEntity: Site
