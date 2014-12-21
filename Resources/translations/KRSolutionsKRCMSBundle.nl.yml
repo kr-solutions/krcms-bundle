@@ -30,5 +30,7 @@ form:
                label: "Template locatie"
            pageHandler:
                label: "Service id voor dit pagina type"
+           pageTypeChildren:
+               label: "Mogelijke subpagina's"
            yes: "Ja"
            no: "Nee"
