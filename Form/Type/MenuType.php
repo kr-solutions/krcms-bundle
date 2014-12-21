@@ -16,8 +16,8 @@ class MenuType extends AbstractType
 	/**
 	 * Build form
 	 *
-	 * @param \Symfony\Component\Form\FormBuilderInterface $builder The form builder
-	 * @param array                                        $options Options
+	 * @param FormBuilderInterface $builder The form builder
+	 * @param array                $options Options
 	 *
 	 * @return void
 	 */
@@ -42,7 +42,7 @@ class MenuType extends AbstractType
 	/**
 	 * Set default options
 	 *
-	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
+	 * @param OptionsResolverInterface $resolver
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver)
 	{

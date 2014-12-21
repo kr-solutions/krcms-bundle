@@ -1,0 +1,36 @@
+form:
+   type:
+       pageType:
+           name:
+               label: "Name"
+           description:
+               label: "Description"
+           isChild:
+               label: "Has to be a subpage?"
+           hasChildren:
+               label: "Has subpages?"
+           hasContent:
+               label: "Has content?"
+           hasFiles:
+               label: "Has files/images?"
+           childrenOrderBy:
+               label: "Subpages sorted by"
+               choices:
+                   orderId: "Page order"
+                   createdAt: "Created at"
+                   updatedAt: "Updated at"
+                   title: "Title"
+                   permalink: "Permalink"
+           childrenOrderDirection:
+               label: "Subpages order direction"
+               choices:
+                   desc: "Descending"
+                   asc: "Ascending"
+           template:
+               label: "Template location"
+           pageHandler:
+               label: "Service id for this page type"
+           pageTypeChildren:
+               label: "Possible subpages"
+           yes: "Yes"
+           no: "No"

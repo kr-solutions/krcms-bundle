@@ -68,8 +68,8 @@ class MenuRepository extends EntityRepository
 	/**
 	 * Get Menus Entity by Site and name
 	 *
-	 * @param Site $site     Site entity
-	 * @param string                               $menuName Menu name
+	 * @param Site   $site     Site entity
+	 * @param string $menuName Menu name
 	 *
 	 * @return Menu
 	 */

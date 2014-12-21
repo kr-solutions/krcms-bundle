@@ -2,7 +2,6 @@
 
 namespace KRSolutions\Bundle\KRCMSBundle\Entity;
 
-use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use KRSolutions\Bundle\KRUserBundle\Entity\User;
@@ -28,11 +27,6 @@ class Site
 	 * @var string
 	 */
 	private $title;
-
-	/**
-	 * @var string
-	 */
-	private $siteUrl;
 
 	/**
 	 * @var boolean
@@ -113,30 +107,6 @@ class Site
 	public function getTitle()
 	{
 		return $this->title;
-	}
-
-	/**
-	 * Set siteUrl
-	 *
-	 * @param string $siteUrl
-	 *
-	 * @return Site
-	 */
-	public function setSiteUrl($siteUrl)
-	{
-		$this->siteUrl = $siteUrl;
-
-		return $this;
-	}
-
-	/**
-	 * Get siteUrl
-	 *
-	 * @return string
-	 */
-	public function getSiteUrl()
-	{
-		return $this->siteUrl;
 	}
 
 	/**

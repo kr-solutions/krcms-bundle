@@ -2,6 +2,8 @@
 
 namespace KRSolutions\Bundle\KRCMSBundle\Form\Type;
 
+use KRSolutions\Bundle\KRCMSBundle\Repository\MenuRepository;
+use KRSolutions\Bundle\KRCMSBundle\Repository\PageRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -14,38 +16,23 @@ class PageType extends AbstractType
 {
 
 	/**
-	 * @var \KRSolutions\Bundle\KRCMSBundle\Entity\Page $page
-	 */
-	private $page;
-
-	/**
-	 * PageType constructor
-	 *
-	 * @param \KRSolutions\Bundle\KRCMSBundle\Entity\Page $page
-	 */
-	public function __construct(\KRSolutions\Bundle\KRCMSBundle\Entity\Page $page)
-	{
-		$this->page = $page;
-	}
-
-	/**
 	 * Build form
 	 *
-	 * @param \Symfony\Component\Form\FormBuilderInterface $builder The form builder
-	 * @param array                                        $options Options
+	 * @param FormBuilderInterface $builder The form builder
+	 * @param array                $options Options
 	 *
 	 * @return void
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
-		$page = $this->page;
+		$page = $builder->getData();
 
 		$builder->add('title', null, array('label' => 'Titel', 'required' => true, 'error_bubbling' => true));
 		$builder->add('truePermalink', null, array('label' => 'Permalink', 'required' => false, 'error_bubbling' => true));
 
 		if (false === $page->getPageType()->getIsChild()) {
 			$builder->add('menu', null, array('label' => 'Menu', 'required' => false, 'error_bubbling' => true, 'empty_value' => 'Geen menu (Losse pagina)', 'empty_data' => null,
-				'query_builder' => function (\KRSolutions\Bundle\KRCMSBundle\Repository\MenuRepository $repository) use ($page) {
+				'query_builder' => function (MenuRepository $repository) use ($page) {
 					return $repository->getMenusBySiteQB($page->getSite());
 				}));
 
@@ -54,7 +41,7 @@ class PageType extends AbstractType
 
 		if (0 !== count($page->getPageType()->getPageTypeParents())) {
 			$parentOptions = array('class' => 'KRSolutions\\Bundle\\KRCMSBundle\\Entity\\Page', 'label' => 'Onderdeel van pagina', 'required' => true, 'error_bubbling' => true, 'empty_value' => false,
-				'query_builder' => function (\KRSolutions\Bundle\KRCMSBundle\Repository\PageRepository $repository) use ($page) {
+				'query_builder' => function (PageRepository $repository) use ($page) {
 					return $repository->getAllChildablePagesExceptThisPageQB($page);
 				});
 
@@ -77,7 +64,7 @@ class PageType extends AbstractType
 	/**
 	 * Set default options
 	 *
-	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
+	 * @param OptionsResolverInterface $resolver
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver)
 	{

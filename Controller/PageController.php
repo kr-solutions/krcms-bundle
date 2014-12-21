@@ -125,7 +125,7 @@ class PageController extends AbstractKRCMSController
 			$formClass = 'KRSolutions\Bundle\KRCMSBundle\Form\Type\PageType';
 		}
 
-		$pageForm = $this->createForm(new $formClass($page), $page);
+		$pageForm = $this->createForm(new $formClass(), $page);
 		$pageForm->handleRequest($request);
 
 		if (null !== $pageType->getAdminFormHandler()) {

@@ -19,7 +19,37 @@ services:
         tags:
             - { name: twig.extension }
 
+    kr_solutions_krcms.form.type.category:
+        class: KRSolutions\Bundle\KRCMSBundle\Form\Type\CategoryType
+        tags:
+            - { name: form.type, alias: category }
+
+    kr_solutions_krcms.form.type.file:
+        class: KRSolutions\Bundle\KRCMSBundle\Form\Type\FileType
+        tags:
+            - { name: form.type, alias: file }
+
+    kr_solutions_krcms.form.type.menu:
+        class: KRSolutions\Bundle\KRCMSBundle\Form\Type\MenuType
+        tags:
+            - { name: form.type, alias: menu }
+
+    kr_solutions_krcms.form.type.page:
+        class: KRSolutions\Bundle\KRCMSBundle\Form\Type\PageType
+        tags:
+            - { name: form.type, alias: page }
+
     kr_solutions_krcms.form.type.page_type:
         class: KRSolutions\Bundle\KRCMSBundle\Form\Type\PageTypeType
         tags:
             - { name: form.type, alias: page_type }
+
+    kr_solutions_krcms.form.type.site:
+        class: KRSolutions\Bundle\KRCMSBundle\Form\Type\SiteType
+        tags:
+            - { name: form.type, alias: site }
+
+    kr_solutions_krcms.form.type.tag:
+        class: KRSolutions\Bundle\KRCMSBundle\Form\Type\TagType
+        tags:
+            - { name: form.type, alias: tag }

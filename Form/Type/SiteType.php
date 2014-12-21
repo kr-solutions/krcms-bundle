@@ -8,9 +8,9 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 
 /**
- * \KRSolutions\Bundle\KRCMSBundle\Form\Type\FileType
+ * \KRSolutions\Bundle\KRCMSBundle\Form\Type\SiteType
  */
-class FileType extends AbstractType
+class SiteType extends AbstractType
 {
 
 	/**
@@ -24,9 +24,10 @@ class FileType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder
-			->add('uri', null, array('label' => 'Bestand', 'required' => true, 'error_bubbling' => true))
-			->add('title', null, array('label' => 'Titel', 'required' => false, 'error_bubbling' => true))
-			->add('description', null, array('label' => 'Omschrijving', 'required' => false, 'error_bubbling' => true));
+			->add('permalink', null, array('label' => 'Permalink', 'required' => true, 'error_bubbling' => true))
+			->add('title', null, array('label' => 'Titel', 'required' => true, 'error_bubbling' => true))
+			->add('isActive', null, array('label' => 'Is geactiveerd', 'required' => true, 'error_bubbling' => true))
+			->add('homepage', null, array('label' => 'Homepage', 'required' => true, 'error_bubbling' => true));
 	}
 
 	/**
@@ -36,7 +37,7 @@ class FileType extends AbstractType
 	 */
 	public function getName()
 	{
-		return 'file';
+		return 'site';
 	}
 
 	/**
@@ -47,7 +48,7 @@ class FileType extends AbstractType
 	public function setDefaultOptions(OptionsResolverInterface $resolver)
 	{
 		$resolver->setDefaults(array(
-			'data_class' => 'KRSolutions\Bundle\KRCMSBundle\Entity\File',
+			'data_class' => 'KRSolutions\Bundle\KRCMSBundle\Entity\Site',
 		));
 	}
 

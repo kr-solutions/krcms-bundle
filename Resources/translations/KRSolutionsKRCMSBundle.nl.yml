@@ -12,7 +12,7 @@ form:
            hasContent:
                label: "Heeft inhoud?"
            hasFiles:
-               label: "Heeft bestand/afbeeldingen?"
+               label: "Heeft bestanden/afbeeldingen?"
            childrenOrderBy:
                label: "Subpagina's sorteren op"
                choices:

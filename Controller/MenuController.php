@@ -3,7 +3,6 @@
 namespace KRSolutions\Bundle\KRCMSBundle\Controller;
 
 use KRSolutions\Bundle\KRCMSBundle\Entity\Menu;
-use KRSolutions\Bundle\KRCMSBundle\Form\Type\MenuType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -32,7 +31,7 @@ class MenuController extends AbstractKRCMSController
 		$menus = $this->getMenuRepository()->findAll();
 
 		$newMenu = new Menu();
-		$menuForm = $this->createForm(new MenuType($newMenu), $newMenu);
+		$menuForm = $this->createForm('menu', $newMenu);
 
 		$menuForm->handleRequest($request);
 
@@ -105,7 +104,7 @@ class MenuController extends AbstractKRCMSController
 			return $this->redirect($this->generateUrl('kr_solutions_krcms_menus_index'));
 		}
 
-		$menuForm = $this->createForm(new MenuType($menu), $menu);
+		$menuForm = $this->createForm('menu', $menu);
 
 		if ($request->isMethod('POST')) {
 			$menuForm->bind($request);

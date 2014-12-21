@@ -8,9 +8,9 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 
 /**
- * \KRSolutions\Bundle\KRCMSBundle\Form\Type\FileType
+ * \KRSolutions\Bundle\KRCMSBundle\Form\Type\TagType
  */
-class FileType extends AbstractType
+class TagType extends AbstractType
 {
 
 	/**
@@ -24,9 +24,7 @@ class FileType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder
-			->add('uri', null, array('label' => 'Bestand', 'required' => true, 'error_bubbling' => true))
-			->add('title', null, array('label' => 'Titel', 'required' => false, 'error_bubbling' => true))
-			->add('description', null, array('label' => 'Omschrijving', 'required' => false, 'error_bubbling' => true));
+			->add('name', null, array('label' => 'Naam', 'required' => true, 'error_bubbling' => true));
 	}
 
 	/**
@@ -36,7 +34,7 @@ class FileType extends AbstractType
 	 */
 	public function getName()
 	{
-		return 'file';
+		return 'tag';
 	}
 
 	/**
@@ -47,7 +45,7 @@ class FileType extends AbstractType
 	public function setDefaultOptions(OptionsResolverInterface $resolver)
 	{
 		$resolver->setDefaults(array(
-			'data_class' => 'KRSolutions\Bundle\KRCMSBundle\Entity\File',
+			'data_class' => 'KRSolutions\Bundle\KRCMSBundle\Entity\Tag',
 		));
 	}
 
