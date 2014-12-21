@@ -27,26 +27,26 @@ class PageType extends AbstractType
 	{
 		$page = $builder->getData();
 
-		$builder->add('title', null, array('label' => 'Titel', 'required' => true, 'error_bubbling' => true));
-		$builder->add('truePermalink', null, array('label' => 'Permalink', 'required' => false, 'error_bubbling' => true));
+		$builder->add('title', null, array('label' => 'form.type.page.title.label', 'required' => true, 'error_bubbling' => true));
+		$builder->add('truePermalink', null, array('label' => 'form.type.page.permalink.label', 'required' => false, 'error_bubbling' => true));
 
 		if (false === $page->getPageType()->getIsChild()) {
-			$builder->add('menu', null, array('label' => 'Menu', 'required' => false, 'error_bubbling' => true, 'empty_value' => 'Geen menu (Losse pagina)', 'empty_data' => null,
+			$builder->add('menu', null, array('label' => 'form.type.page.menu.label', 'required' => false, 'error_bubbling' => true, 'empty_value' => 'form.type.page.menu.empty_value', 'empty_data' => null,
 				'query_builder' => function (MenuRepository $repository) use ($page) {
 					return $repository->getMenusBySiteQB($page->getSite());
 				}));
 
-			$builder->add('menuTitle', null, array('label' => 'Menu titel', 'required' => true, 'error_bubbling' => true));
+			$builder->add('menuTitle', null, array('label' => 'form.type.page.menuTitle.label', 'required' => true, 'error_bubbling' => true));
 		}
 
 		if (0 !== count($page->getPageType()->getPageTypeParents())) {
-			$parentOptions = array('class' => 'KRSolutions\\Bundle\\KRCMSBundle\\Entity\\Page', 'label' => 'Onderdeel van pagina', 'required' => true, 'error_bubbling' => true, 'empty_value' => false,
+			$parentOptions = array('class' => 'KRSolutions\\Bundle\\KRCMSBundle\\Entity\\Page', 'label' => 'form.type.page.parent.label', 'required' => true, 'error_bubbling' => true, 'empty_value' => false,
 				'query_builder' => function (PageRepository $repository) use ($page) {
 					return $repository->getAllChildablePagesExceptThisPageQB($page);
 				});
 
 			if (false === $page->getPageType()->getIsChild()) {
-				$parentOptions['empty_value'] = 'Geen onderdeel van pagina (Hoofdpagina)';
+				$parentOptions['empty_value'] = 'form.type.page.parent.empty_value';
 				$parentOptions['empty_data'] = null;
 				$parentOptions['required'] = false;
 			}
@@ -55,10 +55,10 @@ class PageType extends AbstractType
 		}
 
 		if (true === $page->getPageType()->getHasContent()) {
-			$builder->add('content', null, array('label' => 'Inhoud', 'required' => false, 'error_bubbling' => true));
+			$builder->add('content', null, array('label' => 'form.type.page.content.label', 'required' => false, 'error_bubbling' => true));
 		}
 
-		$builder->add('metaDescription', null, array('label' => 'Meta beschrijving', 'required' => false, 'error_bubbling' => true));
+		$builder->add('metaDescription', null, array('label' => 'form.type.page.metaDescription.label', 'required' => false, 'error_bubbling' => true));
 	}
 
 	/**
@@ -70,6 +70,7 @@ class PageType extends AbstractType
 	{
 		$resolver->setDefaults(array(
 			'data_class' => 'KRSolutions\Bundle\KRCMSBundle\Entity\Page',
+			'translation_domain' => 'KRSolutionsKRCMSBundle'
 		));
 	}
 

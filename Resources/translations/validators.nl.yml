@@ -1,0 +1,10 @@
+kr_solutions_krcms:
+    menu:
+        name:
+            not_blank: Naam kan niet leeg zijn
+    page:
+        title:
+            not_blank: De titel van de pagina is verplicht
+    file:
+        uri:
+            not_blank: U heeft geen bestand geselecteerd

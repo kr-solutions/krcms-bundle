@@ -1,15 +1,15 @@
 <ul class="nav">
 	<li{% if route == 'kr_solutions_krcms_dashboard' %} class="active" {% endif %}>
-		<a href="{{ path('kr_solutions_krcms_dashboard') }}"><i class="icon-home"></i> Dashboard</a>
+		<a href="{{ path('kr_solutions_krcms_dashboard') }}"><i class="icon-home"></i> {{ 'layout.menu.dashboard'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
 	</li>
 	<li{% if route == 'kr_solutions_krcms_pages_index' %} class="active" {% endif %}>
 {% if sites|length == 1 %}
 	<li{% if route == 'kr_solutions_krcms_pages_index' %} class="active" {% endif %}>
-		<a href="{{ path('kr_solutions_krcms_pages_index', { 'siteId': sites[0].id }) }}"><i class="icon-file"></i> Pagina's beheren</a>
+		<a href="{{ path('kr_solutions_krcms_pages_index', { 'siteId': sites[0].id }) }}"><i class="icon-file"></i> {{ 'layout.menu.manage_pages'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
 	</li>
 {% else %}
 	<li class="dropdown{% if route == 'kr_solutions_krcms_pages_index' %} active{% endif %}">
-		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-list"></i> Pagina's beheren<b class="caret"></b></a>
+		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-list"></i> {{ 'layout.menu.manage_pages'|trans({}, 'KRSolutionsKRCMSBundle') }}<b class="caret"></b></a>
 
 		<ul class="dropdown-menu">
 		{% for site in sites %}
@@ -21,31 +21,21 @@
 	</li>
 {% endif %}
 	<li{% if route == 'kr_solutions_krcms_helpdesk' %} class="active" {% endif %}>
-		<a href="{{ path('kr_solutions_krcms_helpdesk') }}"><i class="icon-question-sign"></i> Helpdesk</a>
+		<a href="{{ path('kr_solutions_krcms_helpdesk') }}"><i class="icon-question-sign"></i> {{ 'layout.menu.helpdesk'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
 	</li>
 {% if is_granted('ROLE_ADMIN') %}
 	<li{% if route == 'kr_solutions_krcms_categories_index' %} class="active" {% endif %}>
-		<a href="{{ path('kr_solutions_krcms_categories_index') }}"><i class="icon-leaf"></i> Categori&euml;n</a>
+		<a href="{{ path('kr_solutions_krcms_categories_index') }}"><i class="icon-leaf"></i> {{ 'layout.menu.categories'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
 	</li>
 {% endif %}
 {% if is_granted('ROLE_ADMIN') %}
 	<li{% if route == 'kr_solutions_krcms_menus_index' %} class="active" {% endif %}>
-		<a href="{{ path('kr_solutions_krcms_menus_index') }}"><i class="icon-list"></i> Menu's</a>
+		<a href="{{ path('kr_solutions_krcms_menus_index') }}"><i class="icon-list"></i> {{ 'layout.menu.menus'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
 	</li>
 {% endif %}
 {% if is_granted('ROLE_ADMIN') %}
 	<li{% if route == 'kr_solutions_krcms_sites_index' %} class="active" {% endif %}>
-		<a href="{{ path('kr_solutions_krcms_sites_index') }}"><i class="icon-book"></i> Site's</a>
-	</li>
-{% endif %}
-{% if is_granted('ROLE_ADMIN') %}
-	<li{% if route == 'kr_solutions_krcms_users_index' %} class="active" {% endif %}>
-		<a href="{{ path('kr_solutions_krcms_users_index') }}"><i class="icon-user"></i> Gebruikers</a>
-	</li>
-{% endif %}
-{% if is_granted('ROLE_ADMIN') %}
-	<li{% if route == 'kr_solutions_krcms_privileges_index' %} class="active" {% endif %}>
-		<a href="{{ path('kr_solutions_krcms_privileges_index') }}"><i class="icon-lock"></i> Gebruikersrechten</a>
+		<a href="{{ path('kr_solutions_krcms_sites_index') }}"><i class="icon-book"></i> {{ 'layout.menu.sites'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
 	</li>
 {% endif %}
 </ul>

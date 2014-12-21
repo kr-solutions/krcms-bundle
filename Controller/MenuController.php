@@ -46,7 +46,7 @@ class MenuController extends AbstractKRCMSController
 			return $this->redirect($this->generateUrl('kr_solutions_krcms_menus_index'));
 		}
 
-		return $this->render('KRSolutionsKRCMSBundle:Admin:menus_index.html.twig', array('menus' => $menus, 'menuForm' => $menuForm->createView()));
+		return $this->render('KRSolutionsKRCMSBundle:Menu:index.html.twig', array('menus' => $menus, 'menuForm' => $menuForm->createView()));
 	}
 
 	/**
@@ -120,8 +120,7 @@ class MenuController extends AbstractKRCMSController
 			}
 		}
 
-
-		return $this->render('KRSolutionsKRCMSBundle:Admin:menus_edit.html.twig', array('menu' => $menu, 'menuForm' => $menuForm->createView()));
+		return $this->render('KRSolutionsKRCMSBundle:Menu:edit.html.twig', array('menu' => $menu, 'menuForm' => $menuForm->createView()));
 	}
 
 }

@@ -23,7 +23,7 @@ class SiteController extends AbstractKRCMSController
 	{
 		$allSites = $this->getSiteRepository()->getAllSites();
 
-		return $this->render('KRSolutionsKRCMSBundle:Admin:sites_index.html.twig', array('allSites' => $allSites));
+		return $this->render('KRSolutionsKRCMSBundle:Site:index.html.twig', array('allSites' => $allSites));
 	}
 
 }

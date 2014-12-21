@@ -49,7 +49,7 @@ class PageController extends AbstractKRCMSController
 		$pageTypes = $this->getPageTypeRepository()->getAllPossibleParentPageTypesBySite($site);
 //		$pageTypes = array_merge($childPageTypes, $parentPageTypes);
 
-		return $this->render('KRSolutionsKRCMSBundle:Admin:pages_index.html.twig', array('site' => $site, 'pages' => $pages, 'menus' => $menus, 'childablePages' => $childablePages, 'parentPage' => $parentPage, 'pageTypes' => $pageTypes));
+		return $this->render('KRSolutionsKRCMSBundle:Page:index.html.twig', array('site' => $site, 'pages' => $pages, 'menus' => $menus, 'childablePages' => $childablePages, 'parentPage' => $parentPage, 'pageTypes' => $pageTypes));
 	}
 
 	/**
@@ -185,7 +185,7 @@ class PageController extends AbstractKRCMSController
 		if (null !== $pageType->getAdminTemplate()) {
 			$adminTemplate = 'KRSolutionsKRCMSBundle:KRCMSPageType:' . $pageType->getAdminTemplate() . '.html.twig';
 		} else {
-			$adminTemplate = 'KRSolutionsKRCMSBundle:Admin:pages_edit.html.twig';
+			$adminTemplate = 'KRSolutionsKRCMSBundle:Page:edit.html.twig';
 		}
 
 		$page->setContent(addslashes(preg_replace("/[\n\r]/", "", $page->getContent())));

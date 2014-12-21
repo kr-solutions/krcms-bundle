@@ -1,0 +1,10 @@
+kr_solutions_krcms:
+    menu:
+        name:
+            not_blank: Name can not be empty
+    page:
+        title:
+            not_blank: The title of the page is mandatory
+    file:
+        uri:
+            not_blank: You have not selected any file

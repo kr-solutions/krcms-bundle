@@ -1,36 +1,77 @@
 form:
-   type:
-       pageType:
+    type:
+        yes: Ja
+        no: Nee
+        pageType:
            name:
-               label: "Naam"
+               label: Naam
            description:
-               label: "Omschrijving"
+               label: Omschrijving
            isChild:
-               label: "Moet verplicht subpagina zijn?"
+               label: Moet verplicht subpagina zijn?
            hasChildren:
-               label: "Heeft subpagina's?"
+               label: Heeft subpagina's?
            hasContent:
-               label: "Heeft inhoud?"
+               label: Heeft inhoud?
            hasFiles:
-               label: "Heeft bestanden/afbeeldingen?"
+               label: Heeft bestanden/afbeeldingen?
            childrenOrderBy:
-               label: "Subpagina's sorteren op"
+               label: Subpagina's sorteren op
                choices:
-                   orderId: "Pagina volgorde"
-                   createdAt: "Datum aangemaakt"
-                   updatedAt: "Datum gewijzigd"
-                   title: "Titel"
-                   permalink: "Permalink"
+                   orderId: Pagina volgorde
+                   createdAt: Datum aangemaakt
+                   updatedAt: Datum gewijzigd
+                   title: Titel
+                   permalink: Permalink
            childrenOrderDirection:
-               label: "Subpagina sorteer richting"
+               label: Subpagina sorteer richting
                choices:
-                   desc: "Aflopend"
-                   asc: "Oplopend"
+                   desc: Aflopend
+                   asc: Oplopend
            template:
-               label: "Template locatie"
+               label: Template locatie
            pageHandler:
-               label: "Service id voor dit pagina type"
+               label: Service id voor dit pagina type
            pageTypeChildren:
-               label: "Mogelijke subpagina's"
-           yes: "Ja"
-           no: "Nee"
+               label: Mogelijke subpagina's
+        page:
+            title:
+                label: Titel
+            permalink:
+                label: Permalink
+            menu:
+                label: Menu
+                empty_value: Geen menu (losse pagina)
+            menuTitle:
+                label: Menu titel
+            parent:
+                label: Subpagina van
+                empty_value: Geen subpagina
+            content:
+                label: Inhoud
+            metaDescription:
+                label: Meta beschrijving
+
+layout:
+    logout: Uitloggen
+    login: Inloggen
+    register: Registreer
+    logged_in_as: Ingelogd als %username%
+    footer_text: Content Management System - K&amp;R Solutions.
+    save: Opslaan
+    cancel: Annuleren
+    created_by: Aangemaakt door
+    created_at: Aangemaakt op
+    updated_by: Gewijzigd door
+    updated_at: Gewijzigd op
+    menu:
+        dashboard: Dashboard
+        manage_pages: Pagina's beheren
+        helpdesk: Helpdesk
+        categories: Categoriën
+        menus: Menu's
+        sites: Sites
+
+page:
+    add_page: Pagina toevoegen
+    edit_page: Wijzig pagina

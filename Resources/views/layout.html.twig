@@ -43,7 +43,7 @@
 
 					{% render controller('KRSolutionsKRCMSBundle:Admin:menu', { 'activeSite': activeSite, 'route': app.request.attributes.get('_route') }) %}
 
-					<a class="btn btn-danger pull-right" href="{{ path('fos_user_security_logout') }}"><i class="icon-off icon-white"></i> Uitloggen{% if app.user.email is defined %} ({{ app.user.email }}){% endif %}</a>
+					<a class="btn btn-danger pull-right" href="{{ path('fos_user_security_logout') }}"><i class="icon-off icon-white"></i> {{ 'layout.logout'|trans({}, 'KRSolutionsKRCMSBundle') }} ({{ app.user }})</a>
 				</div>
 			</div>
 		</div>
@@ -89,7 +89,7 @@
 
 		<div class="row-fluid">
 			<p style="text-align: center;">
-				Copyright &copy; 2011 K&amp;R Solutions. Alle rechten voorbehouden.
+				{{ 'layout.footer_text'|trans({}, 'KRSolutionsKRCMSBundle')|raw }}
 				<br />
 				<strong>H:</strong>
 				<a href="mailto:helpdesk@kr-solutions.nl">helpdesk@kr-solutions.nl</a>

@@ -27,25 +27,25 @@ class PageTypeType extends AbstractType
 		$builder->add('description', null, array('label' => 'form.type.pageType.description.label', 'required' => false, 'error_bubbling' => true));
 		$builder->add('isChild', 'choice', array(
 			'label' => 'form.type.pageType.isChild.label',
-			'choices' => array(0 => 'form.type.pageType.no', 1 => 'form.type.pageType.yes'),
+			'choices' => array(0 => 'form.type.no', 1 => 'form.type.yes'),
 			'required' => true,
 			'error_bubbling' => true
 		));
 		$builder->add('hasChildren', 'choice', array(
 			'label' => 'form.type.pageType.hasChildren.label',
-			'choices' => array(0 => 'form.type.pageType.no', 1 => 'form.type.pageType.yes'),
+			'choices' => array(0 => 'form.type.no', 1 => 'form.type.yes'),
 			'required' => true,
 			'error_bubbling' => true
 		));
 		$builder->add('hasContent', 'choice', array(
 			'label' => 'form.type.pageType.hasContent.label',
-			'choices' => array(1 => 'form.type.pageType.yes', 0 => 'form.type.pageType.no'),
+			'choices' => array(1 => 'form.type.yes', 0 => 'form.type.no'),
 			'required' => true,
 			'error_bubbling' => true
 		));
 		$builder->add('hasFiles', 'choice', array(
 			'label' => 'form.type.pageType.hasFiles.label',
-			'choices' => array(1 => 'form.type.pageType.yes', 0 => 'form.type.pageType.no'),
+			'choices' => array(1 => 'form.type.yes', 0 => 'form.type.no'),
 			'required' => true,
 			'error_bubbling' => true
 		));

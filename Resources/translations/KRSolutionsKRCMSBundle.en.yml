@@ -1,36 +1,77 @@
 form:
-   type:
-       pageType:
-           name:
-               label: "Name"
-           description:
-               label: "Description"
-           isChild:
-               label: "Has to be a subpage?"
-           hasChildren:
-               label: "Has subpages?"
-           hasContent:
-               label: "Has content?"
-           hasFiles:
-               label: "Has files/images?"
-           childrenOrderBy:
-               label: "Subpages sorted by"
-               choices:
-                   orderId: "Page order"
-                   createdAt: "Created at"
-                   updatedAt: "Updated at"
-                   title: "Title"
-                   permalink: "Permalink"
-           childrenOrderDirection:
-               label: "Subpages order direction"
-               choices:
-                   desc: "Descending"
-                   asc: "Ascending"
-           template:
-               label: "Template location"
-           pageHandler:
-               label: "Service id for this page type"
-           pageTypeChildren:
-               label: "Possible subpages"
-           yes: "Yes"
-           no: "No"
+    type:
+        yes: Yes
+        no: No
+        pageType:
+            name:
+                label: Name
+            description:
+                label: Description
+            isChild:
+                label: Has to be a subpage?
+            hasChildren:
+                label: Has subpages?
+            hasContent:
+                label: Has content?
+            hasFiles:
+                label: Has files/images?
+            childrenOrderBy:
+                label: Subpages sorted by
+                choices:
+                    orderId: Page order
+                    createdAt: Created at
+                    updatedAt: Updated at
+                    title: Title
+                    permalink: Permalink
+            childrenOrderDirection:
+                label: Subpages order direction
+                choices:
+                    desc: Descending
+                    asc: Ascending
+            template:
+                label: Template location
+            pageHandler:
+                label: Service id for this page type
+            pageTypeChildren:
+                label: Possible subpages
+        page:
+            title:
+                label: Title
+            permalink:
+                label: Permalink
+            menu:
+                label: Menu
+                empty_value: No menu (single page)
+            menuTitle:
+                label: Menu title
+            parent:
+                label: Subpage of
+                empty_value: Not a subpage
+            content:
+                label: Content
+            metaDescription:
+                label: Meta description
+
+layout:
+    logout: Logout
+    login: Login
+    register: Register
+    logged_in_as: Logged in as %username%
+    footer_text: Content Management System - K&amp;R Solutions.
+    save: Save
+    cancel: Cancel
+    created_by: Created by
+    created_at: Created at
+    updated_by: Updated by
+    updated_at: Updated at
+    menu:
+        dashboard: Dashboard
+        manage_pages: Manage pages
+        helpdesk: Helpdesk
+        categories: Categories
+        menus: Menus
+        sites: Sites
+
+page:
+    add_page: Add page
+    edit_page: Edit page

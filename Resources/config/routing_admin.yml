@@ -4,7 +4,7 @@ kr_solutions_krcms_dashboard:
 
 kr_solutions_krcms_helpdesk:
     pattern: /helpdesk
-    defaults: { _controller: KRSolutionsKRCMSBundle:Admin:helpdesk }
+    defaults: { _controller: KRSolutionsKRCMSBundle:Helpdesk:helpdesk }
 
 # Pagina's
 kr_solutions_krcms_pages_index:
