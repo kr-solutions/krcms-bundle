@@ -22,6 +22,12 @@ class HelpdeskController extends AbstractKRCMSController
 	 */
 	public function helpdeskAction(Request $request)
 	{
+		if ($this->container->getParameter('kr_solutions_krcms.helpdesk.enabled') === false) {
+			$request->getSession()->getFlashBag()->add('alert-error', 'Helpdesk is not enabled.');
+
+			return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
+		}
+
 		$defaultData = array(
 			'email' => $this->getUser()->getEmail()
 		);
@@ -40,11 +46,11 @@ class HelpdeskController extends AbstractKRCMSController
 			$data = $form->getData();
 
 			$message = Swift_Message::newInstance()
-				->setSubject('KRCMS Helpdesk vraag met onderwerp: ' . $data['subject'])
-				->setReplyTo($data['email'])
-				->setReturnPath('r.adamse@kr-solutions.nl')
-				->setFrom('no-reply@kr-solutions.nl')
-				->setTo('r.adamse@kr-solutions.nl')
+				->setSubject($data['subject'])
+				->setReplyTo($data['email'], $data['name'])
+				->setReturnPath($this->container->getParameter('kr_solutions_krcms.helpdesk.contact_email'), $this->container->getParameter('kr_solutions_krcms.helpdesk.contact_name'))
+				->setFrom($this->container->getParameter('kr_solutions_krcms.helpdesk.noreply_email'), $this->container->getParameter('kr_solutions_krcms.helpdesk.from_name'))
+				->setTo($this->container->getParameter('kr_solutions_krcms.helpdesk.contact_email'), $this->container->getParameter('kr_solutions_krcms.helpdesk.contact_name'))
 				->setBody($data['message']);
 
 			$this->get('mailer')->send($message);

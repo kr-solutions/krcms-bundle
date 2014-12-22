@@ -26,7 +26,12 @@ class AdminController extends AbstractKRCMSController
 	{
 		$sites = $this->getSiteRepository()->getAllActiveSites();
 
-		return $this->render('KRSolutionsKRCMSBundle:Admin:menu.html.twig', array('activeSite' => $activeSite, 'sites' => $sites, 'route' => $route));
+		return $this->render('KRSolutionsKRCMSBundle:Admin:menu.html.twig', array(
+				'activeSite' => $activeSite,
+				'sites' => $sites,
+				'route' => $route,
+				'helpDeskEnabled' => $this->container->getParameter('kr_solutions_krcms.helpdesk.enabled')
+		));
 	}
 
 	/**

@@ -22,6 +22,12 @@ class KRSolutionsKRCMSExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+		$container->setParameter('kr_solutions_krcms.helpdesk.enabled', $config['helpdesk']['enabled']);
+		$container->setParameter('kr_solutions_krcms.helpdesk.contact_name', $config['helpdesk']['contact_name']);
+		$container->setParameter('kr_solutions_krcms.helpdesk.contact_email', $config['helpdesk']['contact_email']);
+		$container->setParameter('kr_solutions_krcms.helpdesk.from_name', $config['helpdesk']['from_name']);
+		$container->setParameter('kr_solutions_krcms.helpdesk.noreply_email', $config['helpdesk']['noreply_email']);
+
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
     }

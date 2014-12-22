@@ -20,9 +20,11 @@
 		</ul>
 	</li>
 {% endif %}
+{% if helpDeskEnabled %}
 	<li{% if route == 'kr_solutions_krcms_helpdesk' %} class="active" {% endif %}>
 		<a href="{{ path('kr_solutions_krcms_helpdesk') }}"><i class="icon-question-sign"></i> {{ 'layout.menu.helpdesk'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
 	</li>
+{% endif %}
 {% if is_granted('ROLE_ADMIN') %}
 	<li{% if route == 'kr_solutions_krcms_categories_index' %} class="active" {% endif %}>
 		<a href="{{ path('kr_solutions_krcms_categories_index') }}"><i class="icon-leaf"></i> {{ 'layout.menu.categories'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
