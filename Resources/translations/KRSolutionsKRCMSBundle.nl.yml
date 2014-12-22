@@ -57,7 +57,7 @@ layout:
     login: Inloggen
     register: Registreer
     logged_in_as: Ingelogd als %username%
-    footer_text: Content Management System - K&amp;R Solutions.
+    footer_text: K&amp;R Solutions - Content Management System
     save: Opslaan
     cancel: Annuleren
     created_by: Aangemaakt door
