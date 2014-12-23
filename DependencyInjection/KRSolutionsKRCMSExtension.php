@@ -22,6 +22,7 @@ class KRSolutionsKRCMSExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+		$container->setParameter('kr_solutions_krcms.upload_dir', $config['upload_dir']);
 		$container->setParameter('kr_solutions_krcms.helpdesk.enabled', $config['helpdesk']['enabled']);
 		$container->setParameter('kr_solutions_krcms.helpdesk.contact_name', $config['helpdesk']['contact_name']);
 		$container->setParameter('kr_solutions_krcms.helpdesk.contact_email', $config['helpdesk']['contact_email']);

@@ -23,6 +23,7 @@ class Configuration implements ConfigurationInterface
 		$rootNode = $treeBuilder->root('kr_solutions_krcms');
 
 		$rootNode->children()
+			->scalarNode('upload_dir')->defaultValue('uploads')->cannotBeEmpty()->end()
 			->arrayNode('helpdesk')
 				->addDefaultsIfNotSet()
 					->children()

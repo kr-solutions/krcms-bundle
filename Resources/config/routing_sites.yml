@@ -1,0 +1,15 @@
+kr_solutions_krcms_sites_index:
+    pattern: /
+    defaults: { _controller: KRSolutionsKRCMSBundle:Site:index }
+
+kr_solutions_krcms_sites_remove:
+    pattern: /remove/{siteId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:Site:remove }
+    requirements:
+        siteId: \d+
+
+kr_solutions_krcms_sites_edit:
+    pattern: /edit/{siteId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:Site:edit }
+    requirements:
+        siteId: \d+

@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
 /**
- * \KRSolutions\Bundle\KRCMSBundle\Controller\DefaultController
+ * Controller to render a page by it's page handler
  */
 class DefaultController extends AbstractKRCMSController
 {
@@ -52,7 +52,7 @@ class DefaultController extends AbstractKRCMSController
 			if (null !== $page404) {
 				$response = new Response();
 
-				$response->setContent($this->render('KRSolutionsKRCMSBundle:' . $site->getId() . ':page.html.twig', array('site' => $site, 'page' => $page, 'news_item' => '$news_item')));
+				$response->setContent($this->render('KRSolutionsKRCMSBundle:' . $site->getId() . ':page.html.twig', array('site' => $site, 'page' => $page)));
 				$response->setStatusCode(404);
 
 				return $response;

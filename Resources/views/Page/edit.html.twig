@@ -11,7 +11,7 @@
 <div class="row-fluid">
 	<div class="span9">
 		<div class="well">
-			<form id="pageForm" action="{% if action == 'new' %}{{ path('kr_solutions_krcms_pages_add', { 'siteId': site.id, 'pageType': page.pageType.id }) }}{% else %}{{ path('kr_solutions_krcms_pages_edit', { 'pageId': page.id }) }}{% endif %}" method="post" id="pageForm" {{ form_enctype(pageForm) }} novalidate="novalidate">
+			<form id="pageForm" action="{% if action == 'new' %}{{ path('kr_solutions_krcms_pages_add', { 'siteId': site.id, 'pageTypeId': page.pageType.id }) }}{% else %}{{ path('kr_solutions_krcms_pages_edit', { 'pageId': page.id }) }}{% endif %}" method="post" id="pageForm" {{ form_enctype(pageForm) }} novalidate="novalidate">
 				<fieldset>
 					{% if form_errors(pageForm) %}
 					<div class="alert alert-error">

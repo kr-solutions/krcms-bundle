@@ -155,9 +155,9 @@
 
 			$('.pages_remove').on('click', function() {
 				var page_id = this.id.replace('pages_remove_', '');
-				var remove_url_holder = '{{ path('kr_solutions_krcms_pages_remove', {'pageId': 'page_ID_PLACE_HOLDER'}) }}';
+				var remove_url_holder = '{{ path('kr_solutions_krcms_pages_remove', {'pageId': 999999999}) }}';
 
-				$('#pages_remove_action').attr('href', remove_url_holder.replace('page_ID_PLACE_HOLDER', page_id));
+				$('#pages_remove_action').attr('href', remove_url_holder.replace('999999999', page_id));
 				$('#pages_remove_modal').modal('show');
 			});
 

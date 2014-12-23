@@ -1,0 +1,9 @@
+kr_solutions_krcms_files:
+    pattern: /{pageId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:File:files }
+    requirements:
+        pageId: \d+
+
+kr_solutions_krcms_files_remove:
+    pattern: /remove
+    defaults: { _controller: KRSolutionsKRCMSBundle:File:removeFile }

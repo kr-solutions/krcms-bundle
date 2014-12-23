@@ -1,0 +1,33 @@
+kr_solutions_krcms_pages_index:
+    pattern: /{siteId}/{parentPageId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:Page:index, parentPageId: null }
+    requirements:
+        siteId: \d+
+        parentPageId: \d+
+
+kr_solutions_krcms_pages_add:
+    pattern: /add/{siteId}/{pageTypeId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:Page:edit }
+    requirements:
+        siteId: \d+
+        pageTypeId: \d+
+
+kr_solutions_krcms_pages_edit:
+    pattern: /edit/{pageId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:Page:edit }
+    requirements:
+        pageId: \d+
+
+kr_solutions_krcms_pages_remove:
+    pattern: /remove/{pageId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:Page:remove }
+    requirements:
+        pageId: \d+
+
+kr_solutions_krcms_pages_generate_permalink:
+    pattern: /generate-permalink
+    defaults: { _controller: KRSolutionsKRCMSBundle:Page:generatePermalink }
+
+kr_solutions_krcms_pages_change_order:
+    pattern: /change-pages-order
+    defaults: { _controller: KRSolutionsKRCMSBundle:Page:changeOrder }
