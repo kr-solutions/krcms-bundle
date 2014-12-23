@@ -101,7 +101,7 @@
 
 {% block javascripts %}
 {{ parent() }}
-{% if pageForm.content is defined %}<script type="text/javascript" src="{{ asset('bundles/krsolutionskrcms/ckeditor/ckeditor.js') }}"></script>{% endif %}
+
 <script type="text/javascript">
     $(document).ready(function() {
         $('#page_title').change(function() {
@@ -120,37 +120,23 @@
 	{% if pageForm.content is defined %}
     /* <![CDATA[ */
     // This is a check for the CKEditor class. If not defined, the paths must be checked.
-    if ( typeof CKEDITOR == 'undefined' )
-    {
+    if ( typeof CKEDITOR === 'undefined' ) {
         document.write(
             '<strong><span style="color: #ff0000">Error</span>: CKEditor not found</strong>.' +
             'This sample assumes that CKEditor (not included with CKFinder) is installed in' +
             'the "/ckeditor/" path. If you have it installed in a different place, just edit' +
             'this file, changing the wrong paths in the &lt;head&gt; (line 5) and the "BasePath"' +
             'value (line 32).' );
-    }
-    else
-    {
+    } else {
         var editor = CKEDITOR.replace( 'page_content',
 		{
-			toolbar :
-			[
-				{ name: 'document', items : [ 'Source','-','Save','NewPage','DocProps','Preview','Print','-','Templates' ] },
-				{ name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
-				{ name: 'editing', items : [ 'Find','Replace','-','SelectAll' ] },
-				{ name: 'tools', items : [ 'Maximize', 'ShowBlocks' ] },
-				'/',
-				{ name: 'paragraph', items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv',
-				'-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl' ] },
-				{ name: 'links', items : [ 'Link','Unlink','Anchor' ] },
-				{ name: 'insert', items : [ 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak','Iframe' ] },
-				'/',
-				{ name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] },
-				{ name: 'styles', items : [ 'Format' ] },
-				{ name: 'colors', items : [ 'TextColor','BGColor' ] }
-			]
+			filebrowserBrowseUrl:       '/bundles/krsolutionskrcms/kcfinder/browse.php?type:files',
+			filebrowserImageBrowseUrl:  '/bundles/krsolutionskrcms/kcfinder/browse.php?type:images',
+			filebrowserFlashBrowseUrl:  '/bundles/krsolutionskrcms/kcfinder/browse.php?type:flash',
+			filebrowserUploadUrl:       '/bundles/krsolutionskrcms/kcfinder/upload.php?type:files',
+			filebrowserImageUploadUrl:  '/bundles/krsolutionskrcms/kcfinder/upload.php?type:images',
+			filebrowserFlashUploadUrl:  '/bundles/krsolutionskrcms/kcfinder/upload.php?type:flash'
 		});
-        editor.setData( '{{ page.content|raw }}');
     }
     /* ]]> */
 	{% endif %}

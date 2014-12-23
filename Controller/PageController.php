@@ -186,8 +186,6 @@ class PageController extends AbstractKRCMSController
 			$adminTemplate = 'KRSolutionsKRCMSBundle:Page:edit.html.twig';
 		}
 
-		$page->setContent(addslashes(preg_replace("/[\n\r]/", "", $page->getContent())));
-
 		return $this->render($adminTemplate, array('site' => $site, 'page' => $page, 'pageForm' => $pageForm->createView(), 'action' => $action));
 	}
 
