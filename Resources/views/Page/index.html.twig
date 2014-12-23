@@ -133,7 +133,6 @@
 
 {% block javascripts %}
 	{{ parent() }}
-	<script type="text/javascript" src="{{ asset('bundles/krsolutionskrcms/tablednd/js/jquery.tablednd.0.7.min.js') }}"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			// Initialise the table
@@ -141,7 +140,7 @@
 				onDrop: function(table, row) {
 					$.post('{{ path('kr_solutions_krcms_pages_change_order') }}', $.tableDnD.serialize(),
 					function(data) {
-						if (data == 'success') {
+						if (data === 'success') {
 							$('.pages_order_success').show();
 							$(window).scrollTop($('.pages_order_success').offset().top - 20);
 							$('.pages_order_success').delay(5000).slideUp(1000);
@@ -150,7 +149,7 @@
 						}
 					});
 				},
-				onDragClass: "table-row-dragged",
+				onDragClass: "table-row-dragged"
 			});
 
 			$('.pages_remove').on('click', function() {
