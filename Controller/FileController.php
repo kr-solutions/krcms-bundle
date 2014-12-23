@@ -26,6 +26,7 @@ class FileController extends AbstractKRCMSController
 	{
 		$_SESSION['KCFINDER'] = array();
 		$_SESSION['KCFINDER']['disabled'] = false;
+		$uploadDir = $this->container->getParameter('kr_solutions_krcms.upload_dir');
 
 		$page = $this->getPageRepository()->getPageById($pageId);
 
@@ -49,7 +50,7 @@ class FileController extends AbstractKRCMSController
 		if ($fileForm->isValid()) {
 			$em = $this->getDoctrine()->getManager();
 
-			$newFile->setUri(str_replace('/' . $this->container->getParameter('kr_solutions_krcms.upload_dir'), '', $newFile->getUri()));
+			$newFile->setUri(str_replace('/' . $uploadDir, '', $newFile->getUri()));
 			$newFile->setCreatedBy($this->getUser());
 			$newFile->setPage($page);
 
@@ -61,7 +62,7 @@ class FileController extends AbstractKRCMSController
 			return $this->redirect($this->generateUrl('kr_solutions_krcms_files', array('pageId' => $pageId)));
 		}
 
-		return $this->render('KRSolutionsKRCMSBundle:File:index.html.twig', array('page' => $page, 'fileForm' => $fileForm->createView()));
+		return $this->render('KRSolutionsKRCMSBundle:File:index.html.twig', array('page' => $page, 'uploadDir' => $uploadDir, 'fileForm' => $fileForm->createView()));
 	}
 
 	/**

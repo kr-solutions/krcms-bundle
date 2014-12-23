@@ -53,8 +53,8 @@
 			{% if page.files|length > 0 %}
 				{% for file in page.files %}
 				<div id="file_{{ file.id }}" class="span2" style="position: relative;">
-					<a href="{{ asset(upload_dir ~ file.uri) }}" title="{{ file.title }}">
-						<img class="img-polaroid" alt="{{ file.title }}" src="{{ asset(upload_dir ~ file.squareCrop(upload_dir, 250)) }}" />
+					<a href="{{ asset(uploadDir ~ file.uri) }}" title="{{ file.title }}">
+						<img class="img-polaroid" alt="{{ file.title }}" src="{{ asset(uploadDir ~ file.squareCrop(uploadDir, 250)) }}" />
 					</a>
 					<a style="position: absolute; bottom: 8px; right: 0px;" href="javascript:void(0);" onclick="javascript:confirmDeleteFile({{ file.id }});" class="btn btn-danger btn-mini"><i class="icon-white icon-trash"></i></a>
 				</div>
