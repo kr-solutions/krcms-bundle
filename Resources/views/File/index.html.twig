@@ -4,12 +4,12 @@
 
 {% block content %}
 
-<header class="jumbotron subhead">
+<header class="sub-header">
 	<h1>Bestanden beheren van <small>{{ page.title }}</small></h1>
 </header>
 
-<div class="row-fluid">
-	<div class="span3">
+<div class="row">
+	<div class="col-md-3">
 		<div class="well">
 			<form id="fileForm" action="{{ path('kr_solutions_krcms_files', { 'pageId': page.id }) }}" method="post" id="fileForm" {{ form_enctype(fileForm) }} novalidate="novalidate">
 				<fieldset>
@@ -25,18 +25,18 @@
 
 					<div class="control-group{% if fileForm.uri.vars.errors|length %} error{% endif %}">
 						{{ form_label(fileForm.uri) }}
-						{{ form_widget(fileForm.uri, { 'attr': {'class': 'span10'} }) }}
+						{{ form_widget(fileForm.uri, { 'attr': {'class': 'col-md-10'} }) }}
 						<button class="btn btn-primary" id="kcfinder_browse">Bladeren</button>
 					</div>
 
 					<div class="control-group{% if fileForm.title.vars.errors|length %} error{% endif %}">
 						{{ form_label(fileForm.title) }}
-						{{ form_widget(fileForm.title, { 'attr': {'class': 'span10'} }) }}
+						{{ form_widget(fileForm.title, { 'attr': {'class': 'col-md-10'} }) }}
 					</div>
 
 					<div class="control-group{% if form_errors(fileForm.description) %} error{% endif %}">
 						{{ form_label(fileForm.description) }}
-						{{ form_widget(fileForm.description, { 'attr': {'class': 'span10'} }) }}
+						{{ form_widget(fileForm.description, { 'attr': {'class': 'col-md-10'} }) }}
 					</div>
 
 					{{ form_rest(fileForm) }}
@@ -46,13 +46,13 @@
 		</div>
 	</div>
 
-	<div class="span9">
+	<div class="col-md-9">
 		<div class="well">
 			<h2>Bestanden</h2>
 
 			{% if page.files|length > 0 %}
 				{% for file in page.files %}
-				<div id="file_{{ file.id }}" class="span2" style="position: relative;">
+				<div id="file_{{ file.id }}" class="col-md-2" style="position: relative;">
 					<a href="{{ asset(uploadDir ~ file.uri) }}" title="{{ file.title }}">
 						<img class="img-polaroid" alt="{{ file.title }}" src="{{ asset(uploadDir ~ file.squareCrop(uploadDir, 250)) }}" />
 					</a>

@@ -60,10 +60,14 @@ layout:
     footer_text: K&amp;R Solutions - Content Management System
     save: Opslaan
     cancel: Annuleren
+    close: Sluiten
     created_by: Aangemaakt door
     created_at: Aangemaakt op
     updated_by: Gewijzigd door
     updated_at: Gewijzigd op
+    edit: Wijzigen
+    remove: Verwijderen
+    files: Bestanden
     menu:
         dashboard: Dashboard
         manage_pages: Pagina's beheren
@@ -73,5 +77,25 @@ layout:
         sites: Sites
 
 page:
+    title: Titel
+    created_at: Aangemaakt op
+    page_type: Pagina type
+    sub_pages: Subpagina's
+    menu: Menu
+    single_pages: Losse pagina's
+    manage_subpages: Subpagina's beheren
+    no_subpages: Geen subpagina's
     add_page: Pagina toevoegen
-    edit_page: Wijzig pagina
+    edit_page: Pagina wijzigen
+    remove_page: Pagina verwijderen
+    details: Details
+    page_order_saved: De nieuwe pagina volgorde is opgeslagen
+    page_order_save_failed: Er is iets fout gegaan bij het opslaan van de volgorde, ververs de pagina en probeer het nog eens.
+    back_to_page_overview: Terug naar het paginaoverzicht
+    index:
+        header:
+            pages: Pagina's
+            subpages: Subpagina's van "%parent_page%"
+    remove_confirmation:
+        title: Weet u zeker dat u deze pagina wilt verwijderen?
+        message: Alle eventueel gekoppelde pagina's onder deze pagina worden verborgen! Deze dient u indien nodig zelf opnieuw te koppelen aan een andere pagina.

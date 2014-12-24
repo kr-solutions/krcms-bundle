@@ -4,12 +4,12 @@
 
 {% block content %}
 
-<header class="jumbotron subhead">
+<header class="sub-header">
 	<h1>Menu wijzigen</h1>
 </header>
 
-<div class="row-fluid">
-	<div class="span12">
+<div class="row">
+	<div class="col-md-12">
 		<div class="well">
 			<form action="{{ path('kr_solutions_krcms_menu_edit', { 'menuId': menu.id }) }}" method="post" {{ form_enctype(menuForm) }} novalidate="novalidate">
 				<fieldset>
@@ -25,12 +25,12 @@
 
 					<div class="control-group{% if menuForm.name.vars.errors|length %} error{% endif %}">
 						{{ form_label(menuForm.name) }}
-						{{ form_widget(menuForm.name, { 'attr': {'class': 'span10'} }) }}
+						{{ form_widget(menuForm.name, { 'attr': {'class': 'col-md-10'} }) }}
 					</div>
 
 					<div class="control-group{% if form_errors(menuForm.description) %} error{% endif %}">
 						{{ form_label(menuForm.description) }}
-						{{ form_widget(menuForm.description, { 'attr': {'class': 'span10'} }) }}
+						{{ form_widget(menuForm.description, { 'attr': {'class': 'col-md-10'} }) }}
 					</div>
 
 					{{ form_rest(menuForm) }}

@@ -60,10 +60,14 @@ layout:
     footer_text: K&amp;R Solutions - Content Management System
     save: Save
     cancel: Cancel
+    close: Close
     created_by: Created by
     created_at: Created at
     updated_by: Updated by
     updated_at: Updated at
+    edit: Edit
+    remove: Remove
+    files: Files
     menu:
         dashboard: Dashboard
         manage_pages: Manage pages
@@ -73,5 +77,25 @@ layout:
         sites: Sites
 
 page:
+    title: Title
+    created_at: Created at
+    page_type: Page type
+    sub_pages: Subpages
     add_page: Add page
+    menu: Menu
+    single_pages: Single pages
+    manage_subpages: Manage subpages
+    no_subpages: No subpages
     edit_page: Edit page
+    remove_page: Remove page
+    details: Details
+    page_order_saved: The new page order is successfully saved
+    page_order_save_failed: Failed to save the new page order, refresh the page and try again.
+    back_to_page_overview: Back to the page overview
+    index:
+        header:
+            pages: Pages
+            subpages: Subpages of "%parent_page%"
+    remove_confirmation:
+        title: Are you sure you want to remove this page?
+        message: All possibly linked subpages of this page are hidden! These should be linked, if necessary, again to another page.

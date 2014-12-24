@@ -1,109 +1,61 @@
-{% extends '::base.html.twig' %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-{% block title %}K&amp;R Solutions - Content Management System{% endblock %}
+		<title>{% block title %}K&amp;R Solutions - Content Management System{% endblock %}</title>
 
-{% block meta %}
-<!-- Set the viewport width to device width for mobile -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="robots" content="noindex, nofollow" />
-{% endblock %}
+		{% block stylesheets %}
+			<link href="{{ asset('bundles/krsolutionskrcms/vendor/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet" />
+			<link href="{{ asset('bundles/krsolutionskrcms/vendor/bootstrap/dist/css/bootstrap-theme.min.css') }}" rel="stylesheet" />
+			<link href="{{ asset('bundles/krsolutionskrcms/vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" />
+			<link href="{{ asset('bundles/krsolutionskrcms/css/application.css') }}" rel="stylesheet" />
 
-{% block stylesheets %}
-<link href="{{ asset('bundles/krsolutionskrcms/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
-<link href="{{ asset('bundles/krsolutionskrcms/bootstrap/css/bootstrap-responsive.min.css') }}" rel="stylesheet" />
-<link href="{{ asset('bundles/krsolutionskrcms/css/application.css') }}" rel="stylesheet" />
+			<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+			<!--[if lt IE 9]>
+			  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+			  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+			<![endif]-->
+		{% endblock %}
 
-<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-<!--[if lt IE 9]>
-  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
-{% endblock %}
+	</head>
+	<body>
+		{% if site is defined %}
+			{% set activeSite = site %}
+		{% else %}
+			{% set activeSite = null %}
+		{% endif %}
 
-{% block body %}
-<div class="container-fluid">
-	<div class="brand brand-logo">Content Management System</div>
+		{% render controller('KRSolutionsKRCMSBundle:Admin:menu', { 'activeSite': activeSite, 'route': app.request.attributes.get('_route') }) %}
 
-	<div class="navbar">
-		<div class="navbar-inner">
-			<div class="container">
-				<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</a>
+		<div class="container-fluid">
+			<div class="row">
+				{% block content %}
+				{% endblock %}
+			</div>
 
-				<div class="nav-collapse">
-					{% if site is defined %}
-						{% set activeSite = site %}
-					{% else %}
-						{% set activeSite = null %}
-					{% endif %}
-
-					{% render controller('KRSolutionsKRCMSBundle:Admin:menu', { 'activeSite': activeSite, 'route': app.request.attributes.get('_route') }) %}
-
-					<a class="btn btn-danger pull-right" href="{{ path('fos_user_security_logout') }}"><i class="icon-off icon-white"></i> {{ 'layout.logout'|trans({}, 'KRSolutionsKRCMSBundle') }} ({{ app.user }})</a>
-				</div>
+			<div class="row">
+				<p style="text-align: center;">
+					{{ 'layout.footer_text'|trans({}, 'KRSolutionsKRCMSBundle')|raw }}
+					<br />
+					<strong>H:</strong>
+					<a href="mailto:helpdesk@kr-solutions.nl">helpdesk@kr-solutions.nl</a>
+					<strong>E:</strong>
+					<a href="mailto:info@kr-solutions.nl">info@kr-solutions.nl</a>
+					<br />
+				</p>
 			</div>
 		</div>
-	</div>
 
-	{% for flashMessage in app.session.flashbag.get('alert') %}
-		<div class="alert alert-block">
-			<button type="button" class="close" data-dismiss="alert">&times;</button>
-			<h4>Waarschuwing!</h4>
-			{{ flashMessage|raw }}
-		</div>
-	{% endfor %}
-	{% for flashMessage in app.session.flashbag.get('alert-error') %}
-		<div class="alert alert-block alert-error">
-			<button type="button" class="close" data-dismiss="alert">&times;</button>
-			<h4>Fout!</h4>
-			{{ flashMessage|raw }}
-		</div>
-	{% endfor %}
-	{% for flashMessage in app.session.flashbag.get('alert-danger') %}
-		<div class="alert alert-block alert-danger">
-			<button type="button" class="close" data-dismiss="alert">&times;</button>
-			<h4>Pas op!</h4>
-			{{ flashMessage|raw }}
-		</div>
-	{% endfor %}
-	{% for flashMessage in app.session.flashbag.get('alert-info') %}
-		<div class="alert alert-block alert-info">
-			<button type="button" class="close" data-dismiss="alert">&times;</button>
-			<h4>Informatie</h4>
-			{{ flashMessage|raw }}
-		</div>
-	{% endfor %}
-	{% for flashMessage in app.session.flashbag.get('alert-success') %}
-		<div class="alert alert-block alert-success">
-			<button type="button" class="close" data-dismiss="alert">&times;</button>
-			<h4>Succes</h4>
-			{{ flashMessage|raw }}
-		</div>
-	{% endfor %}
+		{% block javascripts %}
+			<script type="text/javascript" src="{{ asset('bundles/krsolutionskrcms/vendor/jquery/dist/jquery.min.js') }}"></script>
+			<script type="text/javascript" src="{{ asset('bundles/krsolutionskrcms/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+			<script type="text/javascript" src="{{ asset('bundles/krsolutionskrcms/vendor/TableDnD/js/jquery.tablednd.0.8.min.js') }}"></script>
+			<script type="text/javascript" src="{{ asset('bundles/krsolutionskrcms/vendor/ckeditor/ckeditor.js') }}"></script>
+			<script type="text/javascript" src="{{ asset('bundles/krsolutionskrcms/js/application.js') }}"></script>
+		{% endblock %}
 
-	{% block content %}{% endblock %}
-
-		<div class="row-fluid">
-			<p style="text-align: center;">
-				{{ 'layout.footer_text'|trans({}, 'KRSolutionsKRCMSBundle')|raw }}
-				<br />
-				<strong>H:</strong>
-				<a href="mailto:helpdesk@kr-solutions.nl">helpdesk@kr-solutions.nl</a>
-				<strong>E:</strong>
-				<a href="mailto:info@kr-solutions.nl">info@kr-solutions.nl</a>
-				<br />
-			</p>
-		</div>
-	</div>
-{% endblock %}
-
-{% block javascripts %}
-	<script type="text/javascript" src="{{ asset('bundles/krsolutionskrcms/vendor/jquery/dist/jquery.min.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('bundles/krsolutionskrcms/bootstrap/js/bootstrap.min.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('bundles/krsolutionskrcms/vendor/TableDnD/js/jquery.tablednd.0.8.min.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('bundles/krsolutionskrcms/vendor/ckeditor/ckeditor.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('bundles/krsolutionskrcms/js/application.js') }}"></script>
-{% endblock %}
+	</body>
+</html>

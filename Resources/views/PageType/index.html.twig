@@ -4,13 +4,13 @@
 
 {% block content %}
 
-<header class="jumbotron subhead">
+<header class="sub-header">
 	<h1>Pagina types</h1>
 	<p class="lead">Maak een nieuw pagina type aan <span class="label label-info">Pagina type toevoegen</span></p>
 </header>
 
-<div class="row-fluid">
-	<div class="span4">
+<div class="row">
+	<div class="col-md-4">
 		<div class="well">
 			<form action="{{ path('kr_solutions_krcms_page_types_index') }}" method="post" {{ form_enctype(pageTypeForm) }} novalidate="novalidate">
 				<fieldset>
@@ -26,12 +26,12 @@
 
 					<div class="control-group{% if pageTypeForm.name.vars.errors|length %} error{% endif %}">
 						{{ form_label(pageTypeForm.name) }}
-						{{ form_widget(pageTypeForm.name, { 'attr': {'class': 'span10'} }) }}
+						{{ form_widget(pageTypeForm.name, { 'attr': {'class': 'col-md-10'} }) }}
 					</div>
 
 					<div class="control-group{% if form_errors(pageTypeForm.description) %} error{% endif %}">
 						{{ form_label(pageTypeForm.description) }}
-						{{ form_widget(pageTypeForm.description, { 'attr': {'class': 'span10'} }) }}
+						{{ form_widget(pageTypeForm.description, { 'attr': {'class': 'col-md-10'} }) }}
 					</div>
 
 					{{ form_rest(pageTypeForm) }}
@@ -40,7 +40,7 @@
 			</form>
 		</div>
 	</div>
-	<div class="span8">
+	<div class="col-md-8">
 		<div class="well">
 			{% if pageTypes|length > 0 %}
 			<table class="table table-striped">
