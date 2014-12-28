@@ -2,11 +2,9 @@
 	{% for type, flashMessages in app.session.flashbag.all() %}
 		{% for flashMessage in flashMessages %}
 			{% if "alert-" == type|slice(0, 6) %}
-				<div class="col-md-12">
-					<div class="alert {{ type }} alert-dismissible" role="alert">
-						<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'layout.close'|trans({}, 'KRSolutionsKRCMSBundle') }}</span></button>
+				<div class="alert {{ type }} alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'layout.close'|trans({}, 'KRSolutionsKRCMSBundle') }}</span></button>
 						{{ flashMessage|raw }}
-					</div>
 				</div>
 				<div class="clearfix"></div>
 			{% endif %}

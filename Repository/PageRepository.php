@@ -619,4 +619,23 @@ class PageRepository extends EntityRepository
 		return $result['permalink'];
 	}
 
+	/**
+	 * Get page count by site
+	 *
+	 * @param Site $site
+	 *
+	 * @return int
+	 */
+	public function getPageCountBySite(Site $site)
+	{
+		$qb = $this->createQueryBuilder('pages');
+
+		$qb->select('count(pages.id)');
+
+		$qb->where('pages.site = :site');
+		$qb->setParameter('site', $site);
+
+		return intval($qb->getQuery()->getSingleScalarResult());
+	}
+
 }

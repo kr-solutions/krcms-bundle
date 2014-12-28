@@ -3,114 +3,115 @@
 {% block title %}Menu's - Content Management Systeem{% endblock %}
 
 {% block content %}
+	<div class="col-md-12">
+		<h1 class="sub-header">{{ 'menu.index.header.menus'|trans({}, 'KRSolutionsKRCMSBundle') }}</h1>
+	</div>
 
-<header class="sub-header">
-	<h1>Menu's</h1>
-	<p class="lead">Gebruik dit scherm om uw menu's te beheren. Om een nieuw menu aan te maken klikt u op <span class="label label-info">Menu toevoegen</span></p>
-</header>
-
-<div class="row">
 	<div class="col-md-4">
 		<div class="well">
 			<form action="{{ path('kr_solutions_krcms_menus_index') }}" method="post" {{ form_enctype(menuForm) }} novalidate="novalidate">
 				<fieldset>
-					<legend>Menu toevoegen</legend>
+					<legend>{{ 'menu.add_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}</legend>
 
 					{% if form_errors(menuForm) %}
-					<div class="alert alert-error">
-						<a class="close" data-dismiss="alert" href="#">×</a>
-						<h4 class="alert-heading">Fout!</h4>
-						{{ form_errors(menuForm) }}
-					</div>
+						<div class="alert alert-danger">
+							<a class="close" data-dismiss="alert" href="#">×</a>
+							<h4 class="alert-heading">Fout!</h4>
+							{{ form_errors(menuForm) }}
+						</div>
 					{% endif %}
 
-					<div class="control-group{% if menuForm.name.vars.errors|length %} error{% endif %}">
+					<div class="form-group{% if menuForm.name.vars.errors|length %} error{% endif %}">
 						{{ form_label(menuForm.name) }}
-						{{ form_widget(menuForm.name, { 'attr': {'class': 'col-md-10'} }) }}
+						{{ form_widget(menuForm.name, { 'attr': {'class': 'form-control'} }) }}
 					</div>
 
-					<div class="control-group{% if menuForm.site.vars.errors|length %} error{% endif %}">
+					<div class="form-group{% if menuForm.site.vars.errors|length %} error{% endif %}">
 						{{ form_label(menuForm.site) }}
-						{{ form_widget(menuForm.site, { 'attr': {'class': 'col-md-10'} }) }}
+						{{ form_widget(menuForm.site, { 'attr': {'class': 'form-control'} }) }}
 					</div>
 
-					<div class="control-group{% if form_errors(menuForm.description) %} error{% endif %}">
+					<div class="form-group{% if form_errors(menuForm.description) %} error{% endif %}">
 						{{ form_label(menuForm.description) }}
-						{{ form_widget(menuForm.description, { 'attr': {'class': 'col-md-10'} }) }}
+						{{ form_widget(menuForm.description, { 'attr': {'class': 'form-control'} }) }}
 					</div>
 
 					{{ form_rest(menuForm) }}
 				</fieldset>
-				<input class="btn btn-primary" type="submit" value="Menu toevoegen" />
+				<input class="btn btn-primary" type="submit" value="{{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}" />
 			</form>
 		</div>
 	</div>
 	<div class="col-md-8">
 		<div class="well">
 			{% if menus|length > 0 %}
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th style="width: 20%;">Naam</th>
-						<th>Omschrijving</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-				{% for menu in menus %}
-					<tr>
-						<td><a href="{{ path('kr_solutions_krcms_menu_edit', { 'menuId': menu.id }) }}" title="Menu wijzigen"><b>{{ menu.name }}</b></a></td>
-						<td>{{ menu.description }}</td>
-						<td class="btn-toolbar">
-							<div class="btn-group pull-right">
-								<a id="Menus_edit_{{ menu.id }}" href="{{ path('kr_solutions_krcms_menu_edit', { 'menuId': menu.id }) }}" class="Menus_edit btn"><i class="icon-edit"></i> Wijzigen</a>
-								<a id="Menus_remove_{{ menu.id }}" href="javascript:void(0)" class="Menus_remove btn"><i class="icon-trash"></i> Verwijderen</a>
-							</div>
-						</td>
-					</tr>
-				{% endfor %}
-				</tbody>
-			</table>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th style="width: 20%;">{{ 'menu.name'|trans({}, 'KRSolutionsKRCMSBundle') }}</th>
+							<th>{{ 'menu.description'|trans({}, 'KRSolutionsKRCMSBundle') }}</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for menu in menus %}
+							<tr>
+								<td><a href="{{ path('kr_solutions_krcms_menus_edit', { 'menuId': menu.id }) }}" title="{{ 'menu.edit_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}"><b>{{ menu.name }}</b></a></td>
+								<td>{{ menu.description }}</td>
+								<td class="btn-toolbar">
+									<div class="btn-group pull-right">
+										<a href="{{ path('kr_solutions_krcms_menus_edit', { 'menuId': menu.id }) }}" class="btn btn-default" title="{{ 'menu.edit_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-edit"></i> {{ 'layout.edit'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+										<button type="button" class="btn btn-default" data-toggle="modal" data-target="#menu_remove_modal" data-menu_id="{{ menu.id }}" title="{{ 'menu.remove_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-trash"></i> {{ 'layout.remove'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
+									</div>
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
 			{% else %}
 				<p>Er zijn nog geen menu's toegevoegd.</p>
 				<p>Klik op <strong>"Menu toevoegen"</strong> aan de rechterkant om een menu toe te voegen.</p>
 			{% endif %}
 		</div>
 	</div>
-</div>
 
-{# Modals #}
-<div class="modal hide" id="Menus_remove_modal">
-    <div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">×</button>
-		<h3>Menu verwijderen</h3>
-    </div>
-    <div class="modal-body">
-		<p>Weet u zeker dat u dit menu wilt verwijderen?</p>
-		<p><small>Alle pagina's onder dit menu worden verborgen! Deze dient u zelf opnieuw te koppelen aan een ander menu.</small></p>
-    </div>
-    <div class="modal-footer">
-		<a href="#" class="btn" data-dismiss="modal">Annuleren</a>
-		<a href="#" class="btn btn-danger" id="Menu_remove_action">Verwijderen</a>
-    </div>
-</div>
-{# End modals#}
+	{# Modals #}
+	<div class="modal fade" id="menu_remove_modal" tabindex="-1" role="dialog" aria-labelledby="menu_remove_modal_title" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="menu_remove_modal_title">{{ 'menu.remove_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}</h4>
+				</div>
+				<div class="modal-body">
+					<p>{{ 'menu.remove_confirmation.title'|trans({}, 'KRSolutionsKRCMSBundle') }}</p>
+					<p><small>{{ 'menu.remove_confirmation.message'|trans({}, 'KRSolutionsKRCMSBundle') }}</small></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">{{ 'layout.cancel'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
+					<a href="#" type="button" class="btn btn-primary menu_remove_action">{{ 'layout.remove'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	{# End modals #}
 
 {% endblock %}
 
 {% block javascripts %}
-{{ parent() }}
+	{{ parent() }}
 
-<script type="text/javascript" lang="javascript">
-	$(document).ready(function() {
-		$('.Menus_remove').on('click', function() {
-			var menu_id = this.id.replace('Menus_remove_', '');
-			var remove_url_holder = '{{ path('kr_solutions_krcms_menu_remove', {'menuId': 'MENU_ID_PLACE_HOLDER'}) }}';
+	<script type="text/javascript" lang="javascript">
+		$(document).ready(function () {
+			$('#menu_remove_modal').on('show.bs.modal', function (event) {
+				var button = $(event.relatedTarget);
+				var menuId = button.data('menu_id');
+				var remove_url_holder = '{{ path('kr_solutions_krcms_menus_remove', {'menuId': 0}) }}';
 
-			$('#Menu_remove_action').attr('href', remove_url_holder.replace('MENU_ID_PLACE_HOLDER', menu_id));
-			$('#Menus_remove_modal').modal('show');
+				var modal = $(this);
+				modal.find('.menu_remove_action').attr('href', remove_url_holder.replace('0', menuId));
+			});
 		});
-	});
-</script>
+	</script>
 
 {% endblock %}

@@ -51,6 +51,22 @@ form:
                 label: Inhoud
             metaDescription:
                 label: Meta beschrijving
+        menu:
+            name:
+                label: Naam
+            description:
+                label: Omschrijving
+            site:
+                label: Site
+        site:
+            title:
+                label: Titel
+            permalink:
+                label: Permalink
+            isActive:
+                label: Is actief?
+            homepage:
+                label: Homepage
 
 layout:
     logout: Uitloggen
@@ -58,6 +74,8 @@ layout:
     register: Registreer
     logged_in_as: Ingelogd als %username%
     footer_text: K&amp;R Solutions - Content Management System
+    yes: Ja
+    no: Nee
     save: Opslaan
     cancel: Annuleren
     close: Sluiten
@@ -74,6 +92,7 @@ layout:
         helpdesk: Helpdesk
         categories: Categoriën
         menus: Menu's
+        page_types: Pagina types
         sites: Sites
 
 page:
@@ -88,6 +107,8 @@ page:
     add_page: Pagina toevoegen
     edit_page: Pagina wijzigen
     remove_page: Pagina verwijderen
+    no_pages_added_to_menu: Er zijn nog geen pagina's toegevoegd aan dit menu.
+    no_subpages_added_to_page: Er zijn nog geen subpagina's toegevoegd aan deze pagina.
     details: Details
     page_order_saved: De nieuwe pagina volgorde is opgeslagen
     page_order_save_failed: Er is iets fout gegaan bij het opslaan van de volgorde, ververs de pagina en probeer het nog eens.
@@ -98,4 +119,55 @@ page:
             subpages: Subpagina's van "%parent_page%"
     remove_confirmation:
         title: Weet u zeker dat u deze pagina wilt verwijderen?
-        message: Alle eventueel gekoppelde pagina's onder deze pagina worden verborgen! Deze dient u indien nodig zelf opnieuw te koppelen aan een andere pagina.
+        message: Alle eventueel gekoppelde pagina's onder deze pagina worden losse pagina's! Deze dient u indien nodig zelf opnieuw te koppelen aan een andere pagina of menu.
+    site_not_exist: De site waar u de pagina's van wilt beheren bestaat niet (meer). Ververs de pagina en probeer het nog eens.
+    page_type_not_exist: Het pagina type bestaat niet (meer). Ververs de pagina en probeer het nog eens.
+    page_not_exist: De pagina met id '%page_id%' bestaat niet meer. Ververs de pagina en probeer het nog eens.
+    form_type_not_exist: Het formulier om deze pagina te beheren bestaat nog niet. Neem contact op met uw webdesigner om dit probleem te verhelpen.
+    form_handler_not_exist: De module om deze pagina correct op te slaan ontbreekt. Neem contact op met uw webdesigner om dit probleem te verhelpen.
+    page_added: Pagina '%page_title%' is succesvol toegevoegd.
+    page_edited: Pagina '%page_title%' is succesvol gewijzigd.
+    remove:
+        failed_not_exist: Fout bij het verwijderen van de pagina met id '%page_id%'. Deze pagina bestaat niet (meer).
+        failed_not_authorized: Fout bij het verwijrden van de pagina met id '%page_id%'. U bent niet gemachtigd om deze pagina te verwijderen.
+        success: De pagina met id '%page_id%' is succesvol verwijderd.
+
+menu:
+    name: Naam
+    description: Omschrijving
+    edit_menu: Menu wijzigen
+    remove_menu: Menu verwijderen
+    add_menu: Menu toevoegen
+    index:
+        header:
+            menus: Menu's
+    remove_confirmation:
+        title: Weet u zeker dat u dit menu wilt verwijderen?
+        message: Alle eventueel gekoppelde pagina's onder dit menu worden losse pagina's! Deze dient u indien nodig zelf opnieuw te koppelen aan een andere pagina of menu.
+
+dashboard:
+    no_sites: Er zijn nog geen site geconfigureerd. Maak minsten één site aan (meest voorkomend) of meer sites voor een multi site configuratie.
+
+site:
+    title: Titel
+    permalink: Permalink
+    is_active: Actief?
+    homepage: Homepage
+    index:
+        header:
+            sites: Sites
+    edit_site: Site wijzigen
+    remove_site: Site verwijderen
+    site_added: De site '%site_title%' is succesvol toegevoegd.
+    site_edited: De site '%site_title%' is succesvol aangepast.
+    site_not_exist: De site met id '%site_id%' bestaat niet (meer). Ververs de pagina en probeer het nog eens.
+    remove_confirmation:
+        title: Weet u zeker dat u deze site wilt verwijderen?
+        message: Pagina's verbonden aan deze site moeten eerst verplaatst of verwijderd worden, eerder zal deze site NIET verwijderd worden.
+    edit:
+        failed_not_authorized: U bent niet gemachtigd om sites te wijzigen.
+    remove:
+        failed_not_exist: Fout bij het verwijderen van de site met id '%site_id%'. Deze site bestaat niet (meer).
+        failed_not_authorized: Fout bij het verwijderen van de site met id '%site_id%'. U bent niet gemachtigd om sites te verwijderen.
+        failed_pages_exist: Fout bij het verwijderen van de site met id '%site_id%'. Er zijn nog steeds pagina's aan deze site verbonden. Verplaats of verwijder deze pagina's voordat u deze site verwijderd.
+        success: De site met '%site_id%' is succesvol verwijderd.

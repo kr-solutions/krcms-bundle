@@ -3,8 +3,6 @@
 namespace KRSolutions\Bundle\KRCMSBundle\Controller;
 
 use KRSolutions\Bundle\KRCMSBundle\Entity\Site;
-use Swift_Message;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 
@@ -26,22 +24,19 @@ class AdminController extends AbstractKRCMSController
 	{
 		$sites = $this->getSiteRepository()->getAllActiveSites();
 
+		$managementRoles = array();
+		$managementRoles['categories'] = $this->container->getParameter('kr_solutions_krcms.management_roles.categories');
+		$managementRoles['menus'] = $this->container->getParameter('kr_solutions_krcms.management_roles.menus');
+		$managementRoles['page_types'] = $this->container->getParameter('kr_solutions_krcms.management_roles.page_types');
+		$managementRoles['sites'] = $this->container->getParameter('kr_solutions_krcms.management_roles.sites');
+
 		return $this->render('KRSolutionsKRCMSBundle:Admin:menu.html.twig', array(
 				'activeSite' => $activeSite,
 				'sites' => $sites,
 				'route' => $route,
+				'managementRoles' => $managementRoles,
 				'helpDeskEnabled' => $this->container->getParameter('kr_solutions_krcms.helpdesk.enabled')
 		));
-	}
-
-	/**
-	 * dashboardAction
-	 *
-	 * @return Response
-	 */
-	public function dashboardAction()
-	{
-		return $this->render('KRSolutionsKRCMSBundle:Admin:dashboard.html.twig');
 	}
 
 }

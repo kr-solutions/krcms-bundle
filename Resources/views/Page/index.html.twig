@@ -35,32 +35,39 @@
 						{% set pageCollections = menus %}
 					{% endif %}
 
+					{# Pages linked to a menu or parent page #}
 					{% for pageCollection in pageCollections %}
 						<tbody>
 							{% if pageCollection.name is defined%}<tr class="nodrop nodrag"><th colspan="5">{{ 'page.menu'|trans({}, 'KRSolutionsKRCMSBundle') }}: {{ pageCollection.name }}</th></tr>{% endif %}
 									{% set order_id = 1 %}
-									{% for page in pageCollection.pages %}
-								<tr id="{{ page.id ~ '.' ~ order_id }}">
-									<td><a href="{{ path('kr_solutions_krcms_pages_edit', { 'pageId': page.id }) }}" title="{{ 'page.edit_page'|trans({}, 'KRSolutionsKRCMSBundle') }}"><b>{{ page.title }}</b></a></td>
-									<td>{{ page.pageType.name }}</td>
-									<td>{{ page.createdAt|localizeddate('medium', 'none') }}</td>
-									<td>{% if page.pageType.hasChildren == true %}<a href="{{ path('kr_solutions_krcms_pages_index', { 'siteId': site.id, 'parentPageId': page.id }) }}">{{ 'page.manage_subpages'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>{% else %}{{ 'page.no_subpages'|trans({}, 'KRSolutionsKRCMSBundle') }}{% endif %}</td>
-									<td class="btn-toolbar">
-										<div class="btn-group pull-right">
-											{% if true == page.pageType.hasFiles %}
-												<a class="btn btn-default" href="{{ path('kr_solutions_krcms_files', { 'pageId': page.id }) }}" title="{{ 'layout.files'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-folder-open"></i> {{ 'layout.files'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
-											{% endif %}
-											<a class="btn btn-default" href="{{ path('kr_solutions_krcms_pages_edit', { 'pageId': page.id }) }}" title="{{ 'page.edit_page'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-edit"></i> {{ 'layout.edit'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
-											{% if true == page.pageType.isUserGranted(app.user) %}
-												<button type="button" class="btn btn-default" data-toggle="modal" data-target="#page_remove_modal" data-page_id="{{ page.id }}" title="{{ 'page.remove_page'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-trash"></i> {{ 'layout.remove'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
-											{% endif %}
-										</div>
-									</td>
-								</tr>
-								{% set order_id = order_id + 1 %}
-							{% endfor %}
+									{% if pageCollection.pages|length > 0 %}
+										{% for page in pageCollection.pages %}
+									<tr id="{{ page.id ~ '.' ~ order_id }}">
+										<td><a href="{{ path('kr_solutions_krcms_pages_edit', { 'pageId': page.id }) }}" title="{{ 'page.edit_page'|trans({}, 'KRSolutionsKRCMSBundle') }}"><b>{{ page.title }}</b></a></td>
+										<td>{{ page.pageType.name }}</td>
+										<td>{{ page.createdAt|localizeddate('medium', 'none') }}</td>
+										<td>{% if page.pageType.hasChildren == true %}<a href="{{ path('kr_solutions_krcms_pages_index', { 'siteId': site.id, 'parentPageId': page.id }) }}">{{ 'page.manage_subpages'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>{% else %}{{ 'page.no_subpages'|trans({}, 'KRSolutionsKRCMSBundle') }}{% endif %}</td>
+										<td class="btn-toolbar">
+											<div class="btn-group pull-right">
+												{% if true == page.pageType.hasFiles %}
+													<a class="btn btn-default" href="{{ path('kr_solutions_krcms_files', { 'pageId': page.id }) }}" title="{{ 'layout.files'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-folder-open"></i> {{ 'layout.files'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+												{% endif %}
+												<a class="btn btn-default" href="{{ path('kr_solutions_krcms_pages_edit', { 'pageId': page.id }) }}" title="{{ 'page.edit_page'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-edit"></i> {{ 'layout.edit'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+												{% if true == page.pageType.isUserGranted(app.user) %}
+													<button type="button" class="btn btn-default" data-toggle="modal" data-target="#page_remove_modal" data-page_id="{{ page.id }}" title="{{ 'page.remove_page'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-trash"></i> {{ 'layout.remove'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
+												{% endif %}
+											</div>
+										</td>
+									</tr>
+									{% set order_id = order_id + 1 %}
+								{% endfor %}
+							{% else %}
+								<tr class="nodrop nodrag"><th colspan="5">{{ 'page.no_pages_added_to_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}</th></tr>
+									{% endif %}
 						</tbody>
 					{% endfor %}
+
+					{# Single pages #}
 					{% if parentPage is null and pages|length > 0 %}
 						<tbody>
 							<tr class="nodrop nodrag"><th colspan="5">{{ 'page.single_pages'|trans({}, 'KRSolutionsKRCMSBundle') }}</th></tr>
@@ -71,8 +78,8 @@
 									<td>{{ page.pageType.name }}</td>
 									<td>{{ page.createdAt|localizeddate('medium', 'none') }}</td>
 									<td>{% if page.pageType.hasChildren == true %}<a href="{{ path('kr_solutions_krcms_pages_index', { 'siteId': site.id, 'parentPageId': page.id }) }}">{{ 'page.manage_subpages'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>{% else %}{{ 'page.no_subpages'|trans({}, 'KRSolutionsKRCMSBundle') }}{% endif %}</td>
-									<td class="btn-toolbar">
-										<div class="btn-group pull-right">
+									<td>
+										<div class="btn-group pull-right" role="group">
 											{% if true == page.pageType.hasFiles %}
 												<a class="btn btn-default" href="{{ path('kr_solutions_krcms_files', { 'pageId': page.id }) }}" title="{{ 'layout.files'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-folder-open"></i> {{ 'layout.files'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
 											{% endif %}
@@ -89,31 +96,18 @@
 					{% endif %}
 				</table>
 			{% else %}
-				<p>Er zijn nog geen {% if parentPage is null %}pagina's{% else %}items aan {{ parentPage.pageType.name }} <strong>"{{ parentPage.title }}"</strong>{% endif %} toegevoegd.</p>
-				<p>Klik op <strong>
-						{% if parentPage is null %}"Pagina toevoegen"{% else %}
-							{% if parentPage.pageType.pageTypeChildren|length == 1 %}
-								"{{ parentPage.pageType.pageTypeChildren[0].name }} toevoegen"
-							{% elseif parentPage.pageType.pageTypeChildren|length > 1 %}
-								{% for key, pageChild in parentPage.pageType.pageTypeChildren %}
-									{% if key != 0 %}<small>of</small>{% endif %} "{{ pageChild.name }} toevoegen"
-								{% endfor %}
-							{% else %}
-								&eacute;&eacute;n van de toevoegen-linkjes
-							{% endif %}
-						{% endif %}
-					</strong> aan de linkerkant om een {% if parentPage is null %}pagina{% else %} item aan {{ parentPage.pageType.name }} <strong>"{{ parentPage.title }}"</strong>{% endif %} toe te voegen.</p>
-				{% endif %}
+				<p>{{ 'page.no_subpages_added_to_page'|trans({}, 'KRSolutionsKRCMSBundle') }}</p>
+			{% endif %}
 		</div>
 	</div>
 
 	{# Modals #}
-	<div class="modal fade" id="page_remove_modal" tabindex="-1" role="dialog" aria-labelledby="pages_remove_modal_title" aria-hidden="true">
+	<div class="modal fade" id="page_remove_modal" tabindex="-1" role="dialog" aria-labelledby="page_remove_modal_title" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="pages_remove_modal_title">{{ 'page.remove_page'|trans({}, 'KRSolutionsKRCMSBundle') }}</h4>
+					<h4 class="modal-title" id="page_remove_modal_title">{{ 'page.remove_page'|trans({}, 'KRSolutionsKRCMSBundle') }}</h4>
 				</div>
 				<div class="modal-body">
 					<p>{{ 'page.remove_confirmation.title'|trans({}, 'KRSolutionsKRCMSBundle') }}</p>

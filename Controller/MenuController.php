@@ -22,11 +22,11 @@ class MenuController extends AbstractKRCMSController
 	 */
 	public function indexAction(Request $request)
 	{
-		if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) {
-			$this->getRequest()->getSession()->getFlashBag()->add('alert-error', 'U bent niet gemachtigd om menu\'s te beheren.');
-
-			return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
-		}
+//		if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) {
+//			$this->getRequest()->getSession()->getFlashBag()->add('alert-danger', 'U bent niet gemachtigd om menu\'s te beheren.');
+//
+//			return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
+//		}
 
 		$menus = $this->getMenuRepository()->findAll();
 
@@ -58,16 +58,16 @@ class MenuController extends AbstractKRCMSController
 	 */
 	public function removeAction($menuId)
 	{
-		if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) {
-			$this->getRequest()->getSession()->getFlashBag()->add('alert-error', 'U bent niet gemachtigd om menu\'s te beheren.');
-
-			return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
-		}
+//		if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) {
+//			$this->getRequest()->getSession()->getFlashBag()->add('alert-danger', 'U bent niet gemachtigd om menu\'s te beheren.');
+//
+//			return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
+//		}
 
 		$menu = $this->getMenuRepository()->getMenuById($menuId);
 
 		if (null === $menu) {
-			$this->getRequest()->getSession()->getFlashBag()->add('alert-error', 'Verwijderen mislukt! Het menu met id \'' . $menuId . '\' bestaat niet (meer). Probeer het nog een keer!');
+			$this->getRequest()->getSession()->getFlashBag()->add('alert-danger', 'Verwijderen mislukt! Het menu met id \'' . $menuId . '\' bestaat niet (meer). Probeer het nog een keer!');
 		} else {
 			$em = $this->getDoctrine()->getManager();
 
@@ -90,16 +90,16 @@ class MenuController extends AbstractKRCMSController
 	 */
 	public function editAction(Request $request, $menuId)
 	{
-		if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) {
-			$this->getRequest()->getSession()->getFlashBag()->add('alert-error', 'U bent niet gemachtigd om menu\'s te beheren.');
-
-			return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
-		}
+//		if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) {
+//			$this->getRequest()->getSession()->getFlashBag()->add('alert-danger', 'U bent niet gemachtigd om menu\'s te beheren.');
+//
+//			return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
+//		}
 
 		$menu = $this->getMenuRepository()->getMenuById($menuId);
 
 		if (null === $menu) {
-			$this->getRequest()->getSession()->getFlashBag()->add('alert-error', 'Het menu met id \'' . $menuId . '\' bestaat niet (meer). Probeer het nog een keer!');
+			$this->getRequest()->getSession()->getFlashBag()->add('alert-danger', 'Het menu met id \'' . $menuId . '\' bestaat niet (meer). Probeer het nog een keer!');
 
 			return $this->redirect($this->generateUrl('kr_solutions_krcms_menus_index'));
 		}

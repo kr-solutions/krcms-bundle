@@ -37,19 +37,24 @@
 						<a href="{{ path('kr_solutions_krcms_helpdesk') }}"><i class="fa fa-question"></i> {{ 'layout.menu.helpdesk'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
 					</li>
 				{% endif %}
-				{% if is_granted('ROLE_ADMIN') %}
+				{% if is_granted(managementRoles['categories']) %}
 					<li{% if route == 'kr_solutions_krcms_categories_index' %} class="active" {% endif %}>
 						<a href="{{ path('kr_solutions_krcms_categories_index') }}"><i class="fa fa-leaf"></i> {{ 'layout.menu.categories'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
 					</li>
 				{% endif %}
-				{% if is_granted('ROLE_ADMIN') %}
+				{% if is_granted(managementRoles['menus']) %}
 					<li{% if route == 'kr_solutions_krcms_menus_index' %} class="active" {% endif %}>
 						<a href="{{ path('kr_solutions_krcms_menus_index') }}"><i class="fa fa-list"></i> {{ 'layout.menu.menus'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
 					</li>
 				{% endif %}
-				{% if is_granted('ROLE_ADMIN') %}
+				{% if is_granted(managementRoles['sites']) %}
 					<li{% if route == 'kr_solutions_krcms_sites_index' %} class="active" {% endif %}>
 						<a href="{{ path('kr_solutions_krcms_sites_index') }}"><i class="fa fa-book"></i> {{ 'layout.menu.sites'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+					</li>
+				{% endif %}
+				{% if is_granted(managementRoles['page_types']) %}
+					<li{% if route == 'kr_solutions_krcms_page_types_index' %} class="active" {% endif %}>
+						<a href="{{ path('kr_solutions_krcms_page_types_index') }}"><i class="fa fa-cog"></i> {{ 'layout.menu.page_types'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
 					</li>
 				{% endif %}
 				<li>

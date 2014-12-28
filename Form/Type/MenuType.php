@@ -24,9 +24,9 @@ class MenuType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder
-			->add('name', null, array('label' => 'Naam', 'required' => true, 'error_bubbling' => true))
-			->add('site', null, array('label' => 'Site', 'required' => true, 'error_bubbling' => true))
-			->add('description', null, array('label' => 'Omschrijving', 'required' => false, 'error_bubbling' => true));
+			->add('name', null, array('label' => 'form.type.menu.name.label', 'required' => true, 'error_bubbling' => true))
+			->add('site', null, array('label' => 'form.type.menu.site.label', 'required' => true, 'error_bubbling' => true))
+			->add('description', null, array('label' => 'form.type.menu.description.label', 'required' => false, 'error_bubbling' => true));
 	}
 
 	/**
@@ -48,6 +48,7 @@ class MenuType extends AbstractType
 	{
 		$resolver->setDefaults(array(
 			'data_class' => 'KRSolutions\Bundle\KRCMSBundle\Entity\Menu',
+			'translation_domain' => 'KRSolutionsKRCMSBundle'
 		));
 	}
 

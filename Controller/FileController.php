@@ -31,13 +31,13 @@ class FileController extends AbstractKRCMSController
 		$page = $this->getPageRepository()->getPageById($pageId);
 
 		if (null === $page) {
-			$this->getRequest()->getSession()->getFlashBag()->add('alert-error', 'De pagina met id \'' . $pageId . '\' bestaat niet (meer). Probeer het nog eens.');
+			$this->getRequest()->getSession()->getFlashBag()->add('alert-danger', 'De pagina met id \'' . $pageId . '\' bestaat niet (meer). Probeer het nog eens.');
 
 			return $this->redirect($this->generateUrl('kr_solutions_krcms_pages_index'));
 		}
 
 		if (false == $page->getPageType()->getHasFiles()) {
-			$this->getRequest()->getSession()->getFlashBag()->add('alert-error', 'Deze pagina kan geen bestanden bevatten. Probeer het nog eens.');
+			$this->getRequest()->getSession()->getFlashBag()->add('alert-danger', 'Deze pagina kan geen bestanden bevatten. Probeer het nog eens.');
 
 			return $this->redirect($this->generateUrl('kr_solutions_krcms_pages_index'));
 		}

@@ -26,3 +26,11 @@ KRSolutions\Bundle\KRCMSBundle\Entity\File:
                 message: kr_solutions_krcms.file.uri.not_blank
             - Length:
                 max: 255
+
+KRSolutions\Bundle\KRCMSBundle\Entity\Site:
+    properties:
+        title:
+            - NotBlank:
+                message: kr_solutions_krcms.site.title.not_blank
+            - Length:
+                max: 255

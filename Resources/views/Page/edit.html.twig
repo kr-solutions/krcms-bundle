@@ -3,15 +3,16 @@
 {% block title %}{% if action == 'new' %}{{ 'page.add_page'|trans({}, 'KRSolutionsKRCMSBundle') }}{% else %}{{ 'page.edit_page'|trans({}, 'KRSolutionsKRCMSBundle') }}{% endif %} - Content Management Systeem{% endblock %}
 
 {% block content %}
+	<div class="col-md-12">
+		<h1 class="sub-header">{% if action == 'new' %}{{ 'page.add_page'|trans({}, 'KRSolutionsKRCMSBundle') }}{% else %}{{ 'page.edit_page'|trans({}, 'KRSolutionsKRCMSBundle') }}{% endif %} {% if page.title %} <small>{{ page.title }}</small>{% endif %}</h1>
+	</div>
 
 	<div class="col-md-9">
-		<h1 class="sub-header">{% if action == 'new' %}{{ 'page.add_page'|trans({}, 'KRSolutionsKRCMSBundle') }}{% else %}{{ 'page.edit_page'|trans({}, 'KRSolutionsKRCMSBundle') }}{% endif %} {% if page.title %} <small>{{ page.title }}</small>{% endif %}</h1>
-
 		<div class="well">
-			<form id="pageForm" action="{% if action == 'new' %}{{ path('kr_solutions_krcms_pages_add', { 'siteId': site.id, 'pageTypeId': page.pageType.id }) }}{% else %}{{ path('kr_solutions_krcms_pages_edit', { 'pageId': page.id }) }}{% endif %}" method="post" id="pageForm" {{ form_enctype(pageForm) }} novalidate="novalidate">
+			<form id="pageForm" action="{% if action == 'new' %}{{ path('kr_solutions_krcms_pages_add', { 'siteId': site.id, 'pageTypeId': page.pageType.id }) }}{% else %}{{ path('kr_solutions_krcms_pages_edit', { 'pageId': page.id }) }}{% endif %}" method="post" {{ form_enctype(pageForm) }} novalidate="novalidate">
 				<fieldset>
 					{% if form_errors(pageForm) %}
-						<div class="alert alert-error">
+						<div class="alert alert-danger">
 							<a class="close" data-dismiss="alert" href="#">×</a>
 							<h4 class="alert-heading">Fout!</h4>
 							{{ form_errors(pageForm) }}

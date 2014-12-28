@@ -51,6 +51,22 @@ form:
                 label: Content
             metaDescription:
                 label: Meta description
+        menu:
+            name:
+                label: Name
+            description:
+                label: Description
+            site:
+                label: Site
+        site:
+            title:
+                label: Title
+            permalink:
+                label: Permalink
+            isActive:
+                label: Is active?
+            homepage:
+                label: Homepage
 
 layout:
     logout: Logout
@@ -58,6 +74,8 @@ layout:
     register: Register
     logged_in_as: Logged in as %username%
     footer_text: K&amp;R Solutions - Content Management System
+    yes: Yes
+    no: No
     save: Save
     cancel: Cancel
     close: Close
@@ -74,6 +92,7 @@ layout:
         helpdesk: Helpdesk
         categories: Categories
         menus: Menus
+        page_types: Page types
         sites: Sites
 
 page:
@@ -88,6 +107,8 @@ page:
     no_subpages: No subpages
     edit_page: Edit page
     remove_page: Remove page
+    no_pages_added_to_menu: There are no pages added to this menu.
+    no_subpages_added_to_page: There are no sub-pages added to this page.
     details: Details
     page_order_saved: The new page order is successfully saved
     page_order_save_failed: Failed to save the new page order, refresh the page and try again.
@@ -98,4 +119,55 @@ page:
             subpages: Subpages of "%parent_page%"
     remove_confirmation:
         title: Are you sure you want to remove this page?
-        message: All possibly linked subpages of this page are hidden! These should be linked, if necessary, again to another page.
+        message: All possibly linked subpages of this page become a single page! These should be linked, if necessary, again to another page or menu.
+    site_not_exist: The site where you want to manage the pages does not exist (anymore). Refresh the page and try again.
+    page_type_not_exist: The page type does not exist (anymore). Refresh the page and try again.
+    page_not_exist: The page with id '%page_id%' does not exist (anymore). Refresh the page and try again.
+    form_type_not_exist: The form to manage this page does not exist yet. Contact your webdesigner to fix this problem.
+    form_handler_not_exist: The handler for this form does nog exist yet. Contact your webdesigner to fix this problem.
+    page_added: Page '%page_title%' has been added successfully.
+    page_edited: Page '%page_title%' has been successfully updated.
+    remove:
+        failed_not_exist: Failed to remove the page with id '%page_id%'. This page does not exist (anymore).
+        failed_not_authorized: Failed to remove the page with id '%page_id%'. You are not authorized to remove this page.
+        success: Successfully removed the page with id '%page_id%'.
+
+menu:
+    name: Name
+    description: Description
+    edit_menu: Edit menu
+    remove_menu: Remove menu
+    add_menu: Add menu
+    index:
+        header:
+            menus: Menus
+    remove_confirmation:
+        title: Are you sure you want to remove this menu?
+        message: All possibly linked subpages of this menu become a single page! These should be linked, if necessary, again to another page or menu.
+
+dashboard:
+    no_sites: There are no sites configured yet. Add at least one site (most common) or more for a multiple sites configuration.
+
+site:
+    title: Title
+    permalink: Permalink
+    is_active: Active?
+    homepage: Homepage
+    index:
+        header:
+            sites: Sites
+    edit_site: Edit site
+    remove_site: Remove site
+    site_added: Site '%site_title%' has been added successfully.
+    site_edited: Site '%site_title%' has been successfully updated.
+    site_not_exist: The site with id '%site_id%' does not exist (anymore). Refresh the page and try again.
+    remove_confirmation:
+        title: Are you sure you want to remove this site?
+        message: Pages linked to this site should be moved or deleted first or this site will NOT be removed.
+    edit:
+        failed_not_authorized: You are not authorized to edit sites.
+    remove:
+        failed_not_exist: Failed to remove the site with id '%site_id%'. This site does not exist (anymore).
+        failed_not_authorized: Failed to remove the site. You are not authorized to remove sites.
+        failed_pages_exist: Failed to remove the site. There are still pages linked to this site. You should move or remove these pages first.
+        success: Successfully removed the site with id '%site_id%'.

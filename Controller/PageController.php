@@ -27,7 +27,7 @@ class PageController extends AbstractKRCMSController
 		$site = $this->getSiteRepository()->find($siteId);
 
 		if (null === $site) {
-			$this->getRequest()->getSession()->getFlashBag()->add('alert-error', 'De site waar u de pagina\'s van wilt beheren bestaat niet (meer). Ververs de pagina en probeer het nog eens.');
+			$this->getRequest()->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('page.site_not_exist', array(), 'KRSolutionsKRCMSBundle'));
 
 			return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
 		}
@@ -35,17 +35,17 @@ class PageController extends AbstractKRCMSController
 		$menus = $this->getMenuRepository()->getAllMenusBySite($site);
 
 		if (null !== $parentPageId) {
-			$parentPage = $this->getPageRepository()->find($parentPageId);
+			$parentPage = $this->getPageRepository()->getPageById($parentPageId);
+			$pageType = $parentPage->getPageType();
 			$pages = $this->getPageRepository()->getAllChildPages($parentPage);
 		} else {
 			$parentPage = null;
+			$pageType = null;
 			$pages = $this->getPageRepository()->getAllLoosePagesBySite($site);
 		}
 
 		$childablePages = $this->getPageRepository()->getAllChildablePagesBySite($site);
-//		$childPageTypes = $this->getPageTypeRepository()->getAllPossibleChildPageTypesBySite($site);
-		$pageTypes = $this->getPageTypeRepository()->getAllPossibleParentPageTypesBySite($site);
-//		$pageTypes = array_merge($childPageTypes, $parentPageTypes);
+		$pageTypes = $this->getPageTypeRepository()->getPageTypesByParentPageType($pageType);
 
 		return $this->render('KRSolutionsKRCMSBundle:Page:index.html.twig', array('site' => $site, 'pages' => $pages, 'menus' => $menus, 'childablePages' => $childablePages, 'parentPage' => $parentPage, 'pageTypes' => $pageTypes));
 	}
@@ -72,7 +72,7 @@ class PageController extends AbstractKRCMSController
 			$pageType = $this->getPageTypeRepository()->getPageTypeById($pageTypeId);
 
 			if (null === $pageType) {
-				$this->getRequest()->getSession()->getFlashBag()->add('alert-error', 'Paginatype bestaat niet. Probeer het nog een keer of neem contact op met uw webdesigner.');
+				$this->getRequest()->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('page.page_type_not_exist', array(), 'KRSolutionsKRCMSBundle'));
 
 				return $this->redirect($this->generateUrl('kr_solutions_krcms_pages_index', array('siteId' => $siteId)));
 			}
@@ -80,7 +80,7 @@ class PageController extends AbstractKRCMSController
 			$site = $this->getSiteRepository()->find($siteId);
 
 			if (null === $site) {
-				$this->getRequest()->getSession()->getFlashBag()->add('alert-error', 'De site waar u de pagina\s van wilt beheren bestaat niet (meer). Ververs de pagina en probeer het nog eens.');
+				$this->getRequest()->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('page.site_not_exist', array(), 'KRSolutionsKRCMSBundle'));
 
 				return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
 			}
@@ -106,7 +106,7 @@ class PageController extends AbstractKRCMSController
 		}
 
 		if (null === $page) {
-			$this->getRequest()->getSession()->getFlashBag()->add('alert-error', $pageType->getName() . ' met id \'' . $pageId . '\' bestaat niet (meer). Probeer het nog eens.');
+			$this->getRequest()->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('page.page_not_exist', array('%page_id%' => $pageId), 'KRSolutionsKRCMSBundle'));
 
 			return $this->redirect($this->generateUrl('kr_solutions_krcms_pages_index'));
 		}
@@ -115,7 +115,7 @@ class PageController extends AbstractKRCMSController
 			$formClass = 'KRSolutions\Bundle\KRCMSBundle\PageTypeForm\\' . $pageType->getAdminForm();
 
 			if (!class_exists($formClass)) {
-				$this->getRequest()->getSession()->getFlashBag()->add('alert-error', 'Het formulier om de pagina te beheren bestaat (nog) niet. Neem contact op met de helpdesk om dit probleem te verhelpen.');
+				$this->getRequest()->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('page.form_type_not_exist', array(), 'KRSolutionsKRCMSBundle'));
 
 				return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
 			}
@@ -130,7 +130,7 @@ class PageController extends AbstractKRCMSController
 			$formHandlerClass = 'KRSolutions\Bundle\KRCMSBundle\FormHandler\\' . $pageType->getAdminFormHandler() . 'FormHandler';
 
 			if (!class_exists($formHandlerClass)) {
-				$this->getRequest()->getSession()->getFlashBag()->add('alert-error', $formHandlerClass . 'Het object om de pagina correct op te slaan bestaat (nog) niet. Neem contact op met de helpdesk om dit probleem te verhelpen.');
+				$this->getRequest()->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('page.form_handler_not_exist', array(), 'KRSolutionsKRCMSBundle'));
 
 				return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
 			}
@@ -151,12 +151,12 @@ class PageController extends AbstractKRCMSController
 			if (null === $pageId) {
 				$em->persist($page);
 
-				$flashMessages['alert-success'][] = $pageType->getName() . ' \'' . $page->getTitle() . '\' is toegevoegd.';
+				$flashMessages['alert-success'][] = $this->getTranslator()->trans('page.page_added', array('%page_title%' => $page->getTitle()), 'KRSolutionsKRCMSBundle');
 			} else {
 				$page->setUpdatedAt($now);
 				$page->setUpdatedBy($this->getUser());
 
-				$flashMessages['alert-success'][] = $pageType->getName() . ' \'' . $page->getTitle() . '\' is gewijzigd.';
+				$flashMessages['alert-success'][] = $this->getTranslator()->trans('page.page_edited', array('%page_title%' => $page->getTitle()), 'KRSolutionsKRCMSBundle');
 			}
 
 			foreach ($page->getFiles() as $file) {
@@ -201,7 +201,7 @@ class PageController extends AbstractKRCMSController
 		$page = $this->getPageRepository()->getPageById($pageId);
 
 		if (null === $page) {
-			$this->getRequest()->getSession()->getFlashBag()->add('alert-error', 'Verwijderen mislukt! De pagina met id \'' . $pageId . '\' bestaat niet (meer). Probeer het nog een keer!');
+			$this->getRequest()->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('page.remove.failed_not_exist', array('%page_id%' => $pageId), 'KRSolutionsKRCMSBundle'));
 
 			return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
 		}
@@ -209,17 +209,15 @@ class PageController extends AbstractKRCMSController
 		$site = $page->getSite();
 
 		if (false === $page->getPageType()->isUserGranted($this->getUser())) {
-			$this->getRequest()->getSession()->getFlashBag()->add('alert-error', 'U bent niet gemachtigd om deze pagina te verwijderen.');
+			$this->getRequest()->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('page.remove.failed_not_authorized', array('%page_id%' => $pageId), 'KRSolutionsKRCMSBundle'));
 
 			return $this->redirect($this->generateUrl('kr_solutions_krcms_pages_index', array('siteId' => $site->getId())));
 		}
 
-		$em = $this->getDoctrine()->getManager();
+		$this->getDoctrine()->getManager()->remove($page);
+		$this->getDoctrine()->getManager()->flush();
 
-		$em->remove($page);
-		$em->flush();
-
-		$this->getRequest()->getSession()->getFlashBag()->add('alert-success', 'De pagina met id \'' . $pageId . '\' is verwijderd.');
+		$this->getRequest()->getSession()->getFlashBag()->add('alert-success', $this->getTranslator()->trans('page.remove.success', array('%page_id%' => $pageId), 'KRSolutionsKRCMSBundle'));
 
 		return $this->redirect($this->generateUrl('kr_solutions_krcms_pages_index', array('siteId' => $site->getId())));
 	}
@@ -227,11 +225,12 @@ class PageController extends AbstractKRCMSController
 	/**
 	 * Generate a permalink for a title
 	 *
+	 * @param Request $request
+	 *
 	 * @return Response
 	 */
-	public function generatePermalinkAction()
+	public function generatePermalinkAction(Request $request)
 	{
-		$request = Request::createFromGlobals();
 		if ($request->isXmlHttpRequest()) {
 			$text = $request->request->get('text');
 			$pageId = $request->request->get('page_id');
@@ -273,14 +272,13 @@ class PageController extends AbstractKRCMSController
 	/**
 	 * Change the order of the pages
 	 *
+	 * @param Request $request
+	 *
 	 * @return Response
 	 */
-	public function changeOrderAction()
+	public function changeOrderAction(Request $request)
 	{
-		$request = Request::createFromGlobals();
 		if ($request->isXmlHttpRequest()) {
-			$em = $this->getDoctrine()->getManager();
-
 			$pagesTable = $request->request->get('pages_table');
 
 			foreach ($pagesTable as $row => $orderValue) {
@@ -298,7 +296,7 @@ class PageController extends AbstractKRCMSController
 				}
 			}
 
-			$em->flush();
+			$this->getDoctrine()->getManager()->flush();
 
 			return new Response('success');
 		} else {

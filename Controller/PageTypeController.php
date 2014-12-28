@@ -53,7 +53,7 @@ class PageTypeController extends AbstractKRCMSController
 		$pageType = $this->getPageTypeRepository()->getPageTypeById($pageTypeId);
 
 		if (null === $pageType) {
-			$request->getSession()->getFlashBag()->add('alert-error', 'Pagina type bestaat niet (meer).');
+			$request->getSession()->getFlashBag()->add('alert-danger', 'Pagina type bestaat niet (meer).');
 
 			return $this->redirect($this->generateUrl('kr_solutions_krcms_page_types_index'));
 		}

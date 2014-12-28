@@ -23,7 +23,7 @@ class HelpdeskController extends AbstractKRCMSController
 	public function helpdeskAction(Request $request)
 	{
 		if ($this->container->getParameter('kr_solutions_krcms.helpdesk.enabled') === false) {
-			$request->getSession()->getFlashBag()->add('alert-error', 'Helpdesk is not enabled.');
+			$request->getSession()->getFlashBag()->add('alert-danger', 'Helpdesk is not enabled.');
 
 			return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
 		}

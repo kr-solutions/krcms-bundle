@@ -56,8 +56,25 @@ class SiteRepository extends EntityRepository
 	{
 		$qb = $this->createQueryBuilder('sites');
 
-		$qb->where('sites.id = :permalink');
+		$qb->where('sites.permalink = :permalink');
 		$qb->setParameter('permalink', $permalink);
+
+		return $qb->getQuery()->getOneOrNullResult();
+	}
+
+	/**
+	 * Get a site by it's id
+	 *
+	 * @param integer $siteId
+	 *
+	 * @return Site|null
+	 */
+	public function getSiteById($siteId)
+	{
+		$qb = $this->createQueryBuilder('sites');
+
+		$qb->where('sites.id = :siteId');
+		$qb->setParameter('siteId', $siteId);
 
 		return $qb->getQuery()->getOneOrNullResult();
 	}

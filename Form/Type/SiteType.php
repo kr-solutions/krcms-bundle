@@ -24,10 +24,15 @@ class SiteType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder
-			->add('permalink', null, array('label' => 'Permalink', 'required' => true, 'error_bubbling' => true))
-			->add('title', null, array('label' => 'Titel', 'required' => true, 'error_bubbling' => true))
-			->add('isActive', null, array('label' => 'Is geactiveerd', 'required' => true, 'error_bubbling' => true))
-			->add('homepage', null, array('label' => 'Homepage', 'required' => true, 'error_bubbling' => true));
+			->add('permalink', null, array('label' => 'form.type.site.permalink.label', 'required' => true, 'error_bubbling' => true))
+			->add('title', null, array('label' => 'form.type.site.title.label', 'required' => true, 'error_bubbling' => true))
+			->add('isActive', 'choice', array(
+				'label' => 'form.type.site.isActive.label',
+				'choices' => array(0 => 'form.type.no', 1 => 'form.type.yes'),
+				'required' => true,
+				'error_bubbling' => true
+			))
+			->add('homepage', null, array('label' => 'form.type.site.homepage.label', 'required' => false, 'error_bubbling' => true));
 	}
 
 	/**
@@ -49,6 +54,7 @@ class SiteType extends AbstractType
 	{
 		$resolver->setDefaults(array(
 			'data_class' => 'KRSolutions\Bundle\KRCMSBundle\Entity\Site',
+			'translation_domain' => 'KRSolutionsKRCMSBundle'
 		));
 	}
 

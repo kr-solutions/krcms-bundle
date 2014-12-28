@@ -8,3 +8,6 @@ kr_solutions_krcms:
     file:
         uri:
             not_blank: You have not selected any file
+    site:
+        title:
+            not_blank: The title of the site is mandatory

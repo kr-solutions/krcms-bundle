@@ -1,6 +1,6 @@
 kr_solutions_krcms_dashboard:
     pattern: /
-    defaults: { _controller: KRSolutionsKRCMSBundle:Admin:dashboard }
+    defaults: { _controller: KRSolutionsKRCMSBundle:Dashboard:index }
 
 kr_solutions_krcms_helpdesk:
     pattern: /helpdesk

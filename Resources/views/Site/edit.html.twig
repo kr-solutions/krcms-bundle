@@ -1,0 +1,61 @@
+{% extends 'KRSolutionsKRCMSBundle::layout.html.twig' %}
+
+{% block title %}{% if action == 'new' %}{{ 'site.add_site'|trans({}, 'KRSolutionsKRCMSBundle') }}{% else %}{{ 'site.edit_site'|trans({}, 'KRSolutionsKRCMSBundle') }}{% endif %} - Content Management Systeem{% endblock %}
+
+{% block content %}
+	<div class="col-md-12">
+		<h1 class="sub-header">{% if action == 'new' %}{{ 'site.add_site'|trans({}, 'KRSolutionsKRCMSBundle') }}{% else %}{{ 'site.edit_site'|trans({}, 'KRSolutionsKRCMSBundle') }}{% endif %} {% if site.title %} <small>{{ site.title }}</small>{% endif %}</h1>
+	</div>
+
+	<div class="col-md-12">
+		<div class="well">
+			<form id="siteForm" action="{% if action == 'new' %}{{ path('kr_solutions_krcms_sites_add') }}{% else %}{{ path('kr_solutions_krcms_sites_edit', { 'siteId': site.id }) }}{% endif %}" method="post" {{ form_enctype(siteForm) }} novalidate="novalidate">
+				<fieldset>
+					{% if form_errors(siteForm) %}
+						<div class="alert alert-danger">
+							<a class="close" data-dismiss="alert" href="#">×</a>
+							<h4 class="alert-heading">Fout!</h4>
+							{{ form_errors(siteForm) }}
+						</div>
+					{% endif %}
+
+					<div class="form-group{% if siteForm.permalink.vars.errors|length %} error{% endif %}">
+						{{ form_label(siteForm.permalink) }}
+						{{ form_widget(siteForm.permalink, { 'attr': {'class': 'form-control'} }) }}
+					</div>
+
+					<div class="form-group{% if siteForm.title.vars.errors|length %} error{% endif %}">
+						{{ form_label(siteForm.title) }}
+						{{ form_widget(siteForm.title, { 'attr': {'class': 'form-control'} }) }}
+					</div>
+
+					<div class="form-group{% if siteForm.isActive.vars.errors|length %} error{% endif %}">
+						{{ form_label(siteForm.isActive) }}
+						{{ form_widget(siteForm.isActive, { 'attr': {'class': 'form-control'} }) }}
+					</div>
+
+					<div class="form-group{% if siteForm.homepage.vars.errors|length %} error{% endif %}">
+						{{ form_label(siteForm.homepage) }}
+						{{ form_widget(siteForm.homepage, { 'attr': {'class': 'form-control'} }) }}
+					</div>
+
+					{{ form_rest(siteForm) }}
+				</fieldset>
+				<button class="btn btn-primary" type="submit"><i class="fa fa-floppy-o"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
+			</form>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#save_site').on('click', function () {
+				$('#siteForm').submit();
+			});
+		});
+	</script>
+{% endblock %}

@@ -32,7 +32,17 @@ class Configuration implements ConfigurationInterface
 						->scalarNode('contact_email')->defaultValue('webmaster@example.com')->cannotBeEmpty()->end()
 						->scalarNode('from_name')->defaultValue('Helpdesk - example.com')->cannotBeEmpty()->end()
 						->scalarNode('noreply_email')->defaultValue('noreply@example.com')->cannotBeEmpty()->end()
-				->end();
+				->end()
+			->end()
+			->arrayNode('management_roles')
+				->addDefaultsIfNotSet()
+					->children()
+						->scalarNode('categories')->defaultValue('ROLE_ADMIN')->cannotBeEmpty()->end()
+						->scalarNode('menus')->defaultValue('ROLE_ADMIN')->cannotBeEmpty()->end()
+						->scalarNode('page_types')->defaultValue('ROLE_ADMIN')->cannotBeEmpty()->end()
+						->scalarNode('sites')->defaultValue('ROLE_ADMIN')->cannotBeEmpty()->end()
+				->end()
+			->end();
 
 		// Here you should define the parameters that are allowed to
 		// configure your bundle. See the documentation linked above for

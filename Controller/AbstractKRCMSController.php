@@ -10,6 +10,7 @@ use KRSolutions\Bundle\KRCMSBundle\Repository\PageTypeRepository;
 use KRSolutions\Bundle\KRCMSBundle\Repository\SiteRepository;
 use KRSolutions\Bundle\KRCMSBundle\Repository\TagRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Translation\Translator;
 
 
 /**
@@ -86,6 +87,26 @@ class AbstractKRCMSController extends Controller
 	protected function getTagRepository()
 	{
 		return $this->getDoctrine()->getRepository('KRSolutionsKRCMSBundle:Tag');
+	}
+
+	/**
+	 * Get the translator
+	 *
+	 * @return Translator
+	 */
+	protected function getTranslator()
+	{
+		return $this->container->get('translator');
+	}
+
+	/**
+	 * Get the security context
+	 *
+	 * @return \Symfony\Component\Security\Core\SecurityContext
+	 */
+	protected function getSecurityContext()
+	{
+		return $this->container->get('security.context');
 	}
 
 }

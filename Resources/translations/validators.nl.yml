@@ -8,3 +8,6 @@ kr_solutions_krcms:
     file:
         uri:
             not_blank: U heeft geen bestand geselecteerd
+    site:
+        title:
+            not_blank: De title van de site is verplicht

@@ -13,3 +13,7 @@ kr_solutions_krcms_sites_edit:
     defaults: { _controller: KRSolutionsKRCMSBundle:Site:edit }
     requirements:
         siteId: \d+
+
+kr_solutions_krcms_sites_add:
+    pattern: /add
+    defaults: { _controller: KRSolutionsKRCMSBundle:Site:edit }
