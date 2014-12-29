@@ -94,6 +94,7 @@ layout:
         menus: Menus
         page_types: Page types
         sites: Sites
+    form_error_alert_heading: Oops!
 
 page:
     title: Title
@@ -156,11 +157,13 @@ site:
     index:
         header:
             sites: Sites
+    add_site: Add site
     edit_site: Edit site
     remove_site: Remove site
     site_added: Site '%site_title%' has been added successfully.
     site_edited: Site '%site_title%' has been successfully updated.
     site_not_exist: The site with id '%site_id%' does not exist (anymore). Refresh the page and try again.
+    back_to_site_overview: Back to the sites overview
     remove_confirmation:
         title: Are you sure you want to remove this site?
         message: Pages linked to this site should be moved or deleted first or this site will NOT be removed.

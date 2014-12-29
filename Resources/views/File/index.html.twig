@@ -4,137 +4,137 @@
 
 {% block content %}
 
-<header class="sub-header">
-	<h1>Bestanden beheren van <small>{{ page.title }}</small></h1>
-</header>
+	<header class="sub-header">
+		<h1>Bestanden beheren van <small>{{ page.title }}</small></h1>
+	</header>
 
-<div class="row">
-	<div class="col-md-3">
-		<div class="well">
-			<form id="fileForm" action="{{ path('kr_solutions_krcms_files', { 'pageId': page.id }) }}" method="post" id="fileForm" {{ form_enctype(fileForm) }} novalidate="novalidate">
-				<fieldset>
-					<legend>Bestand toevoegen</legend>
+	<div class="row">
+		<div class="col-md-3">
+			<div class="well">
+				<form id="fileForm" action="{{ path('kr_solutions_krcms_files', { 'pageId': page.id }) }}" method="post" id="fileForm" {{ form_enctype(fileForm) }} novalidate="novalidate">
+					<fieldset>
+						<legend>Bestand toevoegen</legend>
 
-					{% if form_errors(fileForm) %}
-					<div class="alert alert-danger">
-						<a class="close" data-dismiss="alert" href="#">×</a>
-						<h4 class="alert-heading">Fout!</h4>
-						{{ form_errors(fileForm) }}
-					</div>
-					{% endif %}
+						{% if form_errors(fileForm) %}
+							<div class="alert alert-danger">
+								<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'layout.close'|trans({}, 'KRSolutionsKRCMSBundle') }}</span></button>
+								<h4>{{ 'layout.form_error_alert_heading'|trans({}, 'KRSolutionsKRCMSBundle') }}</h4>
+								{{ form_errors(fileForm) }}
+							</div>
+						{% endif %}
 
-					<div class="control-group{% if fileForm.uri.vars.errors|length %} error{% endif %}">
-						{{ form_label(fileForm.uri) }}
-						{{ form_widget(fileForm.uri, { 'attr': {'class': 'col-md-10'} }) }}
-						<button class="btn btn-primary" id="kcfinder_browse">Bladeren</button>
-					</div>
+						<div class="control-group{% if fileForm.uri.vars.errors|length %} has-error{% endif %}">
+							{{ form_label(fileForm.uri) }}
+							{{ form_widget(fileForm.uri, { 'attr': {'class': 'col-md-10'} }) }}
+							<button class="btn btn-primary" id="kcfinder_browse">Bladeren</button>
+						</div>
 
-					<div class="control-group{% if fileForm.title.vars.errors|length %} error{% endif %}">
-						{{ form_label(fileForm.title) }}
-						{{ form_widget(fileForm.title, { 'attr': {'class': 'col-md-10'} }) }}
-					</div>
+						<div class="control-group{% if fileForm.title.vars.errors|length %} has-error{% endif %}">
+							{{ form_label(fileForm.title) }}
+							{{ form_widget(fileForm.title, { 'attr': {'class': 'col-md-10'} }) }}
+						</div>
 
-					<div class="control-group{% if form_errors(fileForm.description) %} error{% endif %}">
-						{{ form_label(fileForm.description) }}
-						{{ form_widget(fileForm.description, { 'attr': {'class': 'col-md-10'} }) }}
-					</div>
+						<div class="control-group{% if form_errors(fileForm.description) %} error{% endif %}">
+							{{ form_label(fileForm.description) }}
+							{{ form_widget(fileForm.description, { 'attr': {'class': 'col-md-10'} }) }}
+						</div>
 
-					{{ form_rest(fileForm) }}
-				</fieldset>
-				<input class="btn btn-primary" type="submit" value="Bestand toevoegen" />
-			</form>
+						{{ form_rest(fileForm) }}
+					</fieldset>
+					<input class="btn btn-primary" type="submit" value="Bestand toevoegen" />
+				</form>
+			</div>
+		</div>
+
+		<div class="col-md-9">
+			<div class="well">
+				<h2>Bestanden</h2>
+
+				{% if page.files|length > 0 %}
+					{% for file in page.files %}
+						<div id="file_{{ file.id }}" class="col-md-2" style="position: relative;">
+							<a href="{{ asset(uploadDir ~ file.uri) }}" title="{{ file.title }}">
+								<img class="img-polaroid" alt="{{ file.title }}" src="{{ asset(uploadDir ~ file.squareCrop(uploadDir, 250)) }}" />
+							</a>
+							<a style="position: absolute; bottom: 8px; right: 0px;" href="javascript:void(0);" onclick="javascript:confirmDeleteFile({{ file.id }});" class="btn btn-danger btn-mini"><i class="icon-white icon-trash"></i></a>
+						</div>
+					{% endfor %}
+				{% else %}
+					Er zijn nog geen bestanden toegevoegd aan deze pagina.
+				{% endif%}
+
+				<div class="clearfix"></div>
+			</div>
 		</div>
 	</div>
 
-	<div class="col-md-9">
-		<div class="well">
-			<h2>Bestanden</h2>
-
-			{% if page.files|length > 0 %}
-				{% for file in page.files %}
-				<div id="file_{{ file.id }}" class="col-md-2" style="position: relative;">
-					<a href="{{ asset(uploadDir ~ file.uri) }}" title="{{ file.title }}">
-						<img class="img-polaroid" alt="{{ file.title }}" src="{{ asset(uploadDir ~ file.squareCrop(uploadDir, 250)) }}" />
-					</a>
-					<a style="position: absolute; bottom: 8px; right: 0px;" href="javascript:void(0);" onclick="javascript:confirmDeleteFile({{ file.id }});" class="btn btn-danger btn-mini"><i class="icon-white icon-trash"></i></a>
-				</div>
-				{% endfor %}
-			{% else %}
-				Er zijn nog geen bestanden toegevoegd aan deze pagina.
-			{% endif%}
-
-			<div class="clearfix"></div>
+	<!-- Modals -->
+	{% spaceless %}
+		<div class="modal hide fade" id="file-delete">
+			<div class="modal-header">
+				<button class="close" data-dismiss="modal">×</button>
+				<h3>Afbeelding verwijderen</h3>
+			</div>
+			<div class="modal-body">
+				<p>Weet u zeker dat u deze afbeelding wilt verwijderen?.</p>
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn btn-danger" data-dismiss="modal">Verwijderen</a>
+				<a href="#" class="btn btn-primary" data-dismiss="modal">Annuleren</a>
+			</div>
 		</div>
-	</div>
-</div>
-
-<!-- Modals -->
-{% spaceless %}
-<div class="modal hide fade" id="file-delete">
-	<div class="modal-header">
-		<button class="close" data-dismiss="modal">×</button>
-		<h3>Afbeelding verwijderen</h3>
-	</div>
-	<div class="modal-body">
-		<p>Weet u zeker dat u deze afbeelding wilt verwijderen?.</p>
-	</div>
-	<div class="modal-footer">
-		<a href="#" class="btn btn-danger" data-dismiss="modal">Verwijderen</a>
-		<a href="#" class="btn btn-primary" data-dismiss="modal">Annuleren</a>
-	</div>
-</div>
-{% endspaceless %}
-<!-- Modals -->
+	{% endspaceless %}
+	<!-- Modals -->
 
 {% endblock %}
 
 {% block javascripts %}
-{{ parent() }}
-<script type="text/javascript">
-	function openKCFinder_singleFile(field) {
-        window.KCFinder = {
-            callBack: function(url) {
-                window.KCFinder = null;
-                field.val(decodeURI(url));
-            }
-        };
-        window.open('{{ asset('bundles/krsolutionskrcms/kcfinder/browse.php?type=images&lang=nl') }}', 'kcfinder_single',
-        'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
-        'resizable=1, scrollbars=0, width=800, height=600');
-    }
+	{{ parent() }}
+	<script type="text/javascript">
+		function openKCFinder_singleFile(field) {
+			window.KCFinder = {
+				callBack: function (url) {
+					window.KCFinder = null;
+					field.val(decodeURI(url));
+				}
+			};
+			window.open('{{ asset('bundles/krsolutionskrcms/kcfinder/browse.php?type=images&lang=nl') }}', 'kcfinder_single',
+					'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
+					'resizable=1, scrollbars=0, width=800, height=600');
+		}
 
-    $(document).ready(function() {
-		$('#save_page').on('click', function() {
-			$('#pageForm').submit();
+		$(document).ready(function () {
+			$('#save_page').on('click', function () {
+				$('#pageForm').submit();
+			});
+
+			$('#kcfinder_browse').click(function () {
+				openKCFinder_singleFile($('#file_uri'));
+				return false;
+			});
 		});
 
-		$('#kcfinder_browse').click(function() {
-            openKCFinder_singleFile($('#file_uri'));
-            return false;
-        });
-	});
+		function confirmDeleteFile(id) {
+			$('#file-delete').modal('show');
+			$('#file-delete').find('.modal-footer').find('.btn-danger').attr('onclick', 'javascript:deleteFile(' + id + ')');
+		}
 
-	function confirmDeleteFile(id) {
-		$('#file-delete').modal('show');
-		$('#file-delete').find('.modal-footer').find('.btn-danger').attr('onclick', 'javascript:deleteFile(' +id + ')');
-	}
-
-	function deleteFile(id) {
-		$.ajax({
-			url: '{{ path('kr_solutions_krcms_files_remove') }}',
-			type: 'POST',
-            dataType: 'json',
-			data: 'file_id=' + id,
-			success: function(data) {
-				if (data.success === true) {
-					$('#file_' + id).remove();
-					alert('Afbeelding ' + data.file + ' is verwijderd!');
-				} else {
-					$('#file_' + id).remove();
-					alert('Afbeelding bestaat niet (meer)');
+		function deleteFile(id) {
+			$.ajax({
+				url: '{{ path('kr_solutions_krcms_files_remove') }}',
+				type: 'POST',
+				dataType: 'json',
+				data: 'file_id=' + id,
+				success: function (data) {
+					if (data.success === true) {
+						$('#file_' + id).remove();
+						alert('Afbeelding ' + data.file + ' is verwijderd!');
+					} else {
+						$('#file_' + id).remove();
+						alert('Afbeelding bestaat niet (meer)');
+					}
 				}
-			}
-		})
-	}
-</script>
+			})
+		}
+	</script>
 {% endblock %}

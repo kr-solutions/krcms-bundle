@@ -2,14 +2,42 @@
 
 {% block title %}Pagina's - Content Management Systeem{% endblock %}
 
+{% block header %}
+	<div class="col-lg-8">
+		<h1 class="page-header">
+			{% if parentPage is null %}
+				{{ 'page.index.header.pages'|trans({}, 'KRSolutionsKRCMSBundle') }}
+			{% else %}
+				{{ 'page.index.header.subpages'|trans({'%parent_page%': parentPage}, 'KRSolutionsKRCMSBundle') }}
+			{% endif %}
+		</h1>
+	</div>
+
+	<div class="col-lg-4">
+		<div class="page-header pull-right">
+			<div class="btn-group">
+				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+					<i class="fa fa-plus"></i> {{ 'page.add_page'|trans({}, 'KRSolutionsKRCMSBundle') }} <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu dropdown-menu-right" role="menu">
+					{% for pageType in pageTypes %}
+						{% if pageType.isUserGranted(app.user) %}
+							<li
+								{% if app.request.attributes.get('_route') == 'kr_solutions_krcms_pages_add' and app.request.attributes.get('pageType') == pageType.id %}
+									class="active"
+								{% endif %}>
+								<a href="{{ path('kr_solutions_krcms_pages_add', { 'siteId': site.id, 'pageTypeId': pageType.id }) }}" data-trigger="hover" rel="popover" title="{{ pageType.name }}" data-content="{{ pageType.description }}"><i class="fa fa-fw fa-file-o"></i> {{ pageType.name }}</a>
+							</li>
+						{% endif %}
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
 {% block content %}
-
-	{% include 'KRSolutionsKRCMSBundle:Page:menu.html.twig' %}
-
-	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-		<h1 class="sub-header">{% if parentPage is null %}{{ 'page.index.header.pages'|trans({}, 'KRSolutionsKRCMSBundle') }}{% else %}{{ 'page.index.header.subpages'|trans({'%parent_page%': parentPage}, 'KRSolutionsKRCMSBundle') }}{% endif %}</h1>
-
-		{% include 'KRSolutionsKRCMSBundle::alerts.html.twig' %}
+	<div class="col-lg-12">
 
 		<div class="well">
 			<div class="pages_order_success alert alert-success alert-dismissible" style="display: none;" role="alert">

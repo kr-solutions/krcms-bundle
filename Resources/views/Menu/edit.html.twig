@@ -4,50 +4,50 @@
 
 {% block content %}
 
-<header class="sub-header">
-	<h1>Menu wijzigen</h1>
-</header>
+	<header class="sub-header">
+		<h1>Menu wijzigen</h1>
+	</header>
 
-<div class="row">
-	<div class="col-md-12">
-		<div class="well">
-			<form action="{{ path('kr_solutions_krcms_menus_edit', { 'menuId': menu.id }) }}" method="post" {{ form_enctype(menuForm) }} novalidate="novalidate">
-				<fieldset>
-					<legend>Menu wijzigen</legend>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="well">
+				<form action="{{ path('kr_solutions_krcms_menus_edit', { 'menuId': menu.id }) }}" method="post" {{ form_enctype(menuForm) }} novalidate="novalidate">
+					<fieldset>
+						<legend>Menu wijzigen</legend>
 
-					{% if form_errors(menuForm) %}
-					<div class="alert alert-danger">
-						<a class="close" data-dismiss="alert" href="#">×</a>
-						<h4 class="alert-heading">Fout!</h4>
-						{{ form_errors(menuForm) }}
-					</div>
-					{% endif %}
+						{% if form_errors(menuForm) %}
+							<div class="alert alert-danger">
+								<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'layout.close'|trans({}, 'KRSolutionsKRCMSBundle') }}</span></button>
+								<h4>{{ 'layout.form_error_alert_heading'|trans({}, 'KRSolutionsKRCMSBundle') }}</h4>
+								{{ form_errors(menuForm) }}
+							</div>
+						{% endif %}
 
-					<div class="form-group{% if menuForm.name.vars.errors|length %} error{% endif %}">
-						{{ form_label(menuForm.name) }}
-						{{ form_widget(menuForm.name, { 'attr': {'class': 'form-control'} }) }}
-					</div>
+						<div class="form-group{% if menuForm.name.vars.errors|length %} has-error{% endif %}">
+							{{ form_label(menuForm.name) }}
+							{{ form_widget(menuForm.name, { 'attr': {'class': 'form-control'} }) }}
+						</div>
 
-					<div class="form-group{% if menuForm.site.vars.errors|length %} error{% endif %}">
-						{{ form_label(menuForm.site) }}
-						{{ form_widget(menuForm.site, { 'attr': {'class': 'form-control'} }) }}
-					</div>
+						<div class="form-group{% if menuForm.site.vars.errors|length %} has-error{% endif %}">
+							{{ form_label(menuForm.site) }}
+							{{ form_widget(menuForm.site, { 'attr': {'class': 'form-control'} }) }}
+						</div>
 
-					<div class="form-group{% if form_errors(menuForm.description) %} error{% endif %}">
-						{{ form_label(menuForm.description) }}
-						{{ form_widget(menuForm.description, { 'attr': {'class': 'form-control'} }) }}
-					</div>
+						<div class="form-group{% if form_errors(menuForm.description) %} error{% endif %}">
+							{{ form_label(menuForm.description) }}
+							{{ form_widget(menuForm.description, { 'attr': {'class': 'form-control'} }) }}
+						</div>
 
-					{{ form_rest(menuForm) }}
-				</fieldset>
-				<input class="btn btn-primary" type="submit" value="{{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}" />
-			</form>
+						{{ form_rest(menuForm) }}
+					</fieldset>
+					<input class="btn btn-primary" type="submit" value="{{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}" />
+				</form>
+			</div>
 		</div>
 	</div>
-</div>
 
 {% endblock %}
 
 {% block javascripts %}
-{{ parent() }}
+	{{ parent() }}
 {% endblock %}

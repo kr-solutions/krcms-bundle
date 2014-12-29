@@ -94,6 +94,7 @@ layout:
         menus: Menu's
         page_types: Pagina types
         sites: Sites
+    form_error_alert_heading: Oeps!
 
 page:
     title: Titel
@@ -156,11 +157,13 @@ site:
     index:
         header:
             sites: Sites
+    add_site: Site toevoegen
     edit_site: Site wijzigen
     remove_site: Site verwijderen
     site_added: De site '%site_title%' is succesvol toegevoegd.
     site_edited: De site '%site_title%' is succesvol aangepast.
     site_not_exist: De site met id '%site_id%' bestaat niet (meer). Ververs de pagina en probeer het nog eens.
+    back_to_site_overview: Terug naar het overzicht
     remove_confirmation:
         title: Weet u zeker dat u deze site wilt verwijderen?
         message: Pagina's verbonden aan deze site moeten eerst verplaatst of verwijderd worden, eerder zal deze site NIET verwijderd worden.

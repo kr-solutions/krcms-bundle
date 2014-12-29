@@ -5,12 +5,13 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>{% block title %}K&amp;R Solutions - Content Management System{% endblock %}</title>
+		<title>{% block title %}K&amp;R - Content Management System{% endblock %}</title>
 
 		{% block stylesheets %}
 			<link href="{{ asset('bundles/krsolutionskrcms/vendor/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet" />
 			<link href="{{ asset('bundles/krsolutionskrcms/vendor/bootstrap/dist/css/bootstrap-theme.min.css') }}" rel="stylesheet" />
 			<link href="{{ asset('bundles/krsolutionskrcms/vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" />
+			<link href="{{ asset('bundles/krsolutionskrcms/css/sb-admin.css') }}" rel="stylesheet" />
 			<link href="{{ asset('bundles/krsolutionskrcms/css/application.css') }}" rel="stylesheet" />
 
 			<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -28,18 +29,29 @@
 			{% set activeSite = null %}
 		{% endif %}
 
-		{% render controller('KRSolutionsKRCMSBundle:Admin:menu', { 'activeSite': activeSite, 'route': app.request.attributes.get('_route') }) %}
+		<div id="wrapper">
+			{% render controller('KRSolutionsKRCMSBundle:Admin:menu', { 'activeSite': activeSite, 'route': app.request.attributes.get('_route') }) %}
 
-		<div class="container-fluid">
-			<div class="row">
-				{% block content %}
-				{% endblock %}
-			</div>
+			<div id="page-wrapper">
+				<div class="container-fluid">
+					<div class="row">
+						{% block header %}
+						{% endblock %}
+					</div>
 
-			<div class="row">
-				<p style="text-align: center;">
-					{{ 'layout.footer_text'|trans({}, 'KRSolutionsKRCMSBundle')|raw }}
-				</p>
+					{% include 'KRSolutionsKRCMSBundle::alerts.html.twig' %}
+
+					<div class="row">
+						{% block content %}
+						{% endblock %}
+					</div>
+
+					<div class="row">
+						<p style="text-align: center;">
+							{{ 'layout.footer_text'|trans({}, 'KRSolutionsKRCMSBundle')|raw }}
+						</p>
+					</div>
+				</div>
 			</div>
 		</div>
 

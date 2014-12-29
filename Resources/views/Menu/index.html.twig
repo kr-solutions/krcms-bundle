@@ -2,11 +2,13 @@
 
 {% block title %}Menu's - Content Management Systeem{% endblock %}
 
-{% block content %}
-	<div class="col-md-12">
-		<h1 class="sub-header">{{ 'menu.index.header.menus'|trans({}, 'KRSolutionsKRCMSBundle') }}</h1>
+{% block header %}
+	<div class="col-lg-12">
+		<h1 class="page-header">{{ 'menu.index.header.menus'|trans({}, 'KRSolutionsKRCMSBundle') }}</h1>
 	</div>
+{% endblock %}
 
+{% block content %}
 	<div class="col-md-4">
 		<div class="well">
 			<form action="{{ path('kr_solutions_krcms_menus_index') }}" method="post" {{ form_enctype(menuForm) }} novalidate="novalidate">
@@ -15,18 +17,18 @@
 
 					{% if form_errors(menuForm) %}
 						<div class="alert alert-danger">
-							<a class="close" data-dismiss="alert" href="#">×</a>
-							<h4 class="alert-heading">Fout!</h4>
+							<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'layout.close'|trans({}, 'KRSolutionsKRCMSBundle') }}</span></button>
+							<h4>{{ 'layout.form_error_alert_heading'|trans({}, 'KRSolutionsKRCMSBundle') }}</h4>
 							{{ form_errors(menuForm) }}
 						</div>
 					{% endif %}
 
-					<div class="form-group{% if menuForm.name.vars.errors|length %} error{% endif %}">
+					<div class="form-group{% if menuForm.name.vars.errors|length %} has-error{% endif %}">
 						{{ form_label(menuForm.name) }}
 						{{ form_widget(menuForm.name, { 'attr': {'class': 'form-control'} }) }}
 					</div>
 
-					<div class="form-group{% if menuForm.site.vars.errors|length %} error{% endif %}">
+					<div class="form-group{% if menuForm.site.vars.errors|length %} has-error{% endif %}">
 						{{ form_label(menuForm.site) }}
 						{{ form_widget(menuForm.site, { 'attr': {'class': 'form-control'} }) }}
 					</div>

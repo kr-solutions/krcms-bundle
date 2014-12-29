@@ -30,7 +30,7 @@ class AdminController extends AbstractKRCMSController
 		$managementRoles['page_types'] = $this->container->getParameter('kr_solutions_krcms.management_roles.page_types');
 		$managementRoles['sites'] = $this->container->getParameter('kr_solutions_krcms.management_roles.sites');
 
-		return $this->render('KRSolutionsKRCMSBundle:Admin:menu.html.twig', array(
+		return $this->render('KRSolutionsKRCMSBundle::menu.html.twig', array(
 				'activeSite' => $activeSite,
 				'sites' => $sites,
 				'route' => $route,

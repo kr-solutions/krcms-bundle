@@ -17,18 +17,18 @@
 
 						{% if form_errors(pageTypeForm) %}
 							<div class="alert alert-danger">
-								<a class="close" data-dismiss="alert" href="#">×</a>
-								<h4 class="alert-heading">Fout!</h4>
+								<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'layout.close'|trans({}, 'KRSolutionsKRCMSBundle') }}</span></button>
+								<h4>{{ 'layout.form_error_alert_heading'|trans({}, 'KRSolutionsKRCMSBundle') }}</h4>
 								{{ form_errors(pageTypeForm) }}
 							</div>
 						{% endif %}
 
-						<div class="control-group{% if pageTypeForm.name.vars.errors|length %} error{% endif %}">
+						<div class="control-group{% if pageTypeForm.name.vars.errors|length %} has-error{% endif %}">
 							{{ form_label(pageTypeForm.name) }}
 							{{ form_widget(pageTypeForm.name, { 'attr': {'class': 'col-md-10'} }) }}
 						</div>
 
-						<div class="control-group{% if pageTypeForm.description.vars.errors|length %} error{% endif %}">
+						<div class="control-group{% if pageTypeForm.description.vars.errors|length %} has-error{% endif %}">
 							{{ form_label(pageTypeForm.description) }}
 							{{ form_widget(pageTypeForm.description, { 'attr': {'class': 'col-md-10'} }) }}
 						</div>
