@@ -24,9 +24,13 @@ class FileController extends AbstractKRCMSController
 	 */
 	public function filesAction(Request $request, $pageId)
 	{
-		$_SESSION['KCFINDER'] = array();
-		$_SESSION['KCFINDER']['disabled'] = false;
-		$uploadDir = $this->container->getParameter('kr_solutions_krcms.upload_dir');
+		$uploadDir = trim($this->container->getParameter('kr_solutions_krcms.upload_dir'));
+
+		$request->getSession()->set('KCFINDER', array(
+			'disabled' => false,
+			'uploadURL' => '/' . trim($this->container->getParameter('kr_solutions_krcms.upload_dir'), '/'),
+			'uploadDir' => $this->container->getParameter('kernel.root_dir') . '/../web/' . trim($this->container->getParameter('kr_solutions_krcms.upload_dir'), '/')
+		));
 
 		$page = $this->getPageRepository()->getPageById($pageId);
 
@@ -50,7 +54,9 @@ class FileController extends AbstractKRCMSController
 		if ($fileForm->isValid()) {
 			$em = $this->getDoctrine()->getManager();
 
-			$newFile->setUri(str_replace('/' . $uploadDir, '', $newFile->getUri()));
+			$uriOrig = trim($newFile->getUri());
+
+			$newFile->setUri(ltrim(ltrim($uriOrig, '/'), ltrim($uploadDir, '/')));
 			$newFile->setCreatedBy($this->getUser());
 			$newFile->setPage($page);
 

@@ -427,13 +427,13 @@ class File
 	 */
 	public function squareCrop($uploadDir = 'uploads', $thumbSize = 64, $jpgQuality = 90)
 	{
-		$srcImage = dirname(__FILE__) . '/../../../../web/' . $uploadDir . $this->uri;
+		$srcImage = dirname(__FILE__) . '/../../../../../web/' . $uploadDir . $this->uri;
 
 		if (!file_exists($srcImage)) {
 			return $this->uri;
 		}
 
-		$squareCropDir = dirname(__FILE__) . '/../../../../web/' . $uploadDir . '/_square_crop';
+		$squareCropDir = dirname(__FILE__) . '/../../../../../web/' . $uploadDir . '/_square_crop';
 
 		$thumbDir = $squareCropDir . '/' . $thumbSize;
 

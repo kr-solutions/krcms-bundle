@@ -12,7 +12,8 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "kr-solutions/kruser-bundle": "dev-master"
+        "kr-solutions/kruser-bundle": "dev-master",
+        "sunhater/kcfinder": "dev-master"
     },
     "autoload": {
         "psr-4": {

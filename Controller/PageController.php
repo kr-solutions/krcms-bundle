@@ -41,13 +41,31 @@ class PageController extends AbstractKRCMSController
 		} else {
 			$parentPage = null;
 			$pageType = null;
+
+			/**
+			 * Get the single pages (without a parent)
+			 */
 			$pages = $this->getPageRepository()->getAllLoosePagesBySite($site);
 		}
 
+		/**
+		 * Get pages that can have children
+		 */
 		$childablePages = $this->getPageRepository()->getAllChildablePagesBySite($site);
+
+		/**
+		 * Get the page types that can be linked to this parent page
+		 */
 		$pageTypes = $this->getPageTypeRepository()->getPageTypesByParentPageType($pageType);
 
-		return $this->render('KRSolutionsKRCMSBundle:Page:index.html.twig', array('site' => $site, 'pages' => $pages, 'menus' => $menus, 'childablePages' => $childablePages, 'parentPage' => $parentPage, 'pageTypes' => $pageTypes));
+		return $this->render('KRSolutionsKRCMSBundle:Page:index.html.twig', array(
+				'site' => $site,
+				'pages' => $pages,
+				'menus' => $menus,
+				'childablePages' => $childablePages,
+				'parentPage' => $parentPage,
+				'pageTypes' => $pageTypes
+		));
 	}
 
 	/**
@@ -62,9 +80,15 @@ class PageController extends AbstractKRCMSController
 	 */
 	public function editAction(Request $request, $siteId = null, $pageId = null, $pageTypeId = null)
 	{
-		$_SESSION['KCFINDER'] = array();
-		$_SESSION['KCFINDER']['disabled'] = false;
-		$request->getSession()->set('KCFINDER', array('disabled' => false));
+//		$_SESSION['KCFINDER'] = array();
+//		$_SESSION['KCFINDER']['disabled'] = false;
+//		$_SESSION['KCFINDER']['uploadURL'] = '/' . trim($this->container->getParameter('kr_solutions_krcms.upload_dir'), '/');
+//		$_SESSION['KCFINDER']['uploadDir'] = $this->container->getParameter('kernel.root_dir') . '/../web/' . trim($this->container->getParameter('kr_solutions_krcms.upload_dir'), '/');
+		$request->getSession()->set('KCFINDER', array(
+			'disabled' => false,
+			'uploadURL' => '/' . trim($this->container->getParameter('kr_solutions_krcms.upload_dir'), '/'),
+			'uploadDir' => $this->container->getParameter('kernel.root_dir') . '/../web/' . trim($this->container->getParameter('kr_solutions_krcms.upload_dir'), '/')
+		));
 
 		$now = new DateTime('now');
 
