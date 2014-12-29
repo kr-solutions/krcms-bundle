@@ -26,11 +26,10 @@ class FileController extends AbstractKRCMSController
 	{
 		$uploadDir = trim($this->container->getParameter('kr_solutions_krcms.upload_dir'));
 
-		$request->getSession()->set('KCFINDER', array(
-			'disabled' => false,
-			'uploadURL' => '/' . trim($this->container->getParameter('kr_solutions_krcms.upload_dir'), '/'),
-			'uploadDir' => $this->container->getParameter('kernel.root_dir') . '/../web/' . trim($this->container->getParameter('kr_solutions_krcms.upload_dir'), '/')
-		));
+		$_SESSION['KCFINDER'] = array();
+		$_SESSION['KCFINDER']['disabled'] = false;
+		$_SESSION['KCFINDER']['uploadURL'] = '/' . trim($this->container->getParameter('kr_solutions_krcms.upload_dir'), '/');
+		$_SESSION['KCFINDER']['uploadDir'] = $this->container->getParameter('kernel.root_dir') . '/../web/' . trim($this->container->getParameter('kr_solutions_krcms.upload_dir'), '/');
 
 		$page = $this->getPageRepository()->getPageById($pageId);
 
