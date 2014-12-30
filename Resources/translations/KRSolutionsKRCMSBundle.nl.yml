@@ -67,6 +67,13 @@ form:
                 label: Is actief?
             homepage:
                 label: Homepage
+        file:
+            uri:
+                label: Bestand
+            title:
+                label: Titel
+            description:
+                label: Omschrijving
 
 layout:
     logout: Uitloggen
@@ -174,3 +181,21 @@ site:
         failed_not_authorized: Fout bij het verwijderen van de site met id '%site_id%'. U bent niet gemachtigd om sites te verwijderen.
         failed_pages_exist: Fout bij het verwijderen van de site met id '%site_id%'. Er zijn nog steeds pagina's aan deze site verbonden. Verplaats of verwijder deze pagina's voordat u deze site verwijderd.
         success: De site met '%site_id%' is succesvol verwijderd.
+
+file:
+    index:
+        header:
+            manage_files: Bestanden beheren van pagina <small>%page_title%</small>
+            files: Bestanden
+    add_file: Bestand toevoegen
+    remove_file: Bestand verwijderen
+    file_added: Bestand is succesvol toegevoegd
+    file_removed: Bestand is succesvol verwijderd
+    file_not_exist: Bestand bestaat niet (meer)
+    page_not_exist: De pagina met id '%page_id%' bestaat niet (meer). Ververs de pagina en probeer het nog eens.
+    no_files: Er zijn nog geen bestanden aan deze pagina toegevoegd.
+    page_cannot_contain_files: Deze pagina mag geen bestanden bevatten. Ververs de pagina en probeer het nog eens.
+    browse: Bladeren
+    remove_confirmation:
+        title: Weet u zeker dat u dit bestand wilt verwijderen?
+        message: Het bestand wordt alleen van deze pagina verwijderd. Het bestand zelf blijft op het bestandssysteem staan. Gebruik het scherm 'bestanden beheren' om het bestand ook van het bestandssyteem te verwijderen.

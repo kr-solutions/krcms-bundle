@@ -67,6 +67,13 @@ form:
                 label: Is active?
             homepage:
                 label: Homepage
+        file:
+            uri:
+                label: File
+            title:
+                label: Title
+            description:
+                label: Description
 
 layout:
     logout: Logout
@@ -174,3 +181,21 @@ site:
         failed_not_authorized: Failed to remove the site. You are not authorized to remove sites.
         failed_pages_exist: Failed to remove the site. There are still pages linked to this site. You should move or remove these pages first.
         success: Successfully removed the site with id '%site_id%'.
+
+file:
+    index:
+        header:
+            manage_files: Manage files of page <small>%page_title%</small>
+            files: Files
+    add_file: Add file
+    remove_file: Remove file
+    file_added: File has been successfully added
+    file_removed: File has been successfully removed
+    file_not_exist: File does not exist (anymore)
+    page_not_exist: The page with id '%page_id%' does not exist (anymore). Refresh the page and try again.
+    no_files: There are no files added to this page yet.
+    page_cannot_contain_files: This page can not contain files. Refresh the page and try again.
+    browse: Browse
+    remove_confirmation:
+        title: Are you sure you want to remove this file?
+        message: This file will be removed from this page. The actual file will not be removed. Use the file manager to remove the file from the file system.

@@ -2,18 +2,17 @@
 
 {% block title %}Bestanden beheren van "{{ page.title }}" - Content Management Systeem{% endblock %}
 
+{% block header %}
+	<h1 class="page-header">{{ 'file.index.header.manage_files'|trans({ '%page_title%': page.title }, 'KRSolutionsKRCMSBundle')|raw }}</h1>
+{% endblock %}
+
 {% block content %}
-
-	<header class="sub-header">
-		<h1>Bestanden beheren van <small>{{ page.title }}</small></h1>
-	</header>
-
 	<div class="row">
 		<div class="col-md-3">
 			<div class="well">
 				<form id="fileForm" action="{{ path('kr_solutions_krcms_files', { 'pageId': page.id }) }}" method="post" id="fileForm" {{ form_enctype(fileForm) }} novalidate="novalidate">
 					<fieldset>
-						<legend>Bestand toevoegen</legend>
+						<legend>{{ 'file.add_file'|trans({}, 'KRSolutionsKRCMSBundle') }}</legend>
 
 						{% if form_errors(fileForm) %}
 							<div class="alert alert-danger">
@@ -23,50 +22,52 @@
 							</div>
 						{% endif %}
 
-						<div class="control-group{% if fileForm.uri.vars.errors|length %} has-error{% endif %}">
+						<div class="form-group{% if fileForm.uri.vars.errors|length %} has-error{% endif %}">
 							{{ form_label(fileForm.uri) }}
-							{{ form_widget(fileForm.uri, { 'attr': {'class': 'col-md-10'} }) }}
-							<button class="btn btn-primary" id="kcfinder_browse">Bladeren</button>
+							{{ form_widget(fileForm.uri, { 'attr': {'class': 'form-control'} }) }}
+							<button class="btn btn-primary" id="kcfinder_browse">{{ 'file.browse'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
 						</div>
 
-						<div class="control-group{% if fileForm.title.vars.errors|length %} has-error{% endif %}">
+						<div class="form-group{% if fileForm.title.vars.errors|length %} has-error{% endif %}">
 							{{ form_label(fileForm.title) }}
-							{{ form_widget(fileForm.title, { 'attr': {'class': 'col-md-10'} }) }}
+							{{ form_widget(fileForm.title, { 'attr': {'class': 'form-control'} }) }}
 						</div>
 
-						<div class="control-group{% if form_errors(fileForm.description) %} error{% endif %}">
+						<div class="form-group{% if form_errors(fileForm.description) %} has-error{% endif %}">
 							{{ form_label(fileForm.description) }}
-							{{ form_widget(fileForm.description, { 'attr': {'class': 'col-md-10'} }) }}
+							{{ form_widget(fileForm.description, { 'attr': {'class': 'form-control'} }) }}
 						</div>
 
 						{{ form_rest(fileForm) }}
 					</fieldset>
-					<input class="btn btn-primary" type="submit" value="Bestand toevoegen" />
+					<input class="btn btn-primary" type="submit" value="{{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}" />
 				</form>
 			</div>
 		</div>
 
 		<div class="col-md-9">
 			<div class="well">
-				<h2>Bestanden</h2>
+				<h2>{{ 'file.index.header.files'|trans({ '%page_title%': page.title }, 'KRSolutionsKRCMSBundle')|raw }}</h2>
 
 				{% if page.files|length > 0 %}
 					{% for file in page.files %}
-						<div class="col-sm-6 col-md-4">
+						<div id="file_{{ file.id }}" class="col-sm-6 col-md-4 col-lg-3">
 							<div class="thumbnail">
 								<img src="{{ asset(uploadDir ~ file.squareCrop(uploadDir, 250)) }}" alt="{{ file.title }}">
 								<div class="caption">
 									<h3>{{ file.title }}</h3>
 									<p>{{ file.description }}</p>
 									<p>
-										<a href="javascript:void(0);" onclick="javascript:confirmDeleteFile({{ file.id }});" role="button" class="btn btn-danger"><i class="fa fa-fw fa-trash-o"></i> Delete</a>
+										<button type="button" class="btn btn-default" data-toggle="modal" data-target="#file_remove_modal" data-file_id="{{ file.id }}" title="{{ 'file.remove_file'|trans({}, 'KRSolutionsKRCMSBundle') }}">
+											<i class="fa fa-fw fa-trash-o"></i> {{ 'layout.remove'|trans({}, 'KRSolutionsKRCMSBundle') }}
+										</button>
 									</p>
 								</div>
 							</div>
 						</div>
 					{% endfor %}
 				{% else %}
-					Er zijn nog geen bestanden toegevoegd aan deze pagina.
+					{{ 'file.no_files'|trans({ '%page_title%': page.title }, 'KRSolutionsKRCMSBundle') }}
 				{% endif%}
 
 				<div class="clearfix"></div>
@@ -74,23 +75,26 @@
 		</div>
 	</div>
 
-	<!-- Modals -->
-	{% spaceless %}
-		<div class="modal hide fade" id="file-delete">
-			<div class="modal-header">
-				<button class="close" data-dismiss="modal">×</button>
-				<h3>Afbeelding verwijderen</h3>
-			</div>
-			<div class="modal-body">
-				<p>Weet u zeker dat u deze afbeelding wilt verwijderen?.</p>
-			</div>
-			<div class="modal-footer">
-				<a href="#" class="btn btn-danger" data-dismiss="modal">Verwijderen</a>
-				<a href="#" class="btn btn-primary" data-dismiss="modal">Annuleren</a>
+	{# Modals #}
+	<div class="modal fade" id="file_remove_modal" tabindex="-1" role="dialog" aria-labelledby="file_remove_modal_title" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="file_remove_modal_title">{{ 'file.remove_file'|trans({}, 'KRSolutionsKRCMSBundle') }}</h4>
+				</div>
+				<div class="modal-body">
+					<p>{{ 'file.remove_confirmation.title'|trans({}, 'KRSolutionsKRCMSBundle') }}</p>
+					<p><small>{{ 'file.remove_confirmation.message'|trans({}, 'KRSolutionsKRCMSBundle') }}</small></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">{{ 'layout.cancel'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
+					<a href="#" type="button" class="btn btn-primary file_remove_action">{{ 'layout.remove'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+				</div>
 			</div>
 		</div>
-	{% endspaceless %}
-	<!-- Modals -->
+	</div>
+	{# End modals #}
 
 {% endblock %}
 
@@ -110,20 +114,21 @@
 		}
 
 		$(document).ready(function () {
-			$('#save_page').on('click', function () {
-				$('#pageForm').submit();
-			});
-
 			$('#kcfinder_browse').click(function () {
 				openKCFinder_singleFile($('#file_uri'));
+
 				return false;
 			});
-		});
 
-		function confirmDeleteFile(id) {
-			$('#file-delete').modal('show');
-			$('#file-delete').find('.modal-footer').find('.btn-danger').attr('onclick', 'javascript:deleteFile(' + id + ')');
-		}
+			$('#file_remove_modal').on('show.bs.modal', function (event) {
+				var button = $(event.relatedTarget);
+				var fileId = button.data('file_id');
+				var remove_url_holder = 'javascript:deleteFile(FILE_ID_HOLDER)';
+
+				var modal = $(this);
+				modal.find('.file_remove_action').attr('href', remove_url_holder.replace('FILE_ID_HOLDER', fileId));
+			});
+		});
 
 		function deleteFile(id) {
 			$.ajax({
@@ -132,15 +137,17 @@
 				dataType: 'json',
 				data: 'file_id=' + id,
 				success: function (data) {
+					$('#file_remove_modal').modal('hide');
+
 					if (data.success === true) {
 						$('#file_' + id).remove();
-						alert('Afbeelding ' + data.file + ' is verwijderd!');
+						alert('{{ 'file.file_removed'|trans({ '%page_title%': page.title }, 'KRSolutionsKRCMSBundle')|raw }}');
 					} else {
 						$('#file_' + id).remove();
-						alert('Afbeelding bestaat niet (meer)');
+						alert('{{ 'file.file_not_exist'|trans({ '%page_title%': page.title }, 'KRSolutionsKRCMSBundle')|raw }}');
 					}
 				}
-			})
+			});
 		}
 	</script>
 {% endblock %}

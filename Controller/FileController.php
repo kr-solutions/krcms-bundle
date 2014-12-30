@@ -2,10 +2,9 @@
 
 namespace KRSolutions\Bundle\KRCMSBundle\Controller;
 
+use KRSolutions\Bundle\KRCMSBundle\Entity\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use KRSolutions\Bundle\KRCMSBundle\Entity\File;
-use KRSolutions\Bundle\KRCMSBundle\Form\Type\FileType;
 
 
 /**
@@ -34,15 +33,15 @@ class FileController extends AbstractKRCMSController
 		$page = $this->getPageRepository()->getPageById($pageId);
 
 		if (null === $page) {
-			$this->getRequest()->getSession()->getFlashBag()->add('alert-danger', 'De pagina met id \'' . $pageId . '\' bestaat niet (meer). Probeer het nog eens.');
+			$this->getRequest()->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('file.page_not_exist', array('%page_id%' => $pageId), 'KRSolutionsKRCMSBundle'));
 
-			return $this->redirect($this->generateUrl('kr_solutions_krcms_pages_index'));
+			return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
 		}
 
 		if (false == $page->getPageType()->getHasFiles()) {
-			$this->getRequest()->getSession()->getFlashBag()->add('alert-danger', 'Deze pagina kan geen bestanden bevatten. Probeer het nog eens.');
+			$this->getRequest()->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('file.page_cannot_contain_files', array(), 'KRSolutionsKRCMSBundle'));
 
-			return $this->redirect($this->generateUrl('kr_solutions_krcms_pages_index'));
+			return $this->redirect($this->generateUrl('kr_solutions_krcms_pages_index', array('siteId' => $page->getSite()->getId())));
 		}
 
 		$newFile = new File();
@@ -62,7 +61,7 @@ class FileController extends AbstractKRCMSController
 			$em->persist($newFile);
 			$em->flush();
 
-			$this->getRequest()->getSession()->getFlashBag()->add('alert-success', 'Het bestand is toegevoegd!');
+			$this->getRequest()->getSession()->getFlashBag()->add('alert-success', $this->getTranslator()->trans('file.file_added', array(), 'KRSolutionsKRCMSBundle'));
 
 			return $this->redirect($this->generateUrl('kr_solutions_krcms_files', array('pageId' => $pageId)));
 		}

@@ -24,9 +24,9 @@ class FileType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder
-			->add('uri', null, array('label' => 'Bestand', 'required' => true, 'error_bubbling' => true))
-			->add('title', null, array('label' => 'Titel', 'required' => false, 'error_bubbling' => true))
-			->add('description', null, array('label' => 'Omschrijving', 'required' => false, 'error_bubbling' => true));
+			->add('uri', null, array('label' => 'form.type.file.uri.label', 'required' => true, 'error_bubbling' => true))
+			->add('title', null, array('label' => 'form.type.file.title.label', 'required' => false, 'error_bubbling' => true))
+			->add('description', null, array('label' => 'form.type.file.description.label', 'required' => false, 'error_bubbling' => true));
 	}
 
 	/**
@@ -48,6 +48,7 @@ class FileType extends AbstractType
 	{
 		$resolver->setDefaults(array(
 			'data_class' => 'KRSolutions\Bundle\KRCMSBundle\Entity\File',
+			'translation_domain' => 'KRSolutionsKRCMSBundle'
 		));
 	}
 
