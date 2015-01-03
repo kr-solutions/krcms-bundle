@@ -95,6 +95,11 @@ class MenuController extends AbstractKRCMSController
 //
 //			return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
 //		}
+		if (!$this->isGranted($this->container->getParameter('kr_solutions_krcms.management_roles.menus'))) {
+			$request->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('', array(), 'KRSolutionsKRCMSBundle'));
+
+			return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
+		}
 
 		$menu = $this->getMenuRepository()->getMenuById($menuId);
 

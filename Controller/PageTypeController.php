@@ -24,20 +24,7 @@ class PageTypeController extends AbstractKRCMSController
 	{
 		$pageTypes = $this->getPageTypeRepository()->getAllPageTypes();
 
-		$newPageType = new PageType();
-
-		$pageTypeForm = $this->createForm('page_type', $newPageType);
-
-		$pageTypeForm->handleRequest($request);
-
-		if ($pageTypeForm->isValid()) {
-			$this->getDoctrine()->getManager()->persist($newPageType);
-			$this->getDoctrine()->getManager()->flush();
-
-			return $this->redirect($this->generateUrl('kr_solutions_krcms_page_types_index'));
-		}
-
-		return $this->render('KRSolutionsKRCMSBundle:PageType:index.html.twig', array('pageTypes' => $pageTypes, 'pageTypeForm' => $pageTypeForm->createView()));
+		return $this->render('KRSolutionsKRCMSBundle:PageType:index.html.twig', array('pageTypes' => $pageTypes));
 	}
 
 	/**

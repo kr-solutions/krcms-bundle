@@ -72,7 +72,13 @@ class PageTypeType extends AbstractType
 		));
 		$builder->add('template', null, array('label' => 'form.type.pageType.template.label', 'required' => false, 'error_bubbling' => true));
 		$builder->add('pageHandler', null, array('label' => 'form.type.pageType.pageHandler.label', 'required' => false, 'error_bubbling' => true));
-		$builder->add('pageTypeChildren', null, array('label' => 'form.type.pageType.pageTypeChildren.label', 'required' => false, 'error_bubbling' => true));
+		$builder->add('pageTypeChildren', null, array(
+			'label' => 'form.type.pageType.pageTypeChildren.label',
+			'required' => false,
+			'error_bubbling' => true,
+			'multiple' => true,
+			'expanded' => true
+		));
 	}
 
 	/**
