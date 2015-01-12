@@ -2,31 +2,33 @@
 
 {% extends 'KRSolutionsKRCMSBundle::layout.html.twig' %}
 
-{% block title %}Pagina type "{{ pageType.name }}" wijzigen - Content Management Systeem{% endblock %}
+{% block title %}{% if action == 'new' %}Pagina type toevoegen{% else %}Pagina type "{{ pageType.name }}" wijzigen{% endif %} - Content Management Systeem{% endblock %}
 
 {% block header %}
 	<div class="col-lg-12">
-		<h1 class="page-header">Wijzig pagina type "{{ pageType.name }}"</h1>
+		{% if action == 'new' %}
+			<h1 class="page-header">Pagina type toevoegen"</h1>
+		{% else %}
+			<h1 class="page-header">Wijzig pagina type "{{ pageType.name }}"</h1>
+		{% endif %}
 	</div>
 {% endblock %}
 
 {% block content %}
 	<div class="col-md-12">
 		<div class="well">
-			<form id="pageTypeForm" method="post" action="{{ path('kr_solutions_krcms_page_types_edit', { 'pageTypeId': pageType.id }) }}" {{ form_enctype(pageTypeForm) }} novalidate="novalidate">
-				<fieldset>
-					<legend>Pagina type "{{ pageType.name }}" wijzigen</legend>
+			<form id="pageTypeForm" method="post" action="{% if action == 'new' %}{{ path('kr_solutions_krcms_page_types_add') }}{% else %}{{ path('kr_solutions_krcms_page_types_edit', { 'pageTypeId': pageType.id }) }}{% endif %}" {{ form_enctype(pageTypeForm) }} novalidate="novalidate">
 
-					{% if form_errors(pageTypeForm) %}
-						<div class="alert alert-danger">
-							<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'layout.close'|trans({}, 'KRSolutionsKRCMSBundle') }}</span></button>
-							<h4>{{ 'layout.form_error_alert_heading'|trans({}, 'KRSolutionsKRCMSBundle') }}</h4>
-							{{ form_errors(pageTypeForm) }}
-						</div>
-					{% endif %}
+				{% if form_errors(pageTypeForm) %}
+					<div class="alert alert-danger">
+						<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'layout.close'|trans({}, 'KRSolutionsKRCMSBundle') }}</span></button>
+						<h4>{{ 'layout.form_error_alert_heading'|trans({}, 'KRSolutionsKRCMSBundle') }}</h4>
+						{{ form_errors(pageTypeForm) }}
+					</div>
+				{% endif %}
 
-					{{ form_rest(pageTypeForm) }}
-				</fieldset>
+				{{ form_rest(pageTypeForm) }}
+
 				<button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-save"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
 			</form>
 		</div>

@@ -35,9 +35,15 @@ class PageTypeController extends AbstractKRCMSController
 	 *
 	 * @return Response
 	 */
-	public function editAction(Request $request, $pageTypeId)
+	public function editAction(Request $request, $pageTypeId = null)
 	{
-		$pageType = $this->getPageTypeRepository()->getPageTypeById($pageTypeId);
+		if (null !== $pageTypeId) {
+			$pageType = $this->getPageTypeRepository()->getPageTypeById($pageTypeId);
+			$action = 'edit';
+		} else {
+			$pageType = new PageType();
+			$action = 'new';
+		}
 
 		if (null === $pageType) {
 			$request->getSession()->getFlashBag()->add('alert-danger', 'Pagina type bestaat niet (meer).');
@@ -50,14 +56,27 @@ class PageTypeController extends AbstractKRCMSController
 		$pageTypeForm->handleRequest($request);
 
 		if ($pageTypeForm->isValid()) {
+			$flashMessages = array();
+
+			if (null === $pageTypeId) {
+				$this->getDoctrine()->getManager()->persist($pageType);
+
+				$flashMessages['alert-success'][] = 'Pagina type is succesvol aangemaakt';
+			} else {
+				$flashMessages['alert-success'][] = 'Pagina type is succesvol gewijzigd';
+			}
 			$this->getDoctrine()->getManager()->flush();
 
-			$request->getSession()->getFlashBag()->add('alert-success', 'Pagina type succesvol gewijzigd.');
+			foreach ($flashMessages as $type => $flashMessage) {
+				foreach ($flashMessage as $message) {
+					$this->getRequest()->getSession()->getFlashBag()->add($type, $message);
+				}
+			}
 
 			return $this->redirect($this->generateUrl('kr_solutions_krcms_page_types_index'));
 		}
 
-		return $this->render('KRSolutionsKRCMSBundle:PageType:edit.html.twig', array('pageType' => $pageType, 'pageTypeForm' => $pageTypeForm->createView()));
+		return $this->render('KRSolutionsKRCMSBundle:PageType:edit.html.twig', array('pageType' => $pageType, 'pageTypeForm' => $pageTypeForm->createView(), 'action' => $action));
 	}
 
 }
