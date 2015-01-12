@@ -8,9 +8,9 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 
 /**
- * \KRSolutions\Bundle\KRCMSBundle\Form\Type\FileType
+ * \KRSolutions\Bundle\KRCMSBundle\Form\Type\KRCMSFileType
  */
-class FileType extends AbstractType
+class KRCMSFileType extends AbstractType
 {
 
 	/**

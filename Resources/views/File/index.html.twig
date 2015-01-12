@@ -53,7 +53,7 @@
 					{% for file in page.files %}
 						<div id="file_{{ file.id }}" class="col-sm-6 col-md-4 col-lg-3">
 							<div class="thumbnail">
-								<img src="{{ asset(uploadDir ~ file.squareCrop(uploadDir, 250)) }}" alt="{{ file.title }}">
+								<img src="{{ asset(uploadDir ~ file.uri) }}" alt="{{ file.title }}">
 								<div class="caption">
 									<h3>{{ file.title }}</h3>
 									<p>{{ file.description }}</p>
@@ -115,7 +115,7 @@
 
 		$(document).ready(function () {
 			$('#kcfinder_browse').click(function () {
-				openKCFinder_singleFile($('#file_uri'));
+				openKCFinder_singleFile($('#krcms_file_uri'));
 
 				return false;
 			});

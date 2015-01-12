@@ -29,10 +29,10 @@ services:
         tags:
             - { name: form.type, alias: category }
 
-    kr_solutions_krcms.form.type.file:
-        class: KRSolutions\Bundle\KRCMSBundle\Form\Type\FileType
+    kr_solutions_krcms.form.type.krcms_file:
+        class: KRSolutions\Bundle\KRCMSBundle\Form\Type\KRCMSFileType
         tags:
-            - { name: form.type, alias: file }
+            - { name: form.type, alias: krcms_file }
 
     kr_solutions_krcms.form.type.menu:
         class: KRSolutions\Bundle\KRCMSBundle\Form\Type\MenuType
