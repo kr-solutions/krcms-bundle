@@ -86,6 +86,7 @@ layout:
     save: Save
     cancel: Cancel
     close: Close
+    back: Terug
     created_by: Created by
     created_at: Created at
     updated_by: Updated by

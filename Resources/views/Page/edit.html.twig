@@ -20,11 +20,11 @@
 			<div class="btn-group">
 				<a id="save_page" class="btn btn-primary" href="javascript:void(0)"><i class="fa fa-floppy-o"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
 				{% if page.parent is not null %}
-					{% set pageParentId = page.parent.id %}
+					{% set parentPageId = page.parent.id %}
 				{% else %}
-					{% set pageParentId = null %}
+					{% set parentPageId = null %}
 				{% endif %}
-				<a class="btn btn-default" href="{{ path('kr_solutions_krcms_pages_index', { 'siteId': site.id, 'parentPageId': pageParentId }) }}" title="{{ 'page.back_to_page_overview'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-stop"></i> {{ 'layout.cancel'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+				<a class="btn btn-default" href="{{ path('kr_solutions_krcms_pages_index', { 'siteId': site.id, 'parentPageId': parentPageId }) }}" title="{{ 'page.back_to_page_overview'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-stop"></i> {{ 'layout.cancel'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
 			</div>
 		</div>
 	</div>

@@ -32,6 +32,14 @@
 					{% endfor %}
 				</ul>
 			</div>
+			{% if parentPage is not null %}
+				{% if parentPage.parent is not null %}
+					{% set parentPageId = parentPage.parent.id %}
+				{% else %}
+					{% set parentPageId = null %}
+				{% endif %}
+				<a href="{{ url('kr_solutions_krcms_pages_index', { 'siteId': site.id, 'parentPageId': parentPageId }) }}" class="btn btn-default" type="button"><i class="fa fa-fw fa-caret-left"></i> {{ 'layout.back'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+			{% endif %}
 		</div>
 	</div>
 {% endblock %}

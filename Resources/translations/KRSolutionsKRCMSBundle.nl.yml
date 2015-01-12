@@ -86,6 +86,7 @@ layout:
     save: Opslaan
     cancel: Annuleren
     close: Sluiten
+    back: Terug
     created_by: Aangemaakt door
     created_at: Aangemaakt op
     updated_by: Gewijzigd door
