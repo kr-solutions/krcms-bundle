@@ -36,7 +36,7 @@ class FileType extends AbstractType
 	 */
 	public function getName()
 	{
-		return 'file';
+		return 'krcms_file';
 	}
 
 	/**

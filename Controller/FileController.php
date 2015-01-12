@@ -45,7 +45,7 @@ class FileController extends AbstractKRCMSController
 		}
 
 		$newFile = new File();
-		$fileForm = $this->createForm('file', $newFile);
+		$fileForm = $this->createForm('krcms_file', $newFile);
 
 		$fileForm->handleRequest($request);
 
