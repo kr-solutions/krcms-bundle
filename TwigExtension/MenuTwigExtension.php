@@ -75,7 +75,10 @@ class MenuTwigExtension extends Twig_Extension
 		}
 
 		foreach ($pages as $page) {
-			$this->renderItem($html, $page, $activePage, $nested);
+			/* @var $page \KRSolutions\Bundle\KRCMSBundle\Entity\Page */
+			if ($page->getMenuTitle() !== null && trim($page->getMenuTitle()) != '') {
+				$this->renderItem($html, $page, $activePage, $nested);
+			}
 		}
 
 		$html.= '</ul>';
@@ -153,7 +156,7 @@ class MenuTwigExtension extends Twig_Extension
 		$nestedHtml = '';
 
 		if (true === $nested) {
-			$pages = $this->getPageRepository()->getActivePagesFromPage($parent);
+			$pages = $this->getPageRepository()->getActivePagesWithMenuTitleFromPage($parent);
 
 			if (count($pages) > 0) {
 				$nestedHtml.= '<ul>';

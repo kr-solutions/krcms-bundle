@@ -170,6 +170,35 @@ class PageRepository extends EntityRepository
 	}
 
 	/**
+	 * Get active pages with a menu title from parent page
+	 *
+	 * @param Page $page
+	 *
+	 * @return array
+	 */
+	public function getActivePagesWithMenuTitleFromPage(Page $page)
+	{
+		$qb = $this->createQueryBuilder('pages');
+
+		if (null !== $page) {
+			$qb->andWhere('pages.parent = :page');
+			$qb->setParameter('page', $page);
+		} else {
+			$qb->andWhere('pages.parent IS NULL');
+		}
+
+		$qb->andWhere('pages.menuTitle IS NOT NULL');
+
+		// Check if the page is active
+		$qb->andWhere('pages.publishAt < CURRENT_TIMESTAMP() OR pages.publishAt IS NULL');
+		$qb->andWhere('pages.publishTill > CURRENT_TIMESTAMP() OR pages.publishTill IS NULL');
+
+		$qb->orderBy('pages.orderId', 'asc');
+
+		return $qb->getQuery()->getResult();
+	}
+
+	/**
 	 * Get page by id
 	 *
 	 * @param integer $pageId
