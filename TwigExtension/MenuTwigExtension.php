@@ -75,7 +75,10 @@ class MenuTwigExtension extends Twig_Extension
 		}
 
 		foreach ($pages as $page) {
-			$this->renderItem($html, $page, $activePage, $nested);
+			/* @var $page \KRSolutions\Bundle\KRCMSBundle\Entity\Page */
+			if ($page->getMenuTitle() !== null && trim($page->getMenuTitle()) != '') {
+				$this->renderItem($html, $page, $activePage, $nested);
+			}
 		}
 
 		$html.= '</ul>';
