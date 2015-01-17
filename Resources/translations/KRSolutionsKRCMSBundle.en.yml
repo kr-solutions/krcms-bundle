@@ -200,3 +200,14 @@ file:
     remove_confirmation:
         title: Are you sure you want to remove this file?
         message: This file will be removed from this page. The actual file will not be removed. Use the file manager to remove the file from the file system.
+
+helpdesk:
+    title: Helpdesk
+    lead: Do you have questions about managing your website? Or you want a change in your website that you yourself can not do? Use this form to get in touch with your website developer.
+    not_enabled: The helpdesk is not enabled.
+    question_submit_success: Your question has been sent and will be answered as soon as possible.
+    name: Name
+    subject: Subject
+    e-mail: E-mail
+    question: Your question
+    submit: Submit

@@ -5,6 +5,9 @@ namespace KRSolutions\Bundle\KRCMSBundle\Controller;
 use Swift_Message;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 
 /**
@@ -23,7 +26,7 @@ class HelpdeskController extends AbstractKRCMSController
 	public function helpdeskAction(Request $request)
 	{
 		if ($this->container->getParameter('kr_solutions_krcms.helpdesk.enabled') === false) {
-			$request->getSession()->getFlashBag()->add('alert-danger', 'Helpdesk is not enabled.');
+			$request->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('helpdesk.not_enabled', array(), 'KRSolutionsKRCMSBundle'));
 
 			return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
 		}
@@ -33,10 +36,34 @@ class HelpdeskController extends AbstractKRCMSController
 		);
 
 		$form = $this->createFormBuilder($defaultData)
-			->add('name', 'text', array('label' => 'Naam', 'required' => true))
-			->add('subject', 'text', array('label' => 'Onderwerp', 'required' => true))
-			->add('email', 'email', array('label' => 'E-mail', 'required' => true))
-			->add('message', 'textarea', array('label' => 'Uw vraag', 'required' => true))
+			->add('name', 'text', array(
+				'label' => $this->getTranslator()->trans('helpdesk.name', array(), 'KRSolutionsKRCMSBundle'),
+				'required' => true,
+				'constraints' => array(
+					new NotBlank(),
+					new Length(array('min' => 3)),
+			)))
+			->add('subject', 'text', array(
+				'label' => $this->getTranslator()->trans('helpdesk.subject', array(), 'KRSolutionsKRCMSBundle'),
+				'required' => true,
+				'constraints' => array(
+					new NotBlank(),
+					new Length(array('min' => 3)),
+			)))
+			->add('email', 'email', array(
+				'label' => $this->getTranslator()->trans('helpdesk.email', array(), 'KRSolutionsKRCMSBundle'),
+				'required' => true,
+				'constraints' => array(
+					new NotBlank(),
+					new Email(array('checkMX' => true, 'checkHost' => true)),
+			)))
+			->add('message', 'textarea', array(
+				'label' => $this->getTranslator()->trans('helpdesk.question', array(), 'KRSolutionsKRCMSBundle'),
+				'required' => true,
+				'constraints' => array(
+					new NotBlank(),
+					new Length(array('min' => 20)),
+			)))
 			->getForm();
 
 		$form->handleRequest($request);
@@ -55,7 +82,7 @@ class HelpdeskController extends AbstractKRCMSController
 
 			$this->get('mailer')->send($message);
 
-			$request->getSession()->getFlashBag()->add('alert-success', 'Uw vraag is verstuurd en wordt binnen 24 uur behandeld.');
+			$request->getSession()->getFlashBag()->add('alert-success', $this->getTranslator()->trans('helpdesk.question_submit_success', array(), 'KRSolutionsKRCMSBundle'));
 
 			return $this->redirect($this->generateUrl('kr_solutions_krcms_helpdesk'));
 		}

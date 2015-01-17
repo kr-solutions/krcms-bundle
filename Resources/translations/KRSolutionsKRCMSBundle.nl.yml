@@ -200,3 +200,14 @@ file:
     remove_confirmation:
         title: Weet u zeker dat u dit bestand wilt verwijderen?
         message: Het bestand wordt alleen van deze pagina verwijderd. Het bestand zelf blijft op het bestandssysteem staan. Gebruik het scherm 'bestanden beheren' om het bestand ook van het bestandssyteem te verwijderen.
+
+helpdesk:
+    title: Helpdesk
+    lead: Heeft u vragen over het beheren van uw website? Of wilt u een wijziging in uw website die u zelf niet kunt doen? Gebruik dan dit formulier om in contact te komen met uw website ontwikkelaar.
+    not_enabled: De helpdesk is niet geactiveerd.
+    question_submit_success: Uw vraag is verstuurd en wordt zo spoedig mogelijk behandeld.
+    name: Naam
+    subject: Onderwerp
+    email: E-mail adres
+    question: Uw vraag
+    submit: Versturen

@@ -1,3 +1,5 @@
+{% form_theme contactForm 'bootstrap_3_layout.html.twig' %}
+
 {% extends 'KRSolutionsKRCMSBundle::layout.html.twig' %}
 
 
@@ -5,18 +7,19 @@
 
 {% block header %}
 	<div class="col-lg-12">
-		<h1 class="page-header">Helpdesk</h1>
-		<p class="lead">Heeft u vragen over het beheren van uw website? Of wilt u een wijziging in uw website die u zelf niet kunt doen? Gebruik dan dit formulier om in contact te komen met uw website ontwikkelaar (K&amp;R Solutions). Uw vraag wordt binnen 24 uur behandeld.</p>
+		<h1 class="page-header">{{ 'helpdesk.title' | trans({}, 'KRSolutionsKRCMSBundle') }}</h1>
+		<p class="lead">{{ 'helpdesk.lead' | trans({}, 'KRSolutionsKRCMSBundle') }}</p>
 	</div>
 {% endblock %}
 
 {% block content %}
 	<div class="col-md-12">
 		<div class="well">
-			<form method="post" action="{{ path ('kr_solutions_krcms_helpdesk') }}" {{ form_enctype(contactForm) }}>
+			<form method="post" action="{{ path ('kr_solutions_krcms_helpdesk') }}" novalidate="novalidate" {{ form_enctype(contactForm) }}>
 				{{ form_rest(contactForm) }}
-				<input type="submit" value="Versturen" />
+				<button class="btn btn-default pull-right" type="submit">{{ 'helpdesk.submit' | trans({}, 'KRSolutionsKRCMSBundle') }}</button>
 			</form>
+			<div class="clearfix"></div>
 		</div>
 	</div>
 {% endblock %}
