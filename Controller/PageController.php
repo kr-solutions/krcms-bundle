@@ -260,8 +260,8 @@ class PageController extends AbstractKRCMSController
 
 			$clean = iconv('UTF-8', 'ASCII//TRANSLIT', $text);
 			$clean = preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $clean);
-			$clean = strtolower(trim($clean, '-'));
 			$clean = preg_replace("/[\/_|+ -]+/", $delimiter, $clean);
+			$clean = strtolower(trim($clean, '-'));
 
 			$text = $clean;
 
