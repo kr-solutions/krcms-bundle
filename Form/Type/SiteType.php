@@ -2,6 +2,7 @@
 
 namespace KRSolutions\Bundle\KRCMSBundle\Form\Type;
 
+use KRSolutions\Bundle\KRCMSBundle\Repository\PageRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -23,6 +24,8 @@ class SiteType extends AbstractType
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
+		$site = $builder->getData();
+
 		$builder
 			->add('permalink', null, array('label' => 'form.type.site.permalink.label', 'required' => true, 'error_bubbling' => true))
 			->add('title', null, array('label' => 'form.type.site.title.label', 'required' => true, 'error_bubbling' => true))
@@ -32,7 +35,10 @@ class SiteType extends AbstractType
 				'required' => true,
 				'error_bubbling' => true
 			))
-			->add('homepage', null, array('label' => 'form.type.site.homepage.label', 'required' => false, 'error_bubbling' => true));
+			->add('homepage', null, array('label' => 'form.type.site.homepage.label', 'required' => false, 'error_bubbling' => true,
+				'query_builder' => function (PageRepository $repository) use ($site) {
+					return $repository->getActivePagesFromSiteQB($site);
+				}));
 	}
 
 	/**

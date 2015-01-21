@@ -120,13 +120,13 @@ class PageRepository extends EntityRepository
 	}
 
 	/**
-	 * Get pages by site
+	 * Get pages by site (query builder)
 	 *
 	 * @param Site $site
 	 *
 	 * @return array
 	 */
-	public function getActivePagesFromSite(Site $site)
+	public function getActivePagesFromSiteQB(Site $site)
 	{
 		$qb = $this->createQueryBuilder('pages');
 
@@ -139,7 +139,19 @@ class PageRepository extends EntityRepository
 
 		$qb->orderBy('pages.orderId', 'asc');
 
-		return $qb->getQuery()->getResult();
+		return $qb;
+	}
+
+	/**
+	 * Get pages by site
+	 *
+	 * @param Site $site
+	 *
+	 * @return array
+	 */
+	public function getActivePagesFromSite(Site $site)
+	{
+		return $this->getActivePagesFromSiteQB($site)->getQuery()->getResult();
 	}
 
 	/**
