@@ -28,6 +28,10 @@ KRSolutions\Bundle\KRCMSBundle\Entity\File:
                 max: 255
 
 KRSolutions\Bundle\KRCMSBundle\Entity\Site:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: permalink
+            message: kr_solutions_krcms.site.permalink.unique
     properties:
         title:
             - NotBlank:

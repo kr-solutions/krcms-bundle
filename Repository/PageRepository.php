@@ -130,14 +130,16 @@ class PageRepository extends EntityRepository
 	{
 		$qb = $this->createQueryBuilder('pages');
 
-		$qb->where('pages.site = :site');
-		$qb->setParameter('site', $site);
+		if (null !== $site->getId()) {
+			$qb->where('pages.site = :site');
+			$qb->setParameter('site', $site);
 
-		// Check if the page is active
-		$qb->andWhere('pages.publishAt < CURRENT_TIMESTAMP() OR pages.publishAt IS NULL');
-		$qb->andWhere('pages.publishTill > CURRENT_TIMESTAMP() OR pages.publishTill IS NULL');
+			// Check if the page is active
+			$qb->andWhere('pages.publishAt < CURRENT_TIMESTAMP() OR pages.publishAt IS NULL');
+			$qb->andWhere('pages.publishTill > CURRENT_TIMESTAMP() OR pages.publishTill IS NULL');
 
-		$qb->orderBy('pages.orderId', 'asc');
+			$qb->orderBy('pages.orderId', 'asc');
+		}
 
 		return $qb;
 	}

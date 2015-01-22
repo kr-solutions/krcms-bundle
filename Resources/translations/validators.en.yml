@@ -11,3 +11,5 @@ kr_solutions_krcms:
     site:
         title:
             not_blank: The title of the site is mandatory
+        permalink:
+            unique: The permalink for the site has to be unique

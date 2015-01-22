@@ -67,10 +67,6 @@ class SiteController extends AbstractKRCMSController
 
 		$siteForm->handleRequest($request);
 
-		if ($site->getPermalink() === null) {
-			$site->setPermalink('');
-		}
-
 		if ($siteForm->isValid()) {
 			$flashMessages = array();
 

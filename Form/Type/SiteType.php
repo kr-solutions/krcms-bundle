@@ -2,6 +2,7 @@
 
 namespace KRSolutions\Bundle\KRCMSBundle\Form\Type;
 
+use KRSolutions\Bundle\KRCMSBundle\Form\DataTransformer\NullToEmptyStringTransformer;
 use KRSolutions\Bundle\KRCMSBundle\Repository\PageRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,8 +27,12 @@ class SiteType extends AbstractType
 	{
 		$site = $builder->getData();
 
+		$nullToEmptyStringTransformer = new NullToEmptyStringTransformer();
+
 		$builder
-			->add('permalink', null, array('label' => 'form.type.site.permalink.label', 'required' => true, 'error_bubbling' => true))
+			->add(
+				$builder->create('permalink', 'text', array('label' => 'form.type.site.permalink.label', 'required' => false, 'error_bubbling' => true))
+				->addModelTransformer($nullToEmptyStringTransformer))
 			->add('title', null, array('label' => 'form.type.site.title.label', 'required' => true, 'error_bubbling' => true))
 			->add('isActive', 'choice', array(
 				'label' => 'form.type.site.isActive.label',
