@@ -12,6 +12,12 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Menu:
                 max: 255
 
 KRSolutions\Bundle\KRCMSBundle\Entity\Page:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields:
+                - permalink
+                - site
+            message: kr_solutions_krcms.page.permalink.unique
     properties:
         title:
             - NotBlank:

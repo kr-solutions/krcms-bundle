@@ -5,6 +5,8 @@ kr_solutions_krcms:
     page:
         title:
             not_blank: De titel van de pagina is verplicht
+        permalink:
+            unique: De permalink van de pagina moet uniek zijn
     file:
         uri:
             not_blank: U heeft geen bestand geselecteerd

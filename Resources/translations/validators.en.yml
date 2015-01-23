@@ -5,6 +5,8 @@ kr_solutions_krcms:
     page:
         title:
             not_blank: The title of the page is mandatory
+        permalink:
+            unique: The permalink for the page has to be unique
     file:
         uri:
             not_blank: You have not selected any file

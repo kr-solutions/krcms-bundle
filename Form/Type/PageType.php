@@ -2,6 +2,7 @@
 
 namespace KRSolutions\Bundle\KRCMSBundle\Form\Type;
 
+use KRSolutions\Bundle\KRCMSBundle\Form\DataTransformer\NullToEmptyStringTransformer;
 use KRSolutions\Bundle\KRCMSBundle\Repository\MenuRepository;
 use KRSolutions\Bundle\KRCMSBundle\Repository\PageRepository;
 use Symfony\Component\Form\AbstractType;
@@ -27,8 +28,13 @@ class PageType extends AbstractType
 	{
 		$page = $builder->getData();
 
+		$nullToEmptyStringTransformer = new NullToEmptyStringTransformer();
+
 		$builder->add('title', null, array('label' => 'form.type.page.title.label', 'required' => true, 'error_bubbling' => true));
-		$builder->add('truePermalink', null, array('label' => 'form.type.page.permalink.label', 'required' => false, 'error_bubbling' => true));
+
+		$builder->add(
+			$builder->create('truePermalink', null, array('label' => 'form.type.page.permalink.label', 'required' => false, 'error_bubbling' => true))
+				->addModelTransformer($nullToEmptyStringTransformer));
 
 		if (false === $page->getPageType()->getIsChild()) {
 			$builder->add('menu', null, array('label' => 'form.type.page.menu.label', 'required' => false, 'error_bubbling' => true, 'empty_value' => 'form.type.page.menu.empty_value', 'empty_data' => null,

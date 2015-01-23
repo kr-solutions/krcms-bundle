@@ -269,13 +269,15 @@ class PageController extends AbstractKRCMSController
 				return new Response('');
 			}
 
-			if ($pageId != 'null') {
+			if (null !== $pageId) {
 				$page = $this->getPageRepository()->getPageById($pageId);
 			} else {
 				$page = null;
 			}
-			if ($pageId == 'null' || ($page !== null && $page->getPermalink() != $text)) {
+
+			if (null === $pageId || ($page !== null && $page->getPermalink() != $text)) {
 				$uniqueCounter = 1;
+
 				while ($this->getPageRepository()->getPageByPermalink($text) !== null) {
 					$text = $clean . '-' . $uniqueCounter;
 					$uniqueCounter++;

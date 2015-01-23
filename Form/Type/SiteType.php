@@ -31,7 +31,7 @@ class SiteType extends AbstractType
 
 		$builder
 			->add(
-				$builder->create('permalink', 'text', array('label' => 'form.type.site.permalink.label', 'required' => false, 'error_bubbling' => true))
+				$builder->create('permalink', null, array('label' => 'form.type.site.permalink.label', 'required' => false, 'error_bubbling' => true))
 				->addModelTransformer($nullToEmptyStringTransformer))
 			->add('title', null, array('label' => 'form.type.site.title.label', 'required' => true, 'error_bubbling' => true))
 			->add('isActive', 'choice', array(

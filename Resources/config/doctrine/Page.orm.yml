@@ -27,6 +27,11 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Page:
         site_id:
             columns:
                 - site_id
+    uniqueConstraints:
+        permalink_and_site_id:
+            columns:
+                - site_id
+                - permalink
     id:
         id:
             type: integer
