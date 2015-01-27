@@ -208,6 +208,6 @@ helpdesk:
     question_submit_success: Your question has been sent and will be answered as soon as possible.
     name: Name
     subject: Subject
-    e-mail: E-mail
+    email: E-mail
     question: Your question
     submit: Submit
