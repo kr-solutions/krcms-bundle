@@ -3,7 +3,6 @@
 namespace KRSolutions\Bundle\KRCMSBundle\Form\Type;
 
 use KRSolutions\Bundle\KRCMSBundle\Form\DataTransformer\NullToEmptyStringTransformer;
-use KRSolutions\Bundle\KRCMSBundle\Repository\PageRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -14,6 +13,19 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class SiteType extends AbstractType
 {
+
+	/**
+	 * @var string
+	 */
+	private $class;
+
+	/**
+	 * @param string $class The site class name
+	 */
+	public function __construct($class)
+	{
+		$this->class = $class;
+	}
 
 	/**
 	 * Build form
@@ -41,7 +53,7 @@ class SiteType extends AbstractType
 				'error_bubbling' => true
 			))
 			->add('homepage', null, array('label' => 'form.type.site.homepage.label', 'required' => false, 'error_bubbling' => true,
-				'query_builder' => function (PageRepository $repository) use ($site) {
+				'query_builder' => function (\Doctrine\ORM\EntityRepository $repository) use ($site) {
 					return $repository->getActivePagesFromSiteQB($site);
 				}));
 	}
@@ -64,7 +76,7 @@ class SiteType extends AbstractType
 	public function setDefaultOptions(OptionsResolverInterface $resolver)
 	{
 		$resolver->setDefaults(array(
-			'data_class' => 'KRSolutions\Bundle\KRCMSBundle\Entity\Site',
+			'data_class' => $this->class,
 			'translation_domain' => 'KRSolutionsKRCMSBundle'
 		));
 	}

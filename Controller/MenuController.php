@@ -28,9 +28,9 @@ class MenuController extends AbstractKRCMSController
 //			return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
 //		}
 
-		$menus = $this->getMenuRepository()->findAll();
+		$menus = $this->getMenuManager()->findAll();
 
-		$newMenu = new Menu();
+		$newMenu = $this->getMenuManager()->createMenu();
 		$menuForm = $this->createForm('menu', $newMenu);
 
 		$menuForm->handleRequest($request);
@@ -64,7 +64,7 @@ class MenuController extends AbstractKRCMSController
 //			return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
 //		}
 
-		$menu = $this->getMenuRepository()->getMenuById($menuId);
+		$menu = $this->getMenuManager()->getMenuById($menuId);
 
 		if (null === $menu) {
 			$this->getRequest()->getSession()->getFlashBag()->add('alert-danger', 'Verwijderen mislukt! Het menu met id \'' . $menuId . '\' bestaat niet (meer). Probeer het nog een keer!');
@@ -101,7 +101,7 @@ class MenuController extends AbstractKRCMSController
 			return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
 		}
 
-		$menu = $this->getMenuRepository()->getMenuById($menuId);
+		$menu = $this->getMenuManager()->getMenuById($menuId);
 
 		if (null === $menu) {
 			$this->getRequest()->getSession()->getFlashBag()->add('alert-danger', 'Het menu met id \'' . $menuId . '\' bestaat niet (meer). Probeer het nog een keer!');

@@ -95,13 +95,13 @@
 			<ul class="list-unstyled">
 				<li><h3>{{ 'page.details'|trans({}, 'KRSolutionsKRCMSBundle') }}</h3></li>
 						{% if page.createdBy is not null %}
-					<li style="margin-bottom: 10px;"><span class="clearfix">{{ 'layout.created_by'|trans({}, 'KRSolutionsKRCMSBundle') }}:</span> <strong>{{ page.createdBy }}</strong></li>
+					<li style="margin-bottom: 10px;"><span class="clearfix">{{ 'layout.created_by'|trans({}, 'KRSolutionsKRCMSBundle') }}:</span> <strong>{{ page.createdBy.KRCMSUsername }}</strong></li>
 					{% endif %}
 					{% if page.createdAt is not null %}
 					<li style="margin-bottom: 10px;"><span class="clearfix">{{ 'layout.created_at'|trans({}, 'KRSolutionsKRCMSBundle') }}:</span> <strong>{{ page.createdAt|localizeddate('medium', 'medium') }}</strong></li>
 					{% endif %}
 					{% if page.updatedBy is not null %}
-					<li style="margin-bottom: 10px;"><span class="clearfix">{{ 'layout.updated_by'|trans({}, 'KRSolutionsKRCMSBundle') }}:</span> <strong>{{ page.updatedBy }}</strong></li>
+					<li style="margin-bottom: 10px;"><span class="clearfix">{{ 'layout.updated_by'|trans({}, 'KRSolutionsKRCMSBundle') }}:</span> <strong>{{ page.updatedBy.KRCMSUsername }}</strong></li>
 					{% endif %}
 					{% if page.updatedAt is not null and page.updatedAt != page.createdAt %}
 					<li style="margin-bottom: 10px;"><span class="clearfix">{{ 'layout.updated_at'|trans({}, 'KRSolutionsKRCMSBundle') }}:</span> <strong>{{ page.updatedAt|localizeddate('medium', 'medium') }}</strong></li>

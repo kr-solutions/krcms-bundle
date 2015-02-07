@@ -23,7 +23,20 @@ class Configuration implements ConfigurationInterface
 		$rootNode = $treeBuilder->root('kr_solutions_krcms');
 
 		$rootNode->children()
-			->scalarNode('upload_dir')->defaultValue('uploads')->cannotBeEmpty()->end()
+			->arrayNode('model')
+				->addDefaultsIfNotSet()
+					->children()
+						->scalarNode('category_class')->defaultValue('KRSolutions\\Bundle\\KRCMSBundle\\Entity\\Category')->cannotBeEmpty()->end()
+						->scalarNode('file_class')->defaultValue('KRSolutions\\Bundle\\KRCMSBundle\\Entity\\File')->cannotBeEmpty()->end()
+						->scalarNode('menu_class')->defaultValue('KRSolutions\\Bundle\\KRCMSBundle\\Entity\\Menu')->cannotBeEmpty()->end()
+						->scalarNode('page_class')->defaultValue('KRSolutions\\Bundle\\KRCMSBundle\\Entity\\Page')->cannotBeEmpty()->end()
+						->scalarNode('page_type_class')->defaultValue('KRSolutions\\Bundle\\KRCMSBundle\\Entity\\PageType')->cannotBeEmpty()->end()
+						->scalarNode('site_class')->defaultValue('KRSolutions\\Bundle\\KRCMSBundle\\Entity\\Site')->cannotBeEmpty()->end()
+						->scalarNode('tag_class')->defaultValue('KRSolutions\\Bundle\\KRCMSBundle\\Entity\\Tag')->cannotBeEmpty()->end()
+						->scalarNode('user_class')->defaultValue('KRSolutions\\Bundle\\KRCMSBundle\\Entity\\User')->cannotBeEmpty()->end()
+						->scalarNode('upload_dir')->defaultValue('uploads')->cannotBeEmpty()->end()
+				->end()
+			->end()
 			->arrayNode('helpdesk')
 				->addDefaultsIfNotSet()
 					->children()
@@ -42,7 +55,8 @@ class Configuration implements ConfigurationInterface
 						->scalarNode('page_types')->defaultValue('ROLE_ADMIN')->cannotBeEmpty()->end()
 						->scalarNode('sites')->defaultValue('ROLE_ADMIN')->cannotBeEmpty()->end()
 				->end()
-			->end();
+			->end()
+			->scalarNode('upload_dir')->defaultValue('uploads')->cannotBeEmpty()->end();
 
 		// Here you should define the parameters that are allowed to
 		// configure your bundle. See the documentation linked above for

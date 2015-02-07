@@ -1,32 +1,62 @@
 <?php
 
-namespace KRSolutions\Bundle\KRCMSBundle\Repository;
+namespace KRSolutions\Bundle\KRCMSBundle\Doctrine;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
-use KRSolutions\Bundle\KRCMSBundle\Entity\Menu;
-use KRSolutions\Bundle\KRCMSBundle\Entity\Page;
-use KRSolutions\Bundle\KRCMSBundle\Entity\Site;
+use KRSolutions\Bundle\KRCMSBundle\Entity\MenuInterface;
+use KRSolutions\Bundle\KRCMSBundle\Entity\PageInterface;
+use KRSolutions\Bundle\KRCMSBundle\Entity\SiteInterface;
+use KRSolutions\Bundle\KRCMSBundle\Model\PageManager as BasePageManager;
 
 
 /**
- * PageRepository
+ * Page manager
  */
-class PageRepository extends EntityRepository
+class PageManager extends BasePageManager
 {
+
+	protected $objectManager;
+	protected $class;
+	protected $repository;
+
+	/**
+	 * Constructor
+	 *
+	 * @param ObjectManager $om
+	 * @param string        $class
+	 */
+	public function __construct(ObjectManager $om, $class)
+	{
+		parent::__construct();
+
+		$this->objectManager = $om;
+		$this->repository = $om->getRepository($class);
+
+		$metadata = $om->getClassMetadata($class);
+		$this->class = $metadata->getName();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getClass()
+	{
+		return $this->class;
+	}
 
 	/**
 	 * Get a page by it's site and permalink
 	 *
-	 * @param Site   $site      Site entity
-	 * @param string $permalink Page permalink
+	 * @param SiteInterface $site      Site entity
+	 * @param string        $permalink Page permalink
 	 *
-	 * @return Page|null
+	 * @return PageInterface|null
 	 */
-	public function getActivePageFromSiteAndPermalink(Site $site, $permalink)
+	public function getActivePageFromSiteAndPermalink(SiteInterface $site, $permalink)
 	{
-		$qb = $this->createQueryBuilder('pages');
+		$qb = $this->repository->createQueryBuilder('pages');
 		$qb->addSelect('parent');
 		$qb->addSelect('pageTypes');
 		$qb->addSelect('parentPageTypes');
@@ -59,14 +89,14 @@ class PageRepository extends EntityRepository
 	/**
 	 * Get pages by the site and menu
 	 *
-	 * @param Site $site Site entity
-	 * @param Menu $menu Menu entity
+	 * @param SiteInterface $site Site entity
+	 * @param MenuInterface $menu Menu entity
 	 *
 	 * @return array
 	 */
-	public function getActivePagesFromSiteAndMenu(Site $site, Menu $menu)
+	public function getActivePagesFromSiteAndMenu(SiteInterface $site, MenuInterface $menu)
 	{
-		$qb = $this->createQueryBuilder('pages');
+		$qb = $this->repository->createQueryBuilder('pages');
 
 		$qb->where('pages.site = :site');
 		$qb->setParameter('site', $site);
@@ -90,14 +120,14 @@ class PageRepository extends EntityRepository
 	/**
 	 * Get pages by the site and menu
 	 *
-	 * @param Site   $site     Site entity
-	 * @param string $menuName Menu name
+	 * @param SiteInterface $site     Site entity
+	 * @param string        $menuName Menu name
 	 *
 	 * @return array
 	 */
-	public function getActivePagesFromSiteAndMenuName(Site $site, $menuName = null)
+	public function getActivePagesFromSiteAndMenuName(SiteInterface $site, $menuName = null)
 	{
-		$qb = $this->createQueryBuilder('pages');
+		$qb = $this->repository->createQueryBuilder('pages');
 
 		if (null !== $menuName) {
 			$qb->innerJoin('pages.menu', 'menus', Join::WITH, 'menus.site = :site AND menus.name = :menuName');
@@ -122,13 +152,13 @@ class PageRepository extends EntityRepository
 	/**
 	 * Get pages by site (query builder)
 	 *
-	 * @param Site $site
+	 * @param SiteInterface $site
 	 *
 	 * @return array
 	 */
-	public function getActivePagesFromSiteQB(Site $site)
+	public function getActivePagesFromSiteQB(SiteInterface $site)
 	{
-		$qb = $this->createQueryBuilder('pages');
+		$qb = $this->repository->createQueryBuilder('pages');
 
 		if (null !== $site->getId()) {
 			$qb->where('pages.site = :site');
@@ -147,11 +177,11 @@ class PageRepository extends EntityRepository
 	/**
 	 * Get pages by site
 	 *
-	 * @param Site $site
+	 * @param SiteInterface $site
 	 *
 	 * @return array
 	 */
-	public function getActivePagesFromSite(Site $site)
+	public function getActivePagesFromSite(SiteInterface $site)
 	{
 		return $this->getActivePagesFromSiteQB($site)->getQuery()->getResult();
 	}
@@ -159,13 +189,13 @@ class PageRepository extends EntityRepository
 	/**
 	 * Get active pages from parent page
 	 *
-	 * @param Page $page
+	 * @param PageInterface $page
 	 *
 	 * @return array
 	 */
-	public function getActivePagesFromPage(Page $page)
+	public function getActivePagesFromPage(PageInterface $page)
 	{
-		$qb = $this->createQueryBuilder('pages');
+		$qb = $this->repository->createQueryBuilder('pages');
 
 		if (null !== $page) {
 			$qb->andWhere('pages.parent = :page');
@@ -186,13 +216,13 @@ class PageRepository extends EntityRepository
 	/**
 	 * Get active pages with a menu title from parent page
 	 *
-	 * @param Page $page
+	 * @param PageInterface $page
 	 *
 	 * @return array
 	 */
-	public function getActivePagesWithMenuTitleFromPage(Page $page)
+	public function getActivePagesWithMenuTitleFromPage(PageInterface $page)
 	{
-		$qb = $this->createQueryBuilder('pages');
+		$qb = $this->repository->createQueryBuilder('pages');
 
 		if (null !== $page) {
 			$qb->andWhere('pages.parent = :page');
@@ -217,11 +247,11 @@ class PageRepository extends EntityRepository
 	 *
 	 * @param integer $pageId
 	 *
-	 * @return null|Page
+	 * @return null|PageInterface
 	 */
 	public function getPageById($pageId)
 	{
-		$qb = $this->createQueryBuilder('pages');
+		$qb = $this->repository->createQueryBuilder('pages');
 
 		$qb->where('pages.id = :pageId');
 		$qb->setParameter('pageId', intval($pageId));
@@ -234,11 +264,11 @@ class PageRepository extends EntityRepository
 	 *
 	 * @param string $permalink
 	 *
-	 * @return null|Page
+	 * @return null|PageInterface
 	 */
 	public function getPageByPermalink($permalink)
 	{
-		$qb = $this->createQueryBuilder('pages');
+		$qb = $this->repository->createQueryBuilder('pages');
 
 		$qb->where('pages.permalink = :permalink');
 		$qb->setParameter('permalink', $permalink);
@@ -253,7 +283,7 @@ class PageRepository extends EntityRepository
 	 */
 	public function getAllPages()
 	{
-		$qb = $this->createQueryBuilder('pages');
+		$qb = $this->repository->createQueryBuilder('pages');
 
 		$qb->orderBy('pages.orderId', 'asc');
 
@@ -267,7 +297,7 @@ class PageRepository extends EntityRepository
 	 */
 	public function getAllParentPages()
 	{
-		$qb = $this->createQueryBuilder('pages');
+		$qb = $this->repository->createQueryBuilder('pages');
 
 		$qb->where('pages.parent IS NULL');
 		$qb->orderBy('pages.orderId', 'asc');
@@ -278,13 +308,13 @@ class PageRepository extends EntityRepository
 	/**
 	 * Get all loose pages by Site
 	 *
-	 * @param Site $site
+	 * @param SiteInterface $site
 	 *
 	 * @return array
 	 */
-	public function getAllLoosePagesBySite(Site $site)
+	public function getAllLoosePagesBySite(SiteInterface $site)
 	{
-		$qb = $this->createQueryBuilder('pages');
+		$qb = $this->repository->createQueryBuilder('pages');
 
 		$qb->where('pages.parent IS NULL');
 		$qb->andWhere('pages.menu IS NULL');
@@ -300,13 +330,13 @@ class PageRepository extends EntityRepository
 	/**
 	 * Get all child pages
 	 *
-	 * @param Page $parentPage
+	 * @param PageInterface $parentPage
 	 *
 	 * @return array
 	 */
-	public function getAllChildPages(Page $parentPage)
+	public function getAllChildPages(PageInterface $parentPage)
 	{
-		$qb = $this->createQueryBuilder('pages');
+		$qb = $this->repository->createQueryBuilder('pages');
 
 		$qb->where('pages.parent = :parentPage');
 		$qb->setParameter('parentPage', $parentPage);
@@ -323,7 +353,7 @@ class PageRepository extends EntityRepository
 	 */
 	public function getAllChildablePagesQB()
 	{
-		$qb = $this->createQueryBuilder('pages');
+		$qb = $this->repository->createQueryBuilder('pages');
 
 		$qb->innerJoin('pages.pageType', 'pageType', Join::WITH, 'pageType.hasChildren = true');
 
@@ -333,11 +363,11 @@ class PageRepository extends EntityRepository
 	/**
 	 * getAllChildablePagesBySite
 	 *
-	 * @param Site $site
+	 * @param SiteInterface $site
 	 *
 	 * @return array
 	 */
-	public function getAllChildablePagesBySite(Site $site)
+	public function getAllChildablePagesBySite(SiteInterface $site)
 	{
 		$qb = $this->getAllChildablePagesQB();
 
@@ -350,11 +380,11 @@ class PageRepository extends EntityRepository
 	/**
 	 * Get all childable pages except for the given page
 	 *
-	 * @param \KRSolutions\Bundle\KRCMSBundle\Entity\PageInterface $exceptThisPage
+	 * @param PageInterface $exceptThisPage
 	 *
 	 * @return QueryBuilder
 	 */
-	public function getAllChildablePagesExceptThisPageQB(\KRSolutions\Bundle\KRCMSBundle\Entity\PageInterface $exceptThisPage = null)
+	public function getAllChildablePagesExceptThisPageQB(PageInterface $exceptThisPage = null)
 	{
 		$qb = $this->getAllChildablePagesQB();
 
@@ -385,7 +415,7 @@ class PageRepository extends EntityRepository
 	 */
 	public function getFirstPagesByPageTypeId($pageTypeId, $nrOfPages)
 	{
-		$qb = $this->createQueryBuilder('pages');
+		$qb = $this->repository->createQueryBuilder('pages');
 
 		$qb->innerJoin('pages.pageType', 'pageType', Join::WITH, 'pageType.id = :pageTypeId');
 		$qb->setParameter('pageTypeId', $pageTypeId);
@@ -399,13 +429,13 @@ class PageRepository extends EntityRepository
 	/**
 	 * Get the next page permalink in the menu
 	 *
-	 * @param Page $activePage
+	 * @param PageInterface $activePage
 	 *
 	 * @return string|null
 	 */
-	public function getNextPermalinkInMenu(Page $activePage)
+	public function getNextPermalinkInMenu(PageInterface $activePage)
 	{
-		$qb = $this->createQueryBuilder('pages');
+		$qb = $this->repository->createQueryBuilder('pages');
 		$qb->select('pages.permalink');
 
 		$qb->where('pages.menu = :menu');
@@ -429,13 +459,13 @@ class PageRepository extends EntityRepository
 	/**
 	 * Get the previous page permalink in the menu
 	 *
-	 * @param Page $activePage
+	 * @param PageInterface $activePage
 	 *
 	 * @return string|null
 	 */
-	public function getPreviousPermalinkInMenu(Page $activePage)
+	public function getPreviousPermalinkInMenu(PageInterface $activePage)
 	{
-		$qb = $this->createQueryBuilder('pages');
+		$qb = $this->repository->createQueryBuilder('pages');
 		$qb->select('pages.permalink');
 
 		$qb->where('pages.menu = :menu');
@@ -461,11 +491,11 @@ class PageRepository extends EntityRepository
 	 *
 	 * @param string $permalink
 	 *
-	 * @return Page
+	 * @return PageInterface
 	 */
 	public function getLastPageFromParentByPermalink($permalink)
 	{
-		$qb = $this->createQueryBuilder('pages');
+		$qb = $this->repository->createQueryBuilder('pages');
 
 		$qb->innerJoin('pages.parent', 'parent', Join::WITH, 'parent.permalink = :permalink');
 		$qb->setParameter('permalink', $permalink);
@@ -481,11 +511,11 @@ class PageRepository extends EntityRepository
 	 *
 	 * @param string $permalink
 	 *
-	 * @return Page
+	 * @return PageInterface
 	 */
 	public function getNewestPageFromParentByPermalink($permalink)
 	{
-		$qb = $this->createQueryBuilder('pages');
+		$qb = $this->repository->createQueryBuilder('pages');
 
 		$qb->innerJoin('pages.parent', 'parent', Join::WITH, 'parent.permalink = :permalink');
 		$qb->setParameter('permalink', $permalink);
@@ -502,11 +532,11 @@ class PageRepository extends EntityRepository
 	 * @param string $permalink
 	 * @param int    $number
 	 *
-	 * @return Page
+	 * @return PageInterface
 	 */
 	public function getLastPagesFromParentByPermalink($permalink, $number)
 	{
-		$qb = $this->createQueryBuilder('pages');
+		$qb = $this->repository->createQueryBuilder('pages');
 
 		$qb->innerJoin('pages.parent', 'parent', Join::WITH, 'parent.permalink = :permalink');
 		$qb->setParameter('permalink', $permalink);
@@ -523,11 +553,11 @@ class PageRepository extends EntityRepository
 	 * @param string $permalink
 	 * @param int    $number
 	 *
-	 * @return Page
+	 * @return PageInterface
 	 */
 	public function getNewestPagesFromParentByPermalink($permalink, $number)
 	{
-		$qb = $this->createQueryBuilder('pages');
+		$qb = $this->repository->createQueryBuilder('pages');
 
 		$qb->innerJoin('pages.parent', 'parent', Join::WITH, 'parent.permalink = :permalink');
 		$qb->setParameter('permalink', $permalink);
@@ -541,19 +571,19 @@ class PageRepository extends EntityRepository
 	/**
 	 * Get the next page permalink from the parent page
 	 *
-	 * @param Page $page
+	 * @param PageInterface $page
 	 *
 	 * @return string|null
 	 */
-	public function getNextPermalinkFromParentPage(Page $page)
+	public function getNextPermalinkFromParentPage(PageInterface $page)
 	{
 		$parentPage = $page->getParent();
 
-		if (!($parentPage instanceof Page)) {
+		if (!($parentPage instanceof PageInterface)) {
 			return null;
 		}
 
-		$qb = $this->createQueryBuilder('pages');
+		$qb = $this->repository->createQueryBuilder('pages');
 		$qb->select('pages.permalink');
 
 		$qb->where('pages.parent = :parentPage');
@@ -601,19 +631,19 @@ class PageRepository extends EntityRepository
 	/**
 	 * Get the next page permalink from the parent page
 	 *
-	 * @param Page $page
+	 * @param PageInterface $page
 	 *
 	 * @return string|null
 	 */
-	public function getPreviousPermalinkFromParentPage(Page $page)
+	public function getPreviousPermalinkFromParentPage(PageInterface $page)
 	{
 		$parentPage = $page->getParent();
 
-		if (!($parentPage instanceof Page)) {
+		if (!($parentPage instanceof PageInterface)) {
 			return null;
 		}
 
-		$qb = $this->createQueryBuilder('pages');
+		$qb = $this->repository->createQueryBuilder('pages');
 		$qb->select('pages.permalink');
 
 		$qb->where('pages.parent = :parentPage');
@@ -665,13 +695,13 @@ class PageRepository extends EntityRepository
 	/**
 	 * Get page count by site
 	 *
-	 * @param Site $site
+	 * @param SiteInterface $site
 	 *
 	 * @return int
 	 */
-	public function getPageCountBySite(Site $site)
+	public function getPageCountBySite(SiteInterface $site)
 	{
-		$qb = $this->createQueryBuilder('pages');
+		$qb = $this->repository->createQueryBuilder('pages');
 
 		$qb->select('count(pages.id)');
 

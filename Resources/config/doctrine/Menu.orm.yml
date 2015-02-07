@@ -35,15 +35,9 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Menu:
             length: null
             fixed: false
             comment: ''
-    oneToMany:
-        pages:
-            targetEntity: Page
-            mappedBy: menu
-            orderBy:
-                orderId: asc
     manyToOne:
         site:
-            targetEntity: Site
+            targetEntity: SiteInterface
             cascade: {  }
             mappedBy: null
             inversedBy: null
@@ -51,4 +45,10 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Menu:
                 site_id:
                     referencedColumnName: id
             orphanRemoval: false
+    oneToMany:
+        pages:
+            targetEntity: PageInterface
+            mappedBy: menu
+            orderBy:
+                orderId: asc
     lifecycleCallbacks: {  }

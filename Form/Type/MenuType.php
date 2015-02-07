@@ -14,6 +14,19 @@ class MenuType extends AbstractType
 {
 
 	/**
+	 * @var string
+	 */
+	private $class;
+
+	/**
+	 * @param string $class The menu class name
+	 */
+	public function __construct($class)
+	{
+		$this->class = $class;
+	}
+
+	/**
 	 * Build form
 	 *
 	 * @param FormBuilderInterface $builder The form builder
@@ -47,7 +60,7 @@ class MenuType extends AbstractType
 	public function setDefaultOptions(OptionsResolverInterface $resolver)
 	{
 		$resolver->setDefaults(array(
-			'data_class' => 'KRSolutions\Bundle\KRCMSBundle\Entity\Menu',
+			'data_class' => $this->class,
 			'translation_domain' => 'KRSolutionsKRCMSBundle'
 		));
 	}

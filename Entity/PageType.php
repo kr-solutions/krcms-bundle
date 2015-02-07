@@ -3,112 +3,104 @@
 namespace KRSolutions\Bundle\KRCMSBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 
 /**
  * PageType
  */
-class PageType
+class PageType implements PageTypeInterface
 {
 
 	/**
 	 * @var integer
 	 */
-	private $id;
+	protected $id;
 
 	/**
 	 * @var string
 	 */
-	private $name;
+	protected $name;
 
 	/**
 	 * @var string
 	 */
-	private $description;
+	protected $description;
 
 	/**
 	 * @var string
 	 */
-	private $pageHandler;
+	protected $pageHandler;
 
 	/**
 	 * @var string
 	 */
-	private $template;
+	protected $template;
 
 	/**
 	 * @var string
 	 */
-	private $adminForm;
+	protected $adminForm;
 
 	/**
 	 * @var string
 	 */
-	private $adminTemplate;
+	protected $adminTemplate;
 
 	/**
 	 * @var string
 	 */
-	private $adminFormHandler;
+	protected $adminFormHandler;
 
 	/**
 	 * @var boolean
 	 */
-	private $isChild;
+	protected $isChild;
 
 	/**
 	 * @var boolean
 	 */
-	private $hasChildren;
+	protected $hasChildren;
 
 	/**
 	 * @var string
 	 */
-	private $childrenOrderBy;
+	protected $childrenOrderBy;
 
 	/**
 	 * @var string
 	 */
-	private $childrenOrderDirection;
+	protected $childrenOrderDirection;
 
 	/**
 	 * @var boolean
 	 */
-	private $hasFiles;
+	protected $hasFiles;
 
 	/**
 	 * @var boolean
 	 */
-	private $hasContent;
+	protected $hasContent;
 
 	/**
-	 * @var Collection
+	 * @var \Doctrine\Common\Collections\Collection
 	 */
-	private $pages;
+	protected $pageTypeParents;
 
 	/**
-	 * @var Collection
+	 * @var \Doctrine\Common\Collections\Collection
 	 */
-	private $pageTypeParents;
-
-	/**
-	 * @var Collection
-	 */
-	private $pageTypeChildren;
+	protected $pageTypeChildren;
 
 	/**
 	 * @var array
 	 */
-	private $roles;
+	protected $roles;
 
 	/**
 	 * Constructor
 	 */
 	public function __construct()
 	{
-		$this->pages = new ArrayCollection();
 		$this->pageTypeParents = new ArrayCollection();
 		$this->pageTypeChildren = new ArrayCollection();
 
@@ -116,9 +108,7 @@ class PageType
 	}
 
 	/**
-	 * Get id
-	 *
-	 * @return integer
+	 * {@inheritDoc}
 	 */
 	public function getId()
 	{
@@ -126,11 +116,7 @@ class PageType
 	}
 
 	/**
-	 * Set name
-	 *
-	 * @param string $name
-	 *
-	 * @return PageType
+	 * {@inheritDoc}
 	 */
 	public function setName($name)
 	{
@@ -140,9 +126,7 @@ class PageType
 	}
 
 	/**
-	 * Get name
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
 	public function getName()
 	{
@@ -150,11 +134,7 @@ class PageType
 	}
 
 	/**
-	 * Set description
-	 *
-	 * @param string $description
-	 *
-	 * @return PageType
+	 * {@inheritDoc}
 	 */
 	public function setDescription($description)
 	{
@@ -164,9 +144,7 @@ class PageType
 	}
 
 	/**
-	 * Get description
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
 	public function getDescription()
 	{
@@ -174,11 +152,7 @@ class PageType
 	}
 
 	/**
-	 * Set pageHandler
-	 *
-	 * @param string $pageHandler
-	 *
-	 * @return PageType
+	 * {@inheritDoc}
 	 */
 	public function setPageHandler($pageHandler)
 	{
@@ -188,9 +162,7 @@ class PageType
 	}
 
 	/**
-	 * Get pageHandler
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
 	public function getPageHandler()
 	{
@@ -198,11 +170,7 @@ class PageType
 	}
 
 	/**
-	 * Set template
-	 *
-	 * @param string $template
-	 *
-	 * @return PageType
+	 * {@inheritDoc}
 	 */
 	public function setTemplate($template)
 	{
@@ -212,9 +180,7 @@ class PageType
 	}
 
 	/**
-	 * Get template
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
 	public function getTemplate()
 	{
@@ -222,11 +188,7 @@ class PageType
 	}
 
 	/**
-	 * Set adminForm
-	 *
-	 * @param string $adminForm
-	 *
-	 * @return PageType
+	 * {@inheritDoc}
 	 */
 	public function setAdminForm($adminForm)
 	{
@@ -236,9 +198,7 @@ class PageType
 	}
 
 	/**
-	 * Get adminForm
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
 	public function getAdminForm()
 	{
@@ -246,11 +206,7 @@ class PageType
 	}
 
 	/**
-	 * Set adminTemplate
-	 *
-	 * @param string $adminTemplate
-	 *
-	 * @return PageType
+	 * {@inheritDoc}
 	 */
 	public function setAdminTemplate($adminTemplate)
 	{
@@ -260,9 +216,7 @@ class PageType
 	}
 
 	/**
-	 * Get adminTemplate
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
 	public function getAdminTemplate()
 	{
@@ -270,11 +224,7 @@ class PageType
 	}
 
 	/**
-	 * Set adminFormHandler
-	 *
-	 * @param string $adminFormHandler
-	 *
-	 * @return PageType
+	 * {@inheritDoc}
 	 */
 	public function setAdminFormHandler($adminFormHandler)
 	{
@@ -284,9 +234,7 @@ class PageType
 	}
 
 	/**
-	 * Get adminFormHandler
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
 	public function getAdminFormHandler()
 	{
@@ -294,11 +242,7 @@ class PageType
 	}
 
 	/**
-	 * Set isChild
-	 *
-	 * @param boolean $isChild
-	 *
-	 * @return PageType
+	 * {@inheritDoc}
 	 */
 	public function setIsChild($isChild)
 	{
@@ -308,9 +252,7 @@ class PageType
 	}
 
 	/**
-	 * Get isChild
-	 *
-	 * @return boolean
+	 * {@inheritDoc}
 	 */
 	public function getIsChild()
 	{
@@ -318,11 +260,7 @@ class PageType
 	}
 
 	/**
-	 * Set hasChildren
-	 *
-	 * @param boolean $hasChildren
-	 *
-	 * @return PageType
+	 * {@inheritDoc}
 	 */
 	public function setHasChildren($hasChildren)
 	{
@@ -332,9 +270,7 @@ class PageType
 	}
 
 	/**
-	 * Get hasChildren
-	 *
-	 * @return boolean
+	 * {@inheritDoc}
 	 */
 	public function getHasChildren()
 	{
@@ -342,11 +278,7 @@ class PageType
 	}
 
 	/**
-	 * Set childrenOrderBy
-	 *
-	 * @param string $childrenOrderBy
-	 *
-	 * @return PageType
+	 * {@inheritDoc}
 	 */
 	public function setChildrenOrderBy($childrenOrderBy)
 	{
@@ -356,9 +288,7 @@ class PageType
 	}
 
 	/**
-	 * Get childrenOrderBy
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
 	public function getChildrenOrderBy()
 	{
@@ -366,11 +296,7 @@ class PageType
 	}
 
 	/**
-	 * Set childrenOrderDirection
-	 *
-	 * @param string $childrenOrderDirection
-	 *
-	 * @return PageType
+	 * {@inheritDoc}
 	 */
 	public function setChildrenOrderDirection($childrenOrderDirection)
 	{
@@ -380,9 +306,7 @@ class PageType
 	}
 
 	/**
-	 * Get childrenOrderDirection
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
 	public function getChildrenOrderDirection()
 	{
@@ -390,11 +314,7 @@ class PageType
 	}
 
 	/**
-	 * Set hasFiles
-	 *
-	 * @param boolean $hasFiles
-	 *
-	 * @return PageType
+	 * {@inheritDoc}
 	 */
 	public function setHasFiles($hasFiles)
 	{
@@ -404,9 +324,7 @@ class PageType
 	}
 
 	/**
-	 * Get hasFiles
-	 *
-	 * @return boolean
+	 * {@inheritDoc}
 	 */
 	public function getHasFiles()
 	{
@@ -414,11 +332,7 @@ class PageType
 	}
 
 	/**
-	 * Set hasContent
-	 *
-	 * @param boolean $hasContent
-	 *
-	 * @return PageType
+	 * {@inheritDoc}
 	 */
 	public function setHasContent($hasContent)
 	{
@@ -428,9 +342,7 @@ class PageType
 	}
 
 	/**
-	 * Get hasContent
-	 *
-	 * @return boolean
+	 * {@inheritDoc}
 	 */
 	public function getHasContent()
 	{
@@ -438,47 +350,9 @@ class PageType
 	}
 
 	/**
-	 * Add page
-	 *
-	 * @param Page $page
-	 *
-	 * @return PageType
+	 * {@inheritDoc}
 	 */
-	public function addPage(Page $page)
-	{
-		$this->pages[] = $page;
-
-		return $this;
-	}
-
-	/**
-	 * Remove page
-	 *
-	 * @param Page $page
-	 */
-	public function removePage(Page $page)
-	{
-		$this->pages->removeElement($page);
-	}
-
-	/**
-	 * Get pages
-	 *
-	 * @return Collection
-	 */
-	public function getPages()
-	{
-		return $this->pages;
-	}
-
-	/**
-	 * Add pageTypeParent
-	 *
-	 * @param PageType $pageTypeParent
-	 *
-	 * @return PageType
-	 */
-	public function addPageTypeParent(PageType $pageTypeParent)
+	public function addPageTypeParent(PageTypeInterface $pageTypeParent)
 	{
 		$this->pageTypeParents[] = $pageTypeParent;
 
@@ -486,19 +360,15 @@ class PageType
 	}
 
 	/**
-	 * Remove pageTypeParent
-	 *
-	 * @param PageType $pageTypeParent
+	 * {@inheritDoc}
 	 */
-	public function removePageTypeParent(PageType $pageTypeParent)
+	public function removePageTypeParent(PageTypeInterface $pageTypeParent)
 	{
 		$this->pageTypeParents->removeElement($pageTypeParent);
 	}
 
 	/**
-	 * Get pageTypeParents
-	 *
-	 * @return Collection
+	 * {@inheritDoc}
 	 */
 	public function getPageTypeParents()
 	{
@@ -506,13 +376,9 @@ class PageType
 	}
 
 	/**
-	 * Add pageTypeChild
-	 *
-	 * @param PageType $pageTypeChild
-	 *
-	 * @return PageType
+	 * {@inheritDoc}
 	 */
-	public function addPageTypeChild(PageType $pageTypeChild)
+	public function addPageTypeChild(PageTypeInterface $pageTypeChild)
 	{
 		$this->pageTypeChildren[] = $pageTypeChild;
 
@@ -520,19 +386,15 @@ class PageType
 	}
 
 	/**
-	 * Remove pageTypeChild
-	 *
-	 * @param PageType $pageTypeChild
+	 * {@inheritDoc}
 	 */
-	public function removePageTypeChild(PageType $pageTypeChild)
+	public function removePageTypeChild(PageTypeInterface $pageTypeChild)
 	{
 		$this->pageTypeChildren->removeElement($pageTypeChild);
 	}
 
 	/**
-	 * Get pageTypeChildren
-	 *
-	 * @return Collection
+	 * {@inheritDoc}
 	 */
 	public function getPageTypeChildren()
 	{
@@ -540,11 +402,7 @@ class PageType
 	}
 
 	/**
-	 * Set roles
-	 *
-	 * @param array $roles
-	 *
-	 * @return PageType
+	 * {@inheritDoc}
 	 */
 	public function setRoles(array $roles)
 	{
@@ -554,9 +412,7 @@ class PageType
 	}
 
 	/**
-	 * Get roles
-	 *
-	 * @return array
+	 * {@inheritDoc}
 	 */
 	public function getRoles()
 	{
@@ -564,13 +420,9 @@ class PageType
 	}
 
 	/**
-	 * Is the given user granted to use this PageType
-	 *
-	 * @param UserInterface $user
-	 *
-	 * @return boolean
+	 * {@inheritDoc}
 	 */
-	public function isUserGranted(UserInterface $user)
+	public function isUserGranted(\Symfony\Component\Security\Core\User\UserInterface $user)
 	{
 		if (0 === count($this->roles)) {
 			return true;
@@ -588,9 +440,7 @@ class PageType
 	}
 
 	/**
-	 * PageType name
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
 	public function __toString()
 	{

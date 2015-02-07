@@ -2,70 +2,57 @@
 
 namespace KRSolutions\Bundle\KRCMSBundle\Entity;
 
-use DateTime;
-use KRSolutions\Bundle\KRUserBundle\Entity\User;
-
 
 /**
  * File
  */
-class File
+class File implements FileInterface
 {
 
 	/**
 	 * @var integer
 	 */
-	private $id;
+	protected $id;
 
 	/**
 	 * @var string
 	 */
-	private $name;
+	protected $name;
 
 	/**
-	 * @var DateTime
+	 * @var \DateTime
 	 */
-	private $createdAt;
+	protected $createdAt;
 
 	/**
-	 * @var DateTime
+	 * @var \DateTime
 	 */
-	private $updatedAt;
-
-	/**
-	 * @var string
-	 */
-	private $uri;
+	protected $updatedAt;
 
 	/**
 	 * @var string
 	 */
-	private $title;
+	protected $uri;
 
 	/**
 	 * @var string
 	 */
-	private $description;
+	protected $title;
+
+	/**
+	 * @var string
+	 */
+	protected $description;
+
+	/**
+	 * @var PageInterface
+	 */
+	protected $page;
 
 	/**
 	 * @var integer
 	 */
-	private $orderId;
-
-	/**
-	 * @var User
-	 */
-	private $createdBy;
-
-	/**
-	 * @var User
-	 */
-	private $updatedBy;
-
-	/**
-	 * @var Page
-	 */
-	private $page;
+	protected $orderId;
 
 	/**
 	 * File constructor
@@ -78,9 +65,7 @@ class File
 	}
 
 	/**
-	 * Get id
-	 *
-	 * @return integer
+	 * {@inheritDoc}
 	 */
 	public function getId()
 	{
@@ -88,11 +73,7 @@ class File
 	}
 
 	/**
-	 * Set name
-	 *
-	 * @param string $name
-	 *
-	 * @return File
+	 * {@inheritDoc}
 	 */
 	public function setName($name)
 	{
@@ -102,9 +83,7 @@ class File
 	}
 
 	/**
-	 * Get name
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
 	public function getName()
 	{
@@ -112,11 +91,7 @@ class File
 	}
 
 	/**
-	 * Set createdAt
-	 *
-	 * @param DateTime $createdAt
-	 *
-	 * @return File
+	 * {@inheritDoc}
 	 */
 	public function setCreatedAt($createdAt)
 	{
@@ -126,9 +101,7 @@ class File
 	}
 
 	/**
-	 * Get createdAt
-	 *
-	 * @return DateTime
+	 * {@inheritDoc}
 	 */
 	public function getCreatedAt()
 	{
@@ -136,11 +109,7 @@ class File
 	}
 
 	/**
-	 * Set updatedAt
-	 *
-	 * @param DateTime $updatedAt
-	 *
-	 * @return File
+	 * {@inheritDoc}
 	 */
 	public function setUpdatedAt($updatedAt)
 	{
@@ -150,9 +119,7 @@ class File
 	}
 
 	/**
-	 * Get updatedAt
-	 *
-	 * @return DateTime
+	 * {@inheritDoc}
 	 */
 	public function getUpdatedAt()
 	{
@@ -160,11 +127,7 @@ class File
 	}
 
 	/**
-	 * Set uri
-	 *
-	 * @param string $uri
-	 *
-	 * @return File
+	 * {@inheritDoc}
 	 */
 	public function setUri($uri)
 	{
@@ -174,9 +137,7 @@ class File
 	}
 
 	/**
-	 * Get uri
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
 	public function getUri()
 	{
@@ -184,11 +145,7 @@ class File
 	}
 
 	/**
-	 * Set title
-	 *
-	 * @param string $title
-	 *
-	 * @return File
+	 * {@inheritDoc}
 	 */
 	public function setTitle($title)
 	{
@@ -198,9 +155,7 @@ class File
 	}
 
 	/**
-	 * Get title
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
 	public function getTitle()
 	{
@@ -208,11 +163,7 @@ class File
 	}
 
 	/**
-	 * Set description
-	 *
-	 * @param string $description
-	 *
-	 * @return File
+	 * {@inheritDoc}
 	 */
 	public function setDescription($description)
 	{
@@ -222,9 +173,7 @@ class File
 	}
 
 	/**
-	 * Get description
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
 	public function getDescription()
 	{
@@ -232,11 +181,25 @@ class File
 	}
 
 	/**
-	 * Set orderId
-	 *
-	 * @param integer $orderId
-	 *
-	 * @return File
+	 * {@inheritDoc}
+	 */
+	public function setPage(PageInterface $page)
+	{
+		$this->page = $page;
+
+		return $this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getPage()
+	{
+		return $this->page;
+	}
+
+	/**
+	 * {@inheritDoc}
 	 */
 	public function setOrderId($orderId)
 	{
@@ -246,9 +209,7 @@ class File
 	}
 
 	/**
-	 * Get orderId
-	 *
-	 * @return integer
+	 * {@inheritDoc}
 	 */
 	public function getOrderId()
 	{
@@ -256,81 +217,7 @@ class File
 	}
 
 	/**
-	 * Set createdBy
-	 *
-	 * @param User $createdBy
-	 *
-	 * @return File
-	 */
-	public function setCreatedBy(User $createdBy = null)
-	{
-		$this->createdBy = $createdBy;
-
-		return $this;
-	}
-
-	/**
-	 * Get createdBy
-	 *
-	 * @return User
-	 */
-	public function getCreatedBy()
-	{
-		return $this->createdBy;
-	}
-
-	/**
-	 * Set updatedBy
-	 *
-	 * @param User $updatedBy
-	 *
-	 * @return File
-	 */
-	public function setUpdatedBy(User $updatedBy = null)
-	{
-		$this->updatedBy = $updatedBy;
-
-		return $this;
-	}
-
-	/**
-	 * Get updatedBy
-	 *
-	 * @return User
-	 */
-	public function getUpdatedBy()
-	{
-		return $this->updatedBy;
-	}
-
-	/**
-	 * Set page
-	 *
-	 * @param Page $page
-	 *
-	 * @return File
-	 */
-	public function setPage(Page $page = null)
-	{
-		$this->page = $page;
-
-		return $this;
-	}
-
-	/**
-	 * Get page
-	 *
-	 * @return Page
-	 */
-	public function getPage()
-	{
-		return $this->page;
-	}
-
-	/**
-	 * File title
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
 	public function __toString()
 	{

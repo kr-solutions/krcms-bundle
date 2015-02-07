@@ -3,12 +3,6 @@ KRSolutions\Bundle\KRCMSBundle\Entity\File:
     repositoryClass: KRSolutions\Bundle\KRCMSBundle\Repository\FileRepository
     table: krcms_files
     indexes:
-        created_by:
-            columns:
-                - created_by
-        updated_by:
-            columns:
-                - updated_by
         page_id:
             columns:
                 - page_id
@@ -64,31 +58,14 @@ KRSolutions\Bundle\KRCMSBundle\Entity\File:
             default: '0'
             column: order_id
     manyToOne:
-        createdBy:
-            targetEntity: KRSolutions\Bundle\KRUserBundle\Entity\User
-            cascade: {  }
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                created_by:
-                    referencedColumnName: id
-            orphanRemoval: false
-        updatedBy:
-            targetEntity: KRSolutions\Bundle\KRUserBundle\Entity\User
-            cascade: {  }
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                updated_by:
-                    referencedColumnName: id
-            orphanRemoval: false
         page:
-            targetEntity: Page
+            targetEntity: PageInterface
             cascade: {  }
             mappedBy: null
             inversedBy: files
             joinColumns:
                 page_id:
                     referencedColumnName: id
+                    onDelete: "SET NULL"
             orphanRemoval: false
     lifecycleCallbacks: {  }

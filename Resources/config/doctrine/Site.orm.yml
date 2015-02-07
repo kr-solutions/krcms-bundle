@@ -40,7 +40,7 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Site:
             column: is_active
     manyToOne:
         homepage:
-            targetEntity: Page
+            targetEntity: PageInterface
             cascade: {  }
             mappedBy: null
             inversedBy: null
@@ -49,21 +49,4 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Site:
                     referencedColumnName: id
                     onDelete: "SET NULL"
             orphanRemoval: false
-    manyToMany:
-        users:
-            targetEntity: KRSolutions\Bundle\KRUserBundle\Entity\User
-            cascade: {  }
-            mappedBy: null
-            inversedBy: null
-            joinTable:
-                name: krcms_site_users
-                joinColumns:
-                    -
-                        name: site_id
-                        referencedColumnName: id
-                inverseJoinColumns:
-                    -
-                        name: user_id
-                        referencedColumnName: id
-            orderBy: null
     lifecycleCallbacks: {  }

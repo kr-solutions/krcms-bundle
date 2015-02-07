@@ -3,39 +3,38 @@
 namespace KRSolutions\Bundle\KRCMSBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 
 
 /**
  * Menu
  */
-class Menu
+class Menu implements MenuInterface
 {
 
 	/**
 	 * @var integer
 	 */
-	private $id;
+	protected $id;
 
 	/**
 	 * @var string
 	 */
-	private $name;
+	protected $name;
 
 	/**
 	 * @var string
 	 */
-	private $description;
+	protected $description;
 
 	/**
-	 * @var Collection
+	 * @var \Doctrine\Common\Collections\Collection
 	 */
-	private $pages;
+	protected $pages;
 
 	/**
-	 * @var Site
+	 * @var SiteInterface
 	 */
-	private $site;
+	protected $site;
 
 	/**
 	 * Constructor
@@ -46,9 +45,7 @@ class Menu
 	}
 
 	/**
-	 * Get id
-	 *
-	 * @return integer
+	 * {@inheritDoc}
 	 */
 	public function getId()
 	{
@@ -56,11 +53,7 @@ class Menu
 	}
 
 	/**
-	 * Set name
-	 *
-	 * @param string $name
-	 *
-	 * @return Menu
+	 * {@inheritDoc}
 	 */
 	public function setName($name)
 	{
@@ -70,9 +63,7 @@ class Menu
 	}
 
 	/**
-	 * Get name
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
 	public function getName()
 	{
@@ -80,11 +71,7 @@ class Menu
 	}
 
 	/**
-	 * Set description
-	 *
-	 * @param string $description
-	 *
-	 * @return Menu
+	 * {@inheritDoc}
 	 */
 	public function setDescription($description)
 	{
@@ -94,9 +81,7 @@ class Menu
 	}
 
 	/**
-	 * Get description
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
 	public function getDescription()
 	{
@@ -104,13 +89,9 @@ class Menu
 	}
 
 	/**
-	 * Add page
-	 *
-	 * @param Page $page
-	 *
-	 * @return Menu
+	 * {@inheritDoc}
 	 */
-	public function addPage(Page $page)
+	public function addPage(PageInterface $page)
 	{
 		$this->pages[] = $page;
 
@@ -118,19 +99,15 @@ class Menu
 	}
 
 	/**
-	 * Remove page
-	 *
-	 * @param Page $page
+	 * {@inheritDoc}
 	 */
-	public function removePage(Page $page)
+	public function removePage(PageInterface $page)
 	{
 		$this->pages->removeElement($page);
 	}
 
 	/**
-	 * Get pages
-	 *
-	 * @return Collection
+	 * {@inheritDoc}
 	 */
 	public function getPages()
 	{
@@ -138,13 +115,9 @@ class Menu
 	}
 
 	/**
-	 * Set site
-	 *
-	 * @param Site $site
-	 *
-	 * @return Menu
+	 * {@inheritDoc}
 	 */
-	public function setSite(Site $site = null)
+	public function setSite(SiteInterface $site = null)
 	{
 		$this->site = $site;
 
@@ -152,9 +125,7 @@ class Menu
 	}
 
 	/**
-	 * Get site
-	 *
-	 * @return Site
+	 * {@inheritDoc}
 	 */
 	public function getSite()
 	{
@@ -162,9 +133,7 @@ class Menu
 	}
 
 	/**
-	 * Menu name
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
 	public function __toString()
 	{

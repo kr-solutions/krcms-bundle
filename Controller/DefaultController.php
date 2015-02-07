@@ -28,10 +28,10 @@ class DefaultController extends AbstractKRCMSController
 	 */
 	public function pageAction(Request $request, $sitePermalink = '', $permalink = null)
 	{
-		$site = $this->getSiteRepository()->getActiveSiteByPermalink($sitePermalink);
+		$site = $this->getSiteManager()->getActiveSiteByPermalink($sitePermalink);
 
 		if (null === $site) {
-			if ($this->getSiteRepository()->getSiteByPermalink($sitePermalink) !== null) {
+			if ($this->getSiteManager()->getSiteByPermalink($sitePermalink) !== null) {
 				throw new Exception('Site \'' . $sitePermalink . '\' not active');
 			} else {
 				throw new Exception('Site \'' . $sitePermalink . '\' not found');

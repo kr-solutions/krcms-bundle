@@ -2,127 +2,124 @@
 
 namespace KRSolutions\Bundle\KRCMSBundle\Entity;
 
-use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use KRSolutions\Bundle\KRUserBundle\Entity\User;
 
 
 /**
  * Page
  */
-class Page
+class Page implements PageInterface
 {
 
 	/**
 	 * @var integer
 	 */
-	private $id;
+	protected $id;
 
 	/**
 	 * @var integer
 	 */
-	private $orderId;
+	protected $orderId;
 
 	/**
-	 * @var DateTime
+	 * @var \DateTime
 	 */
-	private $createdAt;
+	protected $createdAt;
 
 	/**
-	 * @var DateTime
+	 * @var \DateTime
 	 */
-	private $updatedAt;
+	protected $updatedAt;
 
 	/**
-	 * @var DateTime
+	 * @var \DateTime
 	 */
-	private $publishAt;
+	protected $publishAt;
 
 	/**
-	 * @var DateTime
+	 * @var \DateTime
 	 */
-	private $publishTill;
-
-	/**
-	 * @var string
-	 */
-	private $permalink;
+	protected $publishTill;
 
 	/**
 	 * @var string
 	 */
-	private $menuTitle;
+	protected $permalink;
 
 	/**
 	 * @var string
 	 */
-	private $title;
+	protected $menuTitle;
 
 	/**
 	 * @var string
 	 */
-	private $content;
+	protected $title;
 
 	/**
 	 * @var string
 	 */
-	private $metaKeywords;
+	protected $content;
 
 	/**
 	 * @var string
 	 */
-	private $metaDescription;
+	protected $metaKeywords;
 
 	/**
-	 * @var Collection
+	 * @var string
 	 */
-	private $pages;
+	protected $metaDescription;
 
 	/**
-	 * @var Collection
+	 * @var \Doctrine\Common\Collections\Collection
 	 */
-	private $files;
+	protected $pages;
 
 	/**
-	 * @var Menu
+	 * @var \Doctrine\Common\Collections\Collection
 	 */
-	private $menu;
+	protected $files;
 
 	/**
-	 * @var Site
+	 * @var MenuInterface
 	 */
-	private $site;
+	protected $menu;
 
 	/**
-	 * @var User
+	 * @var SiteInterface
 	 */
-	private $createdBy;
+	protected $site;
 
 	/**
-	 * @var User
+	 * @var UserInterface
 	 */
-	private $updatedBy;
+	protected $createdBy;
 
 	/**
-	 * @var PageType
+	 * @var UserInterface
 	 */
-	private $pageType;
+	protected $updatedBy;
 
 	/**
-	 * @var Page
+	 * @var PageTypeInterface
 	 */
-	private $parent;
+	protected $pageType;
 
 	/**
-	 * @var Collection
+	 * @var PageInterface
 	 */
-	private $categories;
+	protected $parent;
 
 	/**
-	 * @var Collection
+	 * @var \Doctrine\Common\Collections\Collection
 	 */
-	private $tags;
+	protected $categories;
+
+	/**
+	 * @var \Doctrine\Common\Collections\Collection
+	 */
+	protected $tags;
 
 	/**
 	 * Constructor
@@ -139,9 +136,7 @@ class Page
 	}
 
 	/**
-	 * Get id
-	 *
-	 * @return integer
+	 * {@inheritDoc}
 	 */
 	public function getId()
 	{
@@ -149,11 +144,7 @@ class Page
 	}
 
 	/**
-	 * Set orderId
-	 *
-	 * @param integer $orderId
-	 *
-	 * @return Page
+	 * {@inheritDoc}
 	 */
 	public function setOrderId($orderId)
 	{
@@ -163,9 +154,7 @@ class Page
 	}
 
 	/**
-	 * Get orderId
-	 *
-	 * @return integer
+	 * {@inheritDoc}
 	 */
 	public function getOrderId()
 	{
@@ -173,13 +162,9 @@ class Page
 	}
 
 	/**
-	 * Set createdAt
-	 *
-	 * @param DateTime $createdAt
-	 *
-	 * @return Page
+	 * {@inheritDoc}
 	 */
-	public function setCreatedAt($createdAt)
+	public function setCreatedAt(\DateTime $createdAt)
 	{
 		$this->createdAt = $createdAt;
 
@@ -187,9 +172,7 @@ class Page
 	}
 
 	/**
-	 * Get createdAt
-	 *
-	 * @return DateTime
+	 * {@inheritDoc}
 	 */
 	public function getCreatedAt()
 	{
@@ -197,13 +180,9 @@ class Page
 	}
 
 	/**
-	 * Set updatedAt
-	 *
-	 * @param DateTime $updatedAt
-	 *
-	 * @return Page
+	 * {@inheritDoc}
 	 */
-	public function setUpdatedAt($updatedAt)
+	public function setUpdatedAt(\DateTime $updatedAt)
 	{
 		$this->updatedAt = $updatedAt;
 
@@ -211,9 +190,7 @@ class Page
 	}
 
 	/**
-	 * Get updatedAt
-	 *
-	 * @return DateTime
+	 * {@inheritDoc}
 	 */
 	public function getUpdatedAt()
 	{
@@ -221,13 +198,9 @@ class Page
 	}
 
 	/**
-	 * Set publishAt
-	 *
-	 * @param DateTime $publishAt
-	 *
-	 * @return Page
+	 * {@inheritDoc}
 	 */
-	public function setPublishAt($publishAt)
+	public function setPublishAt(\DateTime $publishAt)
 	{
 		$this->publishAt = $publishAt;
 
@@ -235,9 +208,7 @@ class Page
 	}
 
 	/**
-	 * Get publishAt
-	 *
-	 * @return DateTime
+	 * {@inheritDoc}
 	 */
 	public function getPublishAt()
 	{
@@ -245,13 +216,9 @@ class Page
 	}
 
 	/**
-	 * Set publishTill
-	 *
-	 * @param DateTime $publishTill
-	 *
-	 * @return Page
+	 * {@inheritDoc}
 	 */
-	public function setPublishTill($publishTill)
+	public function setPublishTill(\DateTime $publishTill = null)
 	{
 		$this->publishTill = $publishTill;
 
@@ -259,9 +226,7 @@ class Page
 	}
 
 	/**
-	 * Get publishTill
-	 *
-	 * @return DateTime
+	 * {@inheritDoc}
 	 */
 	public function getPublishTill()
 	{
@@ -269,11 +234,7 @@ class Page
 	}
 
 	/**
-	 * Set permalink
-	 *
-	 * @param string $permalink
-	 *
-	 * @return Page
+	 * {@inheritDoc}
 	 */
 	public function setPermalink($permalink)
 	{
@@ -283,11 +244,7 @@ class Page
 	}
 
 	/**
-	 * Get permalink
-	 *
-	 * @param bool $getTruePermalink
-	 *
-	 * @return string|null
+	 * {@inheritDoc}
 	 */
 	public function getPermalink($getTruePermalink = false)
 	{
@@ -299,11 +256,7 @@ class Page
 	}
 
 	/**
-	 * Set true permalink
-	 *
-	 * @param string $truePermalink
-	 *
-	 * @return Page
+	 * {@inheritDoc}
 	 */
 	public function setTruePermalink($truePermalink)
 	{
@@ -313,9 +266,7 @@ class Page
 	}
 
 	/**
-	 * Get true permalink
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
 	public function getTruePermalink()
 	{
@@ -323,11 +274,7 @@ class Page
 	}
 
 	/**
-	 * Set menuTitle
-	 *
-	 * @param string $menuTitle
-	 *
-	 * @return Page
+	 * {@inheritDoc}
 	 */
 	public function setMenuTitle($menuTitle)
 	{
@@ -337,9 +284,7 @@ class Page
 	}
 
 	/**
-	 * Get menuTitle
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
 	public function getMenuTitle()
 	{
@@ -347,11 +292,7 @@ class Page
 	}
 
 	/**
-	 * Set title
-	 *
-	 * @param string $title
-	 *
-	 * @return Page
+	 * {@inheritDoc}
 	 */
 	public function setTitle($title)
 	{
@@ -361,9 +302,7 @@ class Page
 	}
 
 	/**
-	 * Get title
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
 	public function getTitle()
 	{
@@ -371,11 +310,7 @@ class Page
 	}
 
 	/**
-	 * Set content
-	 *
-	 * @param string $content
-	 *
-	 * @return Page
+	 * {@inheritDoc}
 	 */
 	public function setContent($content)
 	{
@@ -385,9 +320,7 @@ class Page
 	}
 
 	/**
-	 * Get content
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
 	public function getContent()
 	{
@@ -395,11 +328,7 @@ class Page
 	}
 
 	/**
-	 * Set metaKeywords
-	 *
-	 * @param string $metaKeywords
-	 *
-	 * @return Page
+	 * {@inheritDoc}
 	 */
 	public function setMetaKeywords($metaKeywords)
 	{
@@ -409,9 +338,7 @@ class Page
 	}
 
 	/**
-	 * Get metaKeywords
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
 	public function getMetaKeywords()
 	{
@@ -419,11 +346,7 @@ class Page
 	}
 
 	/**
-	 * Set metaDescription
-	 *
-	 * @param string $metaDescription
-	 *
-	 * @return Page
+	 * {@inheritDoc}
 	 */
 	public function setMetaDescription($metaDescription)
 	{
@@ -433,9 +356,7 @@ class Page
 	}
 
 	/**
-	 * Get metaDescription
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
 	public function getMetaDescription()
 	{
@@ -443,13 +364,9 @@ class Page
 	}
 
 	/**
-	 * Add page
-	 *
-	 * @param Page $page
-	 *
-	 * @return Page
+	 * {@inheritDoc}
 	 */
-	public function addPage(Page $page)
+	public function addPage(PageInterface $page)
 	{
 		$this->pages[] = $page;
 
@@ -457,19 +374,15 @@ class Page
 	}
 
 	/**
-	 * Remove page
-	 *
-	 * @param Page $page
+	 * {@inheritDoc}
 	 */
-	public function removePage(Page $page)
+	public function removePage(PageInterface $page)
 	{
 		$this->pages->removeElement($page);
 	}
 
 	/**
-	 * Get pages
-	 *
-	 * @return Collection
+	 * {@inheritDoc}
 	 */
 	public function getPages()
 	{
@@ -477,13 +390,9 @@ class Page
 	}
 
 	/**
-	 * Add file
-	 *
-	 * @param File $file
-	 *
-	 * @return Page
+	 * {@inheritDoc}
 	 */
-	public function addFile(File $file)
+	public function addFile(FileInterface $file)
 	{
 		$this->files[] = $file;
 
@@ -491,19 +400,15 @@ class Page
 	}
 
 	/**
-	 * Remove file
-	 *
-	 * @param File $file
+	 * {@inheritDoc}
 	 */
-	public function removeFile(File $file)
+	public function removeFile(FileInterface $file)
 	{
 		$this->files->removeElement($file);
 	}
 
 	/**
-	 * Get files
-	 *
-	 * @return Collection
+	 * {@inheritDoc}
 	 */
 	public function getFiles()
 	{
@@ -511,13 +416,9 @@ class Page
 	}
 
 	/**
-	 * Set menu
-	 *
-	 * @param Menu $menu
-	 *
-	 * @return Page
+	 * {@inheritDoc}
 	 */
-	public function setMenu(Menu $menu = null)
+	public function setMenu(MenuInterface $menu = null)
 	{
 		$this->menu = $menu;
 
@@ -525,9 +426,7 @@ class Page
 	}
 
 	/**
-	 * Get menu
-	 *
-	 * @return Menu
+	 * {@inheritDoc}
 	 */
 	public function getMenu()
 	{
@@ -535,13 +434,9 @@ class Page
 	}
 
 	/**
-	 * Set site
-	 *
-	 * @param Site $site
-	 *
-	 * @return Page
+	 * {@inheritDoc}
 	 */
-	public function setSite(Site $site = null)
+	public function setSite(SiteInterface $site = null)
 	{
 		$this->site = $site;
 
@@ -549,9 +444,7 @@ class Page
 	}
 
 	/**
-	 * Get site
-	 *
-	 * @return Site
+	 * {@inheritDoc}
 	 */
 	public function getSite()
 	{
@@ -559,13 +452,9 @@ class Page
 	}
 
 	/**
-	 * Set createdBy
-	 *
-	 * @param User $createdBy
-	 *
-	 * @return Page
+	 * {@inheritDoc}
 	 */
-	public function setCreatedBy(User $createdBy = null)
+	public function setCreatedBy(UserInterface $createdBy = null)
 	{
 		$this->createdBy = $createdBy;
 
@@ -573,9 +462,7 @@ class Page
 	}
 
 	/**
-	 * Get createdBy
-	 *
-	 * @return User
+	 * {@inheritDoc}
 	 */
 	public function getCreatedBy()
 	{
@@ -583,13 +470,9 @@ class Page
 	}
 
 	/**
-	 * Set updatedBy
-	 *
-	 * @param User $updatedBy
-	 *
-	 * @return Page
+	 * {@inheritDoc}
 	 */
-	public function setUpdatedBy(User $updatedBy = null)
+	public function setUpdatedBy(UserInterface $updatedBy = null)
 	{
 		$this->updatedBy = $updatedBy;
 
@@ -597,9 +480,7 @@ class Page
 	}
 
 	/**
-	 * Get updatedBy
-	 *
-	 * @return User
+	 * {@inheritDoc}
 	 */
 	public function getUpdatedBy()
 	{
@@ -607,13 +488,9 @@ class Page
 	}
 
 	/**
-	 * Set pageType
-	 *
-	 * @param PageType $pageType
-	 *
-	 * @return Page
+	 * {@inheritDoc}
 	 */
-	public function setPageType(PageType $pageType = null)
+	public function setPageType(PageTypeInterface $pageType = null)
 	{
 		$this->pageType = $pageType;
 
@@ -621,9 +498,7 @@ class Page
 	}
 
 	/**
-	 * Get pageType
-	 *
-	 * @return PageType
+	 * {@inheritDoc}
 	 */
 	public function getPageType()
 	{
@@ -631,13 +506,9 @@ class Page
 	}
 
 	/**
-	 * Set parent
-	 *
-	 * @param Page $parent
-	 *
-	 * @return Page
+	 * {@inheritDoc}
 	 */
-	public function setParent(Page $parent = null)
+	public function setParent(PageInterface $parent = null)
 	{
 		$this->parent = $parent;
 
@@ -645,9 +516,7 @@ class Page
 	}
 
 	/**
-	 * Get parent
-	 *
-	 * @return Page
+	 * {@inheritDoc}
 	 */
 	public function getParent()
 	{
@@ -655,13 +524,9 @@ class Page
 	}
 
 	/**
-	 * Add category
-	 *
-	 * @param Category $category
-	 *
-	 * @return Page
+	 * {@inheritDoc}
 	 */
-	public function addCategory(Category $category)
+	public function addCategory(CategoryInterface $category)
 	{
 		$this->categories[] = $category;
 
@@ -669,19 +534,15 @@ class Page
 	}
 
 	/**
-	 * Remove category
-	 *
-	 * @param Category $category
+	 * {@inheritDoc}
 	 */
-	public function removeCategory(Category $category)
+	public function removeCategory(CategoryInterface $category)
 	{
 		$this->categories->removeElement($category);
 	}
 
 	/**
-	 * Get categories
-	 *
-	 * @return Collection
+	 * {@inheritDoc}
 	 */
 	public function getCategories()
 	{
@@ -689,13 +550,9 @@ class Page
 	}
 
 	/**
-	 * Add tag
-	 *
-	 * @param Tag $tag
-	 *
-	 * @return Page
+	 * {@inheritDoc}
 	 */
-	public function addTag(Tag $tag)
+	public function addTag(TagInterface $tag)
 	{
 		$this->tags[] = $tag;
 
@@ -703,19 +560,15 @@ class Page
 	}
 
 	/**
-	 * Remove tag
-	 *
-	 * @param Tag $tag
+	 * {@inheritDoc}
 	 */
-	public function removeTag(Tag $tag)
+	public function removeTag(TagInterface $tag)
 	{
 		$this->tags->removeElement($tag);
 	}
 
 	/**
-	 * Get tags
-	 *
-	 * @return Collection
+	 * {@inheritDoc}
 	 */
 	public function getTags()
 	{
@@ -723,9 +576,7 @@ class Page
 	}
 
 	/**
-	 * Page title
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
 	public function __toString()
 	{

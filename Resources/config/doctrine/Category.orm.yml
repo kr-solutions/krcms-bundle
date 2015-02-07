@@ -27,12 +27,4 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Category:
             length: null
             fixed: false
             comment: ''
-    manyToMany:
-        pages:
-            targetEntity: Page
-            cascade: {  }
-            mappedBy: categories
-            inversedBy: null
-            joinTable: null
-            orderBy: null
     lifecycleCallbacks: {  }

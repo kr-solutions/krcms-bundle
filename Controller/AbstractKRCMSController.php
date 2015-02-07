@@ -109,4 +109,34 @@ class AbstractKRCMSController extends Controller
 		return $this->container->get('security.context');
 	}
 
+	/**
+	 * Get the site manager
+	 *
+	 * @return \KRSolutions\Bundle\KRCMSBundle\Model\SiteManagerInterface
+	 */
+	protected function getSiteManager()
+	{
+		return $this->container->get('kr_solutions_krcms.site_manager');
+	}
+
+	/**
+	 * Get the page manager
+	 *
+	 * @return \KRSolutions\Bundle\KRCMSBundle\Model\PageManagerInterface
+	 */
+	protected function getPageManager()
+	{
+		return $this->container->get('kr_solutions_krcms.page_manager');
+	}
+
+	/**
+	 * Get the menu manager
+	 *
+	 * @return \KRSolutions\Bundle\KRCMSBundle\Model\MenuManagerInterface
+	 */
+	protected function getMenuManager()
+	{
+		return $this->container->get('kr_solutions_krcms.menu_manager');
+	}
+
 }

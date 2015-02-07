@@ -2,7 +2,6 @@
 
 namespace KRSolutions\Bundle\KRCMSBundle\Controller;
 
-use KRSolutions\Bundle\KRCMSBundle\Entity\Site;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -28,7 +27,7 @@ class SiteController extends AbstractKRCMSController
 			return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
 		}
 
-		$sites = $this->getSiteRepository()->getAllSites();
+		$sites = $this->getSiteManager()->getAllSites();
 
 		return $this->render('KRSolutionsKRCMSBundle:Site:index.html.twig', array('sites' => $sites));
 	}
@@ -50,10 +49,10 @@ class SiteController extends AbstractKRCMSController
 		}
 
 		if (null !== $siteId) {
-			$site = $this->getSiteRepository()->getSiteById($siteId);
+			$site = $this->getSiteManager()->getSiteById($siteId);
 			$action = 'edit';
 		} else {
-			$site = new Site();
+			$site = $this->getSiteManager()->createSite();
 			$action = 'new';
 		}
 
@@ -107,7 +106,7 @@ class SiteController extends AbstractKRCMSController
 			return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
 		}
 
-		$site = $this->getSiteRepository()->getSiteById($siteId);
+		$site = $this->getSiteManager()->getSiteById($siteId);
 
 		if (null === $site) {
 			$request->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('site.remove.failed_not_exist', array('%site_id%' => $siteId), 'KRSolutionsKRCMSBundle'));
@@ -115,7 +114,7 @@ class SiteController extends AbstractKRCMSController
 			return $this->redirect($this->generateUrl('kr_solutions_krcms_sites_index'));
 		}
 
-		$pageCount = $this->getPageRepository()->getPageCountBySite($site);
+		$pageCount = $this->getPageManager()->getPageCountBySite($site);
 
 		if (0 !== $pageCount) {
 			$request->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('site.remove.failed_pages_exist', array('%site_id%' => $siteId), 'KRSolutionsKRCMSBundle'));

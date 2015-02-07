@@ -3,45 +3,43 @@
 namespace KRSolutions\Bundle\KRCMSBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use KRSolutions\Bundle\KRUserBundle\Entity\User;
 
 
 /**
  * Site
  */
-class Site
+class Site implements SiteInterface
 {
 
 	/**
 	 * @var integer
 	 */
-	private $id;
+	protected $id;
 
 	/**
 	 * @var string
 	 */
-	private $permalink;
+	protected $permalink;
 
 	/**
 	 * @var string
 	 */
-	private $title;
+	protected $title;
 
 	/**
 	 * @var boolean
 	 */
-	private $isActive;
+	protected $isActive;
 
 	/**
-	 * @var Page
+	 * @var PageInterface
 	 */
-	private $homepage;
+	protected $homepage;
 
 	/**
-	 * @var Collection
+	 * @var \Doctrine\Common\Collections\Collection
 	 */
-	private $users;
+	protected $users;
 
 	/**
 	 * Constructor
@@ -52,9 +50,7 @@ class Site
 	}
 
 	/**
-	 * Get id
-	 *
-	 * @return integer
+	 * {@inheritDoc}
 	 */
 	public function getId()
 	{
@@ -62,11 +58,7 @@ class Site
 	}
 
 	/**
-	 * Set permalink
-	 *
-	 * @param string $permalink
-	 *
-	 * @return Site
+	 * {@inheritDoc}
 	 */
 	public function setPermalink($permalink)
 	{
@@ -76,9 +68,7 @@ class Site
 	}
 
 	/**
-	 * Get permalink
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
 	public function getPermalink()
 	{
@@ -86,11 +76,7 @@ class Site
 	}
 
 	/**
-	 * Set title
-	 *
-	 * @param string $title
-	 *
-	 * @return Site
+	 * {@inheritDoc}
 	 */
 	public function setTitle($title)
 	{
@@ -100,9 +86,7 @@ class Site
 	}
 
 	/**
-	 * Get title
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
 	public function getTitle()
 	{
@@ -110,11 +94,7 @@ class Site
 	}
 
 	/**
-	 * Set isActive
-	 *
-	 * @param boolean $isActive
-	 *
-	 * @return Site
+	 * {@inheritDoc}
 	 */
 	public function setIsActive($isActive)
 	{
@@ -124,9 +104,7 @@ class Site
 	}
 
 	/**
-	 * Get isActive
-	 *
-	 * @return boolean
+	 * {@inheritDoc}
 	 */
 	public function getIsActive()
 	{
@@ -134,13 +112,9 @@ class Site
 	}
 
 	/**
-	 * Set homepage
-	 *
-	 * @param Page $homepage
-	 *
-	 * @return Site
+	 * {@inheritDoc}
 	 */
-	public function setHomepage(Page $homepage = null)
+	public function setHomepage(PageInterface $homepage = null)
 	{
 		$this->homepage = $homepage;
 
@@ -148,9 +122,7 @@ class Site
 	}
 
 	/**
-	 * Get homepage
-	 *
-	 * @return Page
+	 * {@inheritDoc}
 	 */
 	public function getHomepage()
 	{
@@ -158,13 +130,9 @@ class Site
 	}
 
 	/**
-	 * Add user
-	 *
-	 * @param User $user
-	 *
-	 * @return Site
+	 * {@inheritDoc}
 	 */
-	public function addUser(User $user)
+	public function addUser(UserInterface $user)
 	{
 		$this->users[] = $user;
 
@@ -172,19 +140,15 @@ class Site
 	}
 
 	/**
-	 * Remove user
-	 *
-	 * @param User $user
+	 * {@inheritDoc}
 	 */
-	public function removeUser(User $user)
+	public function removeUser(UserInterface $user)
 	{
 		$this->users->removeElement($user);
 	}
 
 	/**
-	 * Get users
-	 *
-	 * @return Collection
+	 * {@inheritDoc}
 	 */
 	public function getUsers()
 	{
@@ -192,9 +156,7 @@ class Site
 	}
 
 	/**
-	 * Site title
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
 	public function __toString()
 	{

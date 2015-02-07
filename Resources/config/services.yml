@@ -1,7 +1,4 @@
 services:
-#    kr_solutions_krcms.example:
-#        class: KRSolutions\Bundle\KRCMSBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
 
     kr_solutions_krcms.page_handler.page:
         class: KRSolutions\Bundle\KRCMSBundle\PageHandler\PageHandler
@@ -26,35 +23,60 @@ services:
 
     kr_solutions_krcms.form.type.category:
         class: KRSolutions\Bundle\KRCMSBundle\Form\Type\CategoryType
+        arguments: ["%kr_solutions_krcms.model.category_class%"]
         tags:
             - { name: form.type, alias: category }
 
     kr_solutions_krcms.form.type.krcms_file:
         class: KRSolutions\Bundle\KRCMSBundle\Form\Type\KRCMSFileType
+        arguments: ["%kr_solutions_krcms.model.file_class%"]
         tags:
             - { name: form.type, alias: krcms_file }
 
     kr_solutions_krcms.form.type.menu:
         class: KRSolutions\Bundle\KRCMSBundle\Form\Type\MenuType
+        arguments: ["%kr_solutions_krcms.model.menu_class%"]
         tags:
             - { name: form.type, alias: menu }
 
     kr_solutions_krcms.form.type.page:
         class: KRSolutions\Bundle\KRCMSBundle\Form\Type\PageType
+        arguments: ["%kr_solutions_krcms.model.page_class%"]
         tags:
             - { name: form.type, alias: page }
 
     kr_solutions_krcms.form.type.page_type:
         class: KRSolutions\Bundle\KRCMSBundle\Form\Type\PageTypeType
+        arguments: ["%kr_solutions_krcms.model.page_type_class%"]
         tags:
             - { name: form.type, alias: page_type }
 
     kr_solutions_krcms.form.type.site:
         class: KRSolutions\Bundle\KRCMSBundle\Form\Type\SiteType
+        arguments: ["%kr_solutions_krcms.model.site_class%"]
         tags:
             - { name: form.type, alias: site }
 
     kr_solutions_krcms.form.type.tag:
         class: KRSolutions\Bundle\KRCMSBundle\Form\Type\TagType
+        arguments: ["%kr_solutions_krcms.model.tag_class%"]
         tags:
             - { name: form.type, alias: tag }
+
+    kr_solutions_krcms.site_manager:
+        class: KRSolutions\Bundle\KRCMSBundle\Doctrine\SiteManager
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "%kr_solutions_krcms.model.site_class%"
+
+    kr_solutions_krcms.page_manager:
+        class: KRSolutions\Bundle\KRCMSBundle\Doctrine\PageManager
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "%kr_solutions_krcms.model.page_class%"
+
+    kr_solutions_krcms.menu_manager:
+        class: KRSolutions\Bundle\KRCMSBundle\Doctrine\MenuManager
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "%kr_solutions_krcms.model.menu_class%"

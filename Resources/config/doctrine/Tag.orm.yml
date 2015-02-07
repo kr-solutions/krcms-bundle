@@ -21,12 +21,4 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Tag:
             length: 255
             fixed: false
             comment: ''
-    manyToMany:
-        pages:
-            targetEntity: Page
-            cascade: {  }
-            mappedBy: tags
-            inversedBy: null
-            joinTable: null
-            orderBy: null
     lifecycleCallbacks: {  }

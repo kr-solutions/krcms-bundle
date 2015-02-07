@@ -2,43 +2,25 @@
 
 namespace KRSolutions\Bundle\KRCMSBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-
 
 /**
  * Tag
  */
-class Tag
+class Tag implements TagInterface
 {
 
 	/**
 	 * @var integer
 	 */
-	private $id;
+	protected $id;
 
 	/**
 	 * @var string
 	 */
-	private $name;
+	protected $name;
 
 	/**
-	 * @var Collection
-	 */
-	private $pages;
-
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		$this->pages = new ArrayCollection();
-	}
-
-	/**
-	 * Get id
-	 *
-	 * @return integer
+	 * {@inheritDoc}
 	 */
 	public function getId()
 	{
@@ -46,11 +28,7 @@ class Tag
 	}
 
 	/**
-	 * Set name
-	 *
-	 * @param string $name
-	 *
-	 * @return Tag
+	 * {@inheritDoc}
 	 */
 	public function setName($name)
 	{
@@ -60,9 +38,7 @@ class Tag
 	}
 
 	/**
-	 * Get name
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
 	public function getName()
 	{
@@ -70,43 +46,7 @@ class Tag
 	}
 
 	/**
-	 * Add page
-	 *
-	 * @param Page $page
-	 *
-	 * @return Tag
-	 */
-	public function addPage(Page $page)
-	{
-		$this->pages[] = $page;
-
-		return $this;
-	}
-
-	/**
-	 * Remove page
-	 *
-	 * @param Page $page
-	 */
-	public function removePage(Page $page)
-	{
-		$this->pages->removeElement($page);
-	}
-
-	/**
-	 * Get pages
-	 *
-	 * @return Collection
-	 */
-	public function getPages()
-	{
-		return $this->pages;
-	}
-
-	/**
-	 * Tag name
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
 	public function __toString()
 	{

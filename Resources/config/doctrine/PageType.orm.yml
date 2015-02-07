@@ -101,10 +101,10 @@ KRSolutions\Bundle\KRCMSBundle\Entity\PageType:
             comment: ''
     manyToMany:
         pageTypeParents:
-            targetEntity: PageType
+            targetEntity: PageTypeInterface
             mappedBy: pageTypeChildren
         pageTypeChildren:
-            targetEntity: PageType
+            targetEntity: PageTypeInterface
             cascade: {  }
             mappedBy: null
             inversedBy: pageTypeParents
@@ -119,10 +119,4 @@ KRSolutions\Bundle\KRCMSBundle\Entity\PageType:
                         name: child_page_type_id
                         referencedColumnName: id
             orderBy: null
-    oneToMany:
-        pages:
-            targetEntity: Page
-            mappedBy: pageType
-            orderBy:
-                orderId: asc
     lifecycleCallbacks: {  }

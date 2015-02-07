@@ -38,7 +38,7 @@
 								<td>
 									<div class="btn-group pull-right" role="group">
 										<a class="btn btn-default" href="{{ path('kr_solutions_krcms_sites_edit', { 'siteId': site.id }) }}" title="{{ 'site.edit_site'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-edit"></i> {{ 'layout.edit'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
-										<button type="button" class="btn btn-default" data-toggle="modal" data-target="#site_remove_modal" data-site_id="{{ site.id }}" title="{{ 'site.remove_site'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-trash"></i> {{ 'layout.remove'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
+										<button type="button" class="btn btn-default" data-toggle="modal" data-target="#site_remove_modal" data-site_id="{{ site.id }}" title="{{ 'site.remove_site'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-fw fa-trash"></i> {{ 'layout.remove'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
 									</div>
 								</td>
 							</tr>
@@ -46,7 +46,7 @@
 					{% else %}
 						<tr>
 							<td colspan="4">There are no sites added yet.</td>
-							<td><a href="{{ path('kr_solutions_krcms_sites_add') }}">Add</a></td>
+							<td><a class="btn btn-default" href="{{ path('kr_solutions_krcms_sites_add') }}"><i class="fa fa-fw fa-plus"></i> {{ 'site.add_site'|trans({}, 'KRSolutionsKRCMSBundle') }}</a></td>
 						</tr>
 					{% endif %}
 				</tbody>

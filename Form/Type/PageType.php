@@ -3,8 +3,6 @@
 namespace KRSolutions\Bundle\KRCMSBundle\Form\Type;
 
 use KRSolutions\Bundle\KRCMSBundle\Form\DataTransformer\NullToEmptyStringTransformer;
-use KRSolutions\Bundle\KRCMSBundle\Repository\MenuRepository;
-use KRSolutions\Bundle\KRCMSBundle\Repository\PageRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -15,6 +13,19 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class PageType extends AbstractType
 {
+
+	/**
+	 * @var string
+	 */
+	private $class;
+
+	/**
+	 * @param string $class The page class name
+	 */
+	public function __construct($class)
+	{
+		$this->class = $class;
+	}
 
 	/**
 	 * Build form
@@ -38,7 +49,7 @@ class PageType extends AbstractType
 
 		if (false === $page->getPageType()->getIsChild()) {
 			$builder->add('menu', null, array('label' => 'form.type.page.menu.label', 'required' => false, 'error_bubbling' => true, 'empty_value' => 'form.type.page.menu.empty_value', 'empty_data' => null,
-				'query_builder' => function (MenuRepository $repository) use ($page) {
+				'query_builder' => function (\Doctrine\ORM\EntityRepository $repository) use ($page) {
 					return $repository->getMenusBySiteQB($page->getSite());
 				}));
 
@@ -46,8 +57,8 @@ class PageType extends AbstractType
 		}
 
 		if (0 !== count($page->getPageType()->getPageTypeParents())) {
-			$parentOptions = array('class' => 'KRSolutions\\Bundle\\KRCMSBundle\\Entity\\Page', 'label' => 'form.type.page.parent.label', 'required' => true, 'error_bubbling' => true, 'empty_value' => false,
-				'query_builder' => function (PageRepository $repository) use ($page) {
+			$parentOptions = array('class' => $this->class, 'label' => 'form.type.page.parent.label', 'required' => true, 'error_bubbling' => true, 'empty_value' => false,
+				'query_builder' => function (\Doctrine\ORM\EntityRepository $repository) use ($page) {
 					return $repository->getAllChildablePagesExceptThisPageQB($page);
 				});
 
@@ -75,7 +86,7 @@ class PageType extends AbstractType
 	public function setDefaultOptions(OptionsResolverInterface $resolver)
 	{
 		$resolver->setDefaults(array(
-			'data_class' => 'KRSolutions\Bundle\KRCMSBundle\Entity\Page',
+			'data_class' => $this->class,
 			'translation_domain' => 'KRSolutionsKRCMSBundle'
 		));
 	}
