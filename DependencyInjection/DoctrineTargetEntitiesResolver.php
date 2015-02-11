@@ -26,19 +26,15 @@ class DoctrineTargetEntitiesResolver
 		}
 
 		/* @var $resolveTargetEntityListener \Symfony\Component\DependencyInjection\Definition */
-		$resolveTargetEntityListener = $container->findDefinition('doctrine.orm.listeners.resolve_target_entity');
+		$resolveTargetEntityListener = $container->findDefinition('kr_solutions_krcms.doctrine.orm.listeners.resolve_target_entity');
 
 		foreach ($interfaces as $interface => $model) {
 			$resolveTargetEntityListener
 				->addMethodCall('addResolveTargetEntity', array(
-					$this->getInterface($container, '\\KRSolutions\\Bundle\\KRCMSBundle\\Entity\\PageInterface'),
-					$this->getClass($container, '\\KRSolutions\\Bundle\\KRCMSBundle\\Entity\\Page'),
+					$this->getInterface($container, $interface),
+					$this->getClass($container, $model),
 					array()
 			));
-		}
-
-		if (!$resolveTargetEntityListener->hasTag('doctrine.event_listener')) {
-			$resolveTargetEntityListener->addTag('doctrine.event_listener', array('event' => 'loadClassMetadata'));
 		}
 	}
 

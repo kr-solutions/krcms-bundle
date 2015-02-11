@@ -80,3 +80,8 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "%kr_solutions_krcms.model.menu_class%"
+
+    kr_solutions_krcms.doctrine.orm.listeners.resolve_target_entity:
+        class: KRSolutions\Bundle\KRCMSBundle\Doctrine\ORM\Tools\ResolveTargetEntityListener
+        tags:
+            - { name: doctrine.event_listener, event: loadClassMetadata }

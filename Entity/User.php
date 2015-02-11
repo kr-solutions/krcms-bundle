@@ -2,14 +2,14 @@
 
 namespace KRSolutions\Bundle\KRCMSBundle\Entity;
 
-use FOS\UserBundle\Model\User as BaseUser;
-
 
 /**
  * User
  */
-class User extends BaseUser implements UserInterface
+abstract class User implements UserInterface
 {
+
+	protected $id;
 
 	/**
 	 * Constructor

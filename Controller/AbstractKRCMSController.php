@@ -139,4 +139,9 @@ class AbstractKRCMSController extends Controller
 		return $this->container->get('kr_solutions_krcms.menu_manager');
 	}
 
+	protected function isGranted($attributes, $object = null)
+	{
+		return $this->get('security.context')->isGranted($attributes, $object);
+	}
+
 }
