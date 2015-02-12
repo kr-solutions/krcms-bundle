@@ -11,10 +11,4 @@ use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
 interface UserInterface extends BaseUserInterface
 {
 
-	/**
-	 * Get username used by KRCMS
-	 *
-	 * @return string
-	 */
-	public function getKRCMSUsername();
 }

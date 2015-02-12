@@ -31,7 +31,14 @@ class HelpdeskController extends AbstractKRCMSController
 			return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
 		}
 
+		if (method_exists($this->getUser(), 'getKRCMSUsername')) {
+			$username = $this->getUser()->getKRCMSUsername();
+		} else {
+			$username = $this->getUser()->getUsername();
+		}
+
 		$defaultData = array(
+			'name' => $username,
 			'email' => $this->getUser()->getEmail()
 		);
 
