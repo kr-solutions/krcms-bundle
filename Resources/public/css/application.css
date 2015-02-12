@@ -1,12 +1,19 @@
-.brand-logo {
-	background: url("../images/logo-thumb.png") no-repeat scroll left center transparent;
+.navbar-brand img {
+	height: 50px;
+	width: 83px;
+	margin-top: -23px;
+	margin-right: 8px;
+	float: left;
 	display: block;
-	text-indent: 100px;
-	height: 100px;
-	font-weight: 200;
-	font-size: 28px;
-	line-height: 120px;
-	padding: 0px 15px;
+}
+
+.navbar-brand {
+	height: 52px;
+	padding: 25px;
+}
+
+.navbar-inverse .navbar-brand {
+	color: #ddd;
 }
 
 .table-row-dragged td,
