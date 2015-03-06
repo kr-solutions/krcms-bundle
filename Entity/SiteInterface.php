@@ -83,23 +83,32 @@ interface SiteInterface
 	/**
 	 * Add user
 	 *
-	 * @param UserInterface $user
+	 * @param \Symfony\Component\Security\Core\User\UserInterface $user
 	 *
 	 * @return SiteInterface
 	 */
-	public function addUser(UserInterface $user);
+	public function addUser(\Symfony\Component\Security\Core\User\UserInterface $user);
 
 	/**
 	 * Remove user
 	 *
-	 * @param UserInterface $user
+	 * @param \Symfony\Component\Security\Core\User\UserInterface $user
 	 */
-	public function removeUser(UserInterface $user);
+	public function removeUser(\Symfony\Component\Security\Core\User\UserInterface $user);
 
 	/**
 	 * Get users
 	 *
-	 * @return Collection
+	 * @param \Doctrine\Common\Collections\Collection $users
+	 *
+	 * @return SiteInterface
+	 */
+	public function setUsers(\Doctrine\Common\Collections\Collection $users);
+
+	/**
+	 * Get users
+	 *
+	 * @return \Doctrine\Common\Collections\Collection
 	 */
 	public function getUsers();
 

@@ -23,8 +23,12 @@
 
 	</head>
 	<body>
-		{% if site is defined %}
+		{% if site is defined and site.id %}
 			{% set activeSite = site %}
+		{% elseif page is defined %}
+			{% set activeSite = page.site %}
+		{% elseif menu is defined %}
+			{% set activeSite = menu.site %}
 		{% else %}
 			{% set activeSite = null %}
 		{% endif %}
@@ -46,10 +50,8 @@
 						{% endblock %}
 					</div>
 
-					<div class="row">
-						<p style="text-align: center;">
-							{{ 'layout.footer_text'|trans({}, 'KRSolutionsKRCMSBundle')|raw }}
-						</p>
+					<div id="page-footer" class="row">
+						<img src="{{ asset('bundles/krsolutionskrcms/images/logo-sm.png') }}" alt="K&amp;R" /> Content Management System
 					</div>
 				</div>
 			</div>

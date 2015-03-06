@@ -49,4 +49,17 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Site:
                     referencedColumnName: id
                     onDelete: "SET NULL"
             orphanRemoval: false
+    manyToMany:
+        users:
+            targetEntity: UserInterface
+            joinTable:
+                name: krcms_sites_users
+                joinColumns:
+                    user_id:
+                        referencedColumnName: id
+                        onDelete: "CASCADE"
+                inverseJoinColumns:
+                    group_id:
+                       referencedColumnName: id
+                       onDelete: "CASCADE"
     lifecycleCallbacks: {  }

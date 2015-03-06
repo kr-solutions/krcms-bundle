@@ -80,7 +80,6 @@ layout:
     login: Login
     register: Register
     logged_in_as: Logged in as %username%
-    footer_text: K&amp;R Solutions - Content Management System
     yes: Yes
     no: No
     save: Save
@@ -96,7 +95,8 @@ layout:
     files: Files
     menu:
         dashboard: Dashboard
-        manage_pages: Manage pages
+        select_current_site: Select current site
+        pages: Pages
         helpdesk: Helpdesk
         categories: Categories
         menus: Menus

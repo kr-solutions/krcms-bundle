@@ -132,9 +132,11 @@ class Site implements SiteInterface
 	/**
 	 * {@inheritDoc}
 	 */
-	public function addUser(UserInterface $user)
+	public function addUser(\Symfony\Component\Security\Core\User\UserInterface $user)
 	{
-		$this->users[] = $user;
+		if (!$this->users->contains($user)) {
+			$this->users->add($user);
+		}
 
 		return $this;
 	}
@@ -142,9 +144,21 @@ class Site implements SiteInterface
 	/**
 	 * {@inheritDoc}
 	 */
-	public function removeUser(UserInterface $user)
+	public function removeUser(\Symfony\Component\Security\Core\User\UserInterface $user)
 	{
 		$this->users->removeElement($user);
+
+		return $this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function setUsers(\Doctrine\Common\Collections\Collection $users)
+	{
+		$this->users = $users;
+
+		return $this;
 	}
 
 	/**

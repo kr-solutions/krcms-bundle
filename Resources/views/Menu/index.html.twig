@@ -11,7 +11,7 @@
 {% block content %}
 	<div class="col-md-4">
 		<div class="well">
-			<form action="{{ path('kr_solutions_krcms_menus_index') }}" method="post" {{ form_enctype(menuForm) }} novalidate="novalidate">
+			<form action="{{ path('kr_solutions_krcms_menus_index', { 'siteId': site.id }) }}" method="post" {{ form_enctype(menuForm) }} novalidate="novalidate">
 				<fieldset>
 					<legend>{{ 'menu.add_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}</legend>
 

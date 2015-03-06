@@ -22,7 +22,7 @@ class AdminController extends AbstractKRCMSController
 	 */
 	public function menuAction($route, Site $activeSite = null)
 	{
-		$sites = $this->getSiteManager()->getAllActiveSites();
+		$sites = $this->getSiteManager()->getAllSites();
 
 		$managementRoles = array();
 		$managementRoles['categories'] = $this->container->getParameter('kr_solutions_krcms.management_roles.categories');

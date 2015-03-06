@@ -1,6 +1,8 @@
 kr_solutions_krcms_menus_index:
-    pattern: /
+    pattern: /{siteId}
     defaults: { _controller: KRSolutionsKRCMSBundle:Menu:index }
+    requirements:
+        siteId: \d+
 
 kr_solutions_krcms_menus_remove:
     pattern: /remove/{menuId}

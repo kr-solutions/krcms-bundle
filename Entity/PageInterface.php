@@ -2,6 +2,8 @@
 
 namespace KRSolutions\Bundle\KRCMSBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
+
 
 /**
  * Page interface
@@ -229,7 +231,7 @@ interface PageInterface
 	/**
 	 * Get pages
 	 *
-	 * @return \Doctrine\Common\Collections\Collection
+	 * @return Collection
 	 */
 	public function getPages();
 
@@ -252,7 +254,7 @@ interface PageInterface
 	/**
 	 * Get files
 	 *
-	 * @return \Doctrine\Common\Collections\Collection
+	 * @return Collection
 	 */
 	public function getFiles();
 
@@ -291,32 +293,32 @@ interface PageInterface
 	/**
 	 * Set createdBy
 	 *
-	 * @param UserInterface $createdBy
+	 * @param \Symfony\Component\Security\Core\User\UserInterface $createdBy
 	 *
 	 * @return PageInterface
 	 */
-	public function setCreatedBy(UserInterface $createdBy = null);
+	public function setCreatedBy(\Symfony\Component\Security\Core\User\UserInterface $createdBy = null);
 
 	/**
 	 * Get createdBy
 	 *
-	 * @return UserInterface
+	 * @return \Symfony\Component\Security\Core\User\UserInterface
 	 */
 	public function getCreatedBy();
 
 	/**
 	 * Set updatedBy
 	 *
-	 * @param UserInterface $updatedBy
+	 * @param \Symfony\Component\Security\Core\User\UserInterface $updatedBy
 	 *
 	 * @return PageInterface
 	 */
-	public function setUpdatedBy(UserInterface $updatedBy = null);
+	public function setUpdatedBy(\Symfony\Component\Security\Core\User\UserInterface $updatedBy = null);
 
 	/**
 	 * Get updatedBy
 	 *
-	 * @return UserInterface
+	 * @return \Symfony\Component\Security\Core\User\UserInterface
 	 */
 	public function getUpdatedBy();
 
@@ -371,7 +373,7 @@ interface PageInterface
 	/**
 	 * Get categories
 	 *
-	 * @return \Doctrine\Common\Collections\Collection
+	 * @return Collection
 	 */
 	public function getCategories();
 
@@ -394,7 +396,7 @@ interface PageInterface
 	/**
 	 * Get tags
 	 *
-	 * @return \Doctrine\Common\Collections\Collection
+	 * @return Collection
 	 */
 	public function getTags();
 

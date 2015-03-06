@@ -10,14 +10,25 @@
 	</div>
 
 	<ul class="nav navbar-right top-nav">
+		{# Sites #}
+		<li class="dropdown">
+
+			{% if sites|length > 1 %}
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-desktop"></i> {{ 'layout.menu.select_current_site'|trans({}, 'KRSolutionsKRCMSBundle') }}{% if activeSite is defined and activeSite is not null %} ({{ activeSite.title }}){% endif %} <i class="fa fa-fw fa-fw fa-caret-down"></i></a>
+				<ul class="dropdown-menu">
+					{% for site in sites %}
+						<li{% if activeSite is defined and activeSite is not null and activeSite == site %} class="active" {% endif %}>
+							<a href="{{ path('kr_solutions_krcms_pages_index', { 'siteId': site.id }) }}"><i class="fa fa-fw fa-desktop"></i> {{ site.title }}</a>
+						</li>
+					{% endfor %}
+				</ul>
+			{% endif %}
+		</li>
+
 		{# User #}
 		<li class="dropdown">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-user"></i> {{ app.user }} <b class="caret"></b></a>
 			<ul class="dropdown-menu">
-				<li>
-					<a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
-				</li>
-				<li class="divider"></li>
 				<li>
 					<a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-fw fa-fw fa-power-off"></i> {{ 'layout.logout'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
 				</li>
@@ -28,43 +39,26 @@
 	<div class="collapse navbar-collapse navbar-ex1-collapse">
 		<ul class="nav navbar-nav side-nav">
 			<li{% if route == 'kr_solutions_krcms_dashboard' %} class="active" {% endif %}>
-				<a href="{{ path('kr_solutions_krcms_dashboard') }}"><i class="fa fa-fw fa-home"></i> {{ 'layout.menu.dashboard'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+				<a href="{{ path('kr_solutions_krcms_dashboard') }}"><i class="fa fa-fw fa-dashboard"></i> {{ 'layout.menu.dashboard'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
 			</li>
-			{% if sites|length == 1 %}
+			{% if activeSite is not null %}
 				<li{% if route == 'kr_solutions_krcms_pages_index' %} class="active"{% endif %}>
-					<a href="{{ path('kr_solutions_krcms_pages_index', { 'siteId': sites[0].id }) }}"><i class="fa fa-fw fa-files-o"></i> {{ 'layout.menu.manage_pages'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
-				</li>
-			{% else %}
-				<li{% if route == 'kr_solutions_krcms_pages_index' %} class="active"{% endif %}>
-					<a data-toggle="collapse" data-target="#sidebar-pages" href="javascript:void(0);"><i class="fa fa-fw fa-list"></i> {{ 'layout.menu.manage_pages'|trans({}, 'KRSolutionsKRCMSBundle') }} <i class="fa fa-fw fa-fw fa-caret-down"></i></a>
-
-					<ul class="collapse" id="sidebar-pages">
-						{% for site in sites %}
-							<li{% if activeSite is defined and activeSite is not null and activeSite == site %} class="active" {% endif %}>
-								<a href="{{ path('kr_solutions_krcms_pages_index', { 'siteId': site.id }) }}"><i class="fa fa-fw fa-file"></i> {{ site.title }}</a>
-							</li>
-						{% endfor %}
-					</ul>
+					<a href="{{ path('kr_solutions_krcms_pages_index', { 'siteId': activeSite.id }) }}"><i class="fa fa-fw fa-files-o"></i> {{ 'layout.menu.pages'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
 				</li>
 			{% endif %}
-			{% if helpDeskEnabled %}
-				<li{% if route == 'kr_solutions_krcms_helpdesk' %} class="active" {% endif %}>
-					<a href="{{ path('kr_solutions_krcms_helpdesk') }}"><i class="fa fa-fw fa-question"></i> {{ 'layout.menu.helpdesk'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
-				</li>
-			{% endif %}
-			{% if is_granted(managementRoles['categories']) %}
+			{#{% if is_granted(managementRoles['categories']) %}
 				<li{% if route == 'kr_solutions_krcms_categories_index' %} class="active" {% endif %}>
 					<a href="{{ path('kr_solutions_krcms_categories_index') }}"><i class="fa fa-fw fa-leaf"></i> {{ 'layout.menu.categories'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
 				</li>
-			{% endif %}
-			{% if is_granted(managementRoles['menus']) %}
+			{% endif %}#}
+			{% if activeSite is not null and is_granted(managementRoles['menus']) %}
 				<li{% if route == 'kr_solutions_krcms_menus_index' %} class="active" {% endif %}>
-					<a href="{{ path('kr_solutions_krcms_menus_index') }}"><i class="fa fa-fw fa-list"></i> {{ 'layout.menu.menus'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+					<a href="{{ path('kr_solutions_krcms_menus_index', { 'siteId': activeSite.id }) }}"><i class="fa fa-fw fa-list"></i> {{ 'layout.menu.menus'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
 				</li>
 			{% endif %}
 			{% if is_granted(managementRoles['sites']) %}
 				<li{% if route == 'kr_solutions_krcms_sites_index' %} class="active" {% endif %}>
-					<a href="{{ path('kr_solutions_krcms_sites_index') }}"><i class="fa fa-fw fa-book"></i> {{ 'layout.menu.sites'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+					<a href="{{ path('kr_solutions_krcms_sites_index') }}"><i class="fa fa-fw fa-desktop"></i> {{ 'layout.menu.sites'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
 				</li>
 			{% endif %}
 			{% if is_granted(managementRoles['page_types']) %}
@@ -72,16 +66,11 @@
 					<a href="{{ path('kr_solutions_krcms_page_types_index') }}"><i class="fa fa-fw fa-cog"></i> {{ 'layout.menu.page_types'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
 				</li>
 			{% endif %}
-			{#
-			<li{% if app.request.attributes.get('_route') == 'kr_solutions_krcms_pages_index' and app.request.attributes.get('parentPageId') is null %} class="active"{% endif %}><a href="{{ path('kr_solutions_krcms_pages_index', { 'siteId': site.id }) }}">Paginaoverzicht</a></li>
-				{% if childablePages is defined and childablePages|length > 0 %}
-					{% for childablePage in childablePages %}
-					<li{% if app.request.attributes.get('_route') == 'kr_solutions_krcms_pages_index' and app.request.attributes.get('parentPageId') == childablePage.id %} class="active"{% endif %}>
-						<a href="{{ path('kr_solutions_krcms_pages_index', { 'siteId': site.id, 'parentPageId': childablePage.id }) }}">{{ childablePage.title }}</a>
-					</li>
-				{% endfor %}
-
-			{% endif %}#}
+			{% if helpDeskEnabled %}
+				<li{% if route == 'kr_solutions_krcms_helpdesk' %} class="active" {% endif %}>
+					<a href="{{ path('kr_solutions_krcms_helpdesk') }}"><i class="fa fa-fw fa-question"></i> {{ 'layout.menu.helpdesk'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+				</li>
+			{% endif %}
 		</ul>
 	</div>
 </nav>

@@ -454,7 +454,7 @@ class Page implements PageInterface
 	/**
 	 * {@inheritDoc}
 	 */
-	public function setCreatedBy(UserInterface $createdBy = null)
+	public function setCreatedBy(\Symfony\Component\Security\Core\User\UserInterface $createdBy = null)
 	{
 		$this->createdBy = $createdBy;
 
@@ -472,7 +472,7 @@ class Page implements PageInterface
 	/**
 	 * {@inheritDoc}
 	 */
-	public function setUpdatedBy(UserInterface $updatedBy = null)
+	public function setUpdatedBy(\Symfony\Component\Security\Core\User\UserInterface $updatedBy = null)
 	{
 		$this->updatedBy = $updatedBy;
 

@@ -80,7 +80,6 @@ layout:
     login: Inloggen
     register: Registreer
     logged_in_as: Ingelogd als %username%
-    footer_text: K&amp;R Solutions - Content Management System
     yes: Ja
     no: Nee
     save: Opslaan
@@ -96,7 +95,8 @@ layout:
     files: Bestanden
     menu:
         dashboard: Dashboard
-        manage_pages: Pagina's beheren
+        select_current_site: Selecteer huidige site
+        pages: Pagina's
         helpdesk: Helpdesk
         categories: Categoriën
         menus: Menu's

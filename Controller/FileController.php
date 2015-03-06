@@ -55,7 +55,6 @@ class FileController extends AbstractKRCMSController
 			$uriOrig = trim($newFile->getUri());
 
 			$newFile->setUri(ltrim(ltrim($uriOrig, '/'), ltrim($uploadDir, '/')));
-			$newFile->setCreatedBy($this->getUser());
 			$newFile->setPage($page);
 
 			$em->persist($newFile);

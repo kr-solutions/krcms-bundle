@@ -20,3 +20,13 @@
 .table-row-dragged th {
 	background-color: #eeddee !important;
 }
+
+#page-footer {
+	text-align: center;
+	margin-top: 5px;
+}
+
+#page-footer img {
+	display: inline;
+	margin-top: -5px;
+}
