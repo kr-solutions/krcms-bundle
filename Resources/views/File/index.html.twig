@@ -7,71 +7,69 @@
 {% endblock %}
 
 {% block content %}
-	<div class="row">
-		<div class="col-md-3">
-			<div class="well">
-				<form id="fileForm" action="{{ path('kr_solutions_krcms_files', { 'pageId': page.id }) }}" method="post" id="fileForm" {{ form_enctype(fileForm) }} novalidate="novalidate">
-					<fieldset>
-						<legend>{{ 'file.add_file'|trans({}, 'KRSolutionsKRCMSBundle') }}</legend>
+	<div class="col-md-3">
+		<div class="well">
+			<form id="fileForm" action="{{ path('kr_solutions_krcms_files', { 'pageId': page.id }) }}" method="post" id="fileForm" {{ form_enctype(fileForm) }} novalidate="novalidate">
+				<fieldset>
+					<legend>{{ 'file.add_file'|trans({}, 'KRSolutionsKRCMSBundle') }}</legend>
 
-						{% if form_errors(fileForm) %}
-							<div class="alert alert-danger">
-								<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'layout.close'|trans({}, 'KRSolutionsKRCMSBundle') }}</span></button>
-								<h4>{{ 'layout.form_error_alert_heading'|trans({}, 'KRSolutionsKRCMSBundle') }}</h4>
-								{{ form_errors(fileForm) }}
-							</div>
-						{% endif %}
-
-						<div class="form-group{% if fileForm.uri.vars.errors|length %} has-error{% endif %}">
-							{{ form_label(fileForm.uri) }}
-							{{ form_widget(fileForm.uri, { 'attr': {'class': 'form-control'} }) }}
-							<button class="btn btn-primary" id="kcfinder_browse">{{ 'file.browse'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
+					{% if form_errors(fileForm) %}
+						<div class="alert alert-danger">
+							<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'layout.close'|trans({}, 'KRSolutionsKRCMSBundle') }}</span></button>
+							<h4>{{ 'layout.form_error_alert_heading'|trans({}, 'KRSolutionsKRCMSBundle') }}</h4>
+							{{ form_errors(fileForm) }}
 						</div>
+					{% endif %}
 
-						<div class="form-group{% if fileForm.title.vars.errors|length %} has-error{% endif %}">
-							{{ form_label(fileForm.title) }}
-							{{ form_widget(fileForm.title, { 'attr': {'class': 'form-control'} }) }}
-						</div>
+					<div class="form-group{% if fileForm.uri.vars.errors|length %} has-error{% endif %}">
+						{{ form_label(fileForm.uri) }}
+						{{ form_widget(fileForm.uri, { 'attr': {'class': 'form-control'} }) }}
+						<button class="btn btn-primary" id="kcfinder_browse">{{ 'file.browse'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
+					</div>
 
-						<div class="form-group{% if form_errors(fileForm.description) %} has-error{% endif %}">
-							{{ form_label(fileForm.description) }}
-							{{ form_widget(fileForm.description, { 'attr': {'class': 'form-control'} }) }}
-						</div>
+					<div class="form-group{% if fileForm.title.vars.errors|length %} has-error{% endif %}">
+						{{ form_label(fileForm.title) }}
+						{{ form_widget(fileForm.title, { 'attr': {'class': 'form-control'} }) }}
+					</div>
 
-						{{ form_rest(fileForm) }}
-					</fieldset>
-					<input class="btn btn-primary" type="submit" value="{{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}" />
-				</form>
-			</div>
+					<div class="form-group{% if form_errors(fileForm.description) %} has-error{% endif %}">
+						{{ form_label(fileForm.description) }}
+						{{ form_widget(fileForm.description, { 'attr': {'class': 'form-control'} }) }}
+					</div>
+
+					{{ form_rest(fileForm) }}
+				</fieldset>
+				<input class="btn btn-primary" type="submit" value="{{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}" />
+			</form>
 		</div>
+	</div>
 
-		<div class="col-md-9">
-			<div class="well">
-				<h2>{{ 'file.index.header.files'|trans({ '%page_title%': page.title }, 'KRSolutionsKRCMSBundle')|raw }}</h2>
+	<div class="col-md-9">
+		<div class="well">
+			<h2>{{ 'file.index.header.files'|trans({ '%page_title%': page.title }, 'KRSolutionsKRCMSBundle')|raw }}</h2>
 
-				{% if page.files|length > 0 %}
-					{% for file in page.files %}
-						<div id="file_{{ file.id }}" class="col-sm-6 col-md-4 col-lg-3">
-							<div class="thumbnail">
-								<img src="{{ asset(uploadDir ~ file.uri) }}" alt="{{ file.title }}">
-								<div class="caption">
-									<h3>{{ file.title }}</h3>
-									<p>{{ file.description }}</p>
-									<p>
-										<button type="button" class="btn btn-default" data-toggle="modal" data-target="#file_remove_modal" data-file_id="{{ file.id }}" title="{{ 'file.remove_file'|trans({}, 'KRSolutionsKRCMSBundle') }}">
-											<i class="fa fa-fw fa-trash-o"></i> {{ 'layout.remove'|trans({}, 'KRSolutionsKRCMSBundle') }}
-										</button>
-									</p>
-								</div>
+			{% if page.files|length > 0 %}
+				{% for file in page.files %}
+					<div id="file_{{ file.id }}" class="col-sm-6 col-md-4 col-lg-3">
+						<div class="thumbnail">
+							<img src="{{ asset(uploadDir ~ file.uri) }}" alt="{{ file.title }}">
+							<div class="caption">
+								<h3>{{ file.title }}</h3>
+								<p>{{ file.description }}</p>
+								<p>
+									<button type="button" class="btn btn-default" data-toggle="modal" data-target="#file_remove_modal" data-file_id="{{ file.id }}" title="{{ 'file.remove_file'|trans({}, 'KRSolutionsKRCMSBundle') }}">
+										<i class="fa fa-fw fa-trash-o"></i> {{ 'layout.remove'|trans({}, 'KRSolutionsKRCMSBundle') }}
+									</button>
+								</p>
 							</div>
 						</div>
-					{% endfor %}
-				{% else %}
-					{{ 'file.no_files'|trans({ '%page_title%': page.title }, 'KRSolutionsKRCMSBundle') }}
-				{% endif%}
+					</div>
+				{% endfor %}
+			{% else %}
+				{{ 'file.no_files'|trans({ '%page_title%': page.title }, 'KRSolutionsKRCMSBundle') }}
+			{% endif%}
 
-				<div class="clearfix"></div>
-			</div>
+			<div class="clearfix"></div>
 		</div>
 	</div>
 
