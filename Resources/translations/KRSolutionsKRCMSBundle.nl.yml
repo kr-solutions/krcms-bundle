@@ -96,6 +96,7 @@ layout:
     menu:
         dashboard: Dashboard
         select_current_site: Selecteer huidige site
+        configuration: Configuratie
         pages: Pagina's
         helpdesk: Helpdesk
         categories: Categoriën

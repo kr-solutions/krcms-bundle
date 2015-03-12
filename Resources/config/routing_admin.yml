@@ -1,6 +1,12 @@
 kr_solutions_krcms_dashboard:
     pattern: /
+    defaults: { _controller: KRSolutionsKRCMSBundle:Dashboard:index, siteId: null }
+
+kr_solutions_krcms_dashboard_site:
+    pattern: /{siteId}
     defaults: { _controller: KRSolutionsKRCMSBundle:Dashboard:index }
+    requirements:
+        siteId: \d+
 
 kr_solutions_krcms_helpdesk:
     pattern: /helpdesk

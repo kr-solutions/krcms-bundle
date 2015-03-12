@@ -23,7 +23,7 @@
 
 	</head>
 	<body>
-		{% if site is defined and site.id %}
+		{% if site is defined and site is not null and site.id %}
 			{% set activeSite = site %}
 		{% elseif page is defined %}
 			{% set activeSite = page.site %}

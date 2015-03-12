@@ -37,7 +37,7 @@
 								<td>{% if site.homepage is not null %}{{ site.homepage.title }}{% else %}-{% endif %}</td>
 								<td>
 									<div class="btn-group pull-right" role="group">
-										<a class="btn btn-default" href="{{ path('kr_solutions_krcms_sites_edit', { 'siteId': site.id }) }}" title="{{ 'site.edit_site'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-edit"></i> {{ 'layout.edit'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+										<a class="btn btn-default" href="{{ path('kr_solutions_krcms_sites_edit', { 'siteId': site.id }) }}" title="{{ 'site.edit_site'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-fw fa-edit"></i> {{ 'layout.edit'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
 										<button type="button" class="btn btn-default" data-toggle="modal" data-target="#site_remove_modal" data-site_id="{{ site.id }}" title="{{ 'site.remove_site'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-fw fa-trash"></i> {{ 'layout.remove'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
 									</div>
 								</td>

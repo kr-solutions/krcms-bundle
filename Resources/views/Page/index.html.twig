@@ -17,7 +17,7 @@
 		<div class="page-header pull-right">
 			<div class="btn-group">
 				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-					<i class="fa fa-plus"></i> {{ 'page.add_page'|trans({}, 'KRSolutionsKRCMSBundle') }} <span class="caret"></span>
+					<i class="fa fa-fw fa-plus"></i> {{ 'page.add_page'|trans({}, 'KRSolutionsKRCMSBundle') }} <span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu dropdown-menu-right" role="menu">
 					{% for pageType in pageTypes %}
@@ -85,11 +85,11 @@
 										<td class="btn-toolbar">
 											<div class="btn-group pull-right">
 												{% if true == page.pageType.hasFiles %}
-													<a class="btn btn-default" href="{{ path('kr_solutions_krcms_files', { 'pageId': page.id }) }}" title="{{ 'layout.files'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-folder-open"></i> {{ 'layout.files'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+													<a class="btn btn-default" href="{{ path('kr_solutions_krcms_files', { 'pageId': page.id }) }}" title="{{ 'layout.files'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-fw fa-folder-open"></i> {{ 'layout.files'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
 												{% endif %}
-												<a class="btn btn-default" href="{{ path('kr_solutions_krcms_pages_edit', { 'pageId': page.id }) }}" title="{{ 'page.edit_page'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-edit"></i> {{ 'layout.edit'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+												<a class="btn btn-default" href="{{ path('kr_solutions_krcms_pages_edit', { 'pageId': page.id }) }}" title="{{ 'page.edit_page'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-fw fa-edit"></i> {{ 'layout.edit'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
 												{% if true == page.pageType.isUserGranted(app.user) %}
-													<button type="button" class="btn btn-default" data-toggle="modal" data-target="#page_remove_modal" data-page_id="{{ page.id }}" title="{{ 'page.remove_page'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-trash"></i> {{ 'layout.remove'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
+													<button type="button" class="btn btn-default" data-toggle="modal" data-target="#page_remove_modal" data-page_id="{{ page.id }}" title="{{ 'page.remove_page'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-fw fa-trash"></i> {{ 'layout.remove'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
 												{% endif %}
 											</div>
 										</td>
@@ -116,11 +116,11 @@
 									<td>
 										<div class="btn-group pull-right" role="group">
 											{% if true == page.pageType.hasFiles %}
-												<a class="btn btn-default" href="{{ path('kr_solutions_krcms_files', { 'pageId': page.id }) }}" title="{{ 'layout.files'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-folder-open"></i> {{ 'layout.files'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+												<a class="btn btn-default" href="{{ path('kr_solutions_krcms_files', { 'pageId': page.id }) }}" title="{{ 'layout.files'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-fw fa-folder-open"></i> {{ 'layout.files'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
 											{% endif %}
-											<a class="btn btn-default" href="{{ path('kr_solutions_krcms_pages_edit', { 'pageId': page.id }) }}" title="{{ 'page.edit_page'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-edit"></i> {{ 'layout.edit'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+											<a class="btn btn-default" href="{{ path('kr_solutions_krcms_pages_edit', { 'pageId': page.id }) }}" title="{{ 'page.edit_page'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-fw fa-edit"></i> {{ 'layout.edit'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
 											{% if true == page.pageType.isUserGranted(app.user) %}
-												<button type="button" class="btn btn-default" data-toggle="modal" data-target="#page_remove_modal" data-page_id="{{ page.id }}" title="{{ 'page.remove_page'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-trash"></i> {{ 'layout.remove'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
+												<button type="button" class="btn btn-default" data-toggle="modal" data-target="#page_remove_modal" data-page_id="{{ page.id }}" title="{{ 'page.remove_page'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-fw fa-trash"></i> {{ 'layout.remove'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
 											{% endif %}
 										</div>
 									</td>
