@@ -10,9 +10,8 @@
             "email": "r.adamse@kr-solutions.nl"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
-        "sunhater/kcfinder": "dev-master"
+        "sunhater/kcfinder": "~3.12"
     },
     "autoload": {
         "psr-4": {
