@@ -2,12 +2,16 @@
 
 namespace KRSolutions\Bundle\KRCMSBundle\Entity;
 
-use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
-
 /**
  * User interface
  */
-interface UserInterface extends BaseUserInterface
+interface UserInterface
 {
 
+    /**
+     * Get the username for display in the KRCMS
+     *
+     * @return string
+     */
+    public function getKRCMSUsername();
 }

@@ -21,8 +21,10 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('kr_solutions_krcms');
 
-        $rootNode->children()
+        $rootNode
+            ->children()
             ->arrayNode('model')
+                ->isRequired()
                 ->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('category_class')->defaultValue('KRSolutions\\Bundle\\KRCMSBundle\\Entity\\Category')->cannotBeEmpty()->end()
@@ -32,14 +34,14 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('page_type_class')->defaultValue('KRSolutions\\Bundle\\KRCMSBundle\\Entity\\PageType')->cannotBeEmpty()->end()
                         ->scalarNode('site_class')->defaultValue('KRSolutions\\Bundle\\KRCMSBundle\\Entity\\Site')->cannotBeEmpty()->end()
                         ->scalarNode('tag_class')->defaultValue('KRSolutions\\Bundle\\KRCMSBundle\\Entity\\Tag')->cannotBeEmpty()->end()
-                        ->scalarNode('user_class')->defaultValue('KRSolutions\\Bundle\\KRCMSBundle\\Entity\\User')->cannotBeEmpty()->end()
+                        ->scalarNode('user_class')->isRequired()->cannotBeEmpty()->end()
                         ->scalarNode('upload_dir')->defaultValue('uploads')->cannotBeEmpty()->end()
                 ->end()
             ->end()
             ->arrayNode('helpdesk')
                 ->addDefaultsIfNotSet()
                     ->children()
-                        ->booleanNode('enabled')->defaultValue(true)->end()
+                        ->booleanNode('enabled')->defaultValue(false)->end()
                         ->scalarNode('contact_name')->defaultValue('webmaster')->cannotBeEmpty()->end()
                         ->scalarNode('contact_email')->defaultValue('webmaster@example.com')->cannotBeEmpty()->end()
                         ->scalarNode('from_name')->defaultValue('Helpdesk - example.com')->cannotBeEmpty()->end()
