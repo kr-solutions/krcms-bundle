@@ -11,7 +11,8 @@
         }
     ],
     "require": {
-        "sunhater/kcfinder": "dev-master@dev"
+        "sunhater/kcfinder": "dev-master",
+        "twig/extensions": "^1.2"
     },
     "autoload": {
         "psr-4": {

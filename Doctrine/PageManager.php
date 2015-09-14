@@ -4,16 +4,15 @@ namespace KRSolutions\Bundle\KRCMSBundle\Doctrine;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\Query\Expr\Join;
-use Doctrine\ORM\QueryBuilder;
 use KRSolutions\Bundle\KRCMSBundle\Entity\MenuInterface;
 use KRSolutions\Bundle\KRCMSBundle\Entity\PageInterface;
 use KRSolutions\Bundle\KRCMSBundle\Entity\SiteInterface;
-use KRSolutions\Bundle\KRCMSBundle\Model\PageManager as BasePageManager;
+use KRSolutions\Bundle\KRCMSBundle\Model\AbstractPageManager;
 
 /**
  * Page manager
  */
-class PageManager extends BasePageManager
+class PageManager extends AbstractPageManager
 {
 
     protected $objectManager;
@@ -46,12 +45,7 @@ class PageManager extends BasePageManager
     }
 
     /**
-     * Get a page by it's site and permalink
-     *
-     * @param SiteInterface $site      Site entity
-     * @param string        $permalink Page permalink
-     *
-     * @return PageInterface|null
+     * {@inheritDoc}
      */
     public function getActivePageFromSiteAndPermalink(SiteInterface $site, $permalink)
     {
@@ -86,12 +80,7 @@ class PageManager extends BasePageManager
     }
 
     /**
-     * Get pages by the site and menu
-     *
-     * @param SiteInterface $site Site entity
-     * @param MenuInterface $menu Menu entity
-     *
-     * @return array
+     * {@inheritDoc}
      */
     public function getActivePagesFromSiteAndMenu(SiteInterface $site, MenuInterface $menu)
     {
@@ -117,12 +106,7 @@ class PageManager extends BasePageManager
     }
 
     /**
-     * Get pages by the site and menu
-     *
-     * @param SiteInterface $site     Site entity
-     * @param string        $menuName Menu name
-     *
-     * @return array
+     * {@inheritDoc}
      */
     public function getActivePagesFromSiteAndMenuName(SiteInterface $site, $menuName = null)
     {
@@ -149,11 +133,7 @@ class PageManager extends BasePageManager
     }
 
     /**
-     * Get pages by site (query builder)
-     *
-     * @param SiteInterface $site
-     *
-     * @return array
+     * {@inheritDoc}
      */
     public function getActivePagesFromSiteQB(SiteInterface $site)
     {
@@ -174,11 +154,7 @@ class PageManager extends BasePageManager
     }
 
     /**
-     * Get pages by site
-     *
-     * @param SiteInterface $site
-     *
-     * @return array
+     * {@inheritDoc}
      */
     public function getActivePagesFromSite(SiteInterface $site)
     {
@@ -186,11 +162,7 @@ class PageManager extends BasePageManager
     }
 
     /**
-     * Get active pages from parent page
-     *
-     * @param PageInterface $page
-     *
-     * @return array
+     * {@inheritDoc}
      */
     public function getActivePagesFromPage(PageInterface $page)
     {
@@ -213,11 +185,7 @@ class PageManager extends BasePageManager
     }
 
     /**
-     * Get active pages with a menu title from parent page
-     *
-     * @param PageInterface $page
-     *
-     * @return array
+     * {@inheritDoc}
      */
     public function getActivePagesWithMenuTitleFromPage(PageInterface $page)
     {
@@ -242,11 +210,7 @@ class PageManager extends BasePageManager
     }
 
     /**
-     * Get page by id
-     *
-     * @param integer $pageId
-     *
-     * @return null|PageInterface
+     * {@inheritDoc}
      */
     public function getPageById($pageId)
     {
@@ -259,11 +223,7 @@ class PageManager extends BasePageManager
     }
 
     /**
-     * Get page by permalink
-     *
-     * @param string $permalink
-     *
-     * @return null|PageInterface
+     * {@inheritDoc}
      */
     public function getPageByPermalink($permalink)
     {
@@ -276,9 +236,7 @@ class PageManager extends BasePageManager
     }
 
     /**
-     * Get all pages
-     *
-     * @return array
+     * {@inheritDoc}
      */
     public function getAllPages()
     {
@@ -290,9 +248,7 @@ class PageManager extends BasePageManager
     }
 
     /**
-     * Get all parent pages
-     *
-     * @return array
+     * {@inheritDoc}
      */
     public function getAllParentPages()
     {
@@ -305,11 +261,7 @@ class PageManager extends BasePageManager
     }
 
     /**
-     * Get all loose pages by Site
-     *
-     * @param SiteInterface $site
-     *
-     * @return array
+     * {@inheritDoc}
      */
     public function getAllLoosePagesBySite(SiteInterface $site)
     {
@@ -327,11 +279,7 @@ class PageManager extends BasePageManager
     }
 
     /**
-     * Get all child pages
-     *
-     * @param PageInterface $parentPage
-     *
-     * @return array
+     * {@inheritDoc}
      */
     public function getAllChildPages(PageInterface $parentPage)
     {
@@ -346,9 +294,7 @@ class PageManager extends BasePageManager
     }
 
     /**
-     * getAllChildablePagesQB
-     *
-     * @return QueryBuilder
+     * {@inheritDoc}
      */
     public function getAllChildablePagesQB()
     {
@@ -360,11 +306,7 @@ class PageManager extends BasePageManager
     }
 
     /**
-     * getAllChildablePagesBySite
-     *
-     * @param SiteInterface $site
-     *
-     * @return array
+     * {@inheritDoc}
      */
     public function getAllChildablePagesBySite(SiteInterface $site)
     {
@@ -377,11 +319,7 @@ class PageManager extends BasePageManager
     }
 
     /**
-     * Get all childable pages except for the given page
-     *
-     * @param PageInterface $exceptThisPage
-     *
-     * @return QueryBuilder
+     * {@inheritDoc}
      */
     public function getAllChildablePagesExceptThisPageQB(PageInterface $exceptThisPage = null)
     {
@@ -405,12 +343,7 @@ class PageManager extends BasePageManager
     }
 
     /**
-     * Get first pages by pageTypeId
-     *
-     * @param string $pageTypeId Id of the PageType
-     * @param int    $nrOfPages  Number of pages to fetch
-     *
-     * @return array
+     * {@inheritDoc}
      */
     public function getFirstPagesByPageTypeId($pageTypeId, $nrOfPages)
     {
@@ -426,11 +359,7 @@ class PageManager extends BasePageManager
     }
 
     /**
-     * Get the next page permalink in the menu
-     *
-     * @param PageInterface $activePage
-     *
-     * @return string|null
+     * {@inheritDoc}
      */
     public function getNextPermalinkInMenu(PageInterface $activePage)
     {
@@ -456,11 +385,7 @@ class PageManager extends BasePageManager
     }
 
     /**
-     * Get the previous page permalink in the menu
-     *
-     * @param PageInterface $activePage
-     *
-     * @return string|null
+     * {@inheritDoc}
      */
     public function getPreviousPermalinkInMenu(PageInterface $activePage)
     {
@@ -486,11 +411,7 @@ class PageManager extends BasePageManager
     }
 
     /**
-     * Get last page from a parent page with the parent permalink
-     *
-     * @param string $permalink
-     *
-     * @return PageInterface
+     * {@inheritDoc}
      */
     public function getLastPageFromParentByPermalink($permalink)
     {
@@ -506,11 +427,7 @@ class PageManager extends BasePageManager
     }
 
     /**
-     * Get last page from a parent page with the parent permalink
-     *
-     * @param string $permalink
-     *
-     * @return PageInterface
+     * {@inheritDoc}
      */
     public function getNewestPageFromParentByPermalink($permalink)
     {
@@ -526,12 +443,7 @@ class PageManager extends BasePageManager
     }
 
     /**
-     * Get last number of pages from a parent page with the parent permalink
-     *
-     * @param string $permalink
-     * @param int    $number
-     *
-     * @return PageInterface
+     * {@inheritDoc}
      */
     public function getLastPagesFromParentByPermalink($permalink, $number)
     {
@@ -547,12 +459,7 @@ class PageManager extends BasePageManager
     }
 
     /**
-     * Get newest number of pages from a parent page with the parent permalink
-     *
-     * @param string $permalink
-     * @param int    $number
-     *
-     * @return PageInterface
+     * {@inheritDoc}
      */
     public function getNewestPagesFromParentByPermalink($permalink, $number)
     {
@@ -568,11 +475,7 @@ class PageManager extends BasePageManager
     }
 
     /**
-     * Get the next page permalink from the parent page
-     *
-     * @param PageInterface $page
-     *
-     * @return string|null
+     * {@inheritDoc}
      */
     public function getNextPermalinkFromParentPage(PageInterface $page)
     {
@@ -628,11 +531,7 @@ class PageManager extends BasePageManager
     }
 
     /**
-     * Get the next page permalink from the parent page
-     *
-     * @param PageInterface $page
-     *
-     * @return string|null
+     * {@inheritDoc}
      */
     public function getPreviousPermalinkFromParentPage(PageInterface $page)
     {
@@ -692,11 +591,7 @@ class PageManager extends BasePageManager
     }
 
     /**
-     * Get page count by site
-     *
-     * @param SiteInterface $site
-     *
-     * @return int
+     * {@inheritDoc}
      */
     public function getPageCountBySite(SiteInterface $site)
     {

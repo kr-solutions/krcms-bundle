@@ -15,11 +15,9 @@ class PageTypeController extends AbstractKRCMSController
     /**
      * Index page types
      *
-     * @param Request $request
-     *
      * @return Response
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         $pageTypes = $this->getPageTypeRepository()->getAllPageTypes();
 

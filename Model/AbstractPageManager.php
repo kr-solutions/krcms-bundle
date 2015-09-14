@@ -5,7 +5,7 @@ namespace KRSolutions\Bundle\KRCMSBundle\Model;
 /**
  * Abstract page manager
  */
-abstract class PageManager implements PageManagerInterface
+abstract class AbstractPageManager implements PageManagerInterface
 {
 
     /**

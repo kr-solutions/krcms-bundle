@@ -5,7 +5,7 @@ namespace KRSolutions\Bundle\KRCMSBundle\Model;
 /**
  * Abstract menu manager
  */
-abstract class MenuManager implements MenuManagerInterface
+abstract class AbstractMenuManager implements MenuManagerInterface
 {
 
     /**

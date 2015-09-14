@@ -3,12 +3,12 @@
 namespace KRSolutions\Bundle\KRCMSBundle\Doctrine;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use KRSolutions\Bundle\KRCMSBundle\Model\SiteManager as BaseSiteManager;
+use KRSolutions\Bundle\KRCMSBundle\Model\AbstractSiteManager;
 
 /**
  * Site manager
  */
-class SiteManager extends BaseSiteManager
+class SiteManager extends AbstractSiteManager
 {
 
     protected $objectManager;

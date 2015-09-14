@@ -5,7 +5,7 @@ namespace KRSolutions\Bundle\KRCMSBundle\Model;
 /**
  * Abstract site manager
  */
-abstract class SiteManager implements SiteManagerInterface
+abstract class AbstractSiteManager implements SiteManagerInterface
 {
 
     /**

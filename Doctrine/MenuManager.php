@@ -4,12 +4,12 @@ namespace KRSolutions\Bundle\KRCMSBundle\Doctrine;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use KRSolutions\Bundle\KRCMSBundle\Entity\SiteInterface;
-use KRSolutions\Bundle\KRCMSBundle\Model\MenuManager as BaseMenuManager;
+use KRSolutions\Bundle\KRCMSBundle\Model\AbstractMenuManager;
 
 /**
  * Menu manager
  */
-class MenuManager extends BaseMenuManager
+class MenuManager extends AbstractMenuManager
 {
 
     protected $objectManager;
