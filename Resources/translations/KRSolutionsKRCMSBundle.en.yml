@@ -152,6 +152,7 @@ menu:
     index:
         header:
             menus: Menus
+    back_to_menu_overview: Back to the menu overview
     remove_confirmation:
         title: Are you sure you want to remove this menu?
         message: All possibly linked subpages of this menu become a single page! These should be linked, if necessary, again to another page or menu.

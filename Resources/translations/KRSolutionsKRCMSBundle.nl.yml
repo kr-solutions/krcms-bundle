@@ -152,6 +152,7 @@ menu:
     index:
         header:
             menus: Menu's
+    back_to_menu_overview: Terug naar het menu overzicht
     remove_confirmation:
         title: Weet u zeker dat u dit menu wilt verwijderen?
         message: Alle eventueel gekoppelde pagina's onder dit menu worden losse pagina's! Deze dient u indien nodig zelf opnieuw te koppelen aan een andere pagina of menu.
