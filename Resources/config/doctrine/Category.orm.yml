@@ -9,22 +9,16 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Category:
     id:
         id:
             type: integer
-            nullable: false
-            comment: ''
             id: true
             generator:
-                strategy: IDENTITY
+                strategy: AUTO
     fields:
         name:
             type: string
             nullable: false
             length: 255
-            fixed: false
-            comment: ''
         description:
             type: text
             nullable: false
             length: null
-            fixed: false
-            comment: ''
     lifecycleCallbacks: {  }

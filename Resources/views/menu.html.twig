@@ -11,8 +11,8 @@
 
 	<ul class="nav navbar-right top-nav">
 		{# Sites #}
-		<li class="dropdown">
-			{% if sites|length > 1 %}
+        {% if sites|length > 1 %}
+            <li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-desktop"></i> {{ 'layout.menu.select_current_site'|trans({}, 'KRSolutionsKRCMSBundle') }}{% if activeSite is defined and activeSite is not null %} ({{ activeSite.title }}){% endif %} <i class="fa fa-fw fa-caret-down"></i></a>
 				<ul class="dropdown-menu">
 					{% for site in sites %}
@@ -21,12 +21,12 @@
 						</li>
 					{% endfor %}
 				</ul>
-			{% endif %}
-		</li>
+            </li>
+        {% endif %}
 
 		{# Configuration #}
-		<li class="dropdown">
-			{% if is_granted(managementRoles['sites']) or is_granted(managementRoles['page_types']) %}
+        {% if is_granted(managementRoles['sites']) or is_granted(managementRoles['page_types']) %}
+            <li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-cog"></i> {{ 'layout.menu.configuration'|trans({}, 'KRSolutionsKRCMSBundle') }} <i class="fa fa-fw fa-caret-down"></i></a>
 				<ul class="dropdown-menu">
 					{% if is_granted(managementRoles['sites']) %}
@@ -40,8 +40,8 @@
 						</li>
 					{% endif %}
 				</ul>
-			{% endif %}
-		</li>
+            </li>
+        {% endif %}
 
 		{# User #}
 		<li class="dropdown">

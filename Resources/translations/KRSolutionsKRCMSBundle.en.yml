@@ -173,6 +173,7 @@ site:
     site_added: Site '%site_title%' has been added successfully.
     site_edited: Site '%site_title%' has been successfully updated.
     site_not_exist: The site with id '%site_id%' does not exist (anymore). Refresh the page and try again.
+    no_sites_added: There are no sites added yet
     back_to_site_overview: Back to the sites overview
     remove_confirmation:
         title: Are you sure you want to remove this site?
@@ -194,6 +195,8 @@ page_type:
     add_page_type: Add page type
     edit_page_type: Edit page type
     remove_page_type: Remove page type
+    no_page_types_added: There are no page types added yet
+    back_to_page_type_overview: Back to the page type overview
     remove_confirmation:
         title: Are you sure you want to remove this page type?
         message: Pages linked to this page type should be moved or deleted first, otherwise this page type will NOT be removed.
@@ -231,3 +234,6 @@ helpdesk:
     email: E-mail
     question: Your question
     submit: Submit
+
+Pagina: Page
+Page: Page

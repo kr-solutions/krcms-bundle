@@ -15,3 +15,7 @@ kr_solutions_krcms:
             not_blank: De title van de site is verplicht
         permalink:
             unique: De permalink van de site moet uniek zijn
+    page_type:
+        name:
+            not_blank: De naam van het pagina type is verplicht
+            unique: De naam van het pagina type moet uniek zijn

@@ -44,3 +44,15 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Site:
                 message: kr_solutions_krcms.site.title.not_blank
             - Length:
                 max: 255
+
+KRSolutions\Bundle\KRCMSBundle\Entity\PageType:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: name
+            message: kr_solutions_krcms.page_type.name.unique
+    properties:
+        name:
+            - NotBlank:
+                message: kr_solutions_krcms.page_type.name.not_blank
+            - Length:
+                max: 255

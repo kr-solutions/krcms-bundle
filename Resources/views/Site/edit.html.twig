@@ -1,3 +1,5 @@
+{% form_theme siteForm 'KRSolutionsKRCMSBundle::bootstrap_3_layout.html.twig' %}
+
 {% extends 'KRSolutionsKRCMSBundle::layout.html.twig' %}
 
 {% block title %}{% if action == 'new' %}{{ 'site.add_site'|trans({}, 'KRSolutionsKRCMSBundle') }}{% else %}{{ 'site.edit_site'|trans({}, 'KRSolutionsKRCMSBundle') }}{% endif %} - Content Management Systeem{% endblock %}
@@ -9,9 +11,10 @@
 				{{ 'site.add_site'|trans({}, 'KRSolutionsKRCMSBundle') }}
 			{% else %}
 				{{ 'site.edit_site'|trans({}, 'KRSolutionsKRCMSBundle') }}
-			{% endif %}
-			{% if site.title %}
-				<small>{{ site.title }}</small>
+
+                {% if site.title %}
+                    <small>{{ site.title }}</small>
+                {% endif %}
 			{% endif %}
 		</h1>
 	</div>
@@ -28,43 +31,14 @@
 {% block content %}
 	<div class="col-md-12">
 		<div class="well">
-			<form id="siteForm" action="{% if action == 'new' %}{{ path('kr_solutions_krcms_sites_add') }}{% else %}{{ path('kr_solutions_krcms_sites_edit', { 'siteId': site.id }) }}{% endif %}" method="post" {{ form_enctype(siteForm) }} novalidate="novalidate">
-				<fieldset>
-					{% if form_errors(siteForm) %}
-						<div class="alert alert-danger">
-							<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'layout.close'|trans({}, 'KRSolutionsKRCMSBundle') }}</span></button>
-							<h4>{{ 'layout.form_error_alert_heading'|trans({}, 'KRSolutionsKRCMSBundle') }}</h4>
-							{{ form_errors(siteForm) }}
-						</div>
-					{% endif %}
+			<form id="siteForm" method="post" action="{% if action == 'new' %}{{ path('kr_solutions_krcms_sites_add') }}{% else %}{{ path('kr_solutions_krcms_sites_edit', { 'siteId': site.id }) }}{% endif %}" {{ form_enctype(siteForm) }} novalidate="novalidate">
+                {{ form_errors(siteForm) }}
+                {{ form_rest(siteForm) }}
 
-					<div class="form-group{% if siteForm.permalink.vars.errors|length %} has-error{% endif %}">
-						{{ form_label(siteForm.permalink) }}
-						{{ form_widget(siteForm.permalink, { 'attr': {'class': 'form-control'} }) }}
-					</div>
-
-					<div class="form-group{% if siteForm.title.vars.errors|length %} has-error{% endif %}">
-						{{ form_label(siteForm.title) }}
-						{{ form_widget(siteForm.title, { 'attr': {'class': 'form-control'} }) }}
-					</div>
-
-					<div class="form-group{% if siteForm.isActive.vars.errors|length %} has-error{% endif %}">
-						{{ form_label(siteForm.isActive) }}
-						{{ form_widget(siteForm.isActive, { 'attr': {'class': 'form-control'} }) }}
-					</div>
-
-					<div class="form-group{% if siteForm.homepage.vars.errors|length %} has-error{% endif %}">
-						{{ form_label(siteForm.homepage) }}
-						{{ form_widget(siteForm.homepage, { 'attr': {'class': 'form-control'} }) }}
-					</div>
-
-					{{ form_rest(siteForm) }}
-				</fieldset>
-				<button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-floppy-o"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
+				<button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-save"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
 			</form>
 		</div>
 	</div>
-
 {% endblock %}
 
 {% block javascripts %}

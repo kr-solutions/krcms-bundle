@@ -88,43 +88,53 @@ class MenuController extends AbstractKRCMSController
      *
      * @return Response
      */
-    public function editAction(Request $request, $menuId)
+    public function editAction(Request $request, $menuId = null)
     {
-//		if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) {
-//			$this->getRequest()->getSession()->getFlashBag()->add('alert-danger', 'U bent niet gemachtigd om menu\'s te beheren.');
-//
-//			return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
-//		}
         if (!$this->isGranted($this->container->getParameter('kr_solutions_krcms.management_roles.menus'))) {
-            $request->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('', array(), 'KRSolutionsKRCMSBundle'));
+            $request->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('menu.edit.failed_not_authorized', array(), 'KRSolutionsKRCMSBundle'));
 
             return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
         }
 
-        $menu = $this->getMenuManager()->getMenuById($menuId);
+        if (null !== $menuId) {
+            $menu = $this->getMenuManager()->getMenuById($menuId);
+            $action = 'edit';
+        } else {
+            $menu = $this->getMenuManager()->createMenu();
+            $action = 'new';
+        }
 
         if (null === $menu) {
-            $this->getRequest()->getSession()->getFlashBag()->add('alert-danger', 'Het menu met id \''.$menuId.'\' bestaat niet (meer). Probeer het nog een keer!');
+            $request->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('menu.menu_not_exist', array('%menu_id%' => $menuId), 'KRSolutionsKRCMSBundle'));
 
-            return $this->redirect($this->generateUrl('kr_solutions_krcms_menus_index', array('siteId' => $menu->getSite()->getId())));
+            return $this->redirect($this->generateUrl('kr_solutions_krcms_menus_index'));
         }
 
         $menuForm = $this->createForm('krcms_menu', $menu);
 
-        if ($request->isMethod('POST')) {
-            $menuForm->bind($request);
+        $menuForm->handleRequest($request);
 
-            if ($menuForm->isValid()) {
-                $em = $this->getDoctrine()->getManager();
+        if ($menuForm->isValid()) {
+            $flashMessages = array();
 
-                $em->flush();
+            if (null === $menuId) {
+                $this->getDoctrine()->getManager()->persist($menu);
 
-                $this->getRequest()->getSession()->getFlashBag()->add('alert-success', 'Het menu \''.$menu->getName().'\' is gewijzigd!');
-
-                return $this->redirect($this->generateUrl('kr_solutions_krcms_menus_index', array('siteId' => $menu->getSite()->getId())));
+                $flashMessages['alert-success'][] = $this->getTranslator()->trans('menu.menu_added', array('%menu_name%' => $menu->getName()), 'KRSolutionsKRCMSBundle');
+            } else {
+                $flashMessages['alert-success'][] = $this->getTranslator()->trans('menu.menu_edited', array('%menu_name%' => $menu->getName()), 'KRSolutionsKRCMSBundle');
             }
+            $this->getDoctrine()->getManager()->flush();
+
+            foreach ($flashMessages as $type => $flashMessage) {
+                foreach ($flashMessage as $message) {
+                    $this->getRequest()->getSession()->getFlashBag()->add($type, $message);
+                }
+            }
+
+            return $this->redirect($this->generateUrl('kr_solutions_krcms_menus_index', array('siteId' => $menu->getSite()->getId())));
         }
 
-        return $this->render('KRSolutionsKRCMSBundle:Menu:edit.html.twig', array('menu' => $menu, 'menuForm' => $menuForm->createView()));
+        return $this->render('KRSolutionsKRCMSBundle:Menu:edit.html.twig', array('menu' => $menu, 'menuForm' => $menuForm->createView(), 'action' => $action));
     }
 }

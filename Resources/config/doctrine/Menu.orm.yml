@@ -17,24 +17,18 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Menu:
     id:
         id:
             type: integer
-            nullable: false
-            comment: ''
             id: true
             generator:
-                strategy: IDENTITY
+                strategy: AUTO
     fields:
         name:
             type: string
             nullable: false
             length: 255
-            fixed: false
-            comment: ''
         description:
             type: text
             nullable: true
             length: null
-            fixed: false
-            comment: ''
     manyToOne:
         site:
             targetEntity: SiteInterface

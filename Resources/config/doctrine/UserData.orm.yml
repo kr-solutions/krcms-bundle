@@ -12,11 +12,9 @@ KRSolutions\Bundle\KRCMSBundle\Entity\UserData:
     id:
         id:
             type: integer
-            nullable: false
-            comment: ''
             id: true
             generator:
-                strategy: IDENTITY
+                strategy: AUTO
     manyToOne:
         user:
             targetEntity: UserInterface

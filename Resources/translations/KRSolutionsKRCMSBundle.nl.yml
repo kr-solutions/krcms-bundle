@@ -173,6 +173,7 @@ site:
     site_added: De site '%site_title%' is succesvol toegevoegd.
     site_edited: De site '%site_title%' is succesvol aangepast.
     site_not_exist: De site met id '%site_id%' bestaat niet (meer). Ververs de pagina en probeer het nog eens.
+    no_sites_added: Er zijn nog geen sites toegevoegd
     back_to_site_overview: Terug naar het overzicht
     remove_confirmation:
         title: Weet u zeker dat u deze site wilt verwijderen?
@@ -194,6 +195,8 @@ page_type:
     add_page_type: Pagina type toevoegen
     edit_page_type: Pagina type wijzigen
     remove_page_type: Pagina type verwijderen
+    no_page_types_added: Er zijn nog geen pagina types toegevoegd
+    back_to_page_type_overview: Terug naar het overzicht
     remove_confirmation:
         title: Weet u zeker dat u deze pagina type wilt verwijderen?
         message: Pagina's die aangemaakt zijn onder dit type pagina zullen niet meer werken, u dient deze een ander pagina type te geven.
@@ -231,3 +234,6 @@ helpdesk:
     email: E-mail adres
     question: Uw vraag
     submit: Versturen
+
+Pagina: Pagina
+Page: Page

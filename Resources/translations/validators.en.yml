@@ -15,3 +15,7 @@ kr_solutions_krcms:
             not_blank: The title of the site is mandatory
         permalink:
             unique: The permalink for the site has to be unique
+    page_type:
+        name:
+            not_blank: The name of the page type is mandatory
+            unique: The name of the page type has to be unique

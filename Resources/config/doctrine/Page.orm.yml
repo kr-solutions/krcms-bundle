@@ -35,11 +35,9 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Page:
     id:
         id:
             type: integer
-            nullable: false
-            comment: ''
             id: true
             generator:
-                strategy: IDENTITY
+                strategy: AUTO
     fields:
         orderId:
             type: integer
@@ -50,64 +48,43 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Page:
         createdAt:
             type: datetime
             nullable: false
-            comment: ''
             default: CURRENT_TIMESTAMP
             column: created_at
         updatedAt:
             type: datetime
             nullable: false
-            comment: ''
             default: '0000-00-00 00:00:00'
-            column: updated_at
         publishAt:
             type: datetime
             nullable: true
-            comment: ''
-            column: publish_at
         publishTill:
             type: datetime
             nullable: true
             comment: ''
-            column: publish_till
         permalink:
             type: string
             nullable: true
             length: 255
-            fixed: false
-            comment: ''
         menuTitle:
             type: string
             nullable: true
             length: 255
-            fixed: false
-            comment: ''
-            column: menu_title
         title:
             type: string
             nullable: false
             length: 255
-            fixed: false
-            comment: ''
         content:
             type: text
             nullable: true
             length: null
-            fixed: false
-            comment: ''
         metaKeywords:
             type: string
             nullable: true
             length: 255
-            fixed: false
-            comment: ''
-            column: meta_keywords
         metaDescription:
             type: string
             nullable: true
             length: 255
-            fixed: false
-            comment: ''
-            column: meta_description
     manyToOne:
         pageType:
             targetEntity: PageTypeInterface

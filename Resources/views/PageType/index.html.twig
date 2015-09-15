@@ -33,7 +33,7 @@
 								<td>{{ pageType.description }}</td>
 								<td>
 									<div class="btn-group pull-right" role="group">
-										<a class="btn btn-default" href="{{ path('kr_solutions_krcms_page_types_edit', { 'pageTypeId': pageType.id }) }}"><i class="fa fa-fw fa-edit"></i> {{ 'layout.edit'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+										<a class="btn btn-default" href="{{ path('kr_solutions_krcms_page_types_edit', { 'pageTypeId': pageType.id }) }}" title="{{ 'page_type.edit_page_type'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-fw fa-edit"></i> {{ 'layout.edit'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
 										<button type="button" class="btn btn-default" data-toggle="modal" data-target="#page_type_remove_modal" data-page_type_id="{{ pageType.id }}" title="{{ 'page_type.remove_page_type'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-fw fa-trash"></i> {{ 'layout.remove'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
 									</div>
 								</td>
@@ -41,7 +41,7 @@
 						{% endfor %}
 					{% else %}
 						<tr>
-							<td colspan="4">There are no page types added yet.</td>
+							<td colspan="4">{{ 'page_type.no_page_types_added'|trans({}, 'KRSolutionsKRCMSBundle') }}</td>
 							<td><a class="btn btn-default" href="{{ path('kr_solutions_krcms_page_types_add') }}"><i class="fa fa-fw fa-plus"></i> {{ 'page_type.add_page_type'|trans({}, 'KRSolutionsKRCMSBundle') }}</a></td>
 						</tr>
 					{% endif %}
