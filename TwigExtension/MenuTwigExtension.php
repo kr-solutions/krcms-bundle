@@ -8,13 +8,11 @@ use KRSolutions\Bundle\KRCMSBundle\Entity\Site;
 use KRSolutions\Bundle\KRCMSBundle\Repository\PageRepository;
 use Symfony\Bridge\Doctrine\ManagerRegistry;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Twig_Extension;
-use Twig_Function_Method;
 
 /**
  * \KRSolutions\KRCMSBundle\TwigExtension\MenuTwigExtension
  */
-class MenuTwigExtension extends Twig_Extension
+class MenuTwigExtension extends \Twig_Extension
 {
 
     /**
@@ -46,9 +44,9 @@ class MenuTwigExtension extends Twig_Extension
     public function getFunctions()
     {
         return array(
-            'menu' => new Twig_Function_Method($this, 'menu'),
-            'nextPermalinkInMenu' => new Twig_Function_Method($this, 'nextPermalinkInMenu'),
-            'previousPermalinkInMenu' => new Twig_Function_Method($this, 'previousPermalinkInMenu'),
+            new \Twig_SimpleFunction('menu', array($this, 'menuFunction')),
+            new \Twig_SimpleFunction('nextPermalinkInMenu', array($this, 'nextPermalinkInMenuFunction')),
+            new \Twig_SimpleFunction('previousPermalinkInMenu', array($this, 'previousPermalinkInMenuFunction')),
         );
     }
 
@@ -63,7 +61,7 @@ class MenuTwigExtension extends Twig_Extension
      *
      * @return string
      */
-    public function menu(Site $site, $menuName = '', Page $activePage = null, $nested = true, $class = '')
+    public function menuFunction(Site $site, $menuName = '', Page $activePage = null, $nested = true, $class = '')
     {
         $pages = $this->getPageRepository()->getActivePagesFromSiteAndMenuName($site, $menuName);
 
@@ -93,7 +91,7 @@ class MenuTwigExtension extends Twig_Extension
      * @return string|null
      * @throws Exception
      */
-    public function nextPermalinkInMenu(Page $activePage)
+    public function nextPermalinkInMenuFunction(Page $activePage)
     {
         if (!($activePage instanceof Page)) {
             throw new Exception('Not a Page entity');
@@ -120,7 +118,7 @@ class MenuTwigExtension extends Twig_Extension
      * @return string|null
      * @throws Exception
      */
-    public function previousPermalinkInMenu(Page $activePage)
+    public function previousPermalinkInMenuFunction(Page $activePage)
     {
         if (!($activePage instanceof Page)) {
             throw new Exception('Not a Page entity');

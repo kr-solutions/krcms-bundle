@@ -21,11 +21,11 @@ services:
         tags:
             - { name: twig.extension }
 
-    kr_solutions_krcms.form.type.category:
-        class: KRSolutions\Bundle\KRCMSBundle\Form\Type\CategoryType
+    kr_solutions_krcms.form.type.krcms_category:
+        class: KRSolutions\Bundle\KRCMSBundle\Form\Type\KRCMSCategoryType
         arguments: ["%kr_solutions_krcms.model.category_class%"]
         tags:
-            - { name: form.type, alias: category }
+            - { name: form.type, alias: krcms_category }
 
     kr_solutions_krcms.form.type.krcms_file:
         class: KRSolutions\Bundle\KRCMSBundle\Form\Type\KRCMSFileType
@@ -33,35 +33,35 @@ services:
         tags:
             - { name: form.type, alias: krcms_file }
 
-    kr_solutions_krcms.form.type.menu:
-        class: KRSolutions\Bundle\KRCMSBundle\Form\Type\MenuType
+    kr_solutions_krcms.form.type.krcms_menu:
+        class: KRSolutions\Bundle\KRCMSBundle\Form\Type\KRCMSMenuType
         arguments: ["%kr_solutions_krcms.model.menu_class%"]
         tags:
-            - { name: form.type, alias: menu }
+            - { name: form.type, alias: krcms_menu }
 
-    kr_solutions_krcms.form.type.page:
-        class: KRSolutions\Bundle\KRCMSBundle\Form\Type\PageType
+    kr_solutions_krcms.form.type.krcms_page:
+        class: KRSolutions\Bundle\KRCMSBundle\Form\Type\KRCMSPageType
         arguments: ["%kr_solutions_krcms.model.page_class%"]
         tags:
-            - { name: form.type, alias: page }
+            - { name: form.type, alias: krcms_page }
 
-    kr_solutions_krcms.form.type.page_type:
-        class: KRSolutions\Bundle\KRCMSBundle\Form\Type\PageTypeType
+    kr_solutions_krcms.form.type.krcms_page_type:
+        class: KRSolutions\Bundle\KRCMSBundle\Form\Type\KRCMSPageTypeType
         arguments: ["%kr_solutions_krcms.model.page_type_class%"]
         tags:
-            - { name: form.type, alias: page_type }
+            - { name: form.type, alias: krcms_page_type }
 
-    kr_solutions_krcms.form.type.site:
-        class: KRSolutions\Bundle\KRCMSBundle\Form\Type\SiteType
+    kr_solutions_krcms.form.type.krcms_site:
+        class: KRSolutions\Bundle\KRCMSBundle\Form\Type\KRCMSSiteType
         arguments: ["%kr_solutions_krcms.model.site_class%"]
         tags:
-            - { name: form.type, alias: site }
+            - { name: form.type, alias: krcms_site }
 
-    kr_solutions_krcms.form.type.tag:
-        class: KRSolutions\Bundle\KRCMSBundle\Form\Type\TagType
+    kr_solutions_krcms.form.type.krcms_tag:
+        class: KRSolutions\Bundle\KRCMSBundle\Form\Type\KRCMSTagType
         arguments: ["%kr_solutions_krcms.model.tag_class%"]
         tags:
-            - { name: form.type, alias: tag }
+            - { name: form.type, alias: krcms_tag }
 
     kr_solutions_krcms.site_manager:
         class: KRSolutions\Bundle\KRCMSBundle\Doctrine\SiteManager

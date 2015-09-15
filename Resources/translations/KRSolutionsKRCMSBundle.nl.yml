@@ -104,6 +104,7 @@ layout:
         page_types: Pagina types
         sites: Sites
     form_error_alert_heading: Oeps!
+    toggle_navigation: Schakel navigatie
 
 page:
     title: Titel
@@ -182,7 +183,25 @@ site:
         failed_not_exist: Fout bij het verwijderen van de site met id '%site_id%'. Deze site bestaat niet (meer).
         failed_not_authorized: Fout bij het verwijderen van de site met id '%site_id%'. U bent niet gemachtigd om sites te verwijderen.
         failed_pages_exist: Fout bij het verwijderen van de site met id '%site_id%'. Er zijn nog steeds pagina's aan deze site verbonden. Verplaats of verwijder deze pagina's voordat u deze site verwijderd.
-        success: De site met '%site_id%' is succesvol verwijderd.
+        success: De site met id '%site_id%' is succesvol verwijderd.
+
+page_type:
+    name: Naam
+    description: Omschrijving
+    index:
+        header:
+            page_types: Pagina types
+    add_page_type: Pagina type toevoegen
+    edit_page_type: Pagina type wijzigen
+    remove_page_type: Pagina type verwijderen
+    remove_confirmation:
+        title: Weet u zeker dat u deze pagina type wilt verwijderen?
+        message: Pagina's die aangemaakt zijn onder dit type pagina zullen niet meer werken, u dient deze een ander pagina type te geven.
+    remove:
+        failed_not_exist: Fout bij het verwijderen van het pagina type met id '%page_type_id%'. Dit pagina type bestaat niet (meer).
+        failed_not_authorized: Fout bij het verwijderen van het pagina type met id '%page_type_id%'. U bent niet gemachtigd om pagina types te verwijderen.
+        failed_pages_exist: Fout bij het verwijderen van het pagina type met id '%page_type_id%'. Er zijn nog steeds pagina's aan dit pagina type verbonden. Verplaats of verwijder deze pagina's voordat u dit pagina type verwijderd.
+        success: Pagina type met het id '%page_type_id%' is succesvol verwijderd.
 
 file:
     index:

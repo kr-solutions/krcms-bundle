@@ -1,17 +1,17 @@
 kr_solutions_krcms_menus_index:
-    pattern: /{siteId}
+    path: /{siteId}
     defaults: { _controller: KRSolutionsKRCMSBundle:Menu:index }
     requirements:
         siteId: \d+
 
 kr_solutions_krcms_menus_remove:
-    pattern: /remove/{menuId}
+    path: /remove/{menuId}
     defaults: { _controller: KRSolutionsKRCMSBundle:Menu:remove }
     requirements:
         menuId: \d+
 
 kr_solutions_krcms_menus_edit:
-    pattern: /edit/{menuId}
+    path: /edit/{menuId}
     defaults: { _controller: KRSolutionsKRCMSBundle:Menu:edit }
     requirements:
         menuId: \d+

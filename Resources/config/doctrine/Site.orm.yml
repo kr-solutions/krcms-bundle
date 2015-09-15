@@ -55,11 +55,11 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Site:
             joinTable:
                 name: krcms_sites_users
                 joinColumns:
-                    user_id:
+                    site_id:
                         referencedColumnName: id
                         onDelete: "CASCADE"
                 inverseJoinColumns:
-                    group_id:
+                    user_id:
                        referencedColumnName: id
                        onDelete: "CASCADE"
     lifecycleCallbacks: {  }

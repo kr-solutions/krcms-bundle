@@ -104,6 +104,7 @@ layout:
         page_types: Page types
         sites: Sites
     form_error_alert_heading: Oops!
+    toggle_navigation: Toggle navigation
 
 page:
     title: Title
@@ -175,7 +176,7 @@ site:
     back_to_site_overview: Back to the sites overview
     remove_confirmation:
         title: Are you sure you want to remove this site?
-        message: Pages linked to this site should be moved or deleted first or this site will NOT be removed.
+        message: Pages linked to this site should be moved or deleted first, otherwise this site will NOT be removed.
     edit:
         failed_not_authorized: You are not authorized to edit sites.
     remove:
@@ -183,6 +184,24 @@ site:
         failed_not_authorized: Failed to remove the site. You are not authorized to remove sites.
         failed_pages_exist: Failed to remove the site. There are still pages linked to this site. You should move or remove these pages first.
         success: Successfully removed the site with id '%site_id%'.
+
+page_type:
+    name: Name
+    description: Description
+    index:
+        header:
+            page_types: Page types
+    add_page_type: Add page type
+    edit_page_type: Edit page type
+    remove_page_type: Remove page type
+    remove_confirmation:
+        title: Are you sure you want to remove this page type?
+        message: Pages linked to this page type should be moved or deleted first, otherwise this page type will NOT be removed.
+    remove:
+        failed_not_exist: Failed to remove the page type with id '%page_type_id%'. This page type does not exist (anymore).
+        failed_not_authorized: Failed to remove the page type. You are not authorized to remove page types.
+        failed_pages_exist: Failed to remove the page type. There are still pages linked to this page type. You should move or remove these pages first.
+        success: Successfully removed the page type with id '%page_type_id%'.
 
 file:
     index:

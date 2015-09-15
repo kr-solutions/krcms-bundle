@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app.request.locale }}">
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,7 +34,7 @@
 		{% endif %}
 
 		<div id="wrapper">
-			{% render controller('KRSolutionsKRCMSBundle:Admin:menu', { 'activeSite': activeSite, 'route': app.request.attributes.get('_route') }) %}
+			{{ render(controller('KRSolutionsKRCMSBundle:Admin:menu', { 'activeSite': activeSite, 'route': app.request.attributes.get('_route') })) }}
 
 			<div id="page-wrapper">
 				<div class="container-fluid">

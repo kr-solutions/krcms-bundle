@@ -1,13 +1,13 @@
 {% extends 'KRSolutionsKRCMSBundle::layout.html.twig' %}
 
-{% block title %}Pagina's - Content Management Systeem{% endblock %}
+{% block title %}{{ 'site.index.header.sites'|trans({}, 'KRSolutionsKRCMSBundle') }} - Content Management Systeem{% endblock %}
 
 {% block header %}
 	<div class="col-lg-8">
 		<h1 class="page-header">{{ 'site.index.header.sites'|trans({}, 'KRSolutionsKRCMSBundle') }}</h1>
 	</div>
 	<div class="col-lg-4">
-		<div class="page-header pull-right">
+		<div class="page-header-buttons pull-right">
 			<a href="{{ path('kr_solutions_krcms_sites_add') }}" class="btn btn-default"><i class="fa fa-fw fa-plus"></i> {{ 'site.add_site'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
 		</div>
 	</div>

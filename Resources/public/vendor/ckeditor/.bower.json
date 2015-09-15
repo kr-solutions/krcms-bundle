@@ -14,14 +14,14 @@
   "authors": "CKSource (http://cksource.com/)",
   "license": "For licensing, see LICENSE.md or http://ckeditor.com/license.",
   "homepage": "http://ckeditor.com",
-  "version": "4.4.8",
-  "_release": "4.4.8",
+  "version": "4.5.3",
+  "_release": "4.5.3",
   "_resolution": {
     "type": "version",
-    "tag": "4.4.8",
-    "commit": "a68e8c32012f2955b76e0d2e84f1b14a90c8c959"
+    "tag": "4.5.3",
+    "commit": "a93cb51eb1fc85a13892706dd61eccfd4c999947"
   },
   "_source": "git://github.com/ckeditor/ckeditor-releases.git",
-  "_target": "~4.4.6",
+  "_target": "4",
   "_originalSource": "ckeditor"
 }

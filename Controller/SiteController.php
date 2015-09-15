@@ -61,7 +61,7 @@ class SiteController extends AbstractKRCMSController
             return $this->redirect($this->generateUrl('kr_solutions_krcms_sites_index'));
         }
 
-        $siteForm = $this->createForm('site', $site);
+        $siteForm = $this->createForm('krcms_site', $site);
 
         $siteForm->handleRequest($request);
 

@@ -6,6 +6,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\Query\Expr\Join;
 use KRSolutions\Bundle\KRCMSBundle\Entity\MenuInterface;
 use KRSolutions\Bundle\KRCMSBundle\Entity\PageInterface;
+use KRSolutions\Bundle\KRCMSBundle\Entity\PageTypeInterface;
 use KRSolutions\Bundle\KRCMSBundle\Entity\SiteInterface;
 use KRSolutions\Bundle\KRCMSBundle\Model\AbstractPageManager;
 
@@ -601,6 +602,21 @@ class PageManager extends AbstractPageManager
 
         $qb->where('pages.site = :site');
         $qb->setParameter('site', $site);
+
+        return intval($qb->getQuery()->getSingleScalarResult());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPageCountByPageType(PageTypeInterface $pageType)
+    {
+        $qb = $this->repository->createQueryBuilder('pages');
+
+        $qb->select('count(pages.id)');
+
+        $qb->where('pages.pageType = :page_type');
+        $qb->setParameter('page_type', $pageType);
 
         return intval($qb->getQuery()->getSingleScalarResult());
     }

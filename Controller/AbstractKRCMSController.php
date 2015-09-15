@@ -2,15 +2,7 @@
 
 namespace KRSolutions\Bundle\KRCMSBundle\Controller;
 
-use KRSolutions\Bundle\KRCMSBundle\Repository\CategoryRepository;
-use KRSolutions\Bundle\KRCMSBundle\Repository\FileRepository;
-use KRSolutions\Bundle\KRCMSBundle\Repository\MenuRepository;
-use KRSolutions\Bundle\KRCMSBundle\Repository\PageRepository;
-use KRSolutions\Bundle\KRCMSBundle\Repository\PageTypeRepository;
-use KRSolutions\Bundle\KRCMSBundle\Repository\SiteRepository;
-use KRSolutions\Bundle\KRCMSBundle\Repository\TagRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Translation\Translator;
 
 /**
  * Abstract KRCMS Controller
@@ -21,7 +13,7 @@ class AbstractKRCMSController extends Controller
     /**
      * Get Category repository
      *
-     * @return CategoryRepository
+     * @return \KRSolutions\Bundle\KRCMSBundle\Repository\CategoryRepository
      */
     protected function getCategoryRepository()
     {
@@ -31,7 +23,7 @@ class AbstractKRCMSController extends Controller
     /**
      * Get the File Repository
      *
-     * @return FileRepository
+     * @return \KRSolutions\Bundle\KRCMSBundle\Repository\FileRepository
      */
     protected function getFileRepository()
     {
@@ -41,7 +33,7 @@ class AbstractKRCMSController extends Controller
     /**
      * Get the Menu Repository
      *
-     * @return MenuRepository
+     * @return \KRSolutions\Bundle\KRCMSBundle\Repository\MenuRepository
      */
     protected function getMenuRepository()
     {
@@ -51,7 +43,7 @@ class AbstractKRCMSController extends Controller
     /**
      * Get the Page Repository
      *
-     * @return PageRepository
+     * @return \KRSolutions\Bundle\KRCMSBundle\Repository\PageRepository
      */
     protected function getPageRepository()
     {
@@ -61,7 +53,7 @@ class AbstractKRCMSController extends Controller
     /**
      * Get the PageType Repository
      *
-     * @return PageTypeRepository
+     * @return \KRSolutions\Bundle\KRCMSBundle\Repository\PageTypeRepository
      */
     protected function getPageTypeRepository()
     {
@@ -71,7 +63,7 @@ class AbstractKRCMSController extends Controller
     /**
      * Get Site repository
      *
-     * @return SiteRepository
+     * @return \KRSolutions\Bundle\KRCMSBundle\Repository\SiteRepository
      */
     protected function getSiteRepository()
     {
@@ -81,7 +73,7 @@ class AbstractKRCMSController extends Controller
     /**
      * Get Tag repository
      *
-     * @return TagRepository
+     * @return \KRSolutions\Bundle\KRCMSBundle\Repository\TagRepository
      */
     protected function getTagRepository()
     {
@@ -91,21 +83,11 @@ class AbstractKRCMSController extends Controller
     /**
      * Get the translator
      *
-     * @return Translator
+     * @return \Symfony\Component\Translation\TranslatorInterface
      */
     protected function getTranslator()
     {
         return $this->container->get('translator');
-    }
-
-    /**
-     * Get the security context
-     *
-     * @return \Symfony\Component\Security\Core\SecurityContext
-     */
-    protected function getSecurityContext()
-    {
-        return $this->container->get('security.context');
     }
 
     /**
@@ -136,10 +118,5 @@ class AbstractKRCMSController extends Controller
     protected function getMenuManager()
     {
         return $this->container->get('kr_solutions_krcms.menu_manager');
-    }
-
-    protected function isGranted($attributes, $object = null)
-    {
-        return $this->get('security.context')->isGranted($attributes, $object);
     }
 }

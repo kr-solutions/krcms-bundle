@@ -48,7 +48,7 @@ class PageTypeController extends AbstractKRCMSController
             return $this->redirect($this->generateUrl('kr_solutions_krcms_page_types_index'));
         }
 
-        $pageTypeForm = $this->createForm('page_type', $pageType);
+        $pageTypeForm = $this->createForm('krcms_page_type', $pageType);
 
         $pageTypeForm->handleRequest($request);
 
@@ -74,5 +74,45 @@ class PageTypeController extends AbstractKRCMSController
         }
 
         return $this->render('KRSolutionsKRCMSBundle:PageType:edit.html.twig', array('pageType' => $pageType, 'pageTypeForm' => $pageTypeForm->createView(), 'action' => $action));
+    }
+
+    /**
+     * Remove page type
+     *
+     * @param Request $request
+     * @param int     $pageTypeId
+     *
+     * @return Response
+     */
+    public function removeAction(Request $request, $pageTypeId)
+    {
+        if (!$this->isGranted($this->container->getParameter('kr_solutions_krcms.management_roles.page_types'))) {
+            $request->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('page_type.remove.failed_not_authorized', array('%page_type_id%' => $pageTypeId), 'KRSolutionsKRCMSBundle'));
+
+            return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
+        }
+
+        $pageType = $this->getPageTypeRepository()->getPageTypeById($pageTypeId);
+
+        if (null === $pageType) {
+            $request->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('page_type.remove.failed_not_exist', array('%page_type_id%' => $pageTypeId), 'KRSolutionsKRCMSBundle'));
+
+            return $this->redirect($this->generateUrl('kr_solutions_krcms_page_types_index'));
+        }
+
+        $pageCount = $this->getPageManager()->getPageCountByPageType($pageType);
+
+        if (0 !== $pageCount) {
+            $request->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('page_type.remove.failed_pages_exist', array('%page_type_id%' => $pageTypeId), 'KRSolutionsKRCMSBundle'));
+
+            return $this->redirect($this->generateUrl('kr_solutions_krcms_page_types_index'));
+        }
+
+        $this->getDoctrine()->getManager()->remove($pageType);
+        $this->getDoctrine()->getManager()->flush();
+
+        $request->getSession()->getFlashBag()->add('alert-success', $this->getTranslator()->trans('page_type.remove.success', array('%page_type_id%' => $pageTypeId), 'KRSolutionsKRCMSBundle'));
+
+        return $this->redirect($this->generateUrl('kr_solutions_krcms_page_types_index'));
     }
 }

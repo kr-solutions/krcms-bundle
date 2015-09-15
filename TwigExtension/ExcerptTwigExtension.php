@@ -2,13 +2,10 @@
 
 namespace KRSolutions\Bundle\KRCMSBundle\TwigExtension;
 
-use Twig_Extension;
-use Twig_Filter_Method;
-
 /**
  * Take a short extract from a text
  */
-class ExcerptTwigExtension extends Twig_Extension
+class ExcerptTwigExtension extends \Twig_Extension
 {
 
     /**
@@ -19,7 +16,7 @@ class ExcerptTwigExtension extends Twig_Extension
     public function getFilters()
     {
         return array(
-            'excerpt' => new Twig_Filter_Method($this, 'excerpt'),
+            new \Twig_SimpleFilter('excerpt', array($this, 'excerptFilter')),
         );
     }
 
@@ -32,7 +29,7 @@ class ExcerptTwigExtension extends Twig_Extension
      *
      * @return string
      */
-    public function excerpt($text, $wordsreturned, $textAfterShorten = ' ...')
+    public function excerptFilter($text, $wordsreturned, $textAfterShorten = ' ...')
     {
         $strippedText = strip_tags($text);
         $retval = $strippedText;

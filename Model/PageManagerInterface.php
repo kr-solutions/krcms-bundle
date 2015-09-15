@@ -5,6 +5,7 @@ namespace KRSolutions\Bundle\KRCMSBundle\Model;
 use Doctrine\ORM\QueryBuilder;
 use KRSolutions\Bundle\KRCMSBundle\Entity\MenuInterface;
 use KRSolutions\Bundle\KRCMSBundle\Entity\PageInterface;
+use KRSolutions\Bundle\KRCMSBundle\Entity\PageTypeInterface;
 use KRSolutions\Bundle\KRCMSBundle\Entity\SiteInterface;
 
 /**
@@ -16,7 +17,7 @@ interface PageManagerInterface
     /**
      * Create a new page
      *
-     * @return \KRSolutions\Bundle\KRCMSBundle\Entity\PageInterface
+     * @return PageInterface
      */
     public function createPage();
 
@@ -251,4 +252,13 @@ interface PageManagerInterface
      * @return int
      */
     public function getPageCountBySite(SiteInterface $site);
+
+    /**
+     * Get page count by page type
+     *
+     * @param PageTypeInterface $pageType
+     *
+     * @return int
+     */
+    public function getPageCountByPageType(PageTypeInterface $pageType);
 }

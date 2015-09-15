@@ -1,19 +1,19 @@
 kr_solutions_krcms_page_types_index:
-    pattern: /
+    path: /
     defaults: { _controller: KRSolutionsKRCMSBundle:PageType:index }
 
-kr_solutions_krcms_page_types_add:
-    pattern: /add
-    defaults: { _controller: KRSolutionsKRCMSBundle:PageType:edit }
-
-kr_solutions_krcms_page_types_edit:
-    pattern: /edit/{pageTypeId}
-    defaults: { _controller: KRSolutionsKRCMSBundle:PageType:edit }
-    requirements:
-        pageId: \d+
-
 kr_solutions_krcms_page_types_remove:
-    pattern: /remove/{pageTypeId}
+    path: /remove/{pageTypeId}
     defaults: { _controller: KRSolutionsKRCMSBundle:PageType:remove }
     requirements:
         pageId: \d+
+
+kr_solutions_krcms_page_types_edit:
+    path: /edit/{pageTypeId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:PageType:edit }
+    requirements:
+        pageId: \d+
+
+kr_solutions_krcms_page_types_add:
+    path: /add
+    defaults: { _controller: KRSolutionsKRCMSBundle:PageType:edit }

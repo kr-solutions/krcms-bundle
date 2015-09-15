@@ -31,7 +31,7 @@ class MenuController extends AbstractKRCMSController
         $menus = $this->getMenuManager()->getAllMenusBySite($site);
 
         $newMenu = $this->getMenuManager()->createMenu();
-        $menuForm = $this->createForm('menu', $newMenu);
+        $menuForm = $this->createForm('krcms_menu', $newMenu);
 
         $menuForm->handleRequest($request);
 
@@ -109,7 +109,7 @@ class MenuController extends AbstractKRCMSController
             return $this->redirect($this->generateUrl('kr_solutions_krcms_menus_index', array('siteId' => $menu->getSite()->getId())));
         }
 
-        $menuForm = $this->createForm('menu', $menu);
+        $menuForm = $this->createForm('krcms_menu', $menu);
 
         if ($request->isMethod('POST')) {
             $menuForm->bind($request);
