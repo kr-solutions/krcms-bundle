@@ -51,6 +51,6 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Site:
                         onDelete: "CASCADE"
                 inverseJoinColumns:
                     user_id:
-                       referencedColumnName: id
+                       referencedColumnName: klanten_id
                        onDelete: "CASCADE"
     lifecycleCallbacks: {  }

@@ -23,7 +23,7 @@ KRSolutions\Bundle\KRCMSBundle\Entity\UserData:
             inversedBy: null
             joinColumns:
                 user_id:
-                    referencedColumnName: id
+                    referencedColumnName: klanten_id
                     nullable: false
                     onDelete: "CASCADE"
             orphanRemoval: false
