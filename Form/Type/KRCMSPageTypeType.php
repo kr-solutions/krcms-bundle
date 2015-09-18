@@ -7,10 +7,23 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * \KRSolutions\KRCMSBundle\Form\Type\KRCMSPageTypeType
+ * KRCMSPageTypeType
  */
 class KRCMSPageTypeType extends AbstractType
 {
+
+    /**
+     * @var string
+     */
+    private $class;
+
+    /**
+     * @param string $class The page type class name
+     */
+    public function __construct($class)
+    {
+        $this->class = $class;
+    }
 
     /**
      * Build form

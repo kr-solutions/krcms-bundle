@@ -2,11 +2,13 @@ kr_solutions_krcms:
     menu:
         name:
             not_blank: Name can not be empty
+        site_id_name:
+            unique: The name of the menu has to be unique
     page:
         title:
             not_blank: The title of the page is mandatory
         permalink:
-            unique: The permalink for the page has to be unique
+            unique: The permalink of the page has to be unique
     file:
         uri:
             not_blank: You have not selected any file
@@ -14,7 +16,7 @@ kr_solutions_krcms:
         title:
             not_blank: The title of the site is mandatory
         permalink:
-            unique: The permalink for the site has to be unique
+            unique: The permalink of the site has to be unique
     page_type:
         name:
             not_blank: The name of the page type is mandatory

@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * \KRSolutions\KRCMSBundle\Form\Type\KRCMSPageType
+ * KRCMSPageType
  */
 class KRCMSPageType extends AbstractType
 {

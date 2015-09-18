@@ -21,8 +21,19 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('kr_solutions_krcms');
 
+        $supportedDrivers = array('orm'); //, 'mongodb', 'couchdb'
+
         $rootNode
             ->children()
+            ->scalarNode('db_driver')
+                ->validate()
+                    ->ifNotInArray($supportedDrivers)
+                    ->thenInvalid('The driver %s is not supported. Please choose one of '.json_encode($supportedDrivers))
+                ->end()
+                ->cannotBeOverwritten()
+                ->isRequired()
+                ->cannotBeEmpty()
+            ->end()
             ->arrayNode('model')
                 ->isRequired()
                 ->addDefaultsIfNotSet()

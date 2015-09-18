@@ -18,23 +18,23 @@ interface UserDataInterface
     /**
      * Set user
      *
-     * @param \KRSolutions\Bundle\KRCMSBundle\Entity\UserInterface $user
+     * @param \Symfony\Component\Security\Core\User\UserInterface $user
      *
      * @return UserDataInterface
      */
-    public function setUser(UserInterface $user);
+    public function setUser(\Symfony\Component\Security\Core\User\UserInterface $user);
 
     /**
      * Get user
      *
-     * @return UserInterface
+     * @return \Symfony\Component\Security\Core\User\UserInterface
      */
     public function getUser();
 
     /**
      * Set last selected site
      *
-     * @param \KRSolutions\Bundle\KRCMSBundle\Entity\SiteInterface $lastSelectedSite
+     * @param SiteInterface $lastSelectedSite
      *
      * @return UserDataInterface
      */

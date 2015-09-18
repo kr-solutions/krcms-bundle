@@ -13,6 +13,19 @@ class KRCMSCategoryType extends AbstractType
 {
 
     /**
+     * @var string
+     */
+    private $class;
+
+    /**
+     * @param string $class The category class name
+     */
+    public function __construct($class)
+    {
+        $this->class = $class;
+    }
+
+    /**
      * Build form
      *
      * @param FormBuilderInterface $builder The form builder
@@ -28,16 +41,6 @@ class KRCMSCategoryType extends AbstractType
     }
 
     /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'krcms_category';
-    }
-
-    /**
      * Set default options
      *
      * @param OptionsResolver $resolver
@@ -45,7 +48,18 @@ class KRCMSCategoryType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'KRSolutions\Bundle\KRCMSBundle\Entity\Category',
+            'data_class' => $this->class,
+            'translation_domain' => 'KRSolutionsKRCMSBundle',
         ));
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return 'krcms_category';
     }
 }

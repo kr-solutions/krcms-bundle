@@ -1,7 +1,9 @@
 kr_solutions_krcms:
     menu:
         name:
-            not_blank: Naam kan niet leeg zijn
+            not_blank: De naam van het menu is verplicht
+        site_id_name:
+            unique: De naam van het menu moet uniek zijn
     page:
         title:
             not_blank: De titel van de pagina is verplicht

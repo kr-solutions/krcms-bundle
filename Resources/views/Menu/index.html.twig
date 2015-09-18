@@ -1,3 +1,5 @@
+{% form_theme menuForm 'KRSolutionsKRCMSBundle::bootstrap_3_layout.html.twig' %}
+
 {% extends 'KRSolutionsKRCMSBundle::layout.html.twig' %}
 
 {% block title %}Menu's - Content Management Systeem{% endblock %}
@@ -15,32 +17,11 @@
 				<fieldset>
 					<legend>{{ 'menu.add_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}</legend>
 
-					{% if form_errors(menuForm) %}
-						<div class="alert alert-danger">
-							<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'layout.close'|trans({}, 'KRSolutionsKRCMSBundle') }}</span></button>
-							<h4>{{ 'layout.form_error_alert_heading'|trans({}, 'KRSolutionsKRCMSBundle') }}</h4>
-							{{ form_errors(menuForm) }}
-						</div>
-					{% endif %}
-
-					<div class="form-group{% if menuForm.name.vars.errors|length %} has-error{% endif %}">
-						{{ form_label(menuForm.name) }}
-						{{ form_widget(menuForm.name, { 'attr': {'class': 'form-control'} }) }}
-					</div>
-
-					<div class="form-group{% if menuForm.site.vars.errors|length %} has-error{% endif %}">
-						{{ form_label(menuForm.site) }}
-						{{ form_widget(menuForm.site, { 'attr': {'class': 'form-control'} }) }}
-					</div>
-
-					<div class="form-group{% if form_errors(menuForm.description) %} error{% endif %}">
-						{{ form_label(menuForm.description) }}
-						{{ form_widget(menuForm.description, { 'attr': {'class': 'form-control'} }) }}
-					</div>
-
+					{{ form_errors(menuForm) }}
 					{{ form_rest(menuForm) }}
 				</fieldset>
-				<input class="btn btn-primary" type="submit" value="{{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}" />
+
+				<button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-save"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
 			</form>
 		</div>
 	</div>

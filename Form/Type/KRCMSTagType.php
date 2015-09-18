@@ -7,10 +7,23 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * \KRSolutions\Bundle\KRCMSBundle\Form\Type\KRCMSTagType
+ * KRCMSTagType
  */
 class KRCMSTagType extends AbstractType
 {
+
+    /**
+     * @var string
+     */
+    private $class;
+
+    /**
+     * @param string $class The tag class name
+     */
+    public function __construct($class)
+    {
+        $this->class = $class;
+    }
 
     /**
      * Build form
@@ -44,7 +57,8 @@ class KRCMSTagType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'KRSolutions\Bundle\KRCMSBundle\Entity\Tag',
+            'data_class' => $this->class,
+            'translation_domain' => 'KRSolutionsKRCMSBundle',
         ));
     }
 }

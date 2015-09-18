@@ -3,6 +3,7 @@
 namespace KRSolutions\Bundle\KRCMSBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Site
@@ -131,7 +132,7 @@ class Site implements SiteInterface
     /**
      * {@inheritDoc}
      */
-    public function addUser(\Symfony\Component\Security\Core\User\UserInterface $user)
+    public function addUser(UserInterface $user)
     {
         if (!$this->users->contains($user)) {
             $this->users->add($user);
@@ -143,7 +144,7 @@ class Site implements SiteInterface
     /**
      * {@inheritDoc}
      */
-    public function removeUser(\Symfony\Component\Security\Core\User\UserInterface $user)
+    public function removeUser(UserInterface $user)
     {
         $this->users->removeElement($user);
 

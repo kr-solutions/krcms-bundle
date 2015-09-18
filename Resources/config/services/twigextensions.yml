@@ -1,0 +1,16 @@
+services:
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
+
+    kr_solutions_krcms.menu_twig_extension:
+        class: KRSolutions\Bundle\KRCMSBundle\TwigExtension\MenuTwigExtension
+        arguments: ["@service_container"]
+        tags:
+            - { name: twig.extension }
+
+    kr_solutions_krcms.excerpt_twig_extension:
+        class: KRSolutions\Bundle\KRCMSBundle\TwigExtension\ExcerptTwigExtension
+        tags:
+            - { name: twig.extension }

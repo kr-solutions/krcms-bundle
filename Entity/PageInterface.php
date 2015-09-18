@@ -2,8 +2,6 @@
 
 namespace KRSolutions\Bundle\KRCMSBundle\Entity;
 
-use Doctrine\Common\Collections\Collection;
-
 /**
  * Page interface
  */
@@ -230,7 +228,7 @@ interface PageInterface
     /**
      * Get pages
      *
-     * @return Collection
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getPages();
 
@@ -253,7 +251,7 @@ interface PageInterface
     /**
      * Get files
      *
-     * @return Collection
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getFiles();
 
@@ -372,7 +370,7 @@ interface PageInterface
     /**
      * Get categories
      *
-     * @return Collection
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCategories();
 
@@ -395,7 +393,7 @@ interface PageInterface
     /**
      * Get tags
      *
-     * @return Collection
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getTags();
 

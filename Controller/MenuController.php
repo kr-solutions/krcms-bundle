@@ -31,6 +31,7 @@ class MenuController extends AbstractKRCMSController
         $menus = $this->getMenuManager()->getAllMenusBySite($site);
 
         $newMenu = $this->getMenuManager()->createMenu();
+        $newMenu->setSite($site);
         $menuForm = $this->createForm('krcms_menu', $newMenu);
 
         $menuForm->handleRequest($request);

@@ -66,7 +66,7 @@ interface MenuInterface
     /**
      * Get pages
      *
-     * @return Collection
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getPages();
 

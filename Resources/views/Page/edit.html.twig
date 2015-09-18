@@ -18,7 +18,7 @@
 	<div class="col-lg-4">
 		<div class="page-header pull-right">
 			<div class="btn-group">
-				<a id="save_page" class="btn btn-primary" href="javascript:void(0)"><i class="fa fa-fw fa-floppy-o"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+				<a id="save_page" class="btn btn-primary" href="javascript:void(0)"><i class="fa fa-fw fa-save"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
 				{% if page.parent is not null %}
 					{% set parentPageId = page.parent.id %}
 				{% else %}
@@ -86,7 +86,7 @@
 
 					{{ form_rest(pageForm) }}
 				</fieldset>
-				<button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-floppy-o"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
+				<button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-save"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
 			</form>
 		</div>
 	</div>

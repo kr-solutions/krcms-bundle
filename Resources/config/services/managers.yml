@@ -1,0 +1,18 @@
+services:
+    kr_solutions_krcms.site_manager:
+        class: KRSolutions\Bundle\KRCMSBundle\Doctrine\SiteManager
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "%kr_solutions_krcms.model.site_class%"
+
+    kr_solutions_krcms.page_manager:
+        class: KRSolutions\Bundle\KRCMSBundle\Doctrine\PageManager
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "%kr_solutions_krcms.model.page_class%"
+
+    kr_solutions_krcms.menu_manager:
+        class: KRSolutions\Bundle\KRCMSBundle\Doctrine\MenuManager
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "%kr_solutions_krcms.model.menu_class%"

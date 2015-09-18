@@ -57,7 +57,10 @@ class KRSolutionsKRCMSExtension extends Extension
         $container->setParameter('kr_solutions_krcms.management_roles.page_types', $config['management_roles']['page_types']);
         $container->setParameter('kr_solutions_krcms.management_roles.sites', $config['management_roles']['sites']);
 
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/services'));
         $loader->load('services.yml');
+        $loader->load('formtypes.yml');
+        $loader->load('managers.yml');
+        $loader->load('twigextensions.yml');
     }
 }

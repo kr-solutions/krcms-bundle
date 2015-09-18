@@ -7,10 +7,23 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * \KRSolutions\Bundle\KRCMSBundle\Form\Type\KRCMSFileType
+ * KRCMSFileType
  */
 class KRCMSFileType extends AbstractType
 {
+
+    /**
+     * @var string
+     */
+    private $class;
+
+    /**
+     * @param string $class The file class name
+     */
+    public function __construct($class)
+    {
+        $this->class = $class;
+    }
 
     /**
      * Build form
@@ -29,16 +42,6 @@ class KRCMSFileType extends AbstractType
     }
 
     /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'krcms_file';
-    }
-
-    /**
      * Set default options
      *
      * @param OptionsResolver $resolver
@@ -46,8 +49,18 @@ class KRCMSFileType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'KRSolutions\Bundle\KRCMSBundle\Entity\File',
+            'data_class' => $this->class,
             'translation_domain' => 'KRSolutionsKRCMSBundle',
         ));
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return 'krcms_file';
     }
 }

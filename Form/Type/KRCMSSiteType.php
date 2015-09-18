@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * \KRSolutions\Bundle\KRCMSBundle\Form\Type\KRCMSSiteType
+ * KRCMSSiteType
  */
 class KRCMSSiteType extends AbstractType
 {
@@ -36,31 +36,35 @@ class KRCMSSiteType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        /* @var $site \KRSolutions\Bundle\KRCMSBundle\Entity\SiteInterface */
         $site = $builder->getData();
 
         $nullToEmptyStringTransformer = new NullToEmptyStringTransformer();
 
-        $builder
-            ->add(
-                $builder->create('permalink', null, array(
+        $builder->add(
+            $builder->create('permalink', null, array(
                     'label' => 'form.type.site.permalink.label',
                     'required' => false,
                     'error_bubbling' => true,
                 ))
                 ->addModelTransformer($nullToEmptyStringTransformer)
-            )
-            ->add('title', null, array(
-                'label' => 'form.type.site.title.label',
-                'required' => true,
-                'error_bubbling' => true,
-            ))
-            ->add('isActive', 'choice', array(
-                'label' => 'form.type.site.isActive.label',
-                'choices' => array(0 => 'form.type.no', 1 => 'form.type.yes'),
-                'required' => true,
-                'error_bubbling' => true,
-            ))
-            ->add('homepage', null, array(
+        );
+
+        $builder->add('title', null, array(
+            'label' => 'form.type.site.title.label',
+            'required' => true,
+            'error_bubbling' => true,
+        ));
+
+        $builder->add('isActive', 'choice', array(
+            'label' => 'form.type.site.isActive.label',
+            'choices' => array(0 => 'form.type.no', 1 => 'form.type.yes'),
+            'required' => true,
+            'error_bubbling' => true,
+        ));
+
+        if (null !== $site->getId()) {
+            $builder->add('homepage', null, array(
                 'label' => 'form.type.site.homepage.label',
                 'required' => false,
                 'error_bubbling' => true,
@@ -68,16 +72,7 @@ class KRCMSSiteType extends AbstractType
                     return $repository->getActivePagesFromSiteQB($site);
                 },
             ));
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'krcms_site';
+        }
     }
 
     /**
@@ -91,5 +86,15 @@ class KRCMSSiteType extends AbstractType
             'data_class' => $this->class,
             'translation_domain' => 'KRSolutionsKRCMSBundle',
         ));
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return 'krcms_site';
     }
 }

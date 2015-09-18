@@ -1,16 +1,3 @@
-KRSolutions\Bundle\KRCMSBundle\Entity\Menu:
-#    constraints:
-#        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
-#            fields: name
-#            message: "De naam van het menu moet uniek zijn"
-
-    properties:
-        name:
-            - NotBlank:
-                message: kr_solutions_krcms.menu.name.not_blank
-            - Length:
-                max: 255
-
 KRSolutions\Bundle\KRCMSBundle\Entity\Page:
     constraints:
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
@@ -54,5 +41,17 @@ KRSolutions\Bundle\KRCMSBundle\Entity\PageType:
         name:
             - NotBlank:
                 message: kr_solutions_krcms.page_type.name.not_blank
+            - Length:
+                max: 255
+
+KRSolutions\Bundle\KRCMSBundle\Entity\Menu:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [name, site]
+            message: kr_solutions_krcms.menu.site_id_name.unique
+    properties:
+        name:
+            - NotBlank:
+                message: kr_solutions_krcms.menu.name.not_blank
             - Length:
                 max: 255

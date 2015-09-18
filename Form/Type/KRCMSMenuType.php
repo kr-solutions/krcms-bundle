@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * \KRSolutions\Bundle\KRCMSBundle\Form\Type\KRCMSMenuType
+ * KRCMSMenuType
  */
 class KRCMSMenuType extends AbstractType
 {
@@ -37,18 +37,7 @@ class KRCMSMenuType extends AbstractType
     {
         $builder
             ->add('name', null, array('label' => 'form.type.menu.name.label', 'required' => true, 'error_bubbling' => true))
-            ->add('site', null, array('label' => 'form.type.menu.site.label', 'required' => true, 'error_bubbling' => true))
             ->add('description', null, array('label' => 'form.type.menu.description.label', 'required' => false, 'error_bubbling' => true));
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'krcms_menu';
     }
 
     /**
@@ -62,5 +51,15 @@ class KRCMSMenuType extends AbstractType
             'data_class' => $this->class,
             'translation_domain' => 'KRSolutionsKRCMSBundle',
         ));
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return 'krcms_menu';
     }
 }
