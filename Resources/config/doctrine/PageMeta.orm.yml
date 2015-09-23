@@ -1,0 +1,36 @@
+KRSolutions\Bundle\KRCMSBundle\Entity\PageMeta:
+    type: entity
+    repositoryClass: KRSolutions\Bundle\KRCMSBundle\Repository\PageMetaRepository
+    table: krcms_page_metas
+    uniqueConstraints:
+        page_meta_key:
+            columns:
+                - page_id
+                - meta_key
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        metaKey:
+            type: string
+            nullable: false
+            length: 255
+        metaValue:
+            type: text
+            nullable: true
+            length: null
+    manyToOne:
+        page:
+            targetEntity: PageInterface
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                page_id:
+                    referencedColumnName: id
+                    onDelete: "CASCADE"
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

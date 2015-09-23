@@ -128,18 +128,6 @@ class PageController extends AbstractKRCMSController
             return $this->redirect($this->generateUrl('kr_solutions_krcms_pages_index'));
         }
 
-//		if (null !== $pageType->getAdminForm()) {
-//			$formClass = 'KRSolutions\Bundle\KRCMSBundle\PageTypeForm\\' . $pageType->getAdminForm();
-//
-//			if (!class_exists($formClass)) {
-//				$this->getRequest()->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('page.form_type_not_exist', array(), 'KRSolutionsKRCMSBundle'));
-//
-//				return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
-//			}
-//		} else {
-//			$formClass = 'KRSolutions\Bundle\KRCMSBundle\Form\Type\PageType';
-//		}
-
         $pageForm = $this->createForm('krcms_page', $page);
         $pageForm->handleRequest($request);
 
