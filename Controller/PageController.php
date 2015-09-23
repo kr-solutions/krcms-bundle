@@ -3,6 +3,7 @@
 namespace KRSolutions\Bundle\KRCMSBundle\Controller;
 
 use DateTime;
+use KRSolutions\Bundle\KRCMSBundle\FormHandler\FormHandlerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -128,19 +129,39 @@ class PageController extends AbstractKRCMSController
             return $this->redirect($this->generateUrl('kr_solutions_krcms_pages_index'));
         }
 
-        $pageForm = $this->createForm('krcms_page', $page);
+        if (null !== $page->getPageType()->getAdminForm()) {
+            if ($this->container->has($page->getPageType()->getAdminForm())) {
+                $pageForm = $this->createForm($page->getPageType()->getAdminForm(), $page);
+            } else {
+                $this->getRequest()->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('page.form_type_not_exist', array(), 'KRSolutionsKRCMSBundle'));
+
+                return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
+            }
+        } else {
+            $pageForm = $this->createForm('krcms_page', $page);
+        }
+
         $pageForm->handleRequest($request);
 
         if (null !== $pageType->getAdminFormHandler()) {
-            $formHandlerClass = 'KRSolutions\Bundle\KRCMSBundle\FormHandler\\'.$pageType->getAdminFormHandler().'FormHandler';
+            $validFormHandler = true;
 
-            if (!class_exists($formHandlerClass)) {
+            if ($this->container->has($pageType->getAdminFormHandler())) {
+                $formHandler = $this->container->get($pageType->getAdminFormHandler());
+
+                if (false === ($formHandler instanceof FormHandlerInterface)) {
+                    $formHandler = null;
+                    $validFormHandler = false;
+                }
+            } else {
+                $validFormHandler = false;
+            }
+
+            if (false === $validFormHandler) {
                 $this->getRequest()->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('page.form_handler_not_exist', array(), 'KRSolutionsKRCMSBundle'));
 
                 return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
             }
-
-            $formHandler = new $formHandlerClass($pageForm, $request, $page);
         } else {
             $formHandler = null;
         }
@@ -150,7 +171,7 @@ class PageController extends AbstractKRCMSController
             $flashMessages = array();
 
             if (null !== $formHandler) {
-                $formHandler->handleForm();
+                $formHandler->handleForm($pageForm, $request, $page);
             }
 
             if (null === $pageId) {
@@ -186,7 +207,7 @@ class PageController extends AbstractKRCMSController
         }
 
         if (null !== $pageType->getAdminTemplate()) {
-            $adminTemplate = 'KRSolutionsKRCMSBundle:KRCMSPageType:'.$pageType->getAdminTemplate().'.html.twig';
+            $adminTemplate = $pageType->getAdminTemplate();
         } else {
             $adminTemplate = 'KRSolutionsKRCMSBundle:Page:edit.html.twig';
         }
