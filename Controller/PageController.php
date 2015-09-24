@@ -131,7 +131,8 @@ class PageController extends AbstractKRCMSController
 
         if (null !== $page->getPageType()->getAdminForm()) {
             if ($this->container->has($page->getPageType()->getAdminForm())) {
-                $pageForm = $this->createForm($page->getPageType()->getAdminForm(), $page);
+                $form = $this->container->get($page->getPageType()->getAdminForm());
+                $pageForm = $this->createForm($form, $page);
             } else {
                 $this->getRequest()->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('page.form_type_not_exist', array(), 'KRSolutionsKRCMSBundle'));
 
