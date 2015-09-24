@@ -186,4 +186,8 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Page:
             cascade: ["all"]
             orderBy:
                 orderId: asc
+        pageMetas:
+            targetEntity: PageMetaInterface
+            mappedBy: page
+            cascade: ["all"]
     lifecycleCallbacks: {  }

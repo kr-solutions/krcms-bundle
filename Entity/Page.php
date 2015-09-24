@@ -122,6 +122,11 @@ class Page implements PageInterface
     protected $tags;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $pageMetas;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -130,6 +135,7 @@ class Page implements PageInterface
         $this->files = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->pageMetas = new ArrayCollection();
 
         $this->createdAt = new \DateTime('now');
         $this->updatedAt = new \DateTime('now');
@@ -573,6 +579,32 @@ class Page implements PageInterface
     public function getTags()
     {
         return $this->tags;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addPageMeta(PageMetaInterface $pageMeta)
+    {
+        $this->pageMetas[] = $pageMeta;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removePageMeta(PageMetaInterface $pageMeta)
+    {
+        $this->pageMetas->removeElement($pageMeta);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPageMetas()
+    {
+        return $this->pageMetas;
     }
 
     /**
