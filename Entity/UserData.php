@@ -2,8 +2,6 @@
 
 namespace KRSolutions\Bundle\KRCMSBundle\Entity;
 
-use Symfony\Component\Security\Core\User\UserInterface;
-
 /**
  * User data
  */
@@ -16,7 +14,7 @@ class UserData implements UserDataInterface
     protected $id;
 
     /**
-     * @var UserInterface
+     * @var \Symfony\Component\Security\Core\User\UserInterface
      */
     protected $user;
 
@@ -62,7 +60,7 @@ class UserData implements UserDataInterface
     /**
      * {@inheritDoc}
      */
-    public function setUser(UserInterface $user)
+    public function setUser(\Symfony\Component\Security\Core\User\UserInterface $user)
     {
         $this->user = $user;
 

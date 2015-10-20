@@ -43,6 +43,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('menu_class')->defaultValue('KRSolutions\\Bundle\\KRCMSBundle\\Entity\\Menu')->cannotBeEmpty()->end()
                         ->scalarNode('page_class')->defaultValue('KRSolutions\\Bundle\\KRCMSBundle\\Entity\\Page')->cannotBeEmpty()->end()
                         ->scalarNode('page_type_class')->defaultValue('KRSolutions\\Bundle\\KRCMSBundle\\Entity\\PageType')->cannotBeEmpty()->end()
+                        ->scalarNode('page_meta_class')->defaultValue('KRSolutions\\Bundle\\KRCMSBundle\\Entity\\PageMeta')->cannotBeEmpty()->end()
                         ->scalarNode('site_class')->defaultValue('KRSolutions\\Bundle\\KRCMSBundle\\Entity\\Site')->cannotBeEmpty()->end()
                         ->scalarNode('tag_class')->defaultValue('KRSolutions\\Bundle\\KRCMSBundle\\Entity\\Tag')->cannotBeEmpty()->end()
                         ->scalarNode('user_class')->isRequired()->cannotBeEmpty()->end()

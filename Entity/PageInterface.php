@@ -398,6 +398,29 @@ interface PageInterface
     public function getTags();
 
     /**
+     * Add pageMeta
+     *
+     * @param PageMetaInterface $pageMeta
+     *
+     * @return Page
+     */
+    public function addPageMeta(PageMetaInterface $pageMeta);
+
+    /**
+     * Remove pageMeta
+     *
+     * @param PageMetaInterface $pageMeta
+     */
+    public function removePageMeta(PageMetaInterface $pageMeta);
+
+    /**
+     * Get pageMetas
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPageMetas();
+
+    /**
      * Page title
      *
      * @return string
