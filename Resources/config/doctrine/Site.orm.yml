@@ -29,6 +29,7 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Site:
             type: boolean
             nullable: false
             default: '1'
+            column: is_active
     manyToOne:
         homepage:
             targetEntity: PageInterface

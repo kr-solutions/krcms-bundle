@@ -18,10 +18,12 @@ KRSolutions\Bundle\KRCMSBundle\Entity\PageMeta:
             type: string
             nullable: false
             length: 255
+            column: meta_key
         metaValue:
             type: text
             nullable: true
             length: null
+            column: meta_value
     manyToOne:
         page:
             targetEntity: PageInterface

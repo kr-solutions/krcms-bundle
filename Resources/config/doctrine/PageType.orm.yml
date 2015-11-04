@@ -25,6 +25,7 @@ KRSolutions\Bundle\KRCMSBundle\Entity\PageType:
             type: string
             nullable: true
             length: 255
+            column: page_handler
         template:
             type: string
             nullable: true
@@ -33,38 +34,47 @@ KRSolutions\Bundle\KRCMSBundle\Entity\PageType:
             type: string
             nullable: true
             length: 255
+            column: admin_form
         adminTemplate:
             type: string
             nullable: true
             length: 255
+            column: admin_template
         adminFormHandler:
             type: string
             nullable: true
             length: 255
+            column: admin_form_handler
         isChild:
             type: boolean
             nullable: false
             default: '0'
+            column: is_child
         hasChildren:
             type: boolean
             nullable: false
             default: '0'
+            column: has_children
         childrenOrderBy:
             type: string
             length: 25
             nullable: true
+            column: children_order_by
         childrenOrderDirection:
             type: string
             length: 4
             nullable: true
+            column: children_order_direction
         hasFiles:
             type: boolean
             nullable: false
             default: '0'
+            column: has_files
         hasContent:
             type: boolean
             nullable: false
             default: '1'
+            column: has_content
         roles:
             type: array
             nullable: true
