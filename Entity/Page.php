@@ -3,7 +3,6 @@
 namespace KRSolutions\Bundle\KRCMSBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Page
@@ -92,12 +91,12 @@ class Page implements PageInterface
     protected $site;
 
     /**
-     * @var UserInterface
+     * @var \Symfony\Component\Security\Core\User\UserInterface
      */
     protected $createdBy;
 
     /**
-     * @var UserInterface
+     * @var \Symfony\Component\Security\Core\User\UserInterface
      */
     protected $updatedBy;
 
@@ -122,6 +121,11 @@ class Page implements PageInterface
     protected $tags;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $pageMetas;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -130,6 +134,7 @@ class Page implements PageInterface
         $this->files = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->pageMetas = new ArrayCollection();
 
         $this->createdAt = new \DateTime('now');
         $this->updatedAt = new \DateTime('now');
@@ -454,7 +459,7 @@ class Page implements PageInterface
     /**
      * {@inheritDoc}
      */
-    public function setCreatedBy(UserInterface $createdBy = null)
+    public function setCreatedBy(\Symfony\Component\Security\Core\User\UserInterface $createdBy = null)
     {
         $this->createdBy = $createdBy;
 
@@ -472,7 +477,7 @@ class Page implements PageInterface
     /**
      * {@inheritDoc}
      */
-    public function setUpdatedBy(UserInterface $updatedBy = null)
+    public function setUpdatedBy(\Symfony\Component\Security\Core\User\UserInterface $updatedBy = null)
     {
         $this->updatedBy = $updatedBy;
 
@@ -573,6 +578,32 @@ class Page implements PageInterface
     public function getTags()
     {
         return $this->tags;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addPageMeta(PageMetaInterface $pageMeta)
+    {
+        $this->pageMetas[] = $pageMeta;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removePageMeta(PageMetaInterface $pageMeta)
+    {
+        $this->pageMetas->removeElement($pageMeta);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPageMetas()
+    {
+        return $this->pageMetas;
     }
 
     /**

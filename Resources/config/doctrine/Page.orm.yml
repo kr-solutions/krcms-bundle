@@ -54,13 +54,16 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Page:
             type: datetime
             nullable: false
             default: '0000-00-00 00:00:00'
+            column: updated_at
         publishAt:
             type: datetime
             nullable: true
+            column: publish_at
         publishTill:
             type: datetime
             nullable: true
             comment: ''
+            column: publish_till
         permalink:
             type: string
             nullable: true
@@ -69,6 +72,7 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Page:
             type: string
             nullable: true
             length: 255
+            column: menu_title
         title:
             type: string
             nullable: false
@@ -81,10 +85,12 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Page:
             type: string
             nullable: true
             length: 255
+            column: meta_keywords
         metaDescription:
             type: string
             nullable: true
             length: 255
+            column: meta_description
     manyToOne:
         pageType:
             targetEntity: PageTypeInterface
@@ -186,4 +192,8 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Page:
             cascade: ["all"]
             orderBy:
                 orderId: asc
+        pageMetas:
+            targetEntity: PageMetaInterface
+            mappedBy: page
+            cascade: ["all"]
     lifecycleCallbacks: {  }

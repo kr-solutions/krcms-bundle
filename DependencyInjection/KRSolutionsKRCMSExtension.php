@@ -31,6 +31,7 @@ class KRSolutionsKRCMSExtension extends Extension
         $container->setParameter('kr_solutions_krcms.model.menu_class', $config['model']['menu_class']);
         $container->setParameter('kr_solutions_krcms.model.page_class', $config['model']['page_class']);
         $container->setParameter('kr_solutions_krcms.model.page_type_class', $config['model']['page_type_class']);
+        $container->setParameter('kr_solutions_krcms.model.page_meta_class', $config['model']['page_meta_class']);
         $container->setParameter('kr_solutions_krcms.model.site_class', $config['model']['site_class']);
         $container->setParameter('kr_solutions_krcms.model.tag_class', $config['model']['tag_class']);
         $container->setParameter('kr_solutions_krcms.model.user_class', $config['model']['user_class']);
