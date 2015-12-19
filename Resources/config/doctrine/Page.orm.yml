@@ -139,7 +139,7 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Page:
             inversedBy: null
             joinColumns:
                 created_by:
-                    referencedColumnName: klanten
+                    referencedColumnName: klanten_id
                     onDelete: "SET NULL"
             orphanRemoval: false
         updatedBy:
@@ -149,7 +149,7 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Page:
             inversedBy: null
             joinColumns:
                 updated_by:
-                    referencedColumnName: klanten
+                    referencedColumnName: klanten_id
                     onDelete: "SET NULL"
             orphanRemoval: false
     manyToMany:
