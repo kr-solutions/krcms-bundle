@@ -38,6 +38,7 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Menu:
             joinColumns:
                 site_id:
                     referencedColumnName: id
+                    onDelete: "SET NULL"
             orphanRemoval: false
     oneToMany:
         pages:

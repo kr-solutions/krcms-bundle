@@ -100,6 +100,7 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Page:
             joinColumns:
                 page_type_id:
                     referencedColumnName: id
+                    onDelete: "SET NULL"
             orphanRemoval: false
         menu:
             targetEntity: MenuInterface
@@ -109,6 +110,7 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Page:
             joinColumns:
                 menu_id:
                     referencedColumnName: id
+                    onDelete: "SET NULL"
             orphanRemoval: false
         site:
             targetEntity: SiteInterface
@@ -118,6 +120,7 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Page:
             joinColumns:
                 site_id:
                     referencedColumnName: id
+                    onDelete: "SET NULL"
             orphanRemoval: false
         parent:
             targetEntity: PageInterface
@@ -137,6 +140,7 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Page:
             joinColumns:
                 created_by:
                     referencedColumnName: id
+                    onDelete: "SET NULL"
             orphanRemoval: false
         updatedBy:
             targetEntity: UserInterface
@@ -146,6 +150,7 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Page:
             joinColumns:
                 updated_by:
                     referencedColumnName: id
+                    onDelete: "SET NULL"
             orphanRemoval: false
     manyToMany:
         categories:
