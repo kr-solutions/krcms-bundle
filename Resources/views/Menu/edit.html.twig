@@ -5,50 +5,50 @@
 {% block title %}{% if action == 'new' %}{{ 'menu.add_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}{% else %}{{ 'menu.edit_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}{% endif %} - Content Management Systeem{% endblock %}
 
 {% block header %}
-	<div class="col-lg-8">
-		<h1 class="page-header">
-			{% if action == 'new' %}
-				{{ 'menu.add_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}
-			{% else %}
-				{{ 'menu.edit_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}
+    <div class="col-lg-8">
+        <h1 class="page-header">
+            {% if action == 'new' %}
+                {{ 'menu.add_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}
+            {% else %}
+                {{ 'menu.edit_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}
 
                 {% if menu.name %}
                     <small>{{ menu.name }}</small>
                 {% endif %}
-			{% endif %}
-		</h1>
-	</div>
-	<div class="col-lg-4">
-		<div class="page-header pull-right">
-			<div class="btn-group">
-				<a id="save_menu" href="javascript:void(0);" class="btn btn-primary"><i class="fa fa-fw fa-save"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
-				<a class="btn btn-default" href="{{ path('kr_solutions_krcms_menus_index', {'siteId': menu.site.id}) }}" title="{{ 'menu.back_to_menu_overview'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-fw fa-stop"></i> {{ 'layout.cancel'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
-			</div>
-		</div>
-	</div>
+            {% endif %}
+        </h1>
+    </div>
+    <div class="col-lg-4">
+        <div class="page-header pull-right">
+            <div class="btn-group">
+                <a id="save_menu" href="javascript:void(0);" class="btn btn-primary"><i class="fa fa-fw fa-save"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+                <a class="btn btn-default" href="{{ path('kr_solutions_krcms_menus_index', {'siteId': menu.site.id}) }}" title="{{ 'menu.back_to_menu_overview'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-fw fa-stop"></i> {{ 'layout.cancel'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block content %}
-	<div class="col-md-12">
-		<div class="well">
-			<form id="menuForm" method="post" action="{% if action == 'new' %}{{ path('kr_solutions_krcms_menus_add') }}{% else %}{{ path('kr_solutions_krcms_menus_edit', { 'menuId': menu.id }) }}{% endif %}" {{ form_enctype(menuForm) }} novalidate="novalidate">
+    <div class="col-md-12">
+        <div class="well">
+            {{ form_start(menuForm, {attr: {id: 'menuForm', novalidate: 'novalidate'} }) }}
                 {{ form_errors(menuForm) }}
                 {{ form_rest(menuForm) }}
 
-				<button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-save"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
-			</form>
-		</div>
-	</div>
+                <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-save"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
+            {{ form_end(menuForm) }}
+        </div>
+    </div>
 {% endblock %}
 
 {% block javascripts %}
-	{{ parent() }}
+    {{ parent() }}
 
-	<script type="text/javascript">
-		$(document).ready(function () {
-			$('#save_menu').on('click', function () {
-				$('#menuForm').submit();
-			});
-		});
-	</script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#save_menu').on('click', function () {
+                $('#menuForm').submit();
+            });
+        });
+    </script>
 {% endblock %}

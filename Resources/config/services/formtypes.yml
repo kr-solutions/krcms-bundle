@@ -33,7 +33,7 @@ services:
         class: KRSolutions\Bundle\KRCMSBundle\Form\Type\KRCMSSiteType
         arguments: ["%kr_solutions_krcms.model.site_class%"]
         tags:
-            - { name: form.type, alias: krcms_site }
+            - { name: form.type }
 
     kr_solutions_krcms.form.type.krcms_tag:
         class: KRSolutions\Bundle\KRCMSBundle\Form\Type\KRCMSTagType

@@ -31,12 +31,12 @@
 {% block content %}
 	<div class="col-md-12">
 		<div class="well">
-			<form id="siteForm" method="post" action="{% if action == 'new' %}{{ path('kr_solutions_krcms_sites_add') }}{% else %}{{ path('kr_solutions_krcms_sites_edit', { 'siteId': site.id }) }}{% endif %}" {{ form_enctype(siteForm) }} novalidate="novalidate">
+            {{ form_start(siteForm, {attr: {id: 'siteForm', novalidate: 'novalidate'} }) }}
                 {{ form_errors(siteForm) }}
                 {{ form_rest(siteForm) }}
 
 				<button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-save"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
-			</form>
+            {{ form_end(siteForm) }}
 		</div>
 	</div>
 {% endblock %}

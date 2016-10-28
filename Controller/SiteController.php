@@ -2,6 +2,7 @@
 
 namespace KRSolutions\Bundle\KRCMSBundle\Controller;
 
+use KRSolutions\Bundle\KRCMSBundle\Form\Type\KRCMSSiteType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -50,9 +51,13 @@ class SiteController extends AbstractKRCMSController
         if (null !== $siteId) {
             $site = $this->getSiteManager()->getSiteById($siteId);
             $action = 'edit';
+            $formAction = $this->generateUrl('kr_solutions_krcms_sites_edit', array(
+                'siteId' => $siteId,
+            ));
         } else {
             $site = $this->getSiteManager()->createSite();
             $action = 'new';
+            $formAction = $this->generateUrl('kr_solutions_krcms_sites_add');
         }
 
         if (null === $site) {
@@ -61,11 +66,14 @@ class SiteController extends AbstractKRCMSController
             return $this->redirect($this->generateUrl('kr_solutions_krcms_sites_index'));
         }
 
-        $siteForm = $this->createForm('krcms_site', $site);
+        $siteForm = $this->createForm(KRCMSSiteType::class, $site, array(
+            'action' => $formAction,
+            'method' => 'POST',
+        ));
 
         $siteForm->handleRequest($request);
 
-        if ($siteForm->isValid()) {
+        if ($siteForm->isSubmitted() && $siteForm->isValid()) {
             $flashMessages = array();
 
             if (null === $siteId) {
@@ -79,7 +87,7 @@ class SiteController extends AbstractKRCMSController
 
             foreach ($flashMessages as $type => $flashMessage) {
                 foreach ($flashMessage as $message) {
-                    $this->getRequest()->getSession()->getFlashBag()->add($type, $message);
+                    $request->getSession()->getFlashBag()->add($type, $message);
                 }
             }
 

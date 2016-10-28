@@ -52,7 +52,7 @@ class KRCMSPageType extends AbstractType
                 'label' => 'form.type.page.menu.label',
                 'required' => false,
                 'error_bubbling' => true,
-                'empty_value' => 'form.type.page.menu.empty_value',
+                'placeholder' => 'form.type.page.menu.empty_value',
                 'empty_data' => null,
                 'query_builder' => function (\Doctrine\ORM\EntityRepository $repository) use ($page) {
                     return $repository->getMenusBySiteQB($page->getSite());

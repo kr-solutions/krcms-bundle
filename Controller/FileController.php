@@ -32,13 +32,13 @@ class FileController extends AbstractKRCMSController
         $page = $this->getPageRepository()->getPageById($pageId);
 
         if (null === $page) {
-            $this->getRequest()->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('file.page_not_exist', array('%page_id%' => $pageId), 'KRSolutionsKRCMSBundle'));
+            $request->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('file.page_not_exist', array('%page_id%' => $pageId), 'KRSolutionsKRCMSBundle'));
 
             return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
         }
 
         if (false == $page->getPageType()->getHasFiles()) {
-            $this->getRequest()->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('file.page_cannot_contain_files', array(), 'KRSolutionsKRCMSBundle'));
+            $request->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('file.page_cannot_contain_files', array(), 'KRSolutionsKRCMSBundle'));
 
             return $this->redirect($this->generateUrl('kr_solutions_krcms_pages_index', array('siteId' => $page->getSite()->getId())));
         }
@@ -59,7 +59,7 @@ class FileController extends AbstractKRCMSController
             $em->persist($newFile);
             $em->flush();
 
-            $this->getRequest()->getSession()->getFlashBag()->add('alert-success', $this->getTranslator()->trans('file.file_added', array(), 'KRSolutionsKRCMSBundle'));
+            $request->getSession()->getFlashBag()->add('alert-success', $this->getTranslator()->trans('file.file_added', array(), 'KRSolutionsKRCMSBundle'));
 
             return $this->redirect($this->generateUrl('kr_solutions_krcms_files', array('pageId' => $pageId)));
         }
@@ -70,13 +70,15 @@ class FileController extends AbstractKRCMSController
     /**
      * Remove file
      *
+     * @param Request $request
+     *
      * @return Response
      */
-    public function removeFileAction()
+    public function removeFileAction(Request $request)
     {
         $response = new Response();
 
-        if ($this->getRequest()->isXmlHttpRequest() === false) {
+        if ($request->isXmlHttpRequest() === false) {
             $response->setStatusCode(403);
 
             return $response;
@@ -84,7 +86,7 @@ class FileController extends AbstractKRCMSController
 
         $em = $this->getDoctrine()->getManager();
 
-        $fileId = intval($this->getRequest()->request->get('file_id'));
+        $fileId = intval($request->request->get('file_id'));
 
         $file = $this->getFileRepository()->find($fileId);
 

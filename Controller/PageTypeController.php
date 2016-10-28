@@ -3,6 +3,7 @@
 namespace KRSolutions\Bundle\KRCMSBundle\Controller;
 
 use KRSolutions\Bundle\KRCMSBundle\Entity\PageType;
+use KRSolutions\Bundle\KRCMSBundle\Form\Type\KRCMSPageTypeType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -37,9 +38,13 @@ class PageTypeController extends AbstractKRCMSController
         if (null !== $pageTypeId) {
             $pageType = $this->getPageTypeRepository()->getPageTypeById($pageTypeId);
             $action = 'edit';
+            $formAction = $this->generateUrl('kr_solutions_krcms_page_types_edit', array(
+                'pageTypeId' => $pageTypeId,
+            ));
         } else {
             $pageType = new PageType();
             $action = 'new';
+            $formAction = $this->generateUrl('kr_solutions_krcms_page_types_add');
         }
 
         if (null === $pageType) {
@@ -48,11 +53,14 @@ class PageTypeController extends AbstractKRCMSController
             return $this->redirect($this->generateUrl('kr_solutions_krcms_page_types_index'));
         }
 
-        $pageTypeForm = $this->createForm('krcms_page_type', $pageType);
+        $pageTypeForm = $this->createForm(KRCMSPageTypeType::class, $pageType, array(
+            'method' => 'POST',
+            'action' => $formAction,
+        ));
 
         $pageTypeForm->handleRequest($request);
 
-        if ($pageTypeForm->isValid()) {
+        if ($pageTypeForm->isSubmitted() && $pageTypeForm->isValid()) {
             $flashMessages = array();
 
             if (null === $pageTypeId) {
@@ -66,7 +74,7 @@ class PageTypeController extends AbstractKRCMSController
 
             foreach ($flashMessages as $type => $flashMessage) {
                 foreach ($flashMessage as $message) {
-                    $this->getRequest()->getSession()->getFlashBag()->add($type, $message);
+                    $request->getSession()->getFlashBag()->add($type, $message);
                 }
             }
 

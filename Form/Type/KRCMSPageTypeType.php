@@ -3,6 +3,7 @@
 namespace KRSolutions\Bundle\KRCMSBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -37,47 +38,47 @@ class KRCMSPageTypeType extends AbstractType
     {
         $builder->add('name', null, array('label' => 'form.type.pageType.name.label', 'required' => true, 'error_bubbling' => true));
         $builder->add('description', null, array('label' => 'form.type.pageType.description.label', 'required' => false, 'error_bubbling' => true));
-        $builder->add('isChild', 'choice', array(
+        $builder->add('isChild', ChoiceType::class, array(
             'label' => 'form.type.pageType.isChild.label',
-            'choices' => array(0 => 'form.type.no', 1 => 'form.type.yes'),
+            'choices' => array('form.type.no' => 0, 'form.type.yes' => 1),
             'required' => true,
             'error_bubbling' => true,
         ));
-        $builder->add('hasChildren', 'choice', array(
+        $builder->add('hasChildren', ChoiceType::class, array(
             'label' => 'form.type.pageType.hasChildren.label',
-            'choices' => array(0 => 'form.type.no', 1 => 'form.type.yes'),
+            'choices' => array('form.type.no' => 0, 'form.type.yes' => 1),
             'required' => true,
             'error_bubbling' => true,
         ));
-        $builder->add('hasContent', 'choice', array(
+        $builder->add('hasContent', ChoiceType::class, array(
             'label' => 'form.type.pageType.hasContent.label',
-            'choices' => array(1 => 'form.type.yes', 0 => 'form.type.no'),
+            'choices' => array('form.type.no' => 0, 'form.type.yes' => 1),
             'required' => true,
             'error_bubbling' => true,
         ));
-        $builder->add('hasFiles', 'choice', array(
+        $builder->add('hasFiles', ChoiceType::class, array(
             'label' => 'form.type.pageType.hasFiles.label',
-            'choices' => array(1 => 'form.type.yes', 0 => 'form.type.no'),
+            'choices' => array('form.type.no' => 0, 'form.type.yes' => 1),
             'required' => true,
             'error_bubbling' => true,
         ));
-        $builder->add('childrenOrderBy', 'choice', array(
+        $builder->add('childrenOrderBy', ChoiceType::class, array(
             'label' => 'form.type.pageType.childrenOrderBy.label',
             'choices' => array(
-                'orderId' => 'form.type.pageType.childrenOrderBy.choices.orderId',
-                'createdAt' => 'form.type.pageType.childrenOrderBy.choices.createdAt',
-                'updatedAt' => 'form.type.pageType.childrenOrderBy.choices.updatedAt',
-                'title' => 'form.type.pageType.childrenOrderBy.choices.title',
-                'permalink' => 'form.type.pageType.childrenOrderBy.choices.permalink',
+                'form.type.pageType.childrenOrderBy.choices.orderId' => 'orderId',
+                'form.type.pageType.childrenOrderBy.choices.createdAt' => 'createdAt',
+                'form.type.pageType.childrenOrderBy.choices.updatedAt' => 'updatedAt',
+                'form.type.pageType.childrenOrderBy.choices.title' => 'title',
+                'form.type.pageType.childrenOrderBy.choices.permalink' => 'permalink',
             ),
             'required' => true,
             'error_bubbling' => true,
         ));
-        $builder->add('childrenOrderDirection', 'choice', array(
+        $builder->add('childrenOrderDirection', ChoiceType::class, array(
             'label' => 'form.type.pageType.childrenOrderDirection.label',
             'choices' => array(
-                'desc' => 'form.type.pageType.childrenOrderDirection.choices.desc',
-                'asc' => 'form.type.pageType.childrenOrderDirection.choices.asc',
+                'form.type.pageType.childrenOrderDirection.choices.desc' => 'desc',
+                'form.type.pageType.childrenOrderDirection.choices.asc' => 'asc',
             ),
             'required' => true,
             'error_bubbling' => true,

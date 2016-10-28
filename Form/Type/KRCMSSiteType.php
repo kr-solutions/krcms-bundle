@@ -56,9 +56,9 @@ class KRCMSSiteType extends AbstractType
             'error_bubbling' => true,
         ));
 
-        $builder->add('isActive', 'choice', array(
+        $builder->add('isActive', \Symfony\Component\Form\Extension\Core\Type\ChoiceType::class, array(
             'label' => 'form.type.site.isActive.label',
-            'choices' => array(0 => 'form.type.no', 1 => 'form.type.yes'),
+            'choices' => array('form.type.no' => 0, 'form.type.yes' => 1),
             'required' => true,
             'error_bubbling' => true,
         ));

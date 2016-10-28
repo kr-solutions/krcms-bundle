@@ -13,7 +13,7 @@
 {% block content %}
 	<div class="col-md-4">
 		<div class="well">
-			<form action="{{ path('kr_solutions_krcms_menus_index', { 'siteId': site.id }) }}" method="post" {{ form_enctype(menuForm) }} novalidate="novalidate">
+            {{ form_start(menuForm, {attr: {id: 'menuForm', novalidate: 'novalidate'} }) }}
 				<fieldset>
 					<legend>{{ 'menu.add_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}</legend>
 
@@ -22,7 +22,7 @@
 				</fieldset>
 
 				<button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-save"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
-			</form>
+			{{ form_end(menuForm) }}
 		</div>
 	</div>
 	<div class="col-md-8">

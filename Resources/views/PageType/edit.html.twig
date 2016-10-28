@@ -31,12 +31,12 @@
 {% block content %}
 	<div class="col-md-12">
 		<div class="well">
-			<form id="pageTypeForm" method="post" action="{% if action == 'new' %}{{ path('kr_solutions_krcms_page_types_add') }}{% else %}{{ path('kr_solutions_krcms_page_types_edit', { 'pageTypeId': pageType.id }) }}{% endif %}" {{ form_enctype(pageTypeForm) }} novalidate="novalidate">
+            {{ form_start(pageTypeForm, {attr: {id: 'pageTypeForm', novalidate: 'novalidate'} }) }}
                 {{ form_errors(pageTypeForm) }}
                 {{ form_rest(pageTypeForm) }}
 
 				<button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-save"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
-			</form>
+			{{ form_end(pageTypeForm) }}
 		</div>
 	</div>
 {% endblock %}
