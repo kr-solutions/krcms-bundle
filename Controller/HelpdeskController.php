@@ -3,6 +3,9 @@
 namespace KRSolutions\Bundle\KRCMSBundle\Controller;
 
 use Swift_Message;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints\Email;
@@ -42,8 +45,8 @@ class HelpdeskController extends AbstractKRCMSController
             'email' => $this->getUser()->getEmail(),
         );
 
-        $form = $this->createFormBuilder($defaultData)
-            ->add('name', 'text', array(
+        $form = $this->createFormBuilder($defaultData, array('method' => 'POST', 'action' => $this->generateUrl('kr_solutions_krcms_helpdesk')))
+            ->add('name', TextType::class, array(
                 'label' => $this->getTranslator()->trans('helpdesk.name', array(), 'KRSolutionsKRCMSBundle'),
                 'required' => true,
                 'constraints' => array(
@@ -51,7 +54,7 @@ class HelpdeskController extends AbstractKRCMSController
                     new Length(array('min' => 3)),
                 ),
             ))
-            ->add('subject', 'text', array(
+            ->add('subject', TextType::class, array(
                 'label' => $this->getTranslator()->trans('helpdesk.subject', array(), 'KRSolutionsKRCMSBundle'),
                 'required' => true,
                 'constraints' => array(
@@ -59,7 +62,7 @@ class HelpdeskController extends AbstractKRCMSController
                     new Length(array('min' => 3)),
                 ),
             ))
-            ->add('email', 'email', array(
+            ->add('email', EmailType::class, array(
                 'label' => $this->getTranslator()->trans('helpdesk.email', array(), 'KRSolutionsKRCMSBundle'),
                 'required' => true,
                 'constraints' => array(
@@ -67,7 +70,7 @@ class HelpdeskController extends AbstractKRCMSController
                     new Email(array('checkMX' => true, 'checkHost' => true)),
                 ),
             ))
-            ->add('message', 'textarea', array(
+            ->add('message', TextareaType::class, array(
                 'label' => $this->getTranslator()->trans('helpdesk.question', array(), 'KRSolutionsKRCMSBundle'),
                 'required' => true,
                 'constraints' => array(

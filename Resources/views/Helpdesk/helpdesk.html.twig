@@ -15,10 +15,10 @@
 {% block content %}
 	<div class="col-md-12">
 		<div class="well">
-			<form method="post" action="{{ path ('kr_solutions_krcms_helpdesk') }}" novalidate="novalidate" {{ form_enctype(contactForm) }}>
+            {{ form_start(contactForm, {attr: {id: 'pageForm', novalidate: 'novalidate'} }) }}
 				{{ form_rest(contactForm) }}
 				<button class="btn btn-default pull-right" type="submit">{{ 'helpdesk.submit' | trans({}, 'KRSolutionsKRCMSBundle') }}</button>
-			</form>
+			{{ form_end(contactForm) }}
 			<div class="clearfix"></div>
 		</div>
 	</div>
