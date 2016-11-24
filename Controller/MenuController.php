@@ -30,6 +30,7 @@ class MenuController extends AbstractKRCMSController
 
         $site = $this->getSiteManager()->getSiteById($siteId);
         $menus = $this->getMenuManager()->getAllMenusBySite($site);
+        $flashMessages = array();
 
         $newMenu = $this->getMenuManager()->createMenu();
         $newMenu->setSite($site);
@@ -46,7 +47,13 @@ class MenuController extends AbstractKRCMSController
             $em->persist($newMenu);
             $em->flush();
 
-            $request->getSession()->getFlashBag()->add('alert-success', 'Het menu \''.$newMenu->getName().'\' is toegevoegd!');
+            $flashMessages['alert-success'][] = $this->getTranslator()->trans('menu.menu_added', array('%menu_name%' => $newMenu->getName()), 'KRSolutionsKRCMSBundle');
+
+            foreach ($flashMessages as $type => $flashMessage) {
+                foreach ($flashMessage as $message) {
+                    $request->getSession()->getFlashBag()->add($type, $message);
+                }
+            }
 
             return $this->redirect($this->generateUrl('kr_solutions_krcms_menus_index', array('siteId' => $siteId)));
         }
@@ -71,19 +78,30 @@ class MenuController extends AbstractKRCMSController
 //		}
 
         $menu = $this->getMenuManager()->getMenuById($menuId);
+        $flashMessages = array();
 
         if (null === $menu) {
-            $request->getSession()->getFlashBag()->add('alert-danger', 'Verwijderen mislukt! Het menu met id \''.$menuId.'\' bestaat niet (meer). Probeer het nog een keer!');
+            $flashMessages['alert-danger'][] = $this->getTranslator()->trans('menu.remove.failed_not_exist', array('%menu_id%' => $menuId), 'KRSolutionsKRCMSBundle');
         } else {
             $em = $this->getDoctrine()->getManager();
 
             $em->remove($menu);
             $em->flush();
 
-            $request->getSession()->getFlashBag()->add('alert-success', 'Het menu met id \''.$menuId.'\' is verwijderd.');
+            $flashMessages['alert-success'][] = $this->getTranslator()->trans('menu.remove.success', array('%menu_id%' => $menuId), 'KRSolutionsKRCMSBundle');
         }
 
-        return $this->redirect($this->generateUrl('kr_solutions_krcms_menus_index', array('siteId' => $menu->getSite()->getId())));
+        foreach ($flashMessages as $type => $flashMessage) {
+            foreach ($flashMessage as $message) {
+                $request->getSession()->getFlashBag()->add($type, $message);
+            }
+        }
+
+        if (!empty($menu)) {
+            return $this->redirect($this->generateUrl('kr_solutions_krcms_menus_index', array('siteId' => $menu->getSite()->getId())));
+        } else {
+            return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
+        }
     }
 
     /**

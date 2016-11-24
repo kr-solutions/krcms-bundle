@@ -156,6 +156,12 @@ menu:
     remove_confirmation:
         title: Are you sure you want to remove this menu?
         message: All possibly linked subpages of this menu become a single page! These should be linked, if necessary, again to another page or menu.
+    menu_added: Menu '%menu_name%' has been added successfully.
+    menu_edited: Menu '%menu_name%' has been successfully updated.
+    remove:
+        failed_not_exist: Failed to remove menu with id '%menu_id%'. This menu does not exist (anymore).
+        failed_not_authorized: Failed to remove menu with id '%menu_id%'. You are not authorized to remove this menu.
+        success: Successfully removed menu with id '%menu_id%'.
 
 dashboard:
     no_sites: There are no sites configured yet. Add at least one site (most common) or more for a multiple sites configuration.

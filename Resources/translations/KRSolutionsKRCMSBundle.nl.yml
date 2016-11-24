@@ -140,7 +140,7 @@ page:
     page_edited: Pagina '%page_title%' is succesvol gewijzigd.
     remove:
         failed_not_exist: Fout bij het verwijderen van de pagina met id '%page_id%'. Deze pagina bestaat niet (meer).
-        failed_not_authorized: Fout bij het verwijrden van de pagina met id '%page_id%'. U bent niet gemachtigd om deze pagina te verwijderen.
+        failed_not_authorized: Fout bij het verwijderen van de pagina met id '%page_id%'. U bent niet gemachtigd om deze pagina te verwijderen.
         success: De pagina met id '%page_id%' is succesvol verwijderd.
 
 menu:
@@ -156,6 +156,12 @@ menu:
     remove_confirmation:
         title: Weet u zeker dat u dit menu wilt verwijderen?
         message: Alle eventueel gekoppelde pagina's onder dit menu worden losse pagina's! Deze dient u indien nodig zelf opnieuw te koppelen aan een andere pagina of menu.
+    menu_added: Menu '%menu_name%' is succesvol toegevoegd.
+    menu_edited: Menu '%menu_name%' is succesvol gewijzigd.
+    remove:
+        failed_not_exist: Fout bij het verwijderen van het menu met id '%menu_id%'. Dit menu bestaat niet (meer).
+        failed_not_authorized: Fout bij het verwijderen van het menu met id '%menu_id%'. U bent niet gemachtigd om dit menu te verwijderen.
+        success: Het menu met id '%menu_id%' is succesvol verwijderd.
 
 dashboard:
     no_sites: Er zijn nog geen site geconfigureerd. Maak minsten één site aan (meest voorkomend) of meer sites voor een multi site configuratie.
