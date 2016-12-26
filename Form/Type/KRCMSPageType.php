@@ -2,7 +2,10 @@
 
 namespace KRSolutions\Bundle\KRCMSBundle\Form\Type;
 
+use Doctrine\ORM\EntityRepository;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use KRSolutions\Bundle\KRCMSBundle\Form\DataTransformer\NullToEmptyStringTransformer;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -54,7 +57,7 @@ class KRCMSPageType extends AbstractType
                 'error_bubbling' => true,
                 'placeholder' => 'form.type.page.menu.empty_value',
                 'empty_data' => null,
-                'query_builder' => function (\Doctrine\ORM\EntityRepository $repository) use ($page) {
+                'query_builder' => function (EntityRepository $repository) use ($page) {
                     return $repository->getMenusBySiteQB($page->getSite());
                 },
             ));
@@ -69,7 +72,7 @@ class KRCMSPageType extends AbstractType
                 'required' => true,
                 'error_bubbling' => true,
                 'empty_data' => false,
-                'query_builder' => function (\Doctrine\ORM\EntityRepository $repository) use ($page) {
+                'query_builder' => function (EntityRepository $repository) use ($page) {
                     return $repository->getAllChildablePagesExceptThisPageQB($page);
                 },
             );
@@ -80,11 +83,11 @@ class KRCMSPageType extends AbstractType
                 $parentOptions['required'] = false;
             }
 
-            $builder->add('parent', \Symfony\Bridge\Doctrine\Form\Type\EntityType::class, $parentOptions);
+            $builder->add('parent', EntityType::class, $parentOptions);
         }
 
         if (true === $page->getPageType()->getHasContent()) {
-            $builder->add('content', null, array('label' => 'form.type.page.content.label', 'required' => false, 'error_bubbling' => true));
+            $builder->add('content', CKEditorType::class, array('label' => 'form.type.page.content.label', 'required' => false, 'error_bubbling' => true));
         }
 
         $builder->add('metaDescription', null, array('label' => 'form.type.page.metaDescription.label', 'required' => false, 'error_bubbling' => true));

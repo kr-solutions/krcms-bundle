@@ -136,7 +136,7 @@
 			});
 		});
 
-		{% if pageForm.content is defined %}
+		{# if pageForm.content is defined %}
 			/* <![CDATA[ */
 			// This is a check for the CKEditor class. If not defined, the paths must be checked.
 			if (typeof CKEDITOR === 'undefined') {
@@ -158,6 +158,6 @@
 						});
 			}
 			/* ]]> */
-		{% endif %}
+		{% endif #}
 	</script>
 {% endblock %}
