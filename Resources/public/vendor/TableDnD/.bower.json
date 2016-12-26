@@ -18,7 +18,7 @@
     "tag": "0.9.1",
     "commit": "e8aaea356779c95edbfc0b4267c15e92b5c52afd"
   },
-  "_source": "git://github.com/isocra/TableDnD.git",
+  "_source": "https://github.com/isocra/TableDnD.git",
   "_target": "*",
   "_originalSource": "TableDnD"
 }
