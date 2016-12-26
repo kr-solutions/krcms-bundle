@@ -1,3 +1,6 @@
+elfinder:
+     resource: "@FMElfinderBundle/Resources/config/routing.yml"
+
 kr_solutions_krcms_dashboard:
     path: /
     defaults: { _controller: KRSolutionsKRCMSBundle:Dashboard:index, siteId: null }

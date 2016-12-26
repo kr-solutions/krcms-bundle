@@ -57,6 +57,9 @@
 		</div>
 
 		{% block javascripts %}
+            <script type="text/javascript">
+                var krcms_generate_page_permalink_route = '{{ path('kr_solutions_krcms_pages_generate_permalink') }}';
+            </script>
 			<script type="text/javascript" src="{{ asset('bundles/krsolutionskrcms/vendor/jquery/dist/jquery.min.js') }}"></script>
 			<script type="text/javascript" src="{{ asset('bundles/krsolutionskrcms/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 			<script type="text/javascript" src="{{ asset('bundles/krsolutionskrcms/vendor/TableDnD/js/jquery.tablednd.0.8.min.js') }}"></script>

@@ -87,7 +87,17 @@ class KRCMSPageType extends AbstractType
         }
 
         if (true === $page->getPageType()->getHasContent()) {
-            $builder->add('content', CKEditorType::class, array('label' => 'form.type.page.content.label', 'required' => false, 'error_bubbling' => true));
+            $builder->add('content', CKEditorType::class, array(
+                'label' => 'form.type.page.content.label',
+                'required' => false,
+                'error_bubbling' => true,
+                'config' => array(
+                    'filebrowserBrowseRoute' => 'elfinder',
+                    'filebrowserBrowseRouteParameters' => array(
+                        'instance' => 'krcms',
+                    )
+                ),
+            ));
         }
 
         $builder->add('metaDescription', null, array('label' => 'form.type.page.metaDescription.label', 'required' => false, 'error_bubbling' => true));

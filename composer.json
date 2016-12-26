@@ -3,7 +3,7 @@
     "type": "symfony-bundle",
     "description": "Content Management System bundle for symfony 2",
     "homepage": "https://www.kr-solutions.nl/",
-    "license": "proprietary",
+    "license": "MIT",
     "authors": [
         {
             "name": "Rudy Adamse",
@@ -11,13 +11,16 @@
         }
     ],
     "require": {
-        "sunhater/kcfinder": "dev-master",
         "twig/extensions": "^1.2",
-        "egeloen/ckeditor-bundle": "^4.0"
+        "egeloen/ckeditor-bundle": "^4.0",
+        "helios-ag/fm-elfinder-bundle": "~6"
     },
     "autoload": {
         "psr-4": {
             "KRSolutions\\Bundle\\KRCMSBundle\\": ""
         }
+    },
+    "config": {
+        "component-dir": "web/assets"
     }
 }

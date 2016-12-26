@@ -2,17 +2,18 @@
 
 namespace KRSolutions\Bundle\KRCMSBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * This is the class that loads and manages your bundle configuration
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class KRSolutionsKRCMSExtension extends Extension
+class KRSolutionsKRCMSExtension extends Extension implements PrependExtensionInterface
 {
 
     /**
@@ -63,5 +64,64 @@ class KRSolutionsKRCMSExtension extends Extension
         $loader->load('formtypes.yml');
         $loader->load('managers.yml');
         $loader->load('twigextensions.yml');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prepend(ContainerBuilder $container)
+    {
+        // get all bundles
+        $bundles = $container->getParameter('kernel.bundles');
+        $configs = $container->getExtensionConfig($this->getAlias());
+        $config = $this->processConfiguration(new Configuration(), $configs);
+
+        $ivoryCkEditorConfig = array();
+        $fmElfinderConfig = array();
+
+        if (isset($bundles['IvoryCKEditorBundle'])) {
+            $ivoryCkEditorConfig = array(
+            );
+        }
+
+        if (isset($bundles['FMElfinderBundle'])) {
+            $fmElfinderConfig = array(
+                'instances' => array('krcms' => array(
+                        'locale' => $container->getParameter('locale'),
+                        'editor' => 'ckeditor',
+                        'include_assets' => true,
+                        'connector' => array(
+                            'roots' => array(
+                                'uploads' => array(
+                                    'driver' => 'LocalFileSystem',
+                                    'path' => $config['upload_dir'],
+                                    'upload_allow' => array(
+                                        'image/png',
+                                        'image/jpg',
+                                        'image/jpeg',
+                                    ),
+                                    'upload_deny' => array(
+                                        'all',
+                                    ),
+                                    'upload_max_size' => '2M',
+                                ),
+                            ),
+                        ),
+                    )),
+            );
+        }
+
+        foreach ($container->getExtensions() as $name => $extension) {
+            switch ($name) {
+                case 'ivory_ck_editor':
+                    $container->prependExtensionConfig($name, $ivoryCkEditorConfig);
+                    break;
+                case 'fm_elfinder':
+                    $container->prependExtensionConfig($name, $fmElfinderConfig);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

@@ -1,4 +1,6 @@
-function text_counter (input_text, target)
+/* global krcms_generate_page_permalink_route */
+
+function text_counter(input_text, target)
 {
     var input = $(input_text);
     var target = $(target);
@@ -14,3 +16,21 @@ function text_counter (input_text, target)
         target.text(len + " van de " + max + " karakters");
     });
 }
+
+$('#krcms_page_title').change(function () {
+    $.ajax({
+        type: 'POST',
+        url: krcms_generate_page_permalink_route,
+        dataType: 'text',
+        data: {
+            text: $('#krcms_page_title').val(),
+            page_id: $(this).data('page_id')
+        }
+    }).done(function (data) {
+        $('#krcms_page_truePermalink').val(data);
+    });
+});
+
+$('#save_page').on('click', function () {
+    $('#pageForm').submit();
+});
