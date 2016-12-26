@@ -117,17 +117,17 @@
 
 	<script type="text/javascript">
 		$(document).ready(function () {
-			$('#page_title').change(function () {
+			$('#krcms_page_title').change(function () {
 				$.ajax({
 					type: 'POST',
 					url: '{{ path('kr_solutions_krcms_pages_generate_permalink') }}',
 					dataType: 'text',
 					data: {
-						text: $('#page_title').val(){% if page.id is not null %},
+						text: $('#krcms_page_title').val(){% if page.id is not null %},
 						page_id: {{ page.id }}{% endif %}
 					}
 				}).done(function(data) {
-					$('#page_truePermalink').val(data);
+					$('#krcms_page_truePermalink').val(data);
 				});
 			});
 

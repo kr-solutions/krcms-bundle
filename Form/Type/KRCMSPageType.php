@@ -68,19 +68,19 @@ class KRCMSPageType extends AbstractType
                 'label' => 'form.type.page.parent.label',
                 'required' => true,
                 'error_bubbling' => true,
-                'empty_value' => false,
+                'empty_data' => false,
                 'query_builder' => function (\Doctrine\ORM\EntityRepository $repository) use ($page) {
                     return $repository->getAllChildablePagesExceptThisPageQB($page);
                 },
             );
 
             if (false === $page->getPageType()->getIsChild()) {
-                $parentOptions['empty_value'] = 'form.type.page.parent.empty_value';
-                $parentOptions['empty_data'] = null;
+                $parentOptions['empty_data'] = 'form.type.page.parent.empty_value';
+//                $parentOptions['empty_data'] = null;
                 $parentOptions['required'] = false;
             }
 
-            $builder->add('parent', 'entity', $parentOptions);
+            $builder->add('parent', \Symfony\Bridge\Doctrine\Form\Type\EntityType::class, $parentOptions);
         }
 
         if (true === $page->getPageType()->getHasContent()) {
