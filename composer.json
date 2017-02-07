@@ -1,7 +1,7 @@
 {
     "name": "kr-solutions/krcms-bundle",
     "type": "symfony-bundle",
-    "description": "Content Management System bundle for symfony 3",
+    "description": "Content Management System bundle for symfony 2",
     "homepage": "https://www.kr-solutions.nl/",
     "license": "MIT",
     "authors": [

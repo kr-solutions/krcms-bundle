@@ -61,6 +61,7 @@ class KRCMSSiteType extends AbstractType
             'choices' => array('form.type.no' => 0, 'form.type.yes' => 1),
             'required' => true,
             'error_bubbling' => true,
+            'choices_as_values' => true,
         ));
 
         if (null !== $site->getId()) {

@@ -43,24 +43,28 @@ class KRCMSPageTypeType extends AbstractType
             'choices' => array('form.type.no' => 0, 'form.type.yes' => 1),
             'required' => true,
             'error_bubbling' => true,
+            'choices_as_values' => true,
         ));
         $builder->add('hasChildren', ChoiceType::class, array(
             'label' => 'form.type.pageType.hasChildren.label',
             'choices' => array('form.type.no' => 0, 'form.type.yes' => 1),
             'required' => true,
             'error_bubbling' => true,
+            'choices_as_values' => true,
         ));
         $builder->add('hasContent', ChoiceType::class, array(
             'label' => 'form.type.pageType.hasContent.label',
             'choices' => array('form.type.no' => 0, 'form.type.yes' => 1),
             'required' => true,
             'error_bubbling' => true,
+            'choices_as_values' => true,
         ));
         $builder->add('hasFiles', ChoiceType::class, array(
             'label' => 'form.type.pageType.hasFiles.label',
             'choices' => array('form.type.no' => 0, 'form.type.yes' => 1),
             'required' => true,
             'error_bubbling' => true,
+            'choices_as_values' => true,
         ));
         $builder->add('childrenOrderBy', ChoiceType::class, array(
             'label' => 'form.type.pageType.childrenOrderBy.label',
@@ -73,6 +77,7 @@ class KRCMSPageTypeType extends AbstractType
             ),
             'required' => true,
             'error_bubbling' => true,
+            'choices_as_values' => true,
         ));
         $builder->add('childrenOrderDirection', ChoiceType::class, array(
             'label' => 'form.type.pageType.childrenOrderDirection.label',
@@ -82,6 +87,7 @@ class KRCMSPageTypeType extends AbstractType
             ),
             'required' => true,
             'error_bubbling' => true,
+            'choices_as_values' => true,
         ));
         $builder->add('template', null, array('label' => 'form.type.pageType.template.label', 'required' => false, 'error_bubbling' => true));
         $builder->add('pageHandler', null, array('label' => 'form.type.pageType.pageHandler.label', 'required' => false, 'error_bubbling' => true));
