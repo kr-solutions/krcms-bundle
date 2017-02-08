@@ -2,6 +2,7 @@
 
 namespace KRSolutions\Bundle\KRCMSBundle\Form\Type;
 
+use KRSolutions\Bundle\KRCMSBundle\Form\DataTransformer\NullToEmptyNumberTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -36,6 +37,8 @@ class KRCMSPageTypeType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $nullToEmptyNumberTransformer = new NullToEmptyNumberTransformer();
+
         $builder->add('name', null, array('label' => 'form.type.pageType.name.label', 'required' => true, 'error_bubbling' => true));
         $builder->add('description', null, array('label' => 'form.type.pageType.description.label', 'required' => false, 'error_bubbling' => true));
         $builder->add('isChild', ChoiceType::class, array(
@@ -52,6 +55,10 @@ class KRCMSPageTypeType extends AbstractType
             'error_bubbling' => true,
             'choices_as_values' => true,
         ));
+        $builder->add(
+            $builder->create('maximumToCreate', null, array('label' => 'form.type.pageType.maximumToCreate.label', 'required' => false, 'error_bubbling' => true))
+                ->addModelTransformer($nullToEmptyNumberTransformer)
+        );
         $builder->add('hasContent', ChoiceType::class, array(
             'label' => 'form.type.pageType.hasContent.label',
             'choices' => array('form.type.no' => 0, 'form.type.yes' => 1),

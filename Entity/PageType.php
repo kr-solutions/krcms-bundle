@@ -81,6 +81,11 @@ class PageType implements PageTypeInterface
     protected $hasContent;
 
     /**
+     * @var null|int
+     */
+    protected $maximumToCreate;
+
+    /**
      * @var \Doctrine\Common\Collections\Collection
      */
     protected $pageTypeParents;
@@ -346,6 +351,24 @@ class PageType implements PageTypeInterface
     public function getHasContent()
     {
         return $this->hasContent;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setMaximumToCreate($maximumToCreate = null)
+    {
+        $this->maximumToCreate = $maximumToCreate;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getMaximumToCreate()
+    {
+        return $this->maximumToCreate;
     }
 
     /**

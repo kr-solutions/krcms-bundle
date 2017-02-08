@@ -3,7 +3,9 @@
 namespace KRSolutions\Bundle\KRCMSBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use KRSolutions\Bundle\KRCMSBundle\Entity\PageType;
+use KRSolutions\Bundle\KRCMSBundle\Entity\Site;
 
 /**
  * PageTypeRepository
@@ -30,14 +32,14 @@ class PageTypeRepository extends EntityRepository
      *
      * @return array
      */
-    public function getPageTypesByParentPageType(PageType $parentPageType = null)
+    public function getPageTypesByParentPageType(Site $site, PageType $parentPageType = null)
     {
         $qb = $this->createQueryBuilder('pageTypes');
 
         if (null === $parentPageType) {
             $qb->where('pageTypes.isChild = false');
         } else {
-            $qb->innerJoin('pageTypes.pageTypeParents', 'pageTypeParents', \Doctrine\ORM\Query\Expr\Join::WITH, 'pageTypeParents = :parentPageType');
+            $qb->innerJoin('pageTypes.pageTypeParents', 'pageTypeParents', Join::WITH, 'pageTypeParents = :parentPageType');
             $qb->setParameter('parentPageType', $parentPageType);
         }
 

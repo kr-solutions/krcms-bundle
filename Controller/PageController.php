@@ -56,7 +56,20 @@ class PageController extends AbstractKRCMSController
         /**
          * Get the page types that can be linked to this parent page
          */
-        $pageTypes = $this->getPageTypeRepository()->getPageTypesByParentPageType($pageType);
+        $possiblePageTypes = $this->getPageTypeRepository()->getPageTypesByParentPageType($site, $pageType);
+
+        $pageTypes = array();
+
+        foreach ($possiblePageTypes as $pageType) {
+            /* @var $pageType PageType */
+            if ($pageType->getMaximumToCreate() === null) {
+                $pageTypes[] = $pageType;
+            } else {
+                if ($this->getPageRepository()->getPageCountBySiteAndPageType($site, $pageType) < $pageType->getMaximumToCreate()) {
+                    $pageTypes[] = $pageType;
+                }
+            }
+        }
 
         return $this->render('KRSolutionsKRCMSBundle:Page:index.html.twig', array(
                 'site' => $site,

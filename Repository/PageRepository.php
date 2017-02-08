@@ -7,6 +7,8 @@ use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use KRSolutions\Bundle\KRCMSBundle\Entity\Menu;
 use KRSolutions\Bundle\KRCMSBundle\Entity\Page;
+use KRSolutions\Bundle\KRCMSBundle\Entity\PageInterface;
+use KRSolutions\Bundle\KRCMSBundle\Entity\PageTypeInterface;
 use KRSolutions\Bundle\KRCMSBundle\Entity\Site;
 
 /**
@@ -349,11 +351,11 @@ class PageRepository extends EntityRepository
     /**
      * Get all childable pages except for the given page
      *
-     * @param \KRSolutions\Bundle\KRCMSBundle\Entity\PageInterface $exceptThisPage
+     * @param PageInterface $exceptThisPage
      *
      * @return QueryBuilder
      */
-    public function getAllChildablePagesExceptThisPageQB(\KRSolutions\Bundle\KRCMSBundle\Entity\PageInterface $exceptThisPage = null)
+    public function getAllChildablePagesExceptThisPageQB(PageInterface $exceptThisPage = null)
     {
         $qb = $this->getAllChildablePagesQB();
 
@@ -675,6 +677,29 @@ class PageRepository extends EntityRepository
         $qb->select('count(pages.id)');
 
         $qb->where('pages.site = :site');
+        $qb->setParameter('site', $site);
+
+        return intval($qb->getQuery()->getSingleScalarResult());
+    }
+
+    /**
+     * Get page count by site and page type
+     *
+     * @param Site              $site
+     * @param PageTypeInterface $pageType
+     *
+     * @return int
+     */
+    public function getPageCountBySiteAndPageType(Site $site, PageTypeInterface $pageType)
+    {
+        $qb = $this->createQueryBuilder('pages');
+
+        $qb->select('count(pages.id)');
+
+        $qb->where('pages.pageType = :page_type');
+        $qb->setParameter('page_type', $pageType);
+
+        $qb->andWhere('pages.site = :site');
         $qb->setParameter('site', $site);
 
         return intval($qb->getQuery()->getSingleScalarResult());

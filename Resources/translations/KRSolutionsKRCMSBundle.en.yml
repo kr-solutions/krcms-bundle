@@ -13,6 +13,8 @@ form:
                 label: Has subpages?
             hasContent:
                 label: Has content?
+            maximumToCreate:
+                label: Maximum to create
             hasFiles:
                 label: Has files/images?
             childrenOrderBy:

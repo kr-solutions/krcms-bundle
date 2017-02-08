@@ -75,6 +75,11 @@ KRSolutions\Bundle\KRCMSBundle\Entity\PageType:
             nullable: false
             default: '1'
             column: has_content
+        maximumToCreate:
+            type: integer
+            nullable: true
+            default: null
+            column: maximum_to_create
         roles:
             type: array
             nullable: true

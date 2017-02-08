@@ -224,6 +224,22 @@ interface PageTypeInterface
     public function getHasContent();
 
     /**
+     * Set maximum to create
+     *
+     * @param null|int $maximumToCreate
+     *
+     * @return PageTypeInterface
+     */
+    public function setMaximumToCreate($maximumToCreate = null);
+
+    /**
+     * Get maximum to create
+     *
+     * @return null|int
+     */
+    public function getMaximumToCreate();
+
+    /**
      * Add pageTypeParent
      *
      * @param PageTypeInterface $pageTypeParent
