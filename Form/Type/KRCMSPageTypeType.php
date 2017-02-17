@@ -48,6 +48,13 @@ class KRCMSPageTypeType extends AbstractType
             'error_bubbling' => true,
             'choices_as_values' => true,
         ));
+        $builder->add('isMenuItem', ChoiceType::class, array(
+            'label' => 'form.type.pageType.isMenuItem.label',
+            'choices' => array('form.type.no' => 0, 'form.type.yes' => 1),
+            'required' => true,
+            'error_bubbling' => true,
+            'choices_as_values' => true,
+        ));
         $builder->add('hasChildren', ChoiceType::class, array(
             'label' => 'form.type.pageType.hasChildren.label',
             'choices' => array('form.type.no' => 0, 'form.type.yes' => 1),

@@ -58,6 +58,11 @@ class PageType implements PageTypeInterface
     /**
      * @var boolean
      */
+    protected $isMenuItem;
+
+    /**
+     * @var boolean
+     */
     protected $hasChildren;
 
     /**
@@ -261,6 +266,24 @@ class PageType implements PageTypeInterface
     public function getIsChild()
     {
         return $this->isChild;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setIsMenuItem($isMenuItem)
+    {
+        $this->isMenuItem = $isMenuItem;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getIsMenuItem()
+    {
+        return $this->isMenuItem;
     }
 
     /**

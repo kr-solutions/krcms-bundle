@@ -66,9 +66,9 @@ class MenuTwigExtension extends \Twig_Extension
         $pages = $this->getPageRepository()->getActivePagesFromSiteAndMenuName($site, $menuName);
 
         if (trim($class) !== '') {
-            $html = '<ul class="'.$class.'">';
+            $html = '<ul class="'.$class.'" data-type="navbar">';
         } else {
-            $html = '<ul>';
+            $html = '<ul data-type="navbar">';
         }
 
         foreach ($pages as $page) {
@@ -176,24 +176,29 @@ class MenuTwigExtension extends \Twig_Extension
         $isActive = false;
         $nestedHtml = '';
 
+        $classes = array();
+
         if (true === $nested) {
             $pages = $this->getPageRepository()->getActivePagesWithMenuTitleFromPage($parent);
 
             if (count($pages) > 0) {
-                $nestedHtml.= '<ul>';
+                $nestedHtml.= '<ul class="dropdown-menu">';
                 foreach ($pages as $page) {
                     $isActive = $this->renderItem($nestedHtml, $page, $activePage, $nested);
                 }
                 $nestedHtml.= '</ul>';
+
+                $classes[] = 'dropdown';
             }
         }
 
         if ($activePage == $parent) {
             $isActive = true;
+            $classes[] = 'active';
         }
 
-        if (true === $isActive) {
-            $html.= '<li class="selected">';
+        if (!empty($classes)) {
+            $html.= '<li class="'.implode(' ', $classes).'">';
         } else {
             $html.= '<li>';
         }

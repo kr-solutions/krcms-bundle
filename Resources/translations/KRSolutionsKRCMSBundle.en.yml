@@ -9,6 +9,8 @@ form:
                 label: Description
             isChild:
                 label: Has to be a subpage?
+            isMenuItem:
+               label: Can be placed in a menu?
             hasChildren:
                 label: Has subpages?
             hasContent:

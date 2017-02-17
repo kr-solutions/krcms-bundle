@@ -50,6 +50,11 @@ KRSolutions\Bundle\KRCMSBundle\Entity\PageType:
             nullable: false
             default: '0'
             column: is_child
+        isMenuItem:
+            type: boolean
+            nullable: false
+            default: '0'
+            column: is_menu_item
         hasChildren:
             type: boolean
             nullable: false

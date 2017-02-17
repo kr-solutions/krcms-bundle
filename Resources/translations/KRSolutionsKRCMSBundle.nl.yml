@@ -9,6 +9,8 @@ form:
                label: Omschrijving
            isChild:
                label: Moet verplicht subpagina zijn?
+           isMenuItem:
+               label: Kan in menu geplaatst worden?
            hasChildren:
                label: Heeft subpagina's?
            hasContent:

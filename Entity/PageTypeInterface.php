@@ -144,6 +144,22 @@ interface PageTypeInterface
     public function getIsChild();
 
     /**
+     * Set isMenuItem
+     *
+     * @param boolean $isMenuItem
+     *
+     * @return PageTypeInterface
+     */
+    public function setIsMenuItem($isMenuItem);
+
+    /**
+     * Get isMenuItem
+     *
+     * @return boolean
+     */
+    public function getIsMenuItem();
+
+    /**
      * Set hasChildren
      *
      * @param boolean $hasChildren

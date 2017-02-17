@@ -39,6 +39,7 @@ class KRCMSPageType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        /* @var $page \KRSolutions\Bundle\KRCMSBundle\Entity\PageInterface */
         $page = $builder->getData();
 
         $nullToEmptyStringTransformer = new NullToEmptyStringTransformer();
@@ -50,7 +51,7 @@ class KRCMSPageType extends AbstractType
                 ->addModelTransformer($nullToEmptyStringTransformer)
         );
 
-        if (false === $page->getPageType()->getIsChild()) {
+        if ($page->getPageType()->getIsMenuItem() && false === $page->getPageType()->getIsChild()) {
             $builder->add('menu', null, array(
                 'label' => 'form.type.page.menu.label',
                 'required' => false,
@@ -61,7 +62,9 @@ class KRCMSPageType extends AbstractType
                     return $repository->getMenusBySiteQB($page->getSite());
                 },
             ));
+        }
 
+        if ($page->getPageType()->getIsMenuItem()) {
             $builder->add('menuTitle', null, array('label' => 'form.type.page.menuTitle.label', 'required' => true, 'error_bubbling' => true));
         }
 

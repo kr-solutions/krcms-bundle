@@ -58,7 +58,9 @@
                         {{ form_label(pageForm.menu) }}
                         {{ form_widget(pageForm.menu, { 'attr': {'class': 'form-control'} }) }}
                     </div>
+                {% endif %}
 
+                {% if pageForm.menuTitle is defined %}
                     <div class="form-group{% if pageForm.menuTitle.vars.errors|length %} has-error{% endif %}">
                         {{ form_label(pageForm.menuTitle) }}
                         {{ form_widget(pageForm.menuTitle, { 'attr': {'class': 'form-control'} }) }}

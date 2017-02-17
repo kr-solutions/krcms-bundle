@@ -195,6 +195,8 @@ class PageRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('pages');
 
+        $qb->innerJoin('pages.pageType', 'pageType', Join::WITH, 'pageType.isMenuItem = true');
+
         if (null !== $page) {
             $qb->andWhere('pages.parent = :page');
             $qb->setParameter('page', $page);
