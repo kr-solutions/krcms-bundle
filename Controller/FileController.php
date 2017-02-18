@@ -23,11 +23,7 @@ class FileController extends AbstractKRCMSController
     public function filesAction(Request $request, $pageId)
     {
         $uploadDir = trim($this->container->getParameter('kr_solutions_krcms.upload_dir'));
-
-        $_SESSION['KCFINDER'] = array();
-        $_SESSION['KCFINDER']['disabled'] = false;
-        $_SESSION['KCFINDER']['uploadURL'] = '/'.trim($this->container->getParameter('kr_solutions_krcms.upload_dir'), '/');
-        $_SESSION['KCFINDER']['uploadDir'] = $this->container->getParameter('kernel.root_dir').'/../web/'.trim($this->container->getParameter('kr_solutions_krcms.upload_dir'), '/');
+        $webRoot = trim($this->container->getParameter('kr_solutions_krcms.web_root'));
 
         $page = $this->getPageRepository()->getPageById($pageId);
 
@@ -52,8 +48,22 @@ class FileController extends AbstractKRCMSController
             $em = $this->getDoctrine()->getManager();
 
             $uriOrig = trim($newFile->getUri());
+            $strippedUri = ltrim(ltrim($uriOrig, '/'), ltrim($uploadDir, '/'));
 
-            $newFile->setUri(ltrim(ltrim($uriOrig, '/'), ltrim($uploadDir, '/')));
+            if (class_exists('\Tinify\Tinify') && !empty($this->container->getParameter('kr_solutions_krcms.tinify_api_key'))) {
+                $systemPath = rtrim($webRoot, '/').'/'.trim($uploadDir, '/').'/'.$strippedUri;
+                try {
+                    \Tinify\setKey($this->container->getParameter('kr_solutions_krcms.tinify_api_key'));
+                    \Tinify\validate();
+
+                    $source = \Tinify\fromFile($systemPath);
+                    $source->toFile($systemPath);
+                } catch (\Tinify\Exception $e) {
+                    $request->getSession()->getFlashBag()->add('alert-warning', $this->getTranslator()->trans('tinify.api_key_invalid', array(), 'KRSolutionsKRCMSBundle'));
+                }
+            }
+
+            $newFile->setUri($strippedUri);
             $newFile->setPage($page);
 
             $em->persist($newFile);

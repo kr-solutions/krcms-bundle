@@ -97,7 +97,7 @@ class KRCMSPageType extends AbstractType
                 'config' => array(
                     'filebrowserBrowseRoute' => 'elfinder',
                     'filebrowserBrowseRouteParameters' => array(
-                        'instance' => 'krcms',
+                        'instance' => 'krcms_ckeditor',
                     )
                 ),
             ));

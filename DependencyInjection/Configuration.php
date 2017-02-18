@@ -69,6 +69,9 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('sites')->defaultValue('ROLE_ADMIN')->cannotBeEmpty()->end()
                 ->end()
             ->end()
+
+            ->scalarNode('web_root')->defaultValue('%kernel.root_dir%/../web')->cannotBeEmpty()->end()
+            ->scalarNode('tinify_api_key')->defaultFalse()->end()
             ->scalarNode('upload_dir')->defaultValue('uploads')->cannotBeEmpty()->end();
 
         return $treeBuilder;

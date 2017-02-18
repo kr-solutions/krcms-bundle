@@ -248,3 +248,6 @@ helpdesk:
 
 Pagina: Page
 Page: Page
+
+tinify:
+    api_key_invalid: API key for tinypng is invalid, update your configuration file

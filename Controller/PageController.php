@@ -93,11 +93,6 @@ class PageController extends AbstractKRCMSController
      */
     public function editAction(Request $request, $siteId = null, $pageId = null, $pageTypeId = null)
     {
-        $_SESSION['KCFINDER'] = array();
-        $_SESSION['KCFINDER']['disabled'] = false;
-        $_SESSION['KCFINDER']['uploadURL'] = '/'.trim($this->container->getParameter('kr_solutions_krcms.upload_dir'), '/');
-        $_SESSION['KCFINDER']['uploadDir'] = $this->container->getParameter('kernel.root_dir').'/../web/'.trim($this->container->getParameter('kr_solutions_krcms.upload_dir'), '/');
-
         $now = new DateTime('now');
 
         if (null === $pageId) {

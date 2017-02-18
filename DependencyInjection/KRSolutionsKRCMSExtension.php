@@ -43,6 +43,16 @@ class KRSolutionsKRCMSExtension extends Extension implements PrependExtensionInt
         $container->setParameter('kr_solutions_krcms.upload_dir', $config['upload_dir']);
 
         /**
+         * Web root
+         */
+        $container->setParameter('kr_solutions_krcms.web_root', $config['web_root']);
+
+        /**
+         * Tinify (TinyPNG) API Key
+         */
+        $container->setParameter('kr_solutions_krcms.tinify_api_key', $config['tinify_api_key']);
+
+        /**
          * Helpdesk
          */
         $container->setParameter('kr_solutions_krcms.helpdesk.enabled', $config['helpdesk']['enabled']);
@@ -86,7 +96,8 @@ class KRSolutionsKRCMSExtension extends Extension implements PrependExtensionInt
 
         if (isset($bundles['FMElfinderBundle'])) {
             $fmElfinderConfig = array(
-                'instances' => array('krcms' => array(
+                'instances' => array(
+                    'krcms_ckeditor' => array(
                         'locale' => $container->getParameter('locale'),
                         'editor' => 'ckeditor',
                         'include_assets' => true,
@@ -107,7 +118,30 @@ class KRSolutionsKRCMSExtension extends Extension implements PrependExtensionInt
                                 ),
                             ),
                         ),
-                    )),
+                    ),
+                    'krcms_form' => array(
+                        'locale' => $container->getParameter('locale'),
+                        'editor' => 'form',
+                        'include_assets' => true,
+                        'connector' => array(
+                            'roots' => array(
+                                'uploads' => array(
+                                    'driver' => 'LocalFileSystem',
+                                    'path' => $config['upload_dir'],
+                                    'upload_allow' => array(
+                                        'image/png',
+                                        'image/jpg',
+                                        'image/jpeg',
+                                    ),
+                                    'upload_deny' => array(
+                                        'all',
+                                    ),
+                                    'upload_max_size' => '2M',
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
             );
         }
 

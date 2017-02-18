@@ -2,6 +2,7 @@
 
 namespace KRSolutions\Bundle\KRCMSBundle\Form\Type;
 
+use FM\ElfinderBundle\Form\Type\ElFinderType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -36,7 +37,12 @@ class KRCMSFileType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('uri', null, array('label' => 'form.type.file.uri.label', 'required' => true, 'error_bubbling' => true))
+            ->add('uri', ElFinderType::class, array(
+                'label' => 'form.type.file.uri.label',
+                'required' => true,
+                'error_bubbling' => true,
+                'instance' => 'krcms_form',
+            ))
             ->add('title', null, array('label' => 'form.type.file.title.label', 'required' => false, 'error_bubbling' => true))
             ->add('description', null, array('label' => 'form.type.file.description.label', 'required' => false, 'error_bubbling' => true));
     }

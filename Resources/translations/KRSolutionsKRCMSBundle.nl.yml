@@ -248,3 +248,6 @@ helpdesk:
 
 Pagina: Pagina
 Page: Page
+
+tinify:
+    api_key_invalid: API-sleutel voor tinypng is niet geldig, update uw configuratiebestand
