@@ -15,13 +15,16 @@
                 {% for file in page.files %}
                     <div id="file_{{ file.id }}" class="col-sm-6 col-md-4 col-lg-3">
                         <div class="thumbnail">
-                            <img src="{{ asset(uploadDir ~ file.uri) }}" alt="{{ file.title }}">
+                            <img src="{{ asset(uploadDir ~ '/' ~ file.uri) }}" alt="{{ file.title }}">
                             <div class="caption">
                                 <h3>{{ file.title }}</h3>
                                 <p>{{ file.description }}</p>
                                 <p>
+                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#file_edit_modal" data-file_id="{{ file.id }}" title="{{ 'file.edit_file'|trans({}, 'KRSolutionsKRCMSBundle') }}">
+                                        <i class="fa fa-fw fa-edit"></i>
+                                    </button>
                                     <button type="button" class="btn btn-default" data-toggle="modal" data-target="#file_remove_modal" data-file_id="{{ file.id }}" title="{{ 'file.remove_file'|trans({}, 'KRSolutionsKRCMSBundle') }}">
-                                        <i class="fa fa-fw fa-trash-o"></i> {{ 'layout.remove'|trans({}, 'KRSolutionsKRCMSBundle') }}
+                                        <i class="fa fa-fw fa-trash-o"></i>
                                     </button>
                                 </p>
                             </div>
@@ -79,6 +82,25 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="file_remove_modal_title">{{ 'file.remove_file'|trans({}, 'KRSolutionsKRCMSBundle') }}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>{{ 'file.remove_confirmation.title'|trans({}, 'KRSolutionsKRCMSBundle') }}</p>
+                    <p><small>{{ 'file.remove_confirmation.message'|trans({}, 'KRSolutionsKRCMSBundle') }}</small></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'layout.cancel'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
+                    <a href="#" type="button" class="btn btn-primary file_remove_action">{{ 'layout.remove'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="file_edit_modal" tabindex="-1" role="dialog" aria-labelledby="file_edit_modal_title" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="file_remove_modal_title">{{ 'file.edit_file'|trans({}, 'KRSolutionsKRCMSBundle') }}</h4>
                 </div>
                 <div class="modal-body">
                     <p>{{ 'file.remove_confirmation.title'|trans({}, 'KRSolutionsKRCMSBundle') }}</p>

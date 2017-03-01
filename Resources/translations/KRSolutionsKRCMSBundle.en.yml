@@ -223,6 +223,7 @@ file:
             manage_files: Manage files of page <small>%page_title%</small>
             files: Files
     add_file: Add file
+    edit_file: Edit file
     remove_file: Remove file
     file_added: File has been successfully added
     file_removed: File has been successfully removed

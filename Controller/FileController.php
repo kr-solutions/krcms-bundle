@@ -48,7 +48,7 @@ class FileController extends AbstractKRCMSController
             $em = $this->getDoctrine()->getManager();
 
             $uriOrig = trim($newFile->getUri());
-            $strippedUri = ltrim(ltrim($uriOrig, '/'), ltrim($uploadDir, '/'));
+            $strippedUri = trim(ltrim(trim($uriOrig, '/'), trim($uploadDir, '/')), '/');
 
             if (class_exists('\Tinify\Tinify') && !empty($this->container->getParameter('kr_solutions_krcms.tinify_api_key'))) {
                 $systemPath = rtrim($webRoot, '/').'/'.trim($uploadDir, '/').'/'.$strippedUri;

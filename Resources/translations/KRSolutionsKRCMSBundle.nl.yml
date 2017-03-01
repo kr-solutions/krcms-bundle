@@ -223,6 +223,7 @@ file:
             manage_files: Bestanden beheren van pagina <small>%page_title%</small>
             files: Bestanden
     add_file: Bestand toevoegen
+    edit_file: Bestand wijzigen
     remove_file: Bestand verwijderen
     file_added: Bestand is succesvol toegevoegd
     file_removed: Bestand is succesvol verwijderd

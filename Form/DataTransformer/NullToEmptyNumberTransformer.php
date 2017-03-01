@@ -19,11 +19,7 @@ class NullToEmptyNumberTransformer implements DataTransformerInterface
      */
     public function transform($number)
     {
-        if (0 === intval($number)) {
-            return null;
-        }
-
-        return $number;
+        return intval($number);
     }
 
     /**
@@ -36,9 +32,9 @@ class NullToEmptyNumberTransformer implements DataTransformerInterface
     public function reverseTransform($number)
     {
         if (0 === intval($number)) {
-            return '';
+            return null;
         }
 
-        return $number;
+        return intval($number);
     }
 }
