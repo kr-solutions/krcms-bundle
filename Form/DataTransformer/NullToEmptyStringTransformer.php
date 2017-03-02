@@ -19,8 +19,8 @@ class NullToEmptyStringTransformer implements DataTransformerInterface
      */
     public function transform($text)
     {
-        if (null === $text) {
-            return '';
+        if ('' === $text) {
+            return null;
         }
 
         return $text;
@@ -35,8 +35,8 @@ class NullToEmptyStringTransformer implements DataTransformerInterface
      */
     public function reverseTransform($text)
     {
-        if ('' === $text) {
-            return null;
+        if (is_null($text)) {
+            return '';
         }
 
         return $text;

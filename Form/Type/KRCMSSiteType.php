@@ -2,8 +2,11 @@
 
 namespace KRSolutions\Bundle\KRCMSBundle\Form\Type;
 
+use Doctrine\ORM\EntityRepository;
+use KRSolutions\Bundle\KRCMSBundle\Entity\SiteInterface;
 use KRSolutions\Bundle\KRCMSBundle\Form\DataTransformer\NullToEmptyStringTransformer;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -36,18 +39,17 @@ class KRCMSSiteType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        /* @var $site \KRSolutions\Bundle\KRCMSBundle\Entity\SiteInterface */
-        $site = $builder->getData();
-
         $nullToEmptyStringTransformer = new NullToEmptyStringTransformer();
+
+        /* @var $site SiteInterface */
+        $site = $builder->getData();
 
         $builder->add(
             $builder->create('permalink', null, array(
-                    'label' => 'form.type.site.permalink.label',
-                    'required' => false,
-                    'error_bubbling' => true,
-                ))
-                ->addModelTransformer($nullToEmptyStringTransformer)
+                'label' => 'form.type.site.permalink.label',
+                'required' => false,
+                'error_bubbling' => true,
+            ))->addModelTransformer($nullToEmptyStringTransformer)
         );
 
         $builder->add('title', null, array(
@@ -56,7 +58,7 @@ class KRCMSSiteType extends AbstractType
             'error_bubbling' => true,
         ));
 
-        $builder->add('isActive', \Symfony\Component\Form\Extension\Core\Type\ChoiceType::class, array(
+        $builder->add('isActive', ChoiceType::class, array(
             'label' => 'form.type.site.isActive.label',
             'choices' => array('form.type.no' => 0, 'form.type.yes' => 1),
             'required' => true,
@@ -69,7 +71,7 @@ class KRCMSSiteType extends AbstractType
                 'label' => 'form.type.site.homepage.label',
                 'required' => false,
                 'error_bubbling' => true,
-                'query_builder' => function (\Doctrine\ORM\EntityRepository $repository) use ($site) {
+                'query_builder' => function (EntityRepository $repository) use ($site) {
                     return $repository->getActivePagesFromSiteQB($site);
                 },
             ));
