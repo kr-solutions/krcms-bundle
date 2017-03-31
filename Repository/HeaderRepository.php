@@ -5,9 +5,9 @@ namespace KRSolutions\Bundle\KRCMSBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * PageMetaRepository
+ * HeaderRepository
  */
-class PageMetaRepository extends EntityRepository
+class HeaderRepository extends EntityRepository
 {
 
 }

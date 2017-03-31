@@ -71,22 +71,6 @@ interface MenuInterface
     public function getPages();
 
     /**
-     * Set site
-     *
-     * @param SiteInterface $site
-     *
-     * @return MenuInterface
-     */
-    public function setSite(SiteInterface $site = null);
-
-    /**
-     * Get site
-     *
-     * @return SiteInterface
-     */
-    public function getSite();
-
-    /**
      * Menu name
      *
      * @return string

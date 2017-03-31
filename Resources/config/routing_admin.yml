@@ -3,13 +3,7 @@ elfinder:
 
 kr_solutions_krcms_dashboard:
     path: /
-    defaults: { _controller: KRSolutionsKRCMSBundle:Dashboard:index, siteId: null }
-
-kr_solutions_krcms_dashboard_site:
-    path: /{siteId}
     defaults: { _controller: KRSolutionsKRCMSBundle:Dashboard:index }
-    requirements:
-        siteId: \d+
 
 kr_solutions_krcms_helpdesk:
     path: /helpdesk
@@ -40,7 +34,7 @@ kr_solutions_krcms_categories:
     resource: "@KRSolutionsKRCMSBundle/Resources/config/routing_categories.yml"
     prefix: /categories
 
-# Sites
-kr_solutions_krcms_sites:
-    resource: "@KRSolutionsKRCMSBundle/Resources/config/routing_sites.yml"
-    prefix: /sites
+# Sliders
+kr_solutions_krcms_sliders:
+    resource: "@KRSolutionsKRCMSBundle/Resources/config/routing_sliders.yml"
+    prefix: /sliders

@@ -36,7 +36,7 @@ class FileController extends AbstractKRCMSController
         if (false == $page->getPageType()->getHasFiles()) {
             $request->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('file.page_cannot_contain_files', array(), 'KRSolutionsKRCMSBundle'));
 
-            return $this->redirect($this->generateUrl('kr_solutions_krcms_pages_index', array('siteId' => $page->getSite()->getId())));
+            return $this->redirect($this->generateUrl('kr_solutions_krcms_pages_index'));
         }
 
         $newFile = new File();

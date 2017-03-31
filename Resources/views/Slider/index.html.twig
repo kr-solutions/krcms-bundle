@@ -1,0 +1,100 @@
+{% form_theme sliderForm 'KRSolutionsKRCMSBundle::bootstrap_3_layout.html.twig' %}
+
+{% extends 'KRSolutionsKRCMSBundle::layout.html.twig' %}
+
+{% block title %}Slider's - Content Management Systeem{% endblock %}
+
+{% block header %}
+    <div class="col-lg-12">
+        <h1 class="page-header">{{ 'slider.index.header.sliders'|trans({}, 'KRSolutionsKRCMSBundle') }}</h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-4">
+        <div class="well">
+            {{ form_start(sliderForm, {attr: {id: 'sliderForm', novalidate: 'novalidate'} }) }}
+            <fieldset>
+                <legend>{{ 'slider.add_slider'|trans({}, 'KRSolutionsKRCMSBundle') }}</legend>
+
+                {{ form_errors(sliderForm) }}
+                {{ form_rest(sliderForm) }}
+            </fieldset>
+
+            <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-save"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
+            {{ form_end(sliderForm) }}
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="well">
+            {% if sliders|length > 0 %}
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th style="width: 20%;">{{ 'slider.name'|trans({}, 'KRSolutionsKRCMSBundle') }}</th>
+                            <th>{{ 'slider.description'|trans({}, 'KRSolutionsKRCMSBundle') }}</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for slider in sliders %}
+                            <tr>
+                                <td><a href="{{ path('kr_solutions_krcms_sliders_edit', { 'sliderId': slider.id }) }}" title="{{ 'slider.edit_slider'|trans({}, 'KRSolutionsKRCMSBundle') }}"><b>{{ slider.name }}</b></a></td>
+                                <td>{{ slider.description }}</td>
+                                <td class="btn-toolbar">
+                                    <div class="btn-group pull-right">
+                                        <a href="{{ path('kr_solutions_krcms_sliders_edit', { 'sliderId': slider.id }) }}" class="btn btn-default" title="{{ 'slider.edit_slider'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-fw fa-edit"></i> {{ 'layout.edit'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+                                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#slider_remove_modal" data-slider_id="{{ slider.id }}" title="{{ 'slider.remove_slider'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-fw fa-trash"></i> {{ 'layout.remove'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>Er zijn nog geen slider's toegevoegd.</p>
+                <p>Klik op <strong>"Slider toevoegen"</strong> aan de rechterkant om een slider toe te voegen.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    {# Modals #}
+    <div class="modal fade" id="slider_remove_modal" tabindex="-1" role="dialog" aria-labelledby="slider_remove_modal_title" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="slider_remove_modal_title">{{ 'slider.remove_slider'|trans({}, 'KRSolutionsKRCMSBundle') }}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>{{ 'slider.remove_confirmation.title'|trans({}, 'KRSolutionsKRCMSBundle') }}</p>
+                    <p><small>{{ 'slider.remove_confirmation.message'|trans({}, 'KRSolutionsKRCMSBundle') }}</small></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'layout.cancel'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
+                    <a href="#" type="button" class="btn btn-primary slider_remove_action">{{ 'layout.remove'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {# End modals #}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript" lang="javascript">
+        $(document).ready(function () {
+            $('#slider_remove_modal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var sliderId = button.data('slider_id');
+                var remove_url_holder = '{{ path('kr_solutions_krcms_sliders_remove', {'sliderId': 0}) }}';
+
+                var modal = $(this);
+                modal.find('.slider_remove_action').attr('href', remove_url_holder.replace('0', sliderId));
+            });
+        });
+    </script>
+
+{% endblock %}

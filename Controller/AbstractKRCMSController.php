@@ -31,6 +31,16 @@ class AbstractKRCMSController extends Controller
     }
 
     /**
+     * Get the Header Repository
+     *
+     * @return \KRSolutions\Bundle\KRCMSBundle\Repository\HeaderRepository
+     */
+    protected function getHeaderRepository()
+    {
+        return $this->getDoctrine()->getRepository('KRSolutionsKRCMSBundle:Header');
+    }
+
+    /**
      * Get the Menu Repository
      *
      * @return \KRSolutions\Bundle\KRCMSBundle\Repository\MenuRepository
@@ -61,13 +71,13 @@ class AbstractKRCMSController extends Controller
     }
 
     /**
-     * Get Site repository
+     * Get Slider repository
      *
-     * @return \KRSolutions\Bundle\KRCMSBundle\Repository\SiteRepository
+     * @return \KRSolutions\Bundle\KRCMSBundle\Repository\SliderRepository
      */
-    protected function getSiteRepository()
+    protected function getSliderRepository()
     {
-        return $this->getDoctrine()->getRepository('KRSolutionsKRCMSBundle:Site');
+        return $this->getDoctrine()->getRepository('KRSolutionsKRCMSBundle:Slider');
     }
 
     /**
@@ -91,13 +101,13 @@ class AbstractKRCMSController extends Controller
     }
 
     /**
-     * Get the site manager
+     * Get the slider manager
      *
-     * @return \KRSolutions\Bundle\KRCMSBundle\Model\SiteManagerInterface
+     * @return \KRSolutions\Bundle\KRCMSBundle\Model\SliderManagerInterface
      */
-    protected function getSiteManager()
+    protected function getSliderManager()
     {
-        return $this->container->get('kr_solutions_krcms.site_manager');
+        return $this->container->get('kr_solutions_krcms.slider_manager');
     }
 
     /**

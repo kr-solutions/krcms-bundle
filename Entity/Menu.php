@@ -31,11 +31,6 @@ class Menu implements MenuInterface
     protected $pages;
 
     /**
-     * @var SiteInterface
-     */
-    protected $site;
-
-    /**
      * Constructor
      */
     public function __construct()
@@ -111,24 +106,6 @@ class Menu implements MenuInterface
     public function getPages()
     {
         return $this->pages;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setSite(SiteInterface $site = null)
-    {
-        $this->site = $site;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getSite()
-    {
-        return $this->site;
     }
 
     /**

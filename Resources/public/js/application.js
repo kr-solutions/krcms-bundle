@@ -27,7 +27,7 @@ $('#krcms_page_title').change(function () {
             page_id: $(this).data('page_id')
         }
     }).done(function (data) {
-        $('#krcms_page_truePermalink').val(data);
+        $('#krcms_page_permalink').val(data);
     });
 });
 

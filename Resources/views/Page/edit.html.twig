@@ -1,3 +1,5 @@
+{% form_theme pageForm 'KRSolutionsKRCMSBundle::bootstrap_3_layout.html.twig' %}
+
 {% extends 'KRSolutionsKRCMSBundle::layout.html.twig' %}
 
 {% block title %}{% if action == 'new' %}{{ 'page.add_page'|trans({}, 'KRSolutionsKRCMSBundle') }}{% else %}{{ 'page.edit_page'|trans({}, 'KRSolutionsKRCMSBundle') }}{% endif %} - Content Management Systeem{% endblock %}
@@ -24,7 +26,7 @@
                 {% else %}
                     {% set parentPageId = null %}
                 {% endif %}
-                <a class="btn btn-default" href="{{ path('kr_solutions_krcms_pages_index', { 'siteId': site.id, 'parentPageId': parentPageId }) }}" title="{{ 'page.back_to_page_overview'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-fw fa-stop"></i> {{ 'layout.cancel'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+                <a class="btn btn-default" href="{{ path('kr_solutions_krcms_pages_index', { 'parentPageId': parentPageId }) }}" title="{{ 'page.back_to_page_overview'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-fw fa-stop"></i> {{ 'layout.cancel'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
             </div>
         </div>
     </div>
@@ -48,9 +50,9 @@
                     {{ form_widget(pageForm.title, { 'attr': {'class': 'form-control', 'data-page_id': page.id} }) }}
                 </div>
 
-                <div class="form-group{% if pageForm.truePermalink.vars.errors|length %} has-error{% endif %}">
-                    {{ form_label(pageForm.truePermalink) }}
-                    {{ form_widget(pageForm.truePermalink, { 'attr': {'class': 'form-control'} }) }}
+                <div class="form-group{% if pageForm.permalink.vars.errors|length %} has-error{% endif %}">
+                    {{ form_label(pageForm.permalink) }}
+                    {{ form_widget(pageForm.permalink, { 'attr': {'class': 'form-control'} }) }}
                 </div>
 
                 {% if pageForm.menu is defined %}

@@ -80,6 +80,20 @@ class KRCMSPageTypeType extends AbstractType
             'error_bubbling' => true,
             'choices_as_values' => true,
         ));
+        $builder->add('hasHeader', ChoiceType::class, array(
+            'label' => 'form.type.pageType.hasHeader.label',
+            'choices' => array('form.type.no' => 0, 'form.type.yes' => 1),
+            'required' => true,
+            'error_bubbling' => true,
+            'choices_as_values' => true,
+        ));
+        $builder->add('hasSlider', ChoiceType::class, array(
+            'label' => 'form.type.pageType.hasSlider.label',
+            'choices' => array('form.type.no' => 0, 'form.type.yes' => 1),
+            'required' => true,
+            'error_bubbling' => true,
+            'choices_as_values' => true,
+        ));
         $builder->add('childrenOrderBy', ChoiceType::class, array(
             'label' => 'form.type.pageType.childrenOrderBy.label',
             'choices' => array(

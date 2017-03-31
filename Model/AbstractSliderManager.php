@@ -3,9 +3,9 @@
 namespace KRSolutions\Bundle\KRCMSBundle\Model;
 
 /**
- * Abstract site manager
+ * Abstract slider manager
  */
-abstract class AbstractSiteManager implements SiteManagerInterface
+abstract class AbstractSliderManager implements SliderManagerInterface
 {
 
     /**
@@ -19,11 +19,11 @@ abstract class AbstractSiteManager implements SiteManagerInterface
     /**
      * {@inheritDoc}
      */
-    public function createSite()
+    public function createSlider()
     {
         $class = $this->getClass();
-        $site = new $class;
+        $slider = new $class;
 
-        return $site;
+        return $slider;
     }
 }

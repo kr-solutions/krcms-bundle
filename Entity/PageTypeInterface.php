@@ -224,6 +224,38 @@ interface PageTypeInterface
     public function getHasFiles();
 
     /**
+     * Set hasHeader
+     *
+     * @param boolean $hasHeader
+     *
+     * @return PageTypeInterface
+     */
+    public function setHasHeader($hasHeader);
+
+    /**
+     * Get hasHeader
+     *
+     * @return boolean
+     */
+    public function getHasHeader();
+
+    /**
+     * Set hasSlider
+     *
+     * @param boolean $hasSlider
+     *
+     * @return PageTypeInterface
+     */
+    public function setHasSlider($hasSlider);
+
+    /**
+     * Get hasSlider
+     *
+     * @return boolean
+     */
+    public function getHasSlider();
+
+    /**
      * Set hasContent
      *
      * @param boolean $hasContent

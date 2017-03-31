@@ -1,0 +1,66 @@
+KRSolutions\Bundle\KRCMSBundle\Entity\Header:
+    type: entity
+    table: krcms_headers
+    repositoryClass: KRSolutions\Bundle\KRCMSBundle\Repository\HeaderRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        uri:
+            type: string
+            length: 255
+        title:
+            type: string
+            length: 255
+            nullable: true
+        subtitle:
+            type: string
+            length: 255
+            nullable: true
+        linkType:
+            type: smallint
+        linkHref:
+            type: string
+            length: 255
+            nullable: true
+        linkTarget:
+            type: string
+            length: 255
+        linkLabel:
+            type: string
+            length: 255
+            nullable: true
+        linkTitle:
+            type: string
+            length: 255
+            nullable: true
+        linkClass:
+            type: string
+            length: 255
+            nullable: true
+        linkId:
+            type: string
+            length: 255
+            nullable: true
+    manyToOne:
+        linkPage:
+            targetEntity: PageInterface
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                link_page_id:
+                    referencedColumnName: id
+                    onDelete: "SET NULL"
+            orphanRemoval: false
+    oneToMany:
+        pages:
+            targetEntity: PageInterface
+            mappedBy: header
+    lifecycleCallbacks: {  }

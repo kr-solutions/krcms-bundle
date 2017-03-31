@@ -16,27 +16,18 @@ class MenuController extends AbstractKRCMSController
      * Menu index
      *
      * @param Request $request
-     * @param int     $siteId
      *
      * @return Response
      */
-    public function indexAction(Request $request, $siteId)
+    public function indexAction(Request $request)
     {
-//		if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) {
-//			$request->getSession()->getFlashBag()->add('alert-danger', 'U bent niet gemachtigd om menu\'s te beheren.');
-//
-//			return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
-//		}
-
-        $site = $this->getSiteManager()->getSiteById($siteId);
-        $menus = $this->getMenuManager()->getAllMenusBySite($site);
+        $menus = $this->getMenuManager()->getAllMenus();
         $flashMessages = array();
 
         $newMenu = $this->getMenuManager()->createMenu();
-        $newMenu->setSite($site);
         $menuForm = $this->createForm(KRCMSMenuType::class, $newMenu, array(
             'method' => 'POST',
-            'action' => $this->generateUrl('kr_solutions_krcms_menus_index', array('siteId' => $siteId)),
+            'action' => $this->generateUrl('kr_solutions_krcms_menus_index'),
         ));
 
         $menuForm->handleRequest($request);
@@ -55,10 +46,10 @@ class MenuController extends AbstractKRCMSController
                 }
             }
 
-            return $this->redirect($this->generateUrl('kr_solutions_krcms_menus_index', array('siteId' => $siteId)));
+            return $this->redirect($this->generateUrl('kr_solutions_krcms_menus_index'));
         }
 
-        return $this->render('KRSolutionsKRCMSBundle:Menu:index.html.twig', array('site' => $site, 'menus' => $menus, 'menuForm' => $menuForm->createView()));
+        return $this->render('KRSolutionsKRCMSBundle:Menu:index.html.twig', array('menus' => $menus, 'menuForm' => $menuForm->createView()));
     }
 
     /**
@@ -71,12 +62,6 @@ class MenuController extends AbstractKRCMSController
      */
     public function removeAction(Request $request, $menuId)
     {
-//		if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) {
-//			$request->getSession()->getFlashBag()->add('alert-danger', 'U bent niet gemachtigd om menu\'s te beheren.');
-//
-//			return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
-//		}
-
         $menu = $this->getMenuManager()->getMenuById($menuId);
         $flashMessages = array();
 
@@ -98,7 +83,7 @@ class MenuController extends AbstractKRCMSController
         }
 
         if (!empty($menu)) {
-            return $this->redirect($this->generateUrl('kr_solutions_krcms_menus_index', array('siteId' => $menu->getSite()->getId())));
+            return $this->redirect($this->generateUrl('kr_solutions_krcms_menus_index'));
         } else {
             return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
         }
@@ -163,7 +148,7 @@ class MenuController extends AbstractKRCMSController
                 }
             }
 
-            return $this->redirect($this->generateUrl('kr_solutions_krcms_menus_index', array('siteId' => $menu->getSite()->getId())));
+            return $this->redirect($this->generateUrl('kr_solutions_krcms_menus_index'));
         }
 
         return $this->render('KRSolutionsKRCMSBundle:Menu:edit.html.twig', array('menu' => $menu, 'menuForm' => $menuForm->createView(), 'action' => $action));

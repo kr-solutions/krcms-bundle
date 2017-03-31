@@ -6,13 +6,9 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Menu:
         name:
             columns:
                 - name
-        site_id:
-            columns:
-                - site_id
     uniqueConstraints:
-        site_id_name:
+        name:
             columns:
-                - site_id
                 - name
     id:
         id:
@@ -29,17 +25,6 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Menu:
             type: text
             nullable: true
             length: null
-    manyToOne:
-        site:
-            targetEntity: SiteInterface
-            cascade: {  }
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                site_id:
-                    referencedColumnName: id
-                    onDelete: "SET NULL"
-            orphanRemoval: false
     oneToMany:
         pages:
             targetEntity: PageInterface

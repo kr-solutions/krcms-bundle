@@ -6,7 +6,6 @@ use Doctrine\ORM\QueryBuilder;
 use KRSolutions\Bundle\KRCMSBundle\Entity\MenuInterface;
 use KRSolutions\Bundle\KRCMSBundle\Entity\PageInterface;
 use KRSolutions\Bundle\KRCMSBundle\Entity\PageTypeInterface;
-use KRSolutions\Bundle\KRCMSBundle\Entity\SiteInterface;
 
 /**
  * Page manager interface
@@ -29,43 +28,38 @@ interface PageManagerInterface
     public function getClass();
 
     /**
-     * Get a page by it's site and permalink
+     * Get a page by it's permalink
      *
-     * @param SiteInterface $site      Site entity
-     * @param string        $permalink Page permalink
+     * @param string $permalink Page permalink
      *
      * @return PageInterface|null
      */
-    public function getActivePageFromSiteAndPermalink(SiteInterface $site, $permalink);
+    public function getActivePageFromPermalink($permalink);
 
     /**
-     * Get pages by the site and menu
+     * Get pages by menu
      *
-     * @param SiteInterface $site Site entity
      * @param MenuInterface $menu Menu entity
      *
      * @return array
      */
-    public function getActivePagesFromSiteAndMenu(SiteInterface $site, MenuInterface $menu);
+    public function getActivePagesFromMenu(MenuInterface $menu);
 
     /**
-     * Get pages by the site and menu
+     * Get pages by menu name
      *
-     * @param SiteInterface $site     Site entity
      * @param string        $menuName Menu name
      *
      * @return array
      */
-    public function getActivePagesFromSiteAndMenuName(SiteInterface $site, $menuName = null);
+    public function getActivePagesFromMenuName($menuName = null);
 
     /**
-     * Get pages by site (query builder)
-     *
-     * @param SiteInterface $site
+     * Get active pages (query builder)
      *
      * @return array
      */
-    public function getActivePagesFromSiteQB(SiteInterface $site);
+    public function getActivePagesQB();
 
     /**
      * Get active pages from parent page
@@ -118,13 +112,11 @@ interface PageManagerInterface
     public function getAllParentPages();
 
     /**
-     * Get all loose pages by Site
-     *
-     * @param SiteInterface $site
+     * Get all loose pages
      *
      * @return array
      */
-    public function getAllLoosePagesBySite(SiteInterface $site);
+    public function getAllLoosePages();
 
     /**
      * Get all child pages
@@ -143,13 +135,11 @@ interface PageManagerInterface
     public function getAllChildablePagesQB();
 
     /**
-     * getAllChildablePagesBySite
-     *
-     * @param SiteInterface $site
+     * getAllChildablePages
      *
      * @return array
      */
-    public function getAllChildablePagesBySite(SiteInterface $site);
+    public function getAllChildablePages();
 
     /**
      * Get all childable pages except for the given page
@@ -245,13 +235,11 @@ interface PageManagerInterface
     public function getPreviousPermalinkFromParentPage(PageInterface $page);
 
     /**
-     * Get page count by site
-     *
-     * @param SiteInterface $site
+     * Get page count
      *
      * @return int
      */
-    public function getPageCountBySite(SiteInterface $site);
+    public function getPageCount();
 
     /**
      * Get page count by page type

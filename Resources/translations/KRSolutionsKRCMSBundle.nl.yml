@@ -51,6 +51,8 @@ form:
             parent:
                 label: Subpagina van
                 empty_value: Geen subpagina
+            header:
+                label: Header afbeelding
             content:
                 label: Inhoud
             metaDescription:
@@ -60,17 +62,6 @@ form:
                 label: Naam
             description:
                 label: Omschrijving
-            site:
-                label: Site
-        site:
-            title:
-                label: Titel
-            permalink:
-                label: Permalink
-            isActive:
-                label: Is actief?
-            homepage:
-                label: Homepage
         file:
             uri:
                 label: Bestand
@@ -78,6 +69,40 @@ form:
                 label: Titel
             description:
                 label: Omschrijving
+        header:
+            uri:
+                label: Afbeelding
+            name:
+                label: Naam
+            title:
+                label: Titel
+            subtitle:
+                label: Ondertitel
+            linkType:
+                label: Link/Knop
+                choices:
+                   no_link: Geen link/knop
+                   internal_link: Interne pagina
+                   external_link: Externe link
+            linkPage:
+                label: Interne pagina
+            linkHref:
+                label: Externe link (url)
+            linkTarget:
+                label: Linkdoel (target)
+                choices:
+                    _blank: Laad in een nieuw venster/tabblad (_blank)
+                    _self: Laad in hetzelfde frame (_self)
+                    _parent: Laad in het hoofdframe (_parent)
+                    _top: Laad in hetzelfde venster (_top)
+            linkLabel:
+                label: Label (naam van de link)
+            linkTitle:
+                label: Titel van de link (niet zichtbaar tenzij de muis op de link staat)
+            linkClass:
+                label: Link class
+            linkId:
+                label: Link ID
 
 layout:
     logout: Uitloggen
@@ -99,14 +124,12 @@ layout:
     files: Bestanden
     menu:
         dashboard: Dashboard
-        select_current_site: Selecteer huidige site
         configuration: Configuratie
         pages: Pagina's
         helpdesk: Helpdesk
         categories: Categoriën
         menus: Menu's
         page_types: Pagina types
-        sites: Sites
     form_error_alert_heading: Oeps!
     toggle_navigation: Schakel navigatie
 
@@ -135,7 +158,6 @@ page:
     remove_confirmation:
         title: Weet u zeker dat u deze pagina wilt verwijderen?
         message: Alle eventueel gekoppelde pagina's onder deze pagina worden losse pagina's! Deze dient u indien nodig zelf opnieuw te koppelen aan een andere pagina of menu.
-    site_not_exist: De site waar u de pagina's van wilt beheren bestaat niet (meer). Ververs de pagina en probeer het nog eens.
     page_type_not_exist: Het pagina type bestaat niet (meer). Ververs de pagina en probeer het nog eens.
     page_not_exist: De pagina met id '%page_id%' bestaat niet meer. Ververs de pagina en probeer het nog eens.
     form_type_not_exist: Het formulier om deze pagina te beheren bestaat nog niet. Neem contact op met uw webdesigner om dit probleem te verhelpen.
@@ -166,36 +188,6 @@ menu:
         failed_not_exist: Fout bij het verwijderen van het menu met id '%menu_id%'. Dit menu bestaat niet (meer).
         failed_not_authorized: Fout bij het verwijderen van het menu met id '%menu_id%'. U bent niet gemachtigd om dit menu te verwijderen.
         success: Het menu met id '%menu_id%' is succesvol verwijderd.
-
-dashboard:
-    no_sites: Er zijn nog geen site geconfigureerd. Maak minsten één site aan (meest voorkomend) of meer sites voor een multi site configuratie.
-
-site:
-    title: Titel
-    permalink: Permalink
-    is_active: Actief?
-    homepage: Homepage
-    index:
-        header:
-            sites: Sites
-    add_site: Site toevoegen
-    edit_site: Site wijzigen
-    remove_site: Site verwijderen
-    site_added: De site '%site_title%' is succesvol toegevoegd.
-    site_edited: De site '%site_title%' is succesvol aangepast.
-    site_not_exist: De site met id '%site_id%' bestaat niet (meer). Ververs de pagina en probeer het nog eens.
-    no_sites_added: Er zijn nog geen sites toegevoegd
-    back_to_site_overview: Terug naar het overzicht
-    remove_confirmation:
-        title: Weet u zeker dat u deze site wilt verwijderen?
-        message: Pagina's verbonden aan deze site moeten eerst verplaatst of verwijderd worden, eerder zal deze site NIET verwijderd worden.
-    edit:
-        failed_not_authorized: U bent niet gemachtigd om sites te wijzigen.
-    remove:
-        failed_not_exist: Fout bij het verwijderen van de site met id '%site_id%'. Deze site bestaat niet (meer).
-        failed_not_authorized: Fout bij het verwijderen van de site met id '%site_id%'. U bent niet gemachtigd om sites te verwijderen.
-        failed_pages_exist: Fout bij het verwijderen van de site met id '%site_id%'. Er zijn nog steeds pagina's aan deze site verbonden. Verplaats of verwijder deze pagina's voordat u deze site verwijderd.
-        success: De site met id '%site_id%' is succesvol verwijderd.
 
 page_type:
     name: Naam

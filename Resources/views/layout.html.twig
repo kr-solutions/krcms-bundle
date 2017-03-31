@@ -22,18 +22,9 @@
 		{% endblock %}
 	</head>
 	<body>
-		{% if site is defined and site is not null and site.id %}
-			{% set activeSite = site %}
-		{% elseif page is defined %}
-			{% set activeSite = page.site %}
-		{% elseif menu is defined %}
-			{% set activeSite = menu.site %}
-		{% else %}
-			{% set activeSite = null %}
-		{% endif %}
 
 		<div id="wrapper">
-			{{ render(controller('KRSolutionsKRCMSBundle:Admin:menu', { 'activeSite': activeSite, 'route': app.request.attributes.get('_route') })) }}
+			{{ render(controller('KRSolutionsKRCMSBundle:Admin:menu', { 'route': app.request.attributes.get('_route') })) }}
 
 			<div id="page-wrapper">
 				<div class="container-fluid">

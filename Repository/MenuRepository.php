@@ -5,7 +5,6 @@ namespace KRSolutions\Bundle\KRCMSBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use KRSolutions\Bundle\KRCMSBundle\Entity\Menu;
-use KRSolutions\Bundle\KRCMSBundle\Entity\Site;
 
 /**
  * MenuRepository
@@ -14,18 +13,13 @@ class MenuRepository extends EntityRepository
 {
 
     /**
-     * Get all Menus by Site
-     *
-     * @param Site $site
+     * Get all Menus
      *
      * @return array
      */
-    public function getAllMenusBySite(Site $site)
+    public function getAllMenus()
     {
         $qb = $this->createQueryBuilder('menus');
-
-        $qb->where('menus.site = :site');
-        $qb->setParameter('site', $site);
 
         return $qb->getQuery()->getResult();
     }
@@ -65,39 +59,13 @@ class MenuRepository extends EntityRepository
     }
 
     /**
-     * Get Menus Entity by Site and name
-     *
-     * @param Site   $site     Site entity
-     * @param string $menuName Menu name
-     *
-     * @return Menu
-     */
-    public function getMenuBySiteAndName(Site $site, $menuName)
-    {
-        $qb = $this->createQueryBuilder('menus');
-
-        $qb->where('menus.site = :site');
-        $qb->setParameter('site', $site);
-
-        $qb->andWhere('menus.name = :menuName');
-        $qb->setParameter('menuName', $menuName);
-
-        return $qb->getQuery()->getOneOrNullResult();
-    }
-
-    /**
-     * Get Menus by Site
-     *
-     * @param Site $site
+     * Get Menus QB
      *
      * @return QueryBuilder
      */
-    public function getMenusBySiteQB(Site $site)
+    public function getMenusQB()
     {
         $qb = $this->createQueryBuilder('menus');
-
-        $qb->where('menus.site = :site');
-        $qb->setParameter('site', $site);
 
         return $qb;
     }

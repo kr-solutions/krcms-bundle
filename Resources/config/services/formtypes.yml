@@ -11,6 +11,12 @@ services:
         tags:
             - { name: form.type, alias: krcms_file }
 
+    kr_solutions_krcms.form.type.krcms_header:
+        class: KRSolutions\Bundle\KRCMSBundle\Form\Type\KRCMSHeaderType
+        arguments: ["%kr_solutions_krcms.model.header_class%"]
+        tags:
+            - { name: form.type, alias: krcms_header }
+
     kr_solutions_krcms.form.type.krcms_menu:
         class: KRSolutions\Bundle\KRCMSBundle\Form\Type\KRCMSMenuType
         arguments: ["%kr_solutions_krcms.model.menu_class%"]
@@ -29,11 +35,17 @@ services:
         tags:
             - { name: form.type, alias: krcms_page_type }
 
-    kr_solutions_krcms.form.type.krcms_site:
-        class: KRSolutions\Bundle\KRCMSBundle\Form\Type\KRCMSSiteType
-        arguments: ["%kr_solutions_krcms.model.site_class%"]
+    kr_solutions_krcms.form.type.krcms_slider:
+        class: KRSolutions\Bundle\KRCMSBundle\Form\Type\KRCMSSliderType
+        arguments: ["%kr_solutions_krcms.model.slider_class%"]
         tags:
-            - { name: form.type }
+            - { name: form.type, alias: krcms_slider }
+
+    kr_solutions_krcms.form.type.krcms_slider_image:
+        class: KRSolutions\Bundle\KRCMSBundle\Form\Type\KRCMSSliderImageType
+        arguments: ["%kr_solutions_krcms.model.slider_image_class%"]
+        tags:
+            - { name: form.type, alias: krcms_slider_image }
 
     kr_solutions_krcms.form.type.krcms_tag:
         class: KRSolutions\Bundle\KRCMSBundle\Form\Type\KRCMSTagType

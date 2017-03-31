@@ -60,17 +60,6 @@ form:
                 label: Name
             description:
                 label: Description
-            site:
-                label: Site
-        site:
-            title:
-                label: Title
-            permalink:
-                label: Permalink
-            isActive:
-                label: Is active?
-            homepage:
-                label: Homepage
         file:
             uri:
                 label: File
@@ -99,14 +88,12 @@ layout:
     files: Files
     menu:
         dashboard: Dashboard
-        select_current_site: Select current site
         configuration: Configuration
         pages: Pages
         helpdesk: Helpdesk
         categories: Categories
         menus: Menus
         page_types: Page types
-        sites: Sites
     form_error_alert_heading: Oops!
     toggle_navigation: Toggle navigation
 
@@ -135,7 +122,6 @@ page:
     remove_confirmation:
         title: Are you sure you want to remove this page?
         message: All possibly linked subpages of this page become a single page! These should be linked, if necessary, again to another page or menu.
-    site_not_exist: The site where you want to manage the pages does not exist (anymore). Refresh the page and try again.
     page_type_not_exist: The page type does not exist (anymore). Refresh the page and try again.
     page_not_exist: The page with id '%page_id%' does not exist (anymore). Refresh the page and try again.
     form_type_not_exist: The form to manage this page does not exist yet. Contact your webdesigner to fix this problem.
@@ -166,36 +152,6 @@ menu:
         failed_not_exist: Failed to remove menu with id '%menu_id%'. This menu does not exist (anymore).
         failed_not_authorized: Failed to remove menu with id '%menu_id%'. You are not authorized to remove this menu.
         success: Successfully removed menu with id '%menu_id%'.
-
-dashboard:
-    no_sites: There are no sites configured yet. Add at least one site (most common) or more for a multiple sites configuration.
-
-site:
-    title: Title
-    permalink: Permalink
-    is_active: Active?
-    homepage: Homepage
-    index:
-        header:
-            sites: Sites
-    add_site: Add site
-    edit_site: Edit site
-    remove_site: Remove site
-    site_added: Site '%site_title%' has been added successfully.
-    site_edited: Site '%site_title%' has been successfully updated.
-    site_not_exist: The site with id '%site_id%' does not exist (anymore). Refresh the page and try again.
-    no_sites_added: There are no sites added yet
-    back_to_site_overview: Back to the sites overview
-    remove_confirmation:
-        title: Are you sure you want to remove this site?
-        message: Pages linked to this site should be moved or deleted first, otherwise this site will NOT be removed.
-    edit:
-        failed_not_authorized: You are not authorized to edit sites.
-    remove:
-        failed_not_exist: Failed to remove the site with id '%site_id%'. This site does not exist (anymore).
-        failed_not_authorized: Failed to remove the site. You are not authorized to remove sites.
-        failed_pages_exist: Failed to remove the site. There are still pages linked to this site. You should move or remove these pages first.
-        success: Successfully removed the site with id '%site_id%'.
 
 page_type:
     name: Name

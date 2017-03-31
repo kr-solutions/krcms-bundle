@@ -2,7 +2,6 @@ kr_solutions_krcms:
     menu:
         name:
             not_blank: De naam van het menu is verplicht
-        site_id_name:
             unique: De naam van het menu moet uniek zijn
     page:
         title:
@@ -12,11 +11,6 @@ kr_solutions_krcms:
     file:
         uri:
             not_blank: U heeft geen bestand geselecteerd
-    site:
-        title:
-            not_blank: De title van de site is verplicht
-        permalink:
-            unique: De permalink van de site moet uniek zijn
     page_type:
         name:
             not_blank: De naam van het pagina type is verplicht
