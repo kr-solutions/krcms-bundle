@@ -11,6 +11,20 @@ class SliderRepository extends EntityRepository
 {
 
     /**
+     * Get the default slider
+     *
+     * @return array
+     */
+    public function getDefaultSlider()
+    {
+        $qb = $this->createQueryBuilder('sliders');
+
+        $qb->where('sliders.isDefault = true');
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    /**
      * Get slider by id
      *
      * @param integer $sliderId
