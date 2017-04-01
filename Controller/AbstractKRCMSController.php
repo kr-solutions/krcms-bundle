@@ -81,6 +81,16 @@ class AbstractKRCMSController extends Controller
     }
 
     /**
+     * Get Slider image repository
+     *
+     * @return \KRSolutions\Bundle\KRCMSBundle\Repository\SliderImageRepository
+     */
+    protected function getSliderImageRepository()
+    {
+        return $this->getDoctrine()->getRepository('KRSolutionsKRCMSBundle:SliderImage');
+    }
+
+    /**
      * Get Tag repository
      *
      * @return \KRSolutions\Bundle\KRCMSBundle\Repository\TagRepository

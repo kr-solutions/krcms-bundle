@@ -16,22 +16,6 @@ interface SliderImageInterface
     public function getId();
 
     /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return SliderImageInterface
-     */
-    public function setName($name);
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName();
-
-    /**
      * Set uri
      *
      * @param string $uri

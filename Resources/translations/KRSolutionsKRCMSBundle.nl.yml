@@ -72,8 +72,38 @@ form:
         header:
             uri:
                 label: Afbeelding
-            name:
-                label: Naam
+            title:
+                label: Titel
+            subtitle:
+                label: Ondertitel
+            linkType:
+                label: Link/Knop
+                choices:
+                   no_link: Geen link/knop
+                   internal_link: Interne pagina
+                   external_link: Externe link
+            linkPage:
+                label: Interne pagina
+            linkHref:
+                label: Externe link (url)
+            linkTarget:
+                label: Linkdoel (target)
+                choices:
+                    _blank: Laad in een nieuw venster/tabblad (_blank)
+                    _self: Laad in hetzelfde frame (_self)
+                    _parent: Laad in het hoofdframe (_parent)
+                    _top: Laad in hetzelfde venster (_top)
+            linkLabel:
+                label: Label (naam van de link)
+            linkTitle:
+                label: Titel van de link (niet zichtbaar tenzij de muis op de link staat)
+            linkClass:
+                label: Link class
+            linkId:
+                label: Link ID
+        sliderImage:
+            uri:
+                label: Afbeelding
             title:
                 label: Titel
             subtitle:
@@ -138,11 +168,11 @@ page:
     created_at: Aangemaakt op
     page_type: Pagina type
     sub_pages: Subpagina's
+    add_page: Pagina toevoegen
     menu: Menu
     single_pages: Losse pagina's
     manage_subpages: Subpagina's beheren
     no_subpages: Geen subpagina's
-    add_page: Pagina toevoegen
     edit_page: Pagina wijzigen
     remove_page: Pagina verwijderen
     no_pages_added_to_menu: Er zijn nog geen pagina's toegevoegd aan dit menu.

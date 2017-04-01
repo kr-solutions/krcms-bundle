@@ -51,6 +51,8 @@ form:
             parent:
                 label: Subpage of
                 empty_value: Not a subpage
+            header:
+                label: Header image
             content:
                 label: Content
             metaDescription:
@@ -67,6 +69,70 @@ form:
                 label: Title
             description:
                 label: Description
+        header:
+            uri:
+                label: Afbeelding
+            title:
+                label: Titel
+            subtitle:
+                label: Ondertitel
+            linkType:
+                label: Link/Knop
+                choices:
+                   no_link: Geen link/knop
+                   internal_link: Interne pagina
+                   external_link: Externe link
+            linkPage:
+                label: Interne pagina
+            linkHref:
+                label: Externe link (url)
+            linkTarget:
+                label: Linkdoel (target)
+                choices:
+                    _blank: Laad in een nieuw venster/tabblad (_blank)
+                    _self: Laad in hetzelfde frame (_self)
+                    _parent: Laad in het hoofdframe (_parent)
+                    _top: Laad in hetzelfde venster (_top)
+            linkLabel:
+                label: Label (naam van de link)
+            linkTitle:
+                label: Titel van de link (niet zichtbaar tenzij de muis op de link staat)
+            linkClass:
+                label: Link class
+            linkId:
+                label: Link ID
+        sliderImage:
+            uri:
+                label: Afbeelding
+            title:
+                label: Titel
+            subtitle:
+                label: Ondertitel
+            linkType:
+                label: Link/Knop
+                choices:
+                   no_link: Geen link/knop
+                   internal_link: Interne pagina
+                   external_link: Externe link
+            linkPage:
+                label: Interne pagina
+            linkHref:
+                label: Externe link (url)
+            linkTarget:
+                label: Linkdoel (target)
+                choices:
+                    _blank: Laad in een nieuw venster/tabblad (_blank)
+                    _self: Laad in hetzelfde frame (_self)
+                    _parent: Laad in het hoofdframe (_parent)
+                    _top: Laad in hetzelfde venster (_top)
+            linkLabel:
+                label: Label (naam van de link)
+            linkTitle:
+                label: Titel van de link (niet zichtbaar tenzij de muis op de link staat)
+            linkClass:
+                label: Link class
+            linkId:
+                label: Link ID
 
 layout:
     logout: Logout

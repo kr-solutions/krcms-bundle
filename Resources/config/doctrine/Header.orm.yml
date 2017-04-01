@@ -9,9 +9,6 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Header:
             generator:
                 strategy: AUTO
     fields:
-        name:
-            type: string
-            length: 255
         uri:
             type: string
             length: 255

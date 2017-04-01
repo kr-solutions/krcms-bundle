@@ -4,7 +4,6 @@ namespace KRSolutions\Bundle\KRCMSBundle\Form\Type;
 
 use Doctrine\ORM\EntityRepository;
 use FM\ElfinderBundle\Form\Type\ElFinderType;
-use KRSolutions\Bundle\KRCMSBundle\Entity\SliderImage;
 use KRSolutions\Bundle\KRCMSBundle\Entity\Page;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -19,6 +18,19 @@ class KRCMSSliderImageType extends AbstractType
 {
 
     /**
+     * @var string
+     */
+    private $class;
+
+    /**
+     * @param string $class The file class name
+     */
+    public function __construct($class)
+    {
+        $this->class = $class;
+    }
+
+    /**
      * Build form
      *
      * @param FormBuilderInterface $builder The form builder
@@ -29,7 +41,6 @@ class KRCMSSliderImageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, array('label' => 'form.type.sliderImage.name.label', 'required' => true, 'error_bubbling' => true))
             ->add('title', null, array('label' => 'form.type.sliderImage.title.label', 'required' => true, 'error_bubbling' => true))
             ->add('subtitle', null, array('label' => 'form.type.sliderImage.subtitle.label', 'required' => true, 'error_bubbling' => true))
             ->add('uri', ElFinderType::class, array(
@@ -86,8 +97,18 @@ class KRCMSSliderImageType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => SliderImage::class,
+            'data_class' => $this->class,
             'translation_domain' => 'KRSolutionsKRCMSBundle',
         ));
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return 'krcms_slider_image';
     }
 }

@@ -13,3 +13,13 @@ kr_solutions_krcms_sliders_edit:
     defaults: { _controller: KRSolutionsKRCMSBundle:Slider:edit }
     requirements:
         sliderId: \d+
+
+kr_solutions_krcms_slider_images:
+    path: /{sliderId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:Slider:sliderImages }
+    requirements:
+        sliderId: \d+
+
+kr_solutions_krcms_slider_images_remove:
+    path: /remove-slider-image
+    defaults: { _controller: KRSolutionsKRCMSBundle:Slider:removeSliderImage }

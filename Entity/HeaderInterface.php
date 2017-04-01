@@ -16,22 +16,6 @@ interface HeaderInterface
     public function getId();
 
     /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return HeaderInterface
-     */
-    public function setName($name);
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName();
-
-    /**
      * Set uri
      *
      * @param string $uri

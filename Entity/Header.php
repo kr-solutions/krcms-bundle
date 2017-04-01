@@ -16,11 +16,6 @@ class Header implements HeaderInterface
     /**
      * @var string
      */
-    protected $name;
-
-    /**
-     * @var string
-     */
     protected $uri;
 
     /**
@@ -92,24 +87,6 @@ class Header implements HeaderInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 
     /**

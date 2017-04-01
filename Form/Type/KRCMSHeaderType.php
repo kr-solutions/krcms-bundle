@@ -29,7 +29,6 @@ class KRCMSHeaderType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, array('label' => 'form.type.header.name.label', 'required' => true, 'error_bubbling' => true))
             ->add('title', null, array('label' => 'form.type.header.title.label', 'required' => true, 'error_bubbling' => true))
             ->add('subtitle', null, array('label' => 'form.type.header.subtitle.label', 'required' => true, 'error_bubbling' => true))
             ->add('uri', ElFinderType::class, array(
