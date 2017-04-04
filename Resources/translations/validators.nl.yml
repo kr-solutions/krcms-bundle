@@ -1,17 +1,7 @@
-kr_solutions_krcms:
-    menu:
-        name:
-            not_blank: De naam van het menu is verplicht
-            unique: De naam van het menu moet uniek zijn
-    page:
-        title:
-            not_blank: De titel van de pagina is verplicht
-        permalink:
-            unique: De permalink van de pagina moet uniek zijn
-    file:
-        uri:
-            not_blank: U heeft geen bestand geselecteerd
-    page_type:
-        name:
-            not_blank: De naam van het pagina type is verplicht
-            unique: De naam van het pagina type moet uniek zijn
+kr_solutions_krcms.menu.name.not_blank: 'De naam van het menu is verplicht'
+kr_solutions_krcms.menu.name.unique: 'De naam van het menu moet uniek zijn'
+kr_solutions_krcms.page.title.not_blank: 'De titel van de pagina is verplicht'
+kr_solutions_krcms.page.permalink.unique: 'De permalink van de pagina moet uniek zijn'
+kr_solutions_krcms.file.uri.not_blank: 'U heeft geen bestand geselecteerd'
+kr_solutions_krcms.page_type.name.not_blank: 'De naam van het pagina type is verplicht'
+kr_solutions_krcms.page_type.name.unique: 'De naam van het pagina type moet uniek zijn'
