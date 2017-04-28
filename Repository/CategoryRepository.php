@@ -13,4 +13,20 @@ use Doctrine\ORM\EntityRepository;
 class CategoryRepository extends EntityRepository
 {
 
+    /**
+     * Get Category by id
+     *
+     * @param integer $categoryId
+     *
+     * @return \KRSolutions\Bundle\KRCMSBundle\Entity\Category|null
+     */
+    public function getCategoryById($categoryId)
+    {
+        $qb = $this->createQueryBuilder('categories');
+
+        $qb->where('categories.id = :categoryId');
+        $qb->setParameter('categoryId', intval($categoryId));
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
 }

@@ -139,4 +139,14 @@ class AbstractKRCMSController extends Controller
     {
         return $this->container->get('kr_solutions_krcms.menu_manager');
     }
+
+    /**
+     * Get the category manager
+     *
+     * @return \KRSolutions\Bundle\KRCMSBundle\Model\CategoryManagerInterface
+     */
+    protected function getCategoryManager()
+    {
+        return $this->container->get('kr_solutions_krcms.category_manager');
+    }
 }

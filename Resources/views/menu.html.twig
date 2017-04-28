@@ -43,11 +43,11 @@
             <li{% if route == 'kr_solutions_krcms_pages_index' %} class="active"{% endif %}>
                 <a href="{{ path('kr_solutions_krcms_pages_index') }}"><i class="fa fa-fw fa-files-o"></i> {{ 'layout.menu.pages'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
             </li>
-            {#{% if is_granted(managementRoles['categories']) %}
+            {% if is_granted(managementRoles['categories']) %}
                 <li{% if route == 'kr_solutions_krcms_categories_index' %} class="active" {% endif %}>
                     <a href="{{ path('kr_solutions_krcms_categories_index') }}"><i class="fa fa-fw fa-leaf"></i> {{ 'layout.menu.categories'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
                 </li>
-            {% endif %}#}
+            {% endif %}
             {% if is_granted(managementRoles['menus']) %}
                 <li{% if route == 'kr_solutions_krcms_menus_index' %} class="active" {% endif %}>
                     <a href="{{ path('kr_solutions_krcms_menus_index') }}"><i class="fa fa-fw fa-list"></i> {{ 'layout.menu.menus'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>

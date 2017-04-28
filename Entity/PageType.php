@@ -78,6 +78,11 @@ class PageType implements PageTypeInterface
     /**
      * @var boolean
      */
+    protected $hasCategory;
+
+    /**
+     * @var boolean
+     */
     protected $hasFiles;
 
     /**
@@ -348,6 +353,24 @@ class PageType implements PageTypeInterface
     public function getChildrenOrderDirection()
     {
         return $this->childrenOrderDirection;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setHasCategory($hasCategory)
+    {
+        $this->hasCategory = $hasCategory;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getHasCategory()
+    {
+        return $this->hasCategory;
     }
 
     /**

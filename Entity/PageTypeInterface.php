@@ -208,6 +208,22 @@ interface PageTypeInterface
     public function getChildrenOrderDirection();
 
     /**
+     * Set hasCategory
+     *
+     * @param boolean $hasCategory
+     *
+     * @return PageTypeInterface
+     */
+    public function setHasCategory($hasCategory);
+
+    /**
+     * Get hasCategory
+     *
+     * @return boolean
+     */
+    public function getHasCategory();
+
+    /**
      * Set hasFiles
      *
      * @param boolean $hasFiles

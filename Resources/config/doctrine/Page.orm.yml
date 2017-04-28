@@ -138,6 +138,16 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Page:
                     referencedColumnName: id
                     onDelete: "SET NULL"
             orphanRemoval: false
+        category:
+            targetEntity: CategoryInterface
+            cascade: [ "all" ]
+            mappedBy: null
+            inversedBy: pages
+            joinColumns:
+                category_id:
+                    referencedColumnName: id
+                    onDelete: "SET NULL"
+            orphanRemoval: false
         createdBy:
             targetEntity: UserInterface
             cascade: {  }
@@ -159,22 +169,6 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Page:
                     onDelete: "SET NULL"
             orphanRemoval: false
     manyToMany:
-        categories:
-            targetEntity: CategoryInterface
-            cascade: {  }
-            mappedBy: null
-            inversedBy: null
-            joinTable:
-                name: krcms_pages_categories
-                joinColumns:
-                    -
-                        name: page_id
-                        referencedColumnName: id
-                inverseJoinColumns:
-                    -
-                        name: category_id
-                        referencedColumnName: id
-            orderBy: null
         tags:
             targetEntity: TagInterface
             cascade: {  }

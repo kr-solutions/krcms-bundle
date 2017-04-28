@@ -96,6 +96,11 @@ class Page implements PageInterface
     protected $header;
 
     /**
+     * @var CategoryInterface
+     */
+    protected $category;
+
+    /**
      * @var \Symfony\Component\Security\Core\User\UserInterface
      */
     protected $createdBy;
@@ -118,11 +123,6 @@ class Page implements PageInterface
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    protected $categories;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
     protected $tags;
 
     /**
@@ -132,7 +132,6 @@ class Page implements PageInterface
     {
         $this->pages = new ArrayCollection();
         $this->files = new ArrayCollection();
-        $this->categories = new ArrayCollection();
         $this->tags = new ArrayCollection();
 
         $this->createdAt = new \DateTime('now');
@@ -454,6 +453,24 @@ class Page implements PageInterface
     /**
      * {@inheritDoc}
      */
+    public function setCategory(CategoryInterface $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCategory()
+    {
+        return $this->header;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function setCreatedBy(\Symfony\Component\Security\Core\User\UserInterface $createdBy = null)
     {
         $this->createdBy = $createdBy;
@@ -521,32 +538,6 @@ class Page implements PageInterface
     public function getParent()
     {
         return $this->parent;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function addCategory(CategoryInterface $category)
-    {
-        $this->categories[] = $category;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function removeCategory(CategoryInterface $category)
-    {
-        $this->categories->removeElement($category);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getCategories()
-    {
-        return $this->categories;
     }
 
     /**

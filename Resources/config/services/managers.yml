@@ -16,3 +16,9 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "%kr_solutions_krcms.model.menu_class%"
+
+    kr_solutions_krcms.category_manager:
+        class: KRSolutions\Bundle\KRCMSBundle\Doctrine\CategoryManager
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "%kr_solutions_krcms.model.category_class%"

@@ -69,6 +69,13 @@
                     </div>
                 {% endif %}
 
+                {% if pageForm.category is defined %}
+                    <div class="form-group{% if pageForm.category.vars.errors|length %} has-error{% endif %}">
+                        {{ form_label(pageForm.category) }}
+                        {{ form_widget(pageForm.category, { 'attr': {'class': 'form-control'} }) }}
+                    </div>
+                {% endif %}
+
                 {% if pageForm['parent'] is defined %}
                     <div class="form-group{% if pageForm.parent.vars.errors|length %} has-error{% endif %}">
                         {{ form_label(pageForm.parent) }}

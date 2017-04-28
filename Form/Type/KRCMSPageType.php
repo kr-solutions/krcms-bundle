@@ -9,7 +9,6 @@ use KRSolutions\Bundle\KRCMSBundle\Entity\PageInterface;
 use KRSolutions\Bundle\KRCMSBundle\Form\DataTransformer\NullToEmptyStringTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -69,6 +68,10 @@ class KRCMSPageType extends AbstractType
 
         if ($page->getPageType()->getIsMenuItem()) {
             $builder->add('menuTitle', null, array('label' => 'form.type.page.menuTitle.label', 'required' => true, 'error_bubbling' => true));
+        }
+
+        if ($page->getPageType()->getHasCategory()) {
+            $builder->add('category', null, array('label' => 'form.type.page.category.label', 'required' => true, 'error_bubbling' => true));
         }
 
         if (0 !== count($page->getPageType()->getPageTypeParents())) {

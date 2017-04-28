@@ -286,6 +286,22 @@ interface PageInterface
     public function getHeader();
 
     /**
+     * Set header
+     *
+     * @param CategoryInterface $category
+     *
+     * @return PageInterface
+     */
+    public function setCategory(CategoryInterface $category = null);
+
+    /**
+     * Get header
+     *
+     * @return CategoryInterface
+     */
+    public function getCategory();
+
+    /**
      * Set createdBy
      *
      * @param \Symfony\Component\Security\Core\User\UserInterface $createdBy
@@ -348,29 +364,6 @@ interface PageInterface
      * @return PageInterface
      */
     public function getParent();
-
-    /**
-     * Add category
-     *
-     * @param CategoryInterface $category
-     *
-     * @return PageInterface
-     */
-    public function addCategory(CategoryInterface $category);
-
-    /**
-     * Remove category
-     *
-     * @param CategoryInterface $category
-     */
-    public function removeCategory(CategoryInterface $category);
-
-    /**
-     * Get categories
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCategories();
 
     /**
      * Add tag

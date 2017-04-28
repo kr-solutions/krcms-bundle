@@ -32,20 +32,43 @@ interface CategoryInterface
     public function getName();
 
     /**
-     * Set description
+     * Set imageUri
      *
-     * @param string $description
+     * @param string $imageUri
      *
      * @return CategoryInterface
      */
-    public function setDescription($description);
+    public function setImageUri($imageUri);
 
     /**
-     * Get description
+     * Get imageUri
      *
      * @return string
      */
-    public function getDescription();
+    public function getImageUri();
+
+    /**
+     * Add page
+     *
+     * @param PageInterface $page
+     *
+     * @return CategoryInterface
+     */
+    public function addPage(PageInterface $page);
+
+    /**
+     * Remove page
+     *
+     * @param PageInterface $page
+     */
+    public function removePage(PageInterface $page);
+
+    /**
+     * Get pages
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPages();
 
     /**
      * Category name
