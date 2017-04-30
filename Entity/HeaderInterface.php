@@ -192,27 +192,20 @@ interface HeaderInterface
     public function getLinkId();
 
     /**
-     * Add page
+     * Set page
      *
-     * @param PageInterface $page
+     * @param PageInterface|null $page
      *
      * @return HeaderInterface
      */
-    public function addPage(PageInterface $page);
+    public function setPage(PageInterface $page = null);
 
     /**
-     * Remove page
+     * Get page
      *
-     * @param PageInterface $page
+     * @return PageInterface|null
      */
-    public function removePage(PageInterface $page);
-
-    /**
-     * Get pages
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPages();
+    public function getPage();
 
     /**
      * Header name

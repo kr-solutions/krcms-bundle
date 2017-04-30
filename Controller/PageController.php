@@ -121,6 +121,12 @@ class PageController extends AbstractKRCMSController
             return $this->redirect($this->generateUrl('kr_solutions_krcms_pages_index'));
         }
 
+//        if ($pageType->getHasHeader()) {
+//            if (null === $page->getHeader()) {
+//                $page->setHeader(new \KRSolutions\Bundle\KRCMSBundle\Entity\Header());
+//            }
+//        }
+
         if (null !== $page->getPageType()->getAdminForm()) {
             if ($this->container->has($page->getPageType()->getAdminForm())) {
                 $form = $this->container->get($page->getPageType()->getAdminForm());

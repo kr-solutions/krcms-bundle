@@ -9,6 +9,7 @@ use KRSolutions\Bundle\KRCMSBundle\Entity\PageInterface;
 use KRSolutions\Bundle\KRCMSBundle\Form\DataTransformer\NullToEmptyStringTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -110,6 +111,15 @@ class KRCMSPageType extends AbstractType
         }
 
         if (true === $page->getPageType()->getHasHeader()) {
+            $builder->add('headerType', ChoiceType::class, array(
+                'label' => 'form.type.page.headerType.label',
+                'choices' => array('form.type.page.headerType.standard' => 0, 'form.type.page.headerType.override' => 1),
+                'required' => true,
+                'error_bubbling' => true,
+                'choices_as_values' => true,
+                'mapped' => false,
+            ));
+
             $builder->add('header', KRCMSHeaderType::class, array(
                 'label' => 'form.type.page.header.label',
                 'data_class' => Header::class,

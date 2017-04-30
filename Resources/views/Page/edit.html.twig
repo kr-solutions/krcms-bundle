@@ -34,8 +34,8 @@
 
 {% block content %}
     <div class="col-md-9">
+        {{ form_start(pageForm, {attr: {id: 'pageForm', novalidate: 'novalidate'} }) }}
         <div class="well">
-            {{ form_start(pageForm, {attr: {id: 'pageForm', novalidate: 'novalidate'} }) }}
             <fieldset>
                 {% if form_errors(pageForm) %}
                     <div class="alert alert-danger">
@@ -95,11 +95,16 @@
                     {{ form_widget(pageForm.metaDescription, { 'attr': {'class': 'form-control'} }) }}
                 </div>
 
-                {{ form_rest(pageForm) }}
             </fieldset>
-            <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-save"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
-            {{ form_end(pageForm) }}
         </div>
+        {% if pageForm.header is defined %}
+            <div class="well">
+                {{ form_row(pageForm.header) }}
+            </div>
+        {% endif %}
+        {{ form_rest(pageForm) }}
+        <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-save"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
+        {{ form_end(pageForm) }}
     </div>
     <div class="col-md-3">
         <div class="well">

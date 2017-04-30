@@ -56,8 +56,13 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Header:
                     referencedColumnName: id
                     onDelete: "SET NULL"
             orphanRemoval: false
-    oneToMany:
-        pages:
+    oneToOne:
+        page:
             targetEntity: PageInterface
-            mappedBy: header
+            inversedBy: header
+            joinColumns:
+                page_id:
+                    referencedColumnName: id
+                    onDelete: "CASCADE"
+            orphanRemoval: false
     lifecycleCallbacks: {  }

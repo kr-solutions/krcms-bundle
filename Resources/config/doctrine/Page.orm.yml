@@ -128,16 +128,6 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Page:
                     referencedColumnName: id
                     onDelete: "SET NULL"
             orphanRemoval: false
-        header:
-            targetEntity: HeaderInterface
-            cascade: [ "all" ]
-            mappedBy: null
-            inversedBy: pages
-            joinColumns:
-                header_id:
-                    referencedColumnName: id
-                    onDelete: "SET NULL"
-            orphanRemoval: false
         category:
             targetEntity: CategoryInterface
             cascade: [ "all" ]
@@ -168,6 +158,10 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Page:
                     referencedColumnName: id
                     onDelete: "SET NULL"
             orphanRemoval: false
+    oneToOne:
+        header:
+            targetEntity: HeaderInterface
+            mappedBy: page
     manyToMany:
         tags:
             targetEntity: TagInterface

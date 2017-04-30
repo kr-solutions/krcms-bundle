@@ -69,17 +69,9 @@ class Header implements HeaderInterface
     protected $linkId;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var PageInterface|null
      */
-    protected $pages;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->pages = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+    protected $page;
 
     /**
      * {@inheritDoc}
@@ -290,9 +282,9 @@ class Header implements HeaderInterface
     /**
      * {@inheritDoc}
      */
-    public function addPage(PageInterface $page)
+    public function setPage(PageInterface $page = null)
     {
-        $this->pages[] = $page;
+        $this->page = $page;
 
         return $this;
     }
@@ -300,17 +292,9 @@ class Header implements HeaderInterface
     /**
      * {@inheritDoc}
      */
-    public function removePage(PageInterface $page)
+    public function getPage()
     {
-        $this->pages->removeElement($page);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getPages()
-    {
-        return $this->pages;
+        return $this->page;
     }
 
     /**
