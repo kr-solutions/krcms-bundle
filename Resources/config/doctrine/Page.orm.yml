@@ -132,6 +132,16 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Page:
                     referencedColumnName: id
                     onDelete: "SET NULL"
             orphanRemoval: false
+        header:
+            targetEntity: HeaderInterface
+            cascade: {  }
+            mappedBy: null
+            inversedBy: pages
+            joinColumns:
+                header_id:
+                    referencedColumnName: id
+                    onDelete: "SET NULL"
+            orphanRemoval: false
         createdBy:
             targetEntity: UserInterface
             cascade: {  }
