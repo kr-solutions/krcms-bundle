@@ -36,7 +36,7 @@ class FileController extends AbstractKRCMSController
         if (false == $page->getPageType()->getHasFiles()) {
             $request->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('file.page_cannot_contain_files', array(), 'KRSolutionsKRCMSBundle'));
 
-            return $this->redirect($this->generateUrl('kr_solutions_krcms_pages_index', array('siteId' => $page->getSite()->getId())));
+            return $this->redirect($this->generateUrl('kr_solutions_krcms_pages_index'));
         }
 
         $newFile = new File();
@@ -48,7 +48,7 @@ class FileController extends AbstractKRCMSController
             $em = $this->getDoctrine()->getManager();
 
             $uriOrig = trim($newFile->getUri());
-            $strippedUri = trim(ltrim(trim($uriOrig, '/'), trim($uploadDir, '/')), '/');
+            $strippedUri = trim(substr($uriOrig, strpos(trim($uriOrig, '/'), trim($uploadDir, '/')) + strlen(trim($uploadDir, '/')) + 1), '/');
 
             if (class_exists('\Tinify\Tinify') && !empty($this->container->getParameter('kr_solutions_krcms.tinify_api_key'))) {
                 $systemPath = rtrim($webRoot, '/').'/'.trim($uploadDir, '/').'/'.$strippedUri;

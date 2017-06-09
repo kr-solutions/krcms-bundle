@@ -1,254 +1,217 @@
-form:
-    type:
-        yes: Yes
-        no: No
-        pageType:
-            name:
-                label: Name
-            description:
-                label: Description
-            isChild:
-                label: Has to be a subpage?
-            isMenuItem:
-               label: Can be placed in a menu?
-            hasChildren:
-                label: Has subpages?
-            hasContent:
-                label: Has content?
-            maximumToCreate:
-                label: Maximum to create
-            hasFiles:
-                label: Has files/images?
-            childrenOrderBy:
-                label: Subpages sorted by
-                choices:
-                    orderId: Page order
-                    createdAt: Created at
-                    updatedAt: Updated at
-                    title: Title
-                    permalink: Permalink
-            childrenOrderDirection:
-                label: Subpages order direction
-                choices:
-                    desc: Descending
-                    asc: Ascending
-            template:
-                label: Template location
-            pageHandler:
-                label: Service id for this page type
-            pageTypeChildren:
-                label: Possible subpages
-        page:
-            title:
-                label: Title
-            permalink:
-                label: Permalink
-            menu:
-                label: Menu
-                empty_value: No menu (single page)
-            menuTitle:
-                label: Menu title
-            parent:
-                label: Subpage of
-                empty_value: Not a subpage
-            content:
-                label: Content
-            metaDescription:
-                label: Meta description
-        menu:
-            name:
-                label: Name
-            description:
-                label: Description
-            site:
-                label: Site
-        site:
-            title:
-                label: Title
-            permalink:
-                label: Permalink
-            isActive:
-                label: Is active?
-            homepage:
-                label: Homepage
-        file:
-            uri:
-                label: File
-            title:
-                label: Title
-            description:
-                label: Description
-
-layout:
-    logout: Logout
-    login: Login
-    register: Register
-    logged_in_as: Logged in as %username%
-    yes: Yes
-    no: No
-    save: Save
-    cancel: Cancel
-    close: Close
-    back: Back
-    created_by: Created by
-    created_at: Created at
-    updated_by: Updated by
-    updated_at: Updated at
-    edit: Edit
-    remove: Remove
-    files: Files
-    menu:
-        dashboard: Dashboard
-        select_current_site: Select current site
-        configuration: Configuration
-        pages: Pages
-        helpdesk: Helpdesk
-        categories: Categories
-        menus: Menus
-        page_types: Page types
-        sites: Sites
-    form_error_alert_heading: Oops!
-    toggle_navigation: Toggle navigation
-
-page:
-    title: Title
-    created_at: Created at
-    page_type: Page type
-    sub_pages: Subpages
-    add_page: Add page
-    menu: Menu
-    single_pages: Single pages
-    manage_subpages: Manage subpages
-    no_subpages: No subpages
-    edit_page: Edit page
-    remove_page: Remove page
-    no_pages_added_to_menu: There are no pages added to this menu.
-    no_subpages_added_to_page: There are no sub-pages added to this page.
-    details: Details
-    page_order_saved: The new page order is successfully saved
-    page_order_save_failed: Failed to save the new page order, refresh the page and try again.
-    back_to_page_overview: Back to the page overview
-    index:
-        header:
-            pages: Pages
-            subpages: Subpages of "%parent_page%"
-    remove_confirmation:
-        title: Are you sure you want to remove this page?
-        message: All possibly linked subpages of this page become a single page! These should be linked, if necessary, again to another page or menu.
-    site_not_exist: The site where you want to manage the pages does not exist (anymore). Refresh the page and try again.
-    page_type_not_exist: The page type does not exist (anymore). Refresh the page and try again.
-    page_not_exist: The page with id '%page_id%' does not exist (anymore). Refresh the page and try again.
-    form_type_not_exist: The form to manage this page does not exist yet. Contact your webdesigner to fix this problem.
-    form_handler_not_exist: The handler for this form does nog exist yet. Contact your webdesigner to fix this problem.
-    page_added: Page '%page_title%' has been added successfully.
-    page_edited: Page '%page_title%' has been successfully updated.
-    remove:
-        failed_not_exist: Failed to remove the page with id '%page_id%'. This page does not exist (anymore).
-        failed_not_authorized: Failed to remove the page with id '%page_id%'. You are not authorized to remove this page.
-        success: Successfully removed the page with id '%page_id%'.
-
-menu:
-    name: Name
-    description: Description
-    edit_menu: Edit menu
-    remove_menu: Remove menu
-    add_menu: Add menu
-    index:
-        header:
-            menus: Menus
-    back_to_menu_overview: Back to the menu overview
-    remove_confirmation:
-        title: Are you sure you want to remove this menu?
-        message: All possibly linked subpages of this menu become a single page! These should be linked, if necessary, again to another page or menu.
-    menu_added: Menu '%menu_name%' has been added successfully.
-    menu_edited: Menu '%menu_name%' has been successfully updated.
-    remove:
-        failed_not_exist: Failed to remove menu with id '%menu_id%'. This menu does not exist (anymore).
-        failed_not_authorized: Failed to remove menu with id '%menu_id%'. You are not authorized to remove this menu.
-        success: Successfully removed menu with id '%menu_id%'.
-
-dashboard:
-    no_sites: There are no sites configured yet. Add at least one site (most common) or more for a multiple sites configuration.
-
-site:
-    title: Title
-    permalink: Permalink
-    is_active: Active?
-    homepage: Homepage
-    index:
-        header:
-            sites: Sites
-    add_site: Add site
-    edit_site: Edit site
-    remove_site: Remove site
-    site_added: Site '%site_title%' has been added successfully.
-    site_edited: Site '%site_title%' has been successfully updated.
-    site_not_exist: The site with id '%site_id%' does not exist (anymore). Refresh the page and try again.
-    no_sites_added: There are no sites added yet
-    back_to_site_overview: Back to the sites overview
-    remove_confirmation:
-        title: Are you sure you want to remove this site?
-        message: Pages linked to this site should be moved or deleted first, otherwise this site will NOT be removed.
-    edit:
-        failed_not_authorized: You are not authorized to edit sites.
-    remove:
-        failed_not_exist: Failed to remove the site with id '%site_id%'. This site does not exist (anymore).
-        failed_not_authorized: Failed to remove the site. You are not authorized to remove sites.
-        failed_pages_exist: Failed to remove the site. There are still pages linked to this site. You should move or remove these pages first.
-        success: Successfully removed the site with id '%site_id%'.
-
-page_type:
-    name: Name
-    description: Description
-    index:
-        header:
-            page_types: Page types
-    add_page_type: Add page type
-    edit_page_type: Edit page type
-    remove_page_type: Remove page type
-    no_page_types_added: There are no page types added yet
-    back_to_page_type_overview: Back to the page type overview
-    remove_confirmation:
-        title: Are you sure you want to remove this page type?
-        message: Pages linked to this page type should be moved or deleted first, otherwise this page type will NOT be removed.
-    remove:
-        failed_not_exist: Failed to remove the page type with id '%page_type_id%'. This page type does not exist (anymore).
-        failed_not_authorized: Failed to remove the page type. You are not authorized to remove page types.
-        failed_pages_exist: Failed to remove the page type. There are still pages linked to this page type. You should move or remove these pages first.
-        success: Successfully removed the page type with id '%page_type_id%'.
-
-file:
-    index:
-        header:
-            manage_files: Manage files of page <small>%page_title%</small>
-            files: Files
-    add_file: Add file
-    edit_file: Edit file
-    remove_file: Remove file
-    file_added: File has been successfully added
-    file_removed: File has been successfully removed
-    file_not_exist: File does not exist (anymore)
-    page_not_exist: The page with id '%page_id%' does not exist (anymore). Refresh the page and try again.
-    no_files: There are no files added to this page yet.
-    page_cannot_contain_files: This page can not contain files. Refresh the page and try again.
-    browse: Browse
-    remove_confirmation:
-        title: Are you sure you want to remove this file?
-        message: This file will be removed from this page. The actual file will not be removed. Use the file manager to remove the file from the file system.
-
-helpdesk:
-    title: Helpdesk
-    lead: Do you have questions about managing your website? Or you want a change in your website that you yourself can not do? Use this form to get in touch with your website developer.
-    not_enabled: The helpdesk is not enabled.
-    question_submit_success: Your question has been sent and will be answered as soon as possible.
-    name: Name
-    subject: Subject
-    email: E-mail
-    question: Your question
-    submit: Submit
-
 Pagina: Page
 Page: Page
-
-tinify:
-    api_key_invalid: API key for tinypng is invalid, update your configuration file
+form.type.yes: 'Yes'
+form.type.no: 'No'
+form.type.pageType.name.label: Name
+form.type.pageType.description.label: Description
+form.type.pageType.isChild.label: 'Has to be a subpage?'
+form.type.pageType.isMenuItem.label: 'Can be placed in a menu?'
+form.type.pageType.hasChildren.label: 'Has subpages?'
+form.type.pageType.hasContent.label: 'Has content?'
+form.type.pageType.maximumToCreate.label: 'Maximum to create'
+form.type.pageType.hasCategory.label: 'Categories enabled?'
+form.type.pageType.hasHeader.label: 'Contains a header?'
+form.type.pageType.hasSlider.label: 'Contains a slider?'
+form.type.pageType.hasFiles.label: 'Has files/images?'
+form.type.pageType.childrenOrderBy.label: 'Subpages sorted by'
+form.type.pageType.childrenOrderBy.choices.orderId: 'Page order'
+form.type.pageType.childrenOrderBy.choices.createdAt: 'Created at'
+form.type.pageType.childrenOrderBy.choices.updatedAt: 'Updated at'
+form.type.pageType.childrenOrderBy.choices.title: Title
+form.type.pageType.childrenOrderBy.choices.permalink: Permalink
+form.type.pageType.childrenOrderDirection.label: 'Subpages order direction'
+form.type.pageType.childrenOrderDirection.choices.desc: Descending
+form.type.pageType.childrenOrderDirection.choices.asc: Ascending
+form.type.pageType.template.label: 'Template location'
+form.type.pageType.pageHandler.label: 'Service id for this page type'
+form.type.pageType.pageTypeChildren.label: 'Possible subpages'
+form.type.page.title.label: Title
+form.type.page.permalink.label: Permalink
+form.type.page.menu.label: Menu
+form.type.page.menu.empty_value: 'No menu (single page)'
+form.type.page.menuTitle.label: 'Menu title'
+form.type.page.category.label: 'Category'
+form.type.page.parent.label: 'Subpage of'
+form.type.page.parent.empty_value: 'Not a subpage'
+form.type.page.headerType.label: 'Choose a header'
+form.type.page.headerType.standard: 'Standard header'
+form.type.page.headerType.override: 'Choose another header'
+form.type.page.header.label: 'Header image'
+form.type.page.content.label: Content
+form.type.page.metaDescription.label: 'Meta description'
+form.type.page.slider.label: Slider
+form.type.page.slider.empty_value: Use the standard slider
+form.type.menu.name.label: Name
+form.type.menu.description.label: Description
+form.type.file.uri.label: File
+form.type.file.title.label: Title
+form.type.file.description.label: Description
+form.type.header.uri.label: Afbeelding
+form.type.header.title.label: Titel
+form.type.header.subtitle.label: Ondertitel
+form.type.header.linkType.label: Link/Knop
+form.type.header.linkType.choices.no_link: 'Geen link/knop'
+form.type.header.linkType.choices.internal_link: 'Interne pagina'
+form.type.header.linkType.choices.external_link: 'Externe link'
+form.type.header.linkPage.label: 'Interne pagina'
+form.type.header.linkHref.label: 'Externe link (url)'
+form.type.header.linkTarget.label: 'Linkdoel (target)'
+form.type.header.linkTarget.choices._blank: 'Laad in een nieuw venster/tabblad (_blank)'
+form.type.header.linkTarget.choices._self: 'Laad in hetzelfde frame (_self)'
+form.type.header.linkTarget.choices._parent: 'Laad in het hoofdframe (_parent)'
+form.type.header.linkTarget.choices._top: 'Laad in hetzelfde venster (_top)'
+form.type.header.linkLabel.label: 'Label (naam van de link)'
+form.type.header.linkTitle.label: 'Titel van de link (niet zichtbaar tenzij de muis op de link staat)'
+form.type.header.linkClass.label: 'Link class'
+form.type.header.linkId.label: 'Link ID'
+form.type.slider.name.label: Name
+form.type.slider.description.label: Description
+form.type.slider.isDefault.label: Standard slider?
+form.type.sliderImage.uri.label: Afbeelding
+form.type.sliderImage.title.label: Titel
+form.type.sliderImage.subtitle.label: Ondertitel
+form.type.sliderImage.linkType.label: Link/Knop
+form.type.sliderImage.linkType.choices.no_link: 'Geen link/knop'
+form.type.sliderImage.linkType.choices.internal_link: 'Interne pagina'
+form.type.sliderImage.linkType.choices.external_link: 'Externe link'
+form.type.sliderImage.linkPage.label: 'Interne pagina'
+form.type.sliderImage.linkHref.label: 'Externe link (url)'
+form.type.sliderImage.linkTarget.label: 'Linkdoel (target)'
+form.type.sliderImage.linkTarget.choices._blank: 'Laad in een nieuw venster/tabblad (_blank)'
+form.type.sliderImage.linkTarget.choices._self: 'Laad in hetzelfde frame (_self)'
+form.type.sliderImage.linkTarget.choices._parent: 'Laad in het hoofdframe (_parent)'
+form.type.sliderImage.linkTarget.choices._top: 'Laad in hetzelfde venster (_top)'
+form.type.sliderImage.linkLabel.label: 'Label (naam van de link)'
+form.type.sliderImage.linkTitle.label: 'Titel van de link (niet zichtbaar tenzij de muis op de link staat)'
+form.type.sliderImage.linkClass.label: 'Link class'
+form.type.sliderImage.linkId.label: 'Link ID'
+layout.logout: Logout
+layout.login: Login
+layout.register: Register
+layout.logged_in_as: 'Logged in as %username%'
+layout.yes: 'Yes'
+layout.no: 'No'
+layout.save: Save
+layout.cancel: Cancel
+layout.close: Close
+layout.back: Back
+layout.created_by: 'Created by'
+layout.created_at: 'Created at'
+layout.updated_by: 'Updated by'
+layout.updated_at: 'Updated at'
+layout.edit: Edit
+layout.remove: Remove
+layout.files: Files
+layout.menu.dashboard: Dashboard
+layout.menu.configuration: Configuration
+layout.menu.pages: Pages
+layout.menu.helpdesk: Helpdesk
+layout.menu.categories: Categories
+layout.menu.menus: Menus
+layout.menu.sliders: 'Sliders'
+layout.menu.page_types: 'Page types'
+layout.form_error_alert_heading: Oops!
+layout.toggle_navigation: 'Toggle navigation'
+page.title: Title
+page.created_at: 'Created at'
+page.page_type: 'Page type'
+page.sub_pages: Subpages
+page.add_page: 'Add page'
+page.menu: Menu
+page.single_pages: 'Single pages'
+page.manage_subpages: 'Manage subpages'
+page.no_subpages: 'No subpages'
+page.edit_page: 'Edit page'
+page.remove_page: 'Remove page'
+page.no_pages_added_to_menu: 'There are no pages added to this menu.'
+page.no_subpages_added_to_page: 'There are no sub-pages added to this page.'
+page.details: Details
+page.page_order_saved: 'The new page order is successfully saved'
+page.page_order_save_failed: 'Failed to save the new page order, refresh the page and try again.'
+page.back_to_page_overview: 'Back to the page overview'
+page.index.header.pages: Pages
+page.index.header.subpages: 'Subpages of "%parent_page%"'
+page.remove_confirmation.title: 'Are you sure you want to remove this page?'
+page.remove_confirmation.message: 'All possibly linked subpages of this page become a single page! These should be linked, if necessary, again to another page or menu.'
+page.page_type_not_exist: 'The page type does not exist (anymore). Refresh the page and try again.'
+page.page_not_exist: 'The page with id ''%page_id%'' does not exist (anymore). Refresh the page and try again.'
+page.form_type_not_exist: 'The form to manage this page does not exist yet. Contact your webdesigner to fix this problem.'
+page.form_handler_not_exist: 'The handler for this form does nog exist yet. Contact your webdesigner to fix this problem.'
+page.page_added: 'Page ''%page_title%'' has been added successfully.'
+page.page_edited: 'Page ''%page_title%'' has been successfully updated.'
+page.remove.failed_not_exist: 'Failed to remove the page with id ''%page_id%''. This page does not exist (anymore).'
+page.remove.failed_not_authorized: 'Failed to remove the page with id ''%page_id%''. You are not authorized to remove this page.'
+page.remove.success: 'Successfully removed the page with id ''%page_id%''.'
+menu.name: Name
+menu.description: Description
+menu.edit_menu: 'Edit menu'
+menu.remove_menu: 'Remove menu'
+menu.add_menu: 'Add menu'
+menu.index.header.menus: Menus
+menu.back_to_menu_overview: 'Back to the menu overview'
+menu.remove_confirmation.title: 'Are you sure you want to remove this menu?'
+menu.remove_confirmation.message: 'All possibly linked subpages of this menu become a single page! These should be linked, if necessary, again to another page or menu.'
+menu.menu_added: 'Menu ''%menu_name%'' has been added successfully.'
+menu.menu_edited: 'Menu ''%menu_name%'' has been successfully updated.'
+menu.remove.failed_not_exist: 'Failed to remove menu with id ''%menu_id%''. This menu does not exist (anymore).'
+menu.remove.failed_not_authorized: 'Failed to remove menu with id ''%menu_id%''. You are not authorized to remove this menu.'
+menu.remove.success: 'Successfully removed menu with id ''%menu_id%''.'
+page_type.name: Name
+page_type.description: Description
+page_type.index.header.page_types: 'Page types'
+page_type.add_page_type: 'Add page type'
+page_type.edit_page_type: 'Edit page type'
+page_type.remove_page_type: 'Remove page type'
+page_type.no_page_types_added: 'There are no page types added yet'
+page_type.back_to_page_type_overview: 'Back to the page type overview'
+page_type.remove_confirmation.title: 'Are you sure you want to remove this page type?'
+page_type.remove_confirmation.message: 'Pages linked to this page type should be moved or deleted first, otherwise this page type will NOT be removed.'
+page_type.remove.failed_not_exist: 'Failed to remove the page type with id ''%page_type_id%''. This page type does not exist (anymore).'
+page_type.remove.failed_not_authorized: 'Failed to remove the page type. You are not authorized to remove page types.'
+page_type.remove.failed_pages_exist: 'Failed to remove the page type. There are still pages linked to this page type. You should move or remove these pages first.'
+page_type.remove.success: 'Successfully removed the page type with id ''%page_type_id%''.'
+file.index.header.manage_files: 'Manage files of page <small>%page_title%</small>'
+file.index.header.files: Files
+file.add_file: 'Add file'
+file.edit_file: 'Edit file'
+file.remove_file: 'Remove file'
+file.file_added: 'File has been successfully added'
+file.file_removed: 'File has been successfully removed'
+file.file_not_exist: 'File does not exist (anymore)'
+file.page_not_exist: 'The page with id ''%page_id%'' does not exist (anymore). Refresh the page and try again.'
+file.no_files: 'There are no files added to this page yet.'
+file.page_cannot_contain_files: 'This page can not contain files. Refresh the page and try again.'
+file.browse: Browse
+file.remove_confirmation.title: 'Are you sure you want to remove this file?'
+file.remove_confirmation.message: 'This file will be removed from this page. The actual file will not be removed. Use the file manager to remove the file from the file system.'
+helpdesk.title: Helpdesk
+helpdesk.lead: 'Do you have questions about managing your website? Or you want a change in your website that you yourself can not do? Use this form to get in touch with your website developer.'
+helpdesk.not_enabled: 'The helpdesk is not enabled.'
+helpdesk.question_submit_success: 'Your question has been sent and will be answered as soon as possible.'
+helpdesk.name: Name
+helpdesk.subject: Subject
+helpdesk.email: E-mail
+helpdesk.question: 'Your question'
+helpdesk.submit: Submit
+tinify.api_key_invalid: 'API key for tinypng is invalid, update your configuration file'
+layout.slider.sliders: Sliders
+slider.add_slider: 'Add a slider'
+slider.edit_slider: 'Edit slider'
+slider.back_to_slider_overview: 'Back to slider overview'
+slider.index.header.sliders: Sliders
+slider.name: Name
+slider.description: Description
+slider.manage_slider_images: 'Manage slides'
+slider.remove_slider: 'Remove slider'
+slider.remove_confirmation.title: 'Remove slider'
+slider.remove_confirmation.message: 'Are you sure you want to remove this slider?'
+sliderImage.index.header.manage_files: 'Manage slides'
+sliderImage.index.header.sliderImages: Slides
+sliderImage.edit_file: 'Edit slide'
+sliderImage.remove_file: 'Remove slide'
+sliderImage.no_files: 'No slides added'
+sliderImage.add_file: 'Add slide'
+sliderImage.remove_confirmation.title: 'Remove slide'
+sliderImage.remove_confirmation.message: 'Are you sure you want to delete this slide?'
+sliderImage.file_removed: 'Slide successfully removed'
+sliderImage.file_not_exist: 'Slide does not exist (anymore)'

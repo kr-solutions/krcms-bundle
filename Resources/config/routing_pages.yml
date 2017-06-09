@@ -1,15 +1,13 @@
 kr_solutions_krcms_pages_index:
-    path: /{siteId}/{parentPageId}
+    path: /{parentPageId}
     defaults: { _controller: KRSolutionsKRCMSBundle:Page:index, parentPageId: null }
     requirements:
-        siteId: \d+
         parentPageId: \d+
 
 kr_solutions_krcms_pages_add:
-    path: /add/{siteId}/{pageTypeId}
+    path: /add/{pageTypeId}
     defaults: { _controller: KRSolutionsKRCMSBundle:Page:edit }
     requirements:
-        siteId: \d+
         pageTypeId: \d+
 
 kr_solutions_krcms_pages_edit:

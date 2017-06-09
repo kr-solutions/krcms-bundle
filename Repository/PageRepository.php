@@ -9,7 +9,6 @@ use KRSolutions\Bundle\KRCMSBundle\Entity\Menu;
 use KRSolutions\Bundle\KRCMSBundle\Entity\Page;
 use KRSolutions\Bundle\KRCMSBundle\Entity\PageInterface;
 use KRSolutions\Bundle\KRCMSBundle\Entity\PageTypeInterface;
-use KRSolutions\Bundle\KRCMSBundle\Entity\Site;
 
 /**
  * PageRepository
@@ -18,14 +17,13 @@ class PageRepository extends EntityRepository
 {
 
     /**
-     * Get a page by it's site and permalink
+     * Get a page by it's permalink
      *
-     * @param Site   $site      Site entity
      * @param string $permalink Page permalink
      *
      * @return Page|null
      */
-    public function getActivePageFromSiteAndPermalink(Site $site, $permalink)
+    public function getActivePageFromPermalink($permalink)
     {
         $qb = $this->createQueryBuilder('pages');
         $qb->addSelect('parent');
@@ -37,9 +35,6 @@ class PageRepository extends EntityRepository
         $qb->leftJoin('parent.pageType', 'parentPageTypes');
         $qb->leftJoin('pages.pageType', 'pageTypes');
         $qb->leftJoin('pages.files', 'files');
-
-        $qb->where('pages.site = :site');
-        $qb->setParameter('site', $site);
 
         if (null !== $permalink) {
             $qb->andWhere('pages.permalink = :permalink');
@@ -58,19 +53,15 @@ class PageRepository extends EntityRepository
     }
 
     /**
-     * Get pages by the site and menu
+     * Get pages by menu
      *
-     * @param Site $site Site entity
      * @param Menu $menu Menu entity
      *
      * @return array
      */
-    public function getActivePagesFromSiteAndMenu(Site $site, Menu $menu)
+    public function getActivePagesFromMenu(Menu $menu)
     {
         $qb = $this->createQueryBuilder('pages');
-
-        $qb->where('pages.site = :site');
-        $qb->setParameter('site', $site);
 
         if (null !== $menu) {
             $qb->andWhere('pages.menu = :menu');
@@ -89,27 +80,22 @@ class PageRepository extends EntityRepository
     }
 
     /**
-     * Get pages by the site and menu
+     * Get pages by menu name
      *
-     * @param Site   $site     Site entity
      * @param string $menuName Menu name
      *
      * @return array
      */
-    public function getActivePagesFromSiteAndMenuName(Site $site, $menuName = null)
+    public function getActivePagesFromMenuName($menuName = null)
     {
         $qb = $this->createQueryBuilder('pages');
 
         if (null !== $menuName) {
-            $qb->innerJoin('pages.menu', 'menus', Join::WITH, 'menus.site = :site AND menus.name = :menuName');
-            $qb->setParameter('site', $site);
+            $qb->innerJoin('pages.menu', 'menus', Join::WITH, 'menus.name = :menuName');
             $qb->setParameter('menuName', $menuName);
         } else {
             $qb->andWhere('pages.menu IS NULL');
         }
-
-        $qb->where('pages.site = :site');
-        $qb->setParameter('site', $site);
 
         // Check if the page is active
         $qb->andWhere('pages.publishAt < CURRENT_TIMESTAMP() OR pages.publishAt IS NULL');
@@ -121,40 +107,31 @@ class PageRepository extends EntityRepository
     }
 
     /**
-     * Get pages by site (query builder)
-     *
-     * @param Site $site
+     * Get pages (query builder)
      *
      * @return array
      */
-    public function getActivePagesFromSiteQB(Site $site)
+    public function getActivePagesQB()
     {
         $qb = $this->createQueryBuilder('pages');
 
-        if (null !== $site->getId()) {
-            $qb->where('pages.site = :site');
-            $qb->setParameter('site', $site);
+        // Check if the page is active
+        $qb->andWhere('pages.publishAt < CURRENT_TIMESTAMP() OR pages.publishAt IS NULL');
+        $qb->andWhere('pages.publishTill > CURRENT_TIMESTAMP() OR pages.publishTill IS NULL');
 
-            // Check if the page is active
-            $qb->andWhere('pages.publishAt < CURRENT_TIMESTAMP() OR pages.publishAt IS NULL');
-            $qb->andWhere('pages.publishTill > CURRENT_TIMESTAMP() OR pages.publishTill IS NULL');
-
-            $qb->orderBy('pages.orderId', 'asc');
-        }
+        $qb->orderBy('pages.orderId', 'asc');
 
         return $qb;
     }
 
     /**
-     * Get pages by site
-     *
-     * @param Site $site
+     * Get active pages
      *
      * @return array
      */
-    public function getActivePagesFromSite(Site $site)
+    public function getActivePages()
     {
-        return $this->getActivePagesFromSiteQB($site)->getQuery()->getResult();
+        return $this->getActivePagesQB()->getQuery()->getResult();
     }
 
     /**
@@ -279,21 +256,16 @@ class PageRepository extends EntityRepository
     }
 
     /**
-     * Get all loose pages by Site
-     *
-     * @param Site $site
+     * Get all loose pages
      *
      * @return array
      */
-    public function getAllLoosePagesBySite(Site $site)
+    public function getAllLoosePages()
     {
         $qb = $this->createQueryBuilder('pages');
 
         $qb->where('pages.parent IS NULL');
         $qb->andWhere('pages.menu IS NULL');
-
-        $qb->andWhere('pages.site = :site');
-        $qb->setParameter('site', $site);
 
         $qb->orderBy('pages.orderId', 'asc');
 
@@ -334,18 +306,13 @@ class PageRepository extends EntityRepository
     }
 
     /**
-     * getAllChildablePagesBySite
-     *
-     * @param Site $site
+     * getAllChildablePages
      *
      * @return array
      */
-    public function getAllChildablePagesBySite(Site $site)
+    public function getAllChildablePages()
     {
         $qb = $this->getAllChildablePagesQB();
-
-        $qb->andWhere('pages.site = :site');
-        $qb->setParameter('site', $site);
 
         return $qb->getQuery()->getResult();
     }
@@ -364,11 +331,6 @@ class PageRepository extends EntityRepository
         if (null !== $exceptThisPage && null !== $exceptThisPage->getId()) {
             $qb->where('pages <> :exceptThisPage');
             $qb->setParameter('exceptThisPage', $exceptThisPage);
-        }
-
-        if (null !== $exceptThisPage) {
-            $qb->andWhere('pages.site = :site');
-            $qb->setParameter('site', $exceptThisPage->getSite());
         }
 
         $qb->innerJoin('pages.pageType', 'parentPageType');
@@ -666,33 +628,27 @@ class PageRepository extends EntityRepository
     }
 
     /**
-     * Get page count by site
-     *
-     * @param Site $site
+     * Get page count
      *
      * @return int
      */
-    public function getPageCountBySite(Site $site)
+    public function getPageCount()
     {
         $qb = $this->createQueryBuilder('pages');
 
         $qb->select('count(pages.id)');
 
-        $qb->where('pages.site = :site');
-        $qb->setParameter('site', $site);
-
         return intval($qb->getQuery()->getSingleScalarResult());
     }
 
     /**
-     * Get page count by site and page type
+     * Get page count by page type
      *
-     * @param Site              $site
      * @param PageTypeInterface $pageType
      *
      * @return int
      */
-    public function getPageCountBySiteAndPageType(Site $site, PageTypeInterface $pageType)
+    public function getPageCountByPageType(PageTypeInterface $pageType)
     {
         $qb = $this->createQueryBuilder('pages');
 
@@ -700,9 +656,6 @@ class PageRepository extends EntityRepository
 
         $qb->where('pages.pageType = :page_type');
         $qb->setParameter('page_type', $pageType);
-
-        $qb->andWhere('pages.site = :site');
-        $qb->setParameter('site', $site);
 
         return intval($qb->getQuery()->getSingleScalarResult());
     }

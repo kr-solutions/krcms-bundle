@@ -7,7 +7,6 @@ use Doctrine\ORM\Query\Expr\Join;
 use KRSolutions\Bundle\KRCMSBundle\Entity\MenuInterface;
 use KRSolutions\Bundle\KRCMSBundle\Entity\PageInterface;
 use KRSolutions\Bundle\KRCMSBundle\Entity\PageTypeInterface;
-use KRSolutions\Bundle\KRCMSBundle\Entity\SiteInterface;
 use KRSolutions\Bundle\KRCMSBundle\Model\AbstractPageManager;
 
 /**
@@ -48,7 +47,7 @@ class PageManager extends AbstractPageManager
     /**
      * {@inheritDoc}
      */
-    public function getActivePageFromSiteAndPermalink(SiteInterface $site, $permalink)
+    public function getActivePageFromPermalink($permalink)
     {
         $qb = $this->repository->createQueryBuilder('pages');
         $qb->addSelect('parent');
@@ -60,9 +59,6 @@ class PageManager extends AbstractPageManager
         $qb->leftJoin('parent.pageType', 'parentPageTypes');
         $qb->leftJoin('pages.pageType', 'pageTypes');
         $qb->leftJoin('pages.files', 'files');
-
-        $qb->where('pages.site = :site');
-        $qb->setParameter('site', $site);
 
         if (null !== $permalink) {
             $qb->andWhere('pages.permalink = :permalink');
@@ -83,12 +79,9 @@ class PageManager extends AbstractPageManager
     /**
      * {@inheritDoc}
      */
-    public function getActivePagesFromSiteAndMenu(SiteInterface $site, MenuInterface $menu)
+    public function getActivePagesFromMenu(MenuInterface $menu)
     {
         $qb = $this->repository->createQueryBuilder('pages');
-
-        $qb->where('pages.site = :site');
-        $qb->setParameter('site', $site);
 
         if (null !== $menu) {
             $qb->andWhere('pages.menu = :menu');
@@ -109,20 +102,16 @@ class PageManager extends AbstractPageManager
     /**
      * {@inheritDoc}
      */
-    public function getActivePagesFromSiteAndMenuName(SiteInterface $site, $menuName = null)
+    public function getActivePagesFromMenuName($menuName = null)
     {
         $qb = $this->repository->createQueryBuilder('pages');
 
         if (null !== $menuName) {
-            $qb->innerJoin('pages.menu', 'menus', Join::WITH, 'menus.site = :site AND menus.name = :menuName');
-            $qb->setParameter('site', $site);
+            $qb->innerJoin('pages.menu', 'menus', Join::WITH, 'menus.name = :menuName');
             $qb->setParameter('menuName', $menuName);
         } else {
             $qb->andWhere('pages.menu IS NULL');
         }
-
-        $qb->where('pages.site = :site');
-        $qb->setParameter('site', $site);
 
         // Check if the page is active
         $qb->andWhere('pages.publishAt < CURRENT_TIMESTAMP() OR pages.publishAt IS NULL');
@@ -136,20 +125,15 @@ class PageManager extends AbstractPageManager
     /**
      * {@inheritDoc}
      */
-    public function getActivePagesFromSiteQB(SiteInterface $site)
+    public function getActivePagesQB()
     {
         $qb = $this->repository->createQueryBuilder('pages');
 
-        if (null !== $site->getId()) {
-            $qb->where('pages.site = :site');
-            $qb->setParameter('site', $site);
+        // Check if the page is active
+        $qb->andWhere('pages.publishAt < CURRENT_TIMESTAMP() OR pages.publishAt IS NULL');
+        $qb->andWhere('pages.publishTill > CURRENT_TIMESTAMP() OR pages.publishTill IS NULL');
 
-            // Check if the page is active
-            $qb->andWhere('pages.publishAt < CURRENT_TIMESTAMP() OR pages.publishAt IS NULL');
-            $qb->andWhere('pages.publishTill > CURRENT_TIMESTAMP() OR pages.publishTill IS NULL');
-
-            $qb->orderBy('pages.orderId', 'asc');
-        }
+        $qb->orderBy('pages.orderId', 'asc');
 
         return $qb;
     }
@@ -157,9 +141,9 @@ class PageManager extends AbstractPageManager
     /**
      * {@inheritDoc}
      */
-    public function getActivePagesFromSite(SiteInterface $site)
+    public function getActivePages()
     {
-        return $this->getActivePagesFromSiteQB($site)->getQuery()->getResult();
+        return $this->getActivePagesQB()->getQuery()->getResult();
     }
 
     /**
@@ -264,15 +248,12 @@ class PageManager extends AbstractPageManager
     /**
      * {@inheritDoc}
      */
-    public function getAllLoosePagesBySite(SiteInterface $site)
+    public function getAllLoosePages()
     {
         $qb = $this->repository->createQueryBuilder('pages');
 
         $qb->where('pages.parent IS NULL');
         $qb->andWhere('pages.menu IS NULL');
-
-        $qb->andWhere('pages.site = :site');
-        $qb->setParameter('site', $site);
 
         $qb->orderBy('pages.orderId', 'asc');
 
@@ -309,12 +290,9 @@ class PageManager extends AbstractPageManager
     /**
      * {@inheritDoc}
      */
-    public function getAllChildablePagesBySite(SiteInterface $site)
+    public function getAllChildablePages()
     {
         $qb = $this->getAllChildablePagesQB();
-
-        $qb->andWhere('pages.site = :site');
-        $qb->setParameter('site', $site);
 
         return $qb->getQuery()->getResult();
     }
@@ -329,11 +307,6 @@ class PageManager extends AbstractPageManager
         if (null !== $exceptThisPage && null !== $exceptThisPage->getId()) {
             $qb->where('pages <> :exceptThisPage');
             $qb->setParameter('exceptThisPage', $exceptThisPage);
-        }
-
-        if (null !== $exceptThisPage) {
-            $qb->andWhere('pages.site = :site');
-            $qb->setParameter('site', $exceptThisPage->getSite());
         }
 
         $qb->innerJoin('pages.pageType', 'parentPageType');
@@ -594,14 +567,11 @@ class PageManager extends AbstractPageManager
     /**
      * {@inheritDoc}
      */
-    public function getPageCountBySite(SiteInterface $site)
+    public function getPageCount()
     {
         $qb = $this->repository->createQueryBuilder('pages');
 
         $qb->select('count(pages.id)');
-
-        $qb->where('pages.site = :site');
-        $qb->setParameter('site', $site);
 
         return intval($qb->getQuery()->getSingleScalarResult());
     }

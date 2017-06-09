@@ -1,0 +1,25 @@
+kr_solutions_krcms_sliders_index:
+    path: /
+    defaults: { _controller: KRSolutionsKRCMSBundle:Slider:index }
+
+kr_solutions_krcms_sliders_remove:
+    path: /remove/{sliderId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:Slider:remove }
+    requirements:
+        sliderId: \d+
+
+kr_solutions_krcms_sliders_edit:
+    path: /edit/{sliderId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:Slider:edit }
+    requirements:
+        sliderId: \d+
+
+kr_solutions_krcms_slider_images:
+    path: /{sliderId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:Slider:sliderImages }
+    requirements:
+        sliderId: \d+
+
+kr_solutions_krcms_slider_images_remove:
+    path: /remove-slider-image
+    defaults: { _controller: KRSolutionsKRCMSBundle:Slider:removeSliderImage }

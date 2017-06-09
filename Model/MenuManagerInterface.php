@@ -4,7 +4,6 @@ namespace KRSolutions\Bundle\KRCMSBundle\Model;
 
 use Doctrine\ORM\QueryBuilder;
 use KRSolutions\Bundle\KRCMSBundle\Entity\MenuInterface;
-use KRSolutions\Bundle\KRCMSBundle\Entity\SiteInterface;
 
 /**
  * Menu manager interface
@@ -34,13 +33,11 @@ interface MenuManagerInterface
     public function findAll();
 
     /**
-     * Get all Menus by Site
-     *
-     * @param SiteInterface $site
+     * Get all Menus
      *
      * @return array
      */
-    public function getAllMenusBySite(SiteInterface $site);
+    public function getAllMenus();
 
     /**
      * Get Menus Entity by id
@@ -61,21 +58,9 @@ interface MenuManagerInterface
     public function getMenuByName($menuName);
 
     /**
-     * Get Menus Entity by Site and name
-     *
-     * @param SiteInterface $site     Site entity
-     * @param string        $menuName Menu name
-     *
-     * @return MenuInterface
-     */
-    public function getMenuBySiteAndName(SiteInterface $site, $menuName);
-
-    /**
-     * Get Menus by Site
-     *
-     * @param SiteInterface $site
+     * Get Menus
      *
      * @return QueryBuilder
      */
-    public function getMenusBySiteQB(SiteInterface $site);
+    public function getMenusQB();
 }

@@ -4,9 +4,12 @@ namespace KRSolutions\Bundle\KRCMSBundle\Form\Type;
 
 use Doctrine\ORM\EntityRepository;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use KRSolutions\Bundle\KRCMSBundle\Entity\Header;
+use KRSolutions\Bundle\KRCMSBundle\Entity\PageInterface;
 use KRSolutions\Bundle\KRCMSBundle\Form\DataTransformer\NullToEmptyStringTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -39,7 +42,7 @@ class KRCMSPageType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        /* @var $page \KRSolutions\Bundle\KRCMSBundle\Entity\PageInterface */
+        /* @var $page PageInterface */
         $page = $builder->getData();
 
         $nullToEmptyStringTransformer = new NullToEmptyStringTransformer();
@@ -47,7 +50,7 @@ class KRCMSPageType extends AbstractType
         $builder->add('title', null, array('label' => 'form.type.page.title.label', 'required' => true, 'error_bubbling' => true));
 
         $builder->add(
-            $builder->create('truePermalink', null, array('label' => 'form.type.page.permalink.label', 'required' => false, 'error_bubbling' => true))
+            $builder->create('permalink', null, array('label' => 'form.type.page.permalink.label', 'required' => false, 'error_bubbling' => true))
                 ->addModelTransformer($nullToEmptyStringTransformer)
         );
 
@@ -58,14 +61,18 @@ class KRCMSPageType extends AbstractType
                 'error_bubbling' => true,
                 'placeholder' => 'form.type.page.menu.empty_value',
                 'empty_data' => null,
-                'query_builder' => function (EntityRepository $repository) use ($page) {
-                    return $repository->getMenusBySiteQB($page->getSite());
+                'query_builder' => function (EntityRepository $repository) {
+                    return $repository->getMenusQB();
                 },
             ));
         }
 
         if ($page->getPageType()->getIsMenuItem()) {
             $builder->add('menuTitle', null, array('label' => 'form.type.page.menuTitle.label', 'required' => true, 'error_bubbling' => true));
+        }
+
+        if ($page->getPageType()->getHasCategory()) {
+            $builder->add('category', null, array('label' => 'form.type.page.category.label', 'required' => true, 'error_bubbling' => true));
         }
 
         if (0 !== count($page->getPageType()->getPageTypeParents())) {
@@ -100,6 +107,38 @@ class KRCMSPageType extends AbstractType
                         'instance' => 'krcms_ckeditor',
                     )
                 ),
+            ));
+        }
+
+        if (true === $page->getPageType()->getHasHeader()) {
+            $builder->add('headerType', ChoiceType::class, array(
+                'label' => 'form.type.page.headerType.label',
+                'choices' => array('form.type.page.headerType.standard' => 0, 'form.type.page.headerType.override' => 1),
+                'required' => true,
+                'error_bubbling' => true,
+                'choices_as_values' => true,
+                'mapped' => false,
+            ));
+
+            $builder->add('header', KRCMSHeaderType::class, array(
+                'label' => 'form.type.page.header.label',
+                'data_class' => Header::class,
+                'required' => false,
+                'error_bubbling' => true,
+                'empty_data' => null,
+            ));
+        }
+
+        if (true === $page->getPageType()->getHasSlider()) {
+            $builder->add('slider', null, array(
+                'label' => 'form.type.page.slider.label',
+                'required' => false,
+                'error_bubbling' => true,
+                'placeholder' => 'form.type.page.slider.empty_value',
+                'empty_data' => null,
+                'query_builder' => function (EntityRepository $repository) {
+                    return $repository->getSlidersQB();
+                },
             ));
         }
 

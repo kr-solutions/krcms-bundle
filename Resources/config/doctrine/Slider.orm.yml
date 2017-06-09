@@ -1,0 +1,36 @@
+KRSolutions\Bundle\KRCMSBundle\Entity\Slider:
+    type: entity
+    repositoryClass: KRSolutions\Bundle\KRCMSBundle\Repository\SliderRepository
+    table: krcms_sliders
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            nullable: false
+            length: 255
+        description:
+            type: text
+            nullable: true
+            length: null
+        isDefault:
+            type: boolean
+            nullable: false
+            default: '0'
+            column: is_default
+    oneToMany:
+        pages:
+            targetEntity: PageInterface
+            mappedBy: slider
+            orderBy:
+                orderId: asc
+        sliderImages:
+            targetEntity: SliderImageInterface
+            mappedBy: slider
+            orderBy:
+                orderId: asc
+    lifecycleCallbacks: {  }

@@ -1,0 +1,54 @@
+{% form_theme sliderForm 'KRSolutionsKRCMSBundle::bootstrap_3_layout.html.twig' %}
+
+{% extends 'KRSolutionsKRCMSBundle::layout.html.twig' %}
+
+{% block title %}{% if action == 'new' %}{{ 'slider.add_slider'|trans({}, 'KRSolutionsKRCMSBundle') }}{% else %}{{ 'slider.edit_slider'|trans({}, 'KRSolutionsKRCMSBundle') }}{% endif %} - Content Management Systeem{% endblock %}
+
+{% block header %}
+    <div class="col-lg-8">
+        <h1 class="page-header">
+            {% if action == 'new' %}
+                {{ 'slider.add_slider'|trans({}, 'KRSolutionsKRCMSBundle') }}
+            {% else %}
+                {{ 'slider.edit_slider'|trans({}, 'KRSolutionsKRCMSBundle') }}
+
+                {% if slider.name %}
+                    <small>{{ slider.name }}</small>
+                {% endif %}
+            {% endif %}
+        </h1>
+    </div>
+    <div class="col-lg-4">
+        <div class="page-header pull-right">
+            <div class="btn-group">
+                <a id="save_slider" href="javascript:void(0);" class="btn btn-primary"><i class="fa fa-fw fa-save"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+                <a class="btn btn-default" href="{{ path('kr_solutions_krcms_sliders_index') }}" title="{{ 'slider.back_to_slider_overview'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-fw fa-stop"></i> {{ 'layout.cancel'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-12">
+        <div class="well">
+            {{ form_start(sliderForm, {attr: {id: 'sliderForm', novalidate: 'novalidate'} }) }}
+            {{ form_errors(sliderForm) }}
+            {{ form_rest(sliderForm) }}
+
+            <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-save"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
+            {{ form_end(sliderForm) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#save_slider').on('click', function () {
+                $('#sliderForm').submit();
+            });
+        });
+    </script>
+{% endblock %}

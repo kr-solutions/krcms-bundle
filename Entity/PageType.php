@@ -78,7 +78,22 @@ class PageType implements PageTypeInterface
     /**
      * @var boolean
      */
+    protected $hasCategory;
+
+    /**
+     * @var boolean
+     */
     protected $hasFiles;
+
+    /**
+     * @var boolean
+     */
+    protected $hasHeader;
+
+    /**
+     * @var boolean
+     */
+    protected $hasSlider;
 
     /**
      * @var boolean
@@ -343,6 +358,24 @@ class PageType implements PageTypeInterface
     /**
      * {@inheritDoc}
      */
+    public function setHasCategory($hasCategory)
+    {
+        $this->hasCategory = $hasCategory;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getHasCategory()
+    {
+        return $this->hasCategory;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function setHasFiles($hasFiles)
     {
         $this->hasFiles = $hasFiles;
@@ -356,6 +389,42 @@ class PageType implements PageTypeInterface
     public function getHasFiles()
     {
         return $this->hasFiles;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setHasHeader($hasHeader)
+    {
+        $this->hasHeader = $hasHeader;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getHasHeader()
+    {
+        return $this->hasHeader;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getHasSlider()
+    {
+        return $this->hasSlider;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setHasSlider($hasSlider)
+    {
+        $this->hasSlider = $hasSlider;
+
+        return $this;
     }
 
     /**

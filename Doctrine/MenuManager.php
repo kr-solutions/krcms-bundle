@@ -3,7 +3,6 @@
 namespace KRSolutions\Bundle\KRCMSBundle\Doctrine;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use KRSolutions\Bundle\KRCMSBundle\Entity\SiteInterface;
 use KRSolutions\Bundle\KRCMSBundle\Model\AbstractMenuManager;
 
 /**
@@ -52,9 +51,9 @@ class MenuManager extends AbstractMenuManager
     /**
      * {@inheritDoc}
      */
-    public function getAllMenusBySite(SiteInterface $site)
+    public function getAllMenus()
     {
-        $qb = $this->getMenusBySiteQB($site);
+        $qb = $this->getMenusQB();
 
         return $qb->getQuery()->getResult();
     }
@@ -88,28 +87,9 @@ class MenuManager extends AbstractMenuManager
     /**
      * {@inheritDoc}
      */
-    public function getMenuBySiteAndName(SiteInterface $site, $menuName)
+    public function getMenusQB()
     {
         $qb = $this->repository->createQueryBuilder('menus');
-
-        $qb->where('menus.site = :site');
-        $qb->setParameter('site', $site);
-
-        $qb->andWhere('menus.name = :menuName');
-        $qb->setParameter('menuName', $menuName);
-
-        return $qb->getQuery()->getOneOrNullResult();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getMenusBySiteQB(SiteInterface $site)
-    {
-        $qb = $this->repository->createQueryBuilder('menus');
-
-        $qb->where('menus.site = :site');
-        $qb->setParameter('site', $site);
 
         return $qb;
     }

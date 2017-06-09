@@ -17,22 +17,13 @@ class PageController extends AbstractKRCMSController
     /**
      * Page index
      *
-     * @param int $siteId       Site id
      * @param int $parentPageId Parent page id
      *
      * @return Response
      */
-    public function indexAction(Request $request, $siteId, $parentPageId = null)
+    public function indexAction(Request $request, $parentPageId = null)
     {
-        $site = $this->getSiteManager()->getSiteById($siteId);
-
-        if (null === $site) {
-            $request->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('page.site_not_exist', array(), 'KRSolutionsKRCMSBundle'));
-
-            return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
-        }
-
-        $menus = $this->getMenuManager()->getAllMenusBySite($site);
+        $menus = $this->getMenuManager()->getAllMenus();
 
         if (null !== $parentPageId) {
             $parentPage = $this->getPageManager()->getPageById($parentPageId);
@@ -45,18 +36,18 @@ class PageController extends AbstractKRCMSController
             /**
              * Get the single pages (without a parent)
              */
-            $pages = $this->getPageManager()->getAllLoosePagesBySite($site);
+            $pages = $this->getPageManager()->getAllLoosePages();
         }
 
         /**
          * Get pages that can have children
          */
-        $childablePages = $this->getPageManager()->getAllChildablePagesBySite($site);
+        $childablePages = $this->getPageManager()->getAllChildablePages();
 
         /**
          * Get the page types that can be linked to this parent page
          */
-        $possiblePageTypes = $this->getPageTypeRepository()->getPageTypesByParentPageType($site, $pageType);
+        $possiblePageTypes = $this->getPageTypeRepository()->getPageTypesByParentPageType($pageType);
 
         $pageTypes = array();
 
@@ -65,14 +56,13 @@ class PageController extends AbstractKRCMSController
             if ($pageType->getMaximumToCreate() === null) {
                 $pageTypes[] = $pageType;
             } else {
-                if ($this->getPageRepository()->getPageCountBySiteAndPageType($site, $pageType) < $pageType->getMaximumToCreate()) {
+                if ($this->getPageRepository()->getPageCountByPageType($pageType) < $pageType->getMaximumToCreate()) {
                     $pageTypes[] = $pageType;
                 }
             }
         }
 
         return $this->render('KRSolutionsKRCMSBundle:Page:index.html.twig', array(
-                'site' => $site,
                 'pages' => $pages,
                 'menus' => $menus,
                 'childablePages' => $childablePages,
@@ -85,13 +75,12 @@ class PageController extends AbstractKRCMSController
      * Edit page
      *
      * @param Request $request    Request object
-     * @param int     $siteId     Site id
      * @param int     $pageId     Page id
      * @param string  $pageTypeId PageType id
      *
      * @return Response
      */
-    public function editAction(Request $request, $siteId = null, $pageId = null, $pageTypeId = null)
+    public function editAction(Request $request, $pageId = null, $pageTypeId = null)
     {
         $now = new DateTime('now');
 
@@ -101,30 +90,19 @@ class PageController extends AbstractKRCMSController
             if (null === $pageType) {
                 $request->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('page.page_type_not_exist', array(), 'KRSolutionsKRCMSBundle'));
 
-                return $this->redirect($this->generateUrl('kr_solutions_krcms_pages_index', array('siteId' => $siteId)));
-            }
-
-            $site = $this->getSiteManager()->getSiteById($siteId);
-
-            if (null === $site) {
-                $request->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('page.site_not_exist', array(), 'KRSolutionsKRCMSBundle'));
-
-                return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
+                return $this->redirect($this->generateUrl('kr_solutions_krcms_pages_index'));
             }
 
             $page = $this->getPageManager()->createPage();
             $page->setPageType($pageType);
-            $page->setSite($site);
 
             $page->setCreatedBy($this->getUser());
             $page->setPublishAt($now);
             $page->setPublishTill(null);
-            $page->setSite($site);
             $page->setOrderId(0);
 
             $action = 'new';
             $formAction = $this->generateUrl('kr_solutions_krcms_pages_add', array(
-                'siteId' => $siteId,
                 'pageTypeId' => $pageTypeId,
             ));
         } else {
@@ -135,8 +113,6 @@ class PageController extends AbstractKRCMSController
             ));
 
             $pageType = $page->getPageType();
-
-            $site = $page->getSite();
         }
 
         if (null === $page) {
@@ -144,6 +120,12 @@ class PageController extends AbstractKRCMSController
 
             return $this->redirect($this->generateUrl('kr_solutions_krcms_pages_index'));
         }
+
+//        if ($pageType->getHasHeader()) {
+//            if (null === $page->getHeader()) {
+//                $page->setHeader(new \KRSolutions\Bundle\KRCMSBundle\Entity\Header());
+//            }
+//        }
 
         if (null !== $page->getPageType()->getAdminForm()) {
             if ($this->container->has($page->getPageType()->getAdminForm())) {
@@ -226,7 +208,7 @@ class PageController extends AbstractKRCMSController
                 $parentPageId = null;
             }
 
-            return $this->redirect($this->generateUrl('kr_solutions_krcms_pages_index', array('siteId' => $site->getId(), 'parentPageId' => $parentPageId)));
+            return $this->redirect($this->generateUrl('kr_solutions_krcms_pages_index', array('parentPageId' => $parentPageId)));
         }
 
         if (null !== $pageType->getAdminTemplate()) {
@@ -235,7 +217,7 @@ class PageController extends AbstractKRCMSController
             $adminTemplate = 'KRSolutionsKRCMSBundle:Page:edit.html.twig';
         }
 
-        return $this->render($adminTemplate, array('site' => $site, 'page' => $page, 'pageForm' => $pageForm->createView(), 'action' => $action));
+        return $this->render($adminTemplate, array('page' => $page, 'pageForm' => $pageForm->createView(), 'action' => $action));
     }
 
     /**
@@ -256,12 +238,10 @@ class PageController extends AbstractKRCMSController
             return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
         }
 
-        $site = $page->getSite();
-
         if (false === $page->getPageType()->isUserGranted($this->getUser())) {
             $request->getSession()->getFlashBag()->add('alert-danger', $this->getTranslator()->trans('page.remove.failed_not_authorized', array('%page_id%' => $pageId), 'KRSolutionsKRCMSBundle'));
 
-            return $this->redirect($this->generateUrl('kr_solutions_krcms_pages_index', array('siteId' => $site->getId())));
+            return $this->redirect($this->generateUrl('kr_solutions_krcms_pages_index'));
         }
 
         $this->getDoctrine()->getManager()->remove($page);
@@ -269,7 +249,7 @@ class PageController extends AbstractKRCMSController
 
         $request->getSession()->getFlashBag()->add('alert-success', $this->getTranslator()->trans('page.remove.success', array('%page_id%' => $pageId), 'KRSolutionsKRCMSBundle'));
 
-        return $this->redirect($this->generateUrl('kr_solutions_krcms_pages_index', array('siteId' => $site->getId())));
+        return $this->redirect($this->generateUrl('kr_solutions_krcms_pages_index'));
     }
 
     /**

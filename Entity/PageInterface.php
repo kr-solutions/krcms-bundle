@@ -107,27 +107,9 @@ interface PageInterface
     /**
      * Get permalink
      *
-     * @param bool $getTruePermalink
-     *
      * @return string|null
      */
-    public function getPermalink($getTruePermalink = false);
-
-    /**
-     * Set true permalink
-     *
-     * @param string $truePermalink
-     *
-     * @return PageInterface
-     */
-    public function setTruePermalink($truePermalink);
-
-    /**
-     * Get true permalink
-     *
-     * @return string
-     */
-    public function getTruePermalink();
+    public function getPermalink();
 
     /**
      * Set menuTitle
@@ -272,20 +254,52 @@ interface PageInterface
     public function getMenu();
 
     /**
-     * Set site
+     * Set slider
      *
-     * @param SiteInterface $site
+     * @param SliderInterface $slider
      *
      * @return PageInterface
      */
-    public function setSite(SiteInterface $site = null);
+    public function setSlider(SliderInterface $slider = null);
 
     /**
-     * Get site
+     * Get slider
      *
-     * @return SiteInterface
+     * @return SliderInterface
      */
-    public function getSite();
+    public function getSlider();
+
+    /**
+     * Set header
+     *
+     * @param HeaderInterface $header
+     *
+     * @return PageInterface
+     */
+    public function setHeader(HeaderInterface $header = null);
+
+    /**
+     * Get header
+     *
+     * @return HeaderInterface
+     */
+    public function getHeader();
+
+    /**
+     * Set header
+     *
+     * @param CategoryInterface $category
+     *
+     * @return PageInterface
+     */
+    public function setCategory(CategoryInterface $category = null);
+
+    /**
+     * Get header
+     *
+     * @return CategoryInterface
+     */
+    public function getCategory();
 
     /**
      * Set createdBy
@@ -352,29 +366,6 @@ interface PageInterface
     public function getParent();
 
     /**
-     * Add category
-     *
-     * @param CategoryInterface $category
-     *
-     * @return PageInterface
-     */
-    public function addCategory(CategoryInterface $category);
-
-    /**
-     * Remove category
-     *
-     * @param CategoryInterface $category
-     */
-    public function removeCategory(CategoryInterface $category);
-
-    /**
-     * Get categories
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCategories();
-
-    /**
      * Add tag
      *
      * @param TagInterface $tag
@@ -396,29 +387,6 @@ interface PageInterface
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getTags();
-
-    /**
-     * Add pageMeta
-     *
-     * @param PageMetaInterface $pageMeta
-     *
-     * @return Page
-     */
-    public function addPageMeta(PageMetaInterface $pageMeta);
-
-    /**
-     * Remove pageMeta
-     *
-     * @param PageMetaInterface $pageMeta
-     */
-    public function removePageMeta(PageMetaInterface $pageMeta);
-
-    /**
-     * Get pageMetas
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPageMetas();
 
     /**
      * Page title

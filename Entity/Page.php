@@ -86,9 +86,19 @@ class Page implements PageInterface
     protected $menu;
 
     /**
-     * @var SiteInterface
+     * @var SliderInterface
      */
-    protected $site;
+    protected $slider;
+
+    /**
+     * @var HeaderInterface
+     */
+    protected $header;
+
+    /**
+     * @var CategoryInterface
+     */
+    protected $category;
 
     /**
      * @var \Symfony\Component\Security\Core\User\UserInterface
@@ -113,17 +123,7 @@ class Page implements PageInterface
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    protected $categories;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
     protected $tags;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $pageMetas;
 
     /**
      * Constructor
@@ -132,9 +132,7 @@ class Page implements PageInterface
     {
         $this->pages = new ArrayCollection();
         $this->files = new ArrayCollection();
-        $this->categories = new ArrayCollection();
         $this->tags = new ArrayCollection();
-        $this->pageMetas = new ArrayCollection();
 
         $this->createdAt = new \DateTime('now');
         $this->updatedAt = new \DateTime('now');
@@ -251,31 +249,9 @@ class Page implements PageInterface
     /**
      * {@inheritDoc}
      */
-    public function getPermalink($getTruePermalink = false)
+    public function getPermalink()
     {
-        if (false === $getTruePermalink && null !== $this->site && $this->site->getHomepage() === $this) {
-            return null;
-        }
-
         return $this->permalink;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setTruePermalink($truePermalink)
-    {
-        $this->permalink = $truePermalink;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getTruePermalink()
-    {
-        return $this->getPermalink(true);
     }
 
     /**
@@ -441,9 +417,17 @@ class Page implements PageInterface
     /**
      * {@inheritDoc}
      */
-    public function setSite(SiteInterface $site = null)
+    public function getSlider()
     {
-        $this->site = $site;
+        return $this->slider;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setSlider(SliderInterface $slider = null)
+    {
+        $this->slider = $slider;
 
         return $this;
     }
@@ -451,9 +435,37 @@ class Page implements PageInterface
     /**
      * {@inheritDoc}
      */
-    public function getSite()
+    public function setHeader(HeaderInterface $header = null)
     {
-        return $this->site;
+        $this->header = $header;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getHeader()
+    {
+        return $this->header;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setCategory(CategoryInterface $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCategory()
+    {
+        return $this->header;
     }
 
     /**
@@ -531,32 +543,6 @@ class Page implements PageInterface
     /**
      * {@inheritDoc}
      */
-    public function addCategory(CategoryInterface $category)
-    {
-        $this->categories[] = $category;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function removeCategory(CategoryInterface $category)
-    {
-        $this->categories->removeElement($category);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getCategories()
-    {
-        return $this->categories;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function addTag(TagInterface $tag)
     {
         $this->tags[] = $tag;
@@ -578,32 +564,6 @@ class Page implements PageInterface
     public function getTags()
     {
         return $this->tags;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function addPageMeta(PageMetaInterface $pageMeta)
-    {
-        $this->pageMetas[] = $pageMeta;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function removePageMeta(PageMetaInterface $pageMeta)
-    {
-        $this->pageMetas->removeElement($pageMeta);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getPageMetas()
-    {
-        return $this->pageMetas;
     }
 
     /**

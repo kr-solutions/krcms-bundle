@@ -24,13 +24,9 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Page:
         menu_id:
             columns:
                 - menu_id
-        site_id:
-            columns:
-                - site_id
     uniqueConstraints:
-        permalink_and_site_id:
+        permalink:
             columns:
-                - site_id
                 - permalink
     id:
         id:
@@ -112,13 +108,13 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Page:
                     referencedColumnName: id
                     onDelete: "SET NULL"
             orphanRemoval: false
-        site:
-            targetEntity: SiteInterface
+        slider:
+            targetEntity: SliderInterface
             cascade: {  }
             mappedBy: null
-            inversedBy: null
+            inversedBy: pages
             joinColumns:
-                site_id:
+                slider_id:
                     referencedColumnName: id
                     onDelete: "SET NULL"
             orphanRemoval: false
@@ -132,13 +128,13 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Page:
                     referencedColumnName: id
                     onDelete: "SET NULL"
             orphanRemoval: false
-        header:
-            targetEntity: HeaderInterface
-            cascade: {  }
+        category:
+            targetEntity: CategoryInterface
+            cascade: [ "all" ]
             mappedBy: null
             inversedBy: pages
             joinColumns:
-                header_id:
+                category_id:
                     referencedColumnName: id
                     onDelete: "SET NULL"
             orphanRemoval: false
@@ -162,23 +158,12 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Page:
                     referencedColumnName: id
                     onDelete: "SET NULL"
             orphanRemoval: false
+    oneToOne:
+        header:
+            targetEntity: HeaderInterface
+            mappedBy: page
+            cascade: [ "persist" ]
     manyToMany:
-        categories:
-            targetEntity: CategoryInterface
-            cascade: {  }
-            mappedBy: null
-            inversedBy: null
-            joinTable:
-                name: krcms_pages_categories
-                joinColumns:
-                    -
-                        name: page_id
-                        referencedColumnName: id
-                inverseJoinColumns:
-                    -
-                        name: category_id
-                        referencedColumnName: id
-            orderBy: null
         tags:
             targetEntity: TagInterface
             cascade: {  }
@@ -207,8 +192,4 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Page:
             cascade: ["all"]
             orderBy:
                 orderId: asc
-        pageMetas:
-            targetEntity: PageMetaInterface
-            mappedBy: page
-            cascade: ["all"]
     lifecycleCallbacks: {  }

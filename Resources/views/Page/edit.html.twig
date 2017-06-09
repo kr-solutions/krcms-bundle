@@ -1,3 +1,5 @@
+{% form_theme pageForm 'KRSolutionsKRCMSBundle::bootstrap_3_layout.html.twig' %}
+
 {% extends 'KRSolutionsKRCMSBundle::layout.html.twig' %}
 
 {% block title %}{% if action == 'new' %}{{ 'page.add_page'|trans({}, 'KRSolutionsKRCMSBundle') }}{% else %}{{ 'page.edit_page'|trans({}, 'KRSolutionsKRCMSBundle') }}{% endif %} - Content Management Systeem{% endblock %}
@@ -24,7 +26,7 @@
                 {% else %}
                     {% set parentPageId = null %}
                 {% endif %}
-                <a class="btn btn-default" href="{{ path('kr_solutions_krcms_pages_index', { 'siteId': site.id, 'parentPageId': parentPageId }) }}" title="{{ 'page.back_to_page_overview'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-fw fa-stop"></i> {{ 'layout.cancel'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+                <a class="btn btn-default" href="{{ path('kr_solutions_krcms_pages_index', { 'parentPageId': parentPageId }) }}" title="{{ 'page.back_to_page_overview'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-fw fa-stop"></i> {{ 'layout.cancel'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
             </div>
         </div>
     </div>
@@ -32,8 +34,8 @@
 
 {% block content %}
     <div class="col-md-9">
+        {{ form_start(pageForm, {attr: {id: 'pageForm', novalidate: 'novalidate'} }) }}
         <div class="well">
-            {{ form_start(pageForm, {attr: {id: 'pageForm', novalidate: 'novalidate'} }) }}
             <fieldset>
                 {% if form_errors(pageForm) %}
                     <div class="alert alert-danger">
@@ -48,9 +50,9 @@
                     {{ form_widget(pageForm.title, { 'attr': {'class': 'form-control', 'data-page_id': page.id} }) }}
                 </div>
 
-                <div class="form-group{% if pageForm.truePermalink.vars.errors|length %} has-error{% endif %}">
-                    {{ form_label(pageForm.truePermalink) }}
-                    {{ form_widget(pageForm.truePermalink, { 'attr': {'class': 'form-control'} }) }}
+                <div class="form-group{% if pageForm.permalink.vars.errors|length %} has-error{% endif %}">
+                    {{ form_label(pageForm.permalink) }}
+                    {{ form_widget(pageForm.permalink, { 'attr': {'class': 'form-control'} }) }}
                 </div>
 
                 {% if pageForm.menu is defined %}
@@ -64,6 +66,13 @@
                     <div class="form-group{% if pageForm.menuTitle.vars.errors|length %} has-error{% endif %}">
                         {{ form_label(pageForm.menuTitle) }}
                         {{ form_widget(pageForm.menuTitle, { 'attr': {'class': 'form-control'} }) }}
+                    </div>
+                {% endif %}
+
+                {% if pageForm.category is defined %}
+                    <div class="form-group{% if pageForm.category.vars.errors|length %} has-error{% endif %}">
+                        {{ form_label(pageForm.category) }}
+                        {{ form_widget(pageForm.category, { 'attr': {'class': 'form-control'} }) }}
                     </div>
                 {% endif %}
 
@@ -86,11 +95,16 @@
                     {{ form_widget(pageForm.metaDescription, { 'attr': {'class': 'form-control'} }) }}
                 </div>
 
-                {{ form_rest(pageForm) }}
             </fieldset>
-            <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-save"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
-            {{ form_end(pageForm) }}
         </div>
+        {% if pageForm.header is defined %}
+            <div class="well">
+                {{ form_row(pageForm.header) }}
+            </div>
+        {% endif %}
+        {{ form_rest(pageForm) }}
+        <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-save"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
+        {{ form_end(pageForm) }}
     </div>
     <div class="col-md-3">
         <div class="well">

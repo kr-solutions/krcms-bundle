@@ -11,72 +11,70 @@ class Header implements HeaderInterface
     /**
      * @var int
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      */
-    private $name;
+    protected $uri;
 
     /**
      * @var string
      */
-    private $uri;
+    protected $title;
 
     /**
      * @var string
      */
-    private $title;
-
-    /**
-     * @var string
-     */
-    private $subtitle;
+    protected $subtitle;
 
     /**
      * @var int
      */
-    private $linkType;
+    protected $linkType;
 
     /**
-     * @var \stdClass
+     * @var PageInterface
      */
-    private $linkPage;
+    protected $linkPage;
 
     /**
      * @var string
      */
-    private $linkHref;
+    protected $linkHref;
 
     /**
      * @var string
      */
-    private $linkTarget;
+    protected $linkTarget;
 
     /**
      * @var string
      */
-    private $linkLabel;
+    protected $linkLabel;
 
     /**
      * @var string
      */
-    private $linkTitle;
+    protected $linkTitle;
 
     /**
      * @var string
      */
-    private $linkClass;
+    protected $linkClass;
 
     /**
      * @var string
      */
-    private $linkId;
+    protected $linkId;
 
     /**
-     * Get id
-     *
-     * @return int
+     * @var PageInterface|null
+     */
+    protected $page;
+
+    /**
+     * {@inheritDoc}
      */
     public function getId()
     {
@@ -84,35 +82,7 @@ class Header implements HeaderInterface
     }
 
     /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Header
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set uri
-     *
-     * @param string $uri
-     *
-     * @return Header
+     * {@inheritDoc}
      */
     public function setUri($uri)
     {
@@ -122,9 +92,7 @@ class Header implements HeaderInterface
     }
 
     /**
-     * Get uri
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getUri()
     {
@@ -132,11 +100,7 @@ class Header implements HeaderInterface
     }
 
     /**
-     * Set title
-     *
-     * @param string $title
-     *
-     * @return Header
+     * {@inheritDoc}
      */
     public function setTitle($title)
     {
@@ -146,9 +110,7 @@ class Header implements HeaderInterface
     }
 
     /**
-     * Get title
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getTitle()
     {
@@ -156,11 +118,7 @@ class Header implements HeaderInterface
     }
 
     /**
-     * Set subtitle
-     *
-     * @param string $subtitle
-     *
-     * @return Header
+     * {@inheritDoc}
      */
     public function setSubtitle($subtitle)
     {
@@ -170,9 +128,7 @@ class Header implements HeaderInterface
     }
 
     /**
-     * Get subtitle
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getSubtitle()
     {
@@ -180,11 +136,7 @@ class Header implements HeaderInterface
     }
 
     /**
-     * Set linkType
-     *
-     * @param integer $linkType
-     *
-     * @return Header
+     * {@inheritDoc}
      */
     public function setLinkType($linkType)
     {
@@ -194,9 +146,7 @@ class Header implements HeaderInterface
     }
 
     /**
-     * Get linkType
-     *
-     * @return int
+     * {@inheritDoc}
      */
     public function getLinkType()
     {
@@ -204,11 +154,7 @@ class Header implements HeaderInterface
     }
 
     /**
-     * Set linkPage
-     *
-     * @param \stdClass $linkPage
-     *
-     * @return Header
+     * {@inheritDoc}
      */
     public function setLinkPage($linkPage)
     {
@@ -218,9 +164,7 @@ class Header implements HeaderInterface
     }
 
     /**
-     * Get linkPage
-     *
-     * @return \stdClass
+     * {@inheritDoc}
      */
     public function getLinkPage()
     {
@@ -228,11 +172,7 @@ class Header implements HeaderInterface
     }
 
     /**
-     * Set linkHref
-     *
-     * @param string $linkHref
-     *
-     * @return Header
+     * {@inheritDoc}
      */
     public function setLinkHref($linkHref)
     {
@@ -242,9 +182,7 @@ class Header implements HeaderInterface
     }
 
     /**
-     * Get linkHref
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getLinkHref()
     {
@@ -252,11 +190,7 @@ class Header implements HeaderInterface
     }
 
     /**
-     * Set linkTarget
-     *
-     * @param string $linkTarget
-     *
-     * @return Header
+     * {@inheritDoc}
      */
     public function setLinkTarget($linkTarget)
     {
@@ -266,9 +200,7 @@ class Header implements HeaderInterface
     }
 
     /**
-     * Get linkTarget
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getLinkTarget()
     {
@@ -276,11 +208,7 @@ class Header implements HeaderInterface
     }
 
     /**
-     * Set linkLabel
-     *
-     * @param string $linkLabel
-     *
-     * @return Header
+     * {@inheritDoc}
      */
     public function setLinkLabel($linkLabel)
     {
@@ -290,9 +218,7 @@ class Header implements HeaderInterface
     }
 
     /**
-     * Get linkLabel
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getLinkLabel()
     {
@@ -300,11 +226,7 @@ class Header implements HeaderInterface
     }
 
     /**
-     * Set linkTitle
-     *
-     * @param string $linkTitle
-     *
-     * @return Header
+     * {@inheritDoc}
      */
     public function setLinkTitle($linkTitle)
     {
@@ -314,9 +236,7 @@ class Header implements HeaderInterface
     }
 
     /**
-     * Get linkTitle
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getLinkTitle()
     {
@@ -324,11 +244,7 @@ class Header implements HeaderInterface
     }
 
     /**
-     * Set linkClass
-     *
-     * @param string $linkClass
-     *
-     * @return Header
+     * {@inheritDoc}
      */
     public function setLinkClass($linkClass)
     {
@@ -338,9 +254,7 @@ class Header implements HeaderInterface
     }
 
     /**
-     * Get linkClass
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getLinkClass()
     {
@@ -348,11 +262,7 @@ class Header implements HeaderInterface
     }
 
     /**
-     * Set linkId
-     *
-     * @param string $linkId
-     *
-     * @return Header
+     * {@inheritDoc}
      */
     public function setLinkId($linkId)
     {
@@ -362,12 +272,36 @@ class Header implements HeaderInterface
     }
 
     /**
-     * Get linkId
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getLinkId()
     {
         return $this->linkId;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setPage(PageInterface $page = null)
+    {
+        $this->page = $page;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPage()
+    {
+        return $this->page;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function __toString()
+    {
+        return $this->name;
     }
 }

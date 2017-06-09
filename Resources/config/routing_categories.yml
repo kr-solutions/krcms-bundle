@@ -1,14 +1,12 @@
 kr_solutions_krcms_categories_index:
     path: /
-    defaults: { _controller: KRSolutionsKRCMSBundle:Categories:index }
+    defaults: { _controller: KRSolutionsKRCMSBundle:Category:index }
 
-kr_solutions_krcms_category_remove:
-    path: /remove/{categoryId}
+kr_solutions_krcms_categories_remove:
+    path: /remove
     defaults: { _controller: KRSolutionsKRCMSBundle:Category:remove }
-    requirements:
-        categoryId: \d+
 
-kr_solutions_krcms_category_edit:
+kr_solutions_krcms_categories_edit:
     path: /edit/{categoryId}
     defaults: { _controller: KRSolutionsKRCMSBundle:Category:edit }
     requirements:

@@ -70,11 +70,26 @@ KRSolutions\Bundle\KRCMSBundle\Entity\PageType:
             length: 4
             nullable: true
             column: children_order_direction
+        hasCategory:
+            type: boolean
+            nullable: false
+            default: '0'
+            column: has_category
         hasFiles:
             type: boolean
             nullable: false
             default: '0'
             column: has_files
+        hasHeader:
+            type: boolean
+            nullable: false
+            default: '0'
+            column: has_header
+        hasSlider:
+            type: boolean
+            nullable: false
+            default: '0'
+            column: has_slider
         hasContent:
             type: boolean
             nullable: false

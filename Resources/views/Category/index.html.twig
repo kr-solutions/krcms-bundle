@@ -1,0 +1,129 @@
+{% extends 'KRSolutionsKRCMSBundle::layout.html.twig' %}
+
+{% block title %}Categori&euml;n beheren - Content Management Systeem{% endblock %}
+
+{% block header %}
+    <h1 class="page-header">Categoriën beheren</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-12">
+        <div class="well">
+            <h2>Alle categori&euml;n</h2>
+
+            {% if categories|length > 0 %}
+                {% for category in categories %}
+                    <div id="category_{{ category.id }}" class="col-sm-6 col-md-4 col-lg-3">
+                        <div class="thumbnail">
+                            <img src="{{ asset(uploadDir ~ '/' ~ category.imageUri) }}" alt="{{ category.name }}">
+                            <div class="caption">
+                                <h3>{{ category.name }}</h3>
+                                <p>
+                                    <a href="{{ path('kr_solutions_krcms_categories_edit', { 'categoryId': category.id }) }}" class="btn btn-default">
+                                        <i class="fa fa-fw fa-edit"></i>
+                                    </a>
+                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#category_remove_modal" data-category_id="{{ category.id }}" title="{{ 'category.remove_file'|trans({}, 'KRSolutionsKRCMSBundle') }}">
+                                        <i class="fa fa-fw fa-trash-o"></i>
+                                    </button>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                Er zijn nog geen categori&euml;n aangemaakt.
+            {% endif%}
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="well">
+            <form id="fileForm" action="{{ path('kr_solutions_krcms_categories_index') }}" method="post" id="categoryForm" {{ form_enctype(categoryForm) }} novalidate="novalidate">
+                <fieldset>
+                    <legend>{{ 'category.add_category'|trans({}, 'KRSolutionsKRCMSBundle') }}</legend>
+
+                    {% if form_errors(categoryForm) %}
+                        <div class="alert alert-danger">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'layout.close'|trans({}, 'KRSolutionsKRCMSBundle') }}</span></button>
+                            <h4>{{ 'layout.form_error_alert_heading'|trans({}, 'KRSolutionsKRCMSBundle') }}</h4>
+                            {{ form_errors(categoryForm) }}
+                        </div>
+                    {% endif %}
+
+                    <div class="form-group{% if categoryForm.name.vars.errors|length %} has-error{% endif %}">
+                        {{ form_label(categoryForm.name) }}
+                        {{ form_widget(categoryForm.name, { 'attr': {'class': 'form-control'} }) }}
+                    </div>
+
+                    <div class="form-group{% if categoryForm.imageUri.vars.errors|length %} has-error{% endif %}">
+                        {{ form_label(categoryForm.imageUri) }}
+                        {{ form_widget(categoryForm.imageUri, { 'attr': {'class': 'form-control'} }) }}
+                    </div>
+
+                    {{ form_rest(categoryForm) }}
+                </fieldset>
+                <input class="btn btn-primary" type="submit" value="{{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}" />
+            </form>
+        </div>
+    </div>
+
+    {# Modals #}
+    <div class="modal fade" id="category_remove_modal" tabindex="-1" role="dialog" aria-labelledby="category_remove_modal_title" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="category_remove_modal_title">{{ 'category.remove_file'|trans({}, 'KRSolutionsKRCMSBundle') }}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>{{ 'category.remove_confirmation.title'|trans({}, 'KRSolutionsKRCMSBundle') }}</p>
+                    <p><small>{{ 'category.remove_confirmation.message'|trans({}, 'KRSolutionsKRCMSBundle') }}</small></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'layout.cancel'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
+                    <a href="#" type="button" class="btn btn-primary category_remove_action">{{ 'layout.remove'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {# End modals #}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#category_remove_modal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var fileId = button.data('category_id');
+                var remove_url_holder = 'javascript:deleteFile(FILE_ID_HOLDER)';
+
+                var modal = $(this);
+                modal.find('.category_remove_action').attr('href', remove_url_holder.replace('FILE_ID_HOLDER', fileId));
+            });
+        });
+
+        function deleteFile(id) {
+            $.ajax({
+                url: '{{ path('kr_solutions_krcms_categories_remove') }}',
+                type: 'POST',
+                dataType: 'json',
+                data: 'category_id=' + id,
+                success: function (data) {
+                    $('#category_remove_modal').modal('hide');
+
+                    if (data.success === true) {
+                        $('#category_' + id).remove();
+                        alert('{{ 'category.category_removed'|trans({}, 'KRSolutionsKRCMSBundle')|raw }}');
+                    } else {
+                        $('#category_' + id).remove();
+                        alert('{{ 'category.category_not_exist'|trans({}, 'KRSolutionsKRCMSBundle')|raw }}');
+                    }
+                }
+            });
+        }
+    </script>
+{% endblock %}

@@ -3,7 +3,6 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Page:
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
             fields:
                 - permalink
-                - site
             message: kr_solutions_krcms.page.permalink.unique
     properties:
         title:
@@ -17,18 +16,6 @@ KRSolutions\Bundle\KRCMSBundle\Entity\File:
         uri:
             - NotBlank:
                 message: kr_solutions_krcms.file.uri.not_blank
-            - Length:
-                max: 255
-
-KRSolutions\Bundle\KRCMSBundle\Entity\Site:
-    constraints:
-        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
-            fields: permalink
-            message: kr_solutions_krcms.site.permalink.unique
-    properties:
-        title:
-            - NotBlank:
-                message: kr_solutions_krcms.site.title.not_blank
             - Length:
                 max: 255
 
@@ -47,8 +34,8 @@ KRSolutions\Bundle\KRCMSBundle\Entity\PageType:
 KRSolutions\Bundle\KRCMSBundle\Entity\Menu:
     constraints:
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
-            fields: [name, site]
-            message: kr_solutions_krcms.menu.site_id_name.unique
+            fields: [name]
+            message: kr_solutions_krcms.menu.name.unique
     properties:
         name:
             - NotBlank:

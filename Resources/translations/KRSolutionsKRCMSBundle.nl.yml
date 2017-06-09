@@ -1,254 +1,217 @@
-form:
-    type:
-        yes: Ja
-        no: Nee
-        pageType:
-           name:
-               label: Naam
-           description:
-               label: Omschrijving
-           isChild:
-               label: Moet verplicht subpagina zijn?
-           isMenuItem:
-               label: Kan in menu geplaatst worden?
-           hasChildren:
-               label: Heeft subpagina's?
-           hasContent:
-               label: Heeft inhoud?
-           maximumToCreate:
-                label: Maximaal aan te maken
-           hasFiles:
-               label: Heeft bestanden/afbeeldingen?
-           childrenOrderBy:
-               label: Subpagina's sorteren op
-               choices:
-                   orderId: Pagina volgorde
-                   createdAt: Datum aangemaakt
-                   updatedAt: Datum gewijzigd
-                   title: Titel
-                   permalink: Permalink
-           childrenOrderDirection:
-               label: Subpagina sorteer richting
-               choices:
-                   desc: Aflopend
-                   asc: Oplopend
-           template:
-               label: Template locatie
-           pageHandler:
-               label: Service id voor dit pagina type
-           pageTypeChildren:
-               label: Mogelijke subpagina's
-        page:
-            title:
-                label: Titel
-            permalink:
-                label: Permalink
-            menu:
-                label: Menu
-                empty_value: Geen menu (losse pagina)
-            menuTitle:
-                label: Menu titel
-            parent:
-                label: Subpagina van
-                empty_value: Geen subpagina
-            content:
-                label: Inhoud
-            metaDescription:
-                label: Meta beschrijving
-        menu:
-            name:
-                label: Naam
-            description:
-                label: Omschrijving
-            site:
-                label: Site
-        site:
-            title:
-                label: Titel
-            permalink:
-                label: Permalink
-            isActive:
-                label: Is actief?
-            homepage:
-                label: Homepage
-        file:
-            uri:
-                label: Bestand
-            title:
-                label: Titel
-            description:
-                label: Omschrijving
-
-layout:
-    logout: Uitloggen
-    login: Inloggen
-    register: Registreer
-    logged_in_as: Ingelogd als %username%
-    yes: Ja
-    no: Nee
-    save: Opslaan
-    cancel: Annuleren
-    close: Sluiten
-    back: Terug
-    created_by: Aangemaakt door
-    created_at: Aangemaakt op
-    updated_by: Gewijzigd door
-    updated_at: Gewijzigd op
-    edit: Bewerken
-    remove: Verwijderen
-    files: Bestanden
-    menu:
-        dashboard: Dashboard
-        select_current_site: Selecteer huidige site
-        configuration: Configuratie
-        pages: Pagina's
-        helpdesk: Helpdesk
-        categories: Categoriën
-        menus: Menu's
-        page_types: Pagina types
-        sites: Sites
-    form_error_alert_heading: Oeps!
-    toggle_navigation: Schakel navigatie
-
-page:
-    title: Titel
-    created_at: Aangemaakt op
-    page_type: Pagina type
-    sub_pages: Subpagina's
-    menu: Menu
-    single_pages: Losse pagina's
-    manage_subpages: Subpagina's beheren
-    no_subpages: Geen subpagina's
-    add_page: Pagina toevoegen
-    edit_page: Pagina wijzigen
-    remove_page: Pagina verwijderen
-    no_pages_added_to_menu: Er zijn nog geen pagina's toegevoegd aan dit menu.
-    no_subpages_added_to_page: Er zijn nog geen subpagina's toegevoegd aan deze pagina.
-    details: Details
-    page_order_saved: De nieuwe pagina volgorde is opgeslagen
-    page_order_save_failed: Er is iets fout gegaan bij het opslaan van de volgorde, ververs de pagina en probeer het nog eens.
-    back_to_page_overview: Terug naar het paginaoverzicht
-    index:
-        header:
-            pages: Pagina's
-            subpages: Subpagina's van "%parent_page%"
-    remove_confirmation:
-        title: Weet u zeker dat u deze pagina wilt verwijderen?
-        message: Alle eventueel gekoppelde pagina's onder deze pagina worden losse pagina's! Deze dient u indien nodig zelf opnieuw te koppelen aan een andere pagina of menu.
-    site_not_exist: De site waar u de pagina's van wilt beheren bestaat niet (meer). Ververs de pagina en probeer het nog eens.
-    page_type_not_exist: Het pagina type bestaat niet (meer). Ververs de pagina en probeer het nog eens.
-    page_not_exist: De pagina met id '%page_id%' bestaat niet meer. Ververs de pagina en probeer het nog eens.
-    form_type_not_exist: Het formulier om deze pagina te beheren bestaat nog niet. Neem contact op met uw webdesigner om dit probleem te verhelpen.
-    form_handler_not_exist: De module om deze pagina correct op te slaan ontbreekt. Neem contact op met uw webdesigner om dit probleem te verhelpen.
-    page_added: Pagina '%page_title%' is succesvol toegevoegd.
-    page_edited: Pagina '%page_title%' is succesvol gewijzigd.
-    remove:
-        failed_not_exist: Fout bij het verwijderen van de pagina met id '%page_id%'. Deze pagina bestaat niet (meer).
-        failed_not_authorized: Fout bij het verwijderen van de pagina met id '%page_id%'. U bent niet gemachtigd om deze pagina te verwijderen.
-        success: De pagina met id '%page_id%' is succesvol verwijderd.
-
-menu:
-    name: Naam
-    description: Omschrijving
-    edit_menu: Menu wijzigen
-    remove_menu: Menu verwijderen
-    add_menu: Menu toevoegen
-    index:
-        header:
-            menus: Menu's
-    back_to_menu_overview: Terug naar het menu overzicht
-    remove_confirmation:
-        title: Weet u zeker dat u dit menu wilt verwijderen?
-        message: Alle eventueel gekoppelde pagina's onder dit menu worden losse pagina's! Deze dient u indien nodig zelf opnieuw te koppelen aan een andere pagina of menu.
-    menu_added: Menu '%menu_name%' is succesvol toegevoegd.
-    menu_edited: Menu '%menu_name%' is succesvol gewijzigd.
-    remove:
-        failed_not_exist: Fout bij het verwijderen van het menu met id '%menu_id%'. Dit menu bestaat niet (meer).
-        failed_not_authorized: Fout bij het verwijderen van het menu met id '%menu_id%'. U bent niet gemachtigd om dit menu te verwijderen.
-        success: Het menu met id '%menu_id%' is succesvol verwijderd.
-
-dashboard:
-    no_sites: Er zijn nog geen site geconfigureerd. Maak minsten één site aan (meest voorkomend) of meer sites voor een multi site configuratie.
-
-site:
-    title: Titel
-    permalink: Permalink
-    is_active: Actief?
-    homepage: Homepage
-    index:
-        header:
-            sites: Sites
-    add_site: Site toevoegen
-    edit_site: Site wijzigen
-    remove_site: Site verwijderen
-    site_added: De site '%site_title%' is succesvol toegevoegd.
-    site_edited: De site '%site_title%' is succesvol aangepast.
-    site_not_exist: De site met id '%site_id%' bestaat niet (meer). Ververs de pagina en probeer het nog eens.
-    no_sites_added: Er zijn nog geen sites toegevoegd
-    back_to_site_overview: Terug naar het overzicht
-    remove_confirmation:
-        title: Weet u zeker dat u deze site wilt verwijderen?
-        message: Pagina's verbonden aan deze site moeten eerst verplaatst of verwijderd worden, eerder zal deze site NIET verwijderd worden.
-    edit:
-        failed_not_authorized: U bent niet gemachtigd om sites te wijzigen.
-    remove:
-        failed_not_exist: Fout bij het verwijderen van de site met id '%site_id%'. Deze site bestaat niet (meer).
-        failed_not_authorized: Fout bij het verwijderen van de site met id '%site_id%'. U bent niet gemachtigd om sites te verwijderen.
-        failed_pages_exist: Fout bij het verwijderen van de site met id '%site_id%'. Er zijn nog steeds pagina's aan deze site verbonden. Verplaats of verwijder deze pagina's voordat u deze site verwijderd.
-        success: De site met id '%site_id%' is succesvol verwijderd.
-
-page_type:
-    name: Naam
-    description: Omschrijving
-    index:
-        header:
-            page_types: Pagina types
-    add_page_type: Pagina type toevoegen
-    edit_page_type: Pagina type wijzigen
-    remove_page_type: Pagina type verwijderen
-    no_page_types_added: Er zijn nog geen pagina types toegevoegd
-    back_to_page_type_overview: Terug naar het overzicht
-    remove_confirmation:
-        title: Weet u zeker dat u deze pagina type wilt verwijderen?
-        message: Pagina's die aangemaakt zijn onder dit type pagina zullen niet meer werken, u dient deze een ander pagina type te geven.
-    remove:
-        failed_not_exist: Fout bij het verwijderen van het pagina type met id '%page_type_id%'. Dit pagina type bestaat niet (meer).
-        failed_not_authorized: Fout bij het verwijderen van het pagina type met id '%page_type_id%'. U bent niet gemachtigd om pagina types te verwijderen.
-        failed_pages_exist: Fout bij het verwijderen van het pagina type met id '%page_type_id%'. Er zijn nog steeds pagina's aan dit pagina type verbonden. Verplaats of verwijder deze pagina's voordat u dit pagina type verwijderd.
-        success: Pagina type met het id '%page_type_id%' is succesvol verwijderd.
-
-file:
-    index:
-        header:
-            manage_files: Bestanden beheren van pagina <small>%page_title%</small>
-            files: Bestanden
-    add_file: Bestand toevoegen
-    edit_file: Bestand wijzigen
-    remove_file: Bestand verwijderen
-    file_added: Bestand is succesvol toegevoegd
-    file_removed: Bestand is succesvol verwijderd
-    file_not_exist: Bestand bestaat niet (meer)
-    page_not_exist: De pagina met id '%page_id%' bestaat niet (meer). Ververs de pagina en probeer het nog eens.
-    no_files: Er zijn nog geen bestanden aan deze pagina toegevoegd.
-    page_cannot_contain_files: Deze pagina mag geen bestanden bevatten. Ververs de pagina en probeer het nog eens.
-    browse: Bladeren
-    remove_confirmation:
-        title: Weet u zeker dat u dit bestand wilt verwijderen?
-        message: Het bestand wordt alleen van deze pagina verwijderd. Het bestand zelf blijft op het bestandssysteem staan. Gebruik het scherm 'bestanden beheren' om het bestand ook van het bestandssyteem te verwijderen.
-
-helpdesk:
-    title: Helpdesk
-    lead: Heeft u vragen over het beheren van uw website? Of wilt u een wijziging in uw website die u zelf niet kunt doen? Gebruik dan dit formulier om in contact te komen met uw website ontwikkelaar.
-    not_enabled: De helpdesk is niet geactiveerd.
-    question_submit_success: Uw vraag is verstuurd en wordt zo spoedig mogelijk behandeld.
-    name: Naam
-    subject: Onderwerp
-    email: E-mail adres
-    question: Uw vraag
-    submit: Versturen
-
 Pagina: Pagina
 Page: Page
-
-tinify:
-    api_key_invalid: API-sleutel voor tinypng is niet geldig, update uw configuratiebestand
+form.type.yes: Ja
+form.type.no: Nee
+form.type.pageType.name.label: Naam
+form.type.pageType.description.label: Omschrijving
+form.type.pageType.isChild.label: 'Moet verplicht subpagina zijn?'
+form.type.pageType.isMenuItem.label: 'Kan in menu geplaatst worden?'
+form.type.pageType.hasChildren.label: 'Heeft subpagina''s?'
+form.type.pageType.hasContent.label: 'Heeft inhoud?'
+form.type.pageType.maximumToCreate.label: 'Maximaal aan te maken'
+form.type.pageType.hasCategory.label: 'Categoriën ingeschakeld?'
+form.type.pageType.hasHeader.label: 'Heeft een header?'
+form.type.pageType.hasSlider.label: 'Heeft een slider?'
+form.type.pageType.hasFiles.label: 'Heeft bestanden/afbeeldingen?'
+form.type.pageType.childrenOrderBy.label: 'Subpagina''s sorteren op'
+form.type.pageType.childrenOrderBy.choices.orderId: 'Pagina volgorde'
+form.type.pageType.childrenOrderBy.choices.createdAt: 'Datum aangemaakt'
+form.type.pageType.childrenOrderBy.choices.updatedAt: 'Datum gewijzigd'
+form.type.pageType.childrenOrderBy.choices.title: Titel
+form.type.pageType.childrenOrderBy.choices.permalink: Permalink
+form.type.pageType.childrenOrderDirection.label: 'Subpagina sorteer richting'
+form.type.pageType.childrenOrderDirection.choices.desc: Aflopend
+form.type.pageType.childrenOrderDirection.choices.asc: Oplopend
+form.type.pageType.template.label: 'Template locatie'
+form.type.pageType.pageHandler.label: 'Service id voor dit pagina type'
+form.type.pageType.pageTypeChildren.label: 'Mogelijke subpagina''s'
+form.type.page.title.label: Titel
+form.type.page.permalink.label: Permalink
+form.type.page.menu.label: Menu
+form.type.page.menu.empty_value: 'Geen menu (losse pagina)'
+form.type.page.menuTitle.label: 'Menu titel'
+form.type.page.category.label: 'Categorie'
+form.type.page.parent.label: 'Subpagina van'
+form.type.page.parent.empty_value: 'Geen subpagina'
+form.type.page.headerType.label: 'Kies een header'
+form.type.page.headerType.standard: 'Standaard header'
+form.type.page.headerType.override: 'Kies een andere header'
+form.type.page.header.label: 'Header afbeelding'
+form.type.page.content.label: Inhoud
+form.type.page.metaDescription.label: 'Meta beschrijving'
+form.type.page.slider.label: Slider
+form.type.page.slider.empty_value: Gebruik de standaard slider
+form.type.menu.name.label: Naam
+form.type.menu.description.label: Omschrijving
+form.type.file.uri.label: Bestand
+form.type.file.title.label: Titel
+form.type.file.description.label: Omschrijving
+form.type.header.uri.label: Afbeelding
+form.type.header.title.label: Titel
+form.type.header.subtitle.label: Ondertitel
+form.type.header.linkType.label: Link/Knop
+form.type.header.linkType.choices.no_link: 'Geen link/knop'
+form.type.header.linkType.choices.internal_link: 'Interne pagina'
+form.type.header.linkType.choices.external_link: 'Externe link'
+form.type.header.linkPage.label: 'Interne pagina'
+form.type.header.linkHref.label: 'Externe link (url)'
+form.type.header.linkTarget.label: 'Linkdoel (target)'
+form.type.header.linkTarget.choices._blank: 'Laad in een nieuw venster/tabblad (_blank)'
+form.type.header.linkTarget.choices._self: 'Laad in hetzelfde frame (_self)'
+form.type.header.linkTarget.choices._parent: 'Laad in het hoofdframe (_parent)'
+form.type.header.linkTarget.choices._top: 'Laad in hetzelfde venster (_top)'
+form.type.header.linkLabel.label: 'Label (naam van de link)'
+form.type.header.linkTitle.label: 'Titel van de link (niet zichtbaar tenzij de muis op de link staat)'
+form.type.header.linkClass.label: 'Link class'
+form.type.header.linkId.label: 'Link ID'
+form.type.slider.name.label: Naam
+form.type.slider.description.label: Omschrijving
+form.type.slider.isDefault.label: Standaard slider?
+form.type.sliderImage.uri.label: Afbeelding
+form.type.sliderImage.title.label: Titel
+form.type.sliderImage.subtitle.label: Ondertitel
+form.type.sliderImage.linkType.label: Link/Knop
+form.type.sliderImage.linkType.choices.no_link: 'Geen link/knop'
+form.type.sliderImage.linkType.choices.internal_link: 'Interne pagina'
+form.type.sliderImage.linkType.choices.external_link: 'Externe link'
+form.type.sliderImage.linkPage.label: 'Interne pagina'
+form.type.sliderImage.linkHref.label: 'Externe link (url)'
+form.type.sliderImage.linkTarget.label: 'Linkdoel (target)'
+form.type.sliderImage.linkTarget.choices._blank: 'Laad in een nieuw venster/tabblad (_blank)'
+form.type.sliderImage.linkTarget.choices._self: 'Laad in hetzelfde frame (_self)'
+form.type.sliderImage.linkTarget.choices._parent: 'Laad in het hoofdframe (_parent)'
+form.type.sliderImage.linkTarget.choices._top: 'Laad in hetzelfde venster (_top)'
+form.type.sliderImage.linkLabel.label: 'Label (naam van de link)'
+form.type.sliderImage.linkTitle.label: 'Titel van de link (niet zichtbaar tenzij de muis op de link staat)'
+form.type.sliderImage.linkClass.label: 'Link class'
+form.type.sliderImage.linkId.label: 'Link ID'
+layout.logout: Uitloggen
+layout.login: Inloggen
+layout.register: Registreer
+layout.logged_in_as: 'Ingelogd als %username%'
+layout.yes: Ja
+layout.no: Nee
+layout.save: Opslaan
+layout.cancel: Annuleren
+layout.close: Sluiten
+layout.back: Terug
+layout.created_by: 'Aangemaakt door'
+layout.created_at: 'Aangemaakt op'
+layout.updated_by: 'Gewijzigd door'
+layout.updated_at: 'Gewijzigd op'
+layout.edit: Bewerken
+layout.remove: Verwijderen
+layout.files: Bestanden
+layout.menu.dashboard: Dashboard
+layout.menu.configuration: Configuratie
+layout.menu.pages: 'Pagina''s'
+layout.menu.helpdesk: Helpdesk
+layout.menu.categories: Categoriën
+layout.menu.menus: 'Menu''s'
+layout.menu.sliders: 'Sliders'
+layout.menu.page_types: 'Pagina types'
+layout.form_error_alert_heading: Oeps!
+layout.toggle_navigation: 'Schakel navigatie'
+page.title: Titel
+page.created_at: 'Aangemaakt op'
+page.page_type: 'Pagina type'
+page.sub_pages: 'Subpagina''s'
+page.add_page: 'Pagina toevoegen'
+page.menu: Menu
+page.single_pages: 'Losse pagina''s'
+page.manage_subpages: 'Subpagina''s beheren'
+page.no_subpages: 'Geen subpagina''s'
+page.edit_page: 'Pagina wijzigen'
+page.remove_page: 'Pagina verwijderen'
+page.no_pages_added_to_menu: 'Er zijn nog geen pagina''s toegevoegd aan dit menu.'
+page.no_subpages_added_to_page: 'Er zijn nog geen subpagina''s toegevoegd aan deze pagina.'
+page.details: Details
+page.page_order_saved: 'De nieuwe pagina volgorde is opgeslagen'
+page.page_order_save_failed: 'Er is iets fout gegaan bij het opslaan van de volgorde, ververs de pagina en probeer het nog eens.'
+page.back_to_page_overview: 'Terug naar het paginaoverzicht'
+page.index.header.pages: 'Pagina''s'
+page.index.header.subpages: 'Subpagina''s van "%parent_page%"'
+page.remove_confirmation.title: 'Weet u zeker dat u deze pagina wilt verwijderen?'
+page.remove_confirmation.message: 'Alle eventueel gekoppelde pagina''s onder deze pagina worden losse pagina''s! Deze dient u indien nodig zelf opnieuw te koppelen aan een andere pagina of menu.'
+page.page_type_not_exist: 'Het pagina type bestaat niet (meer). Ververs de pagina en probeer het nog eens.'
+page.page_not_exist: 'De pagina met id ''%page_id%'' bestaat niet meer. Ververs de pagina en probeer het nog eens.'
+page.form_type_not_exist: 'Het formulier om deze pagina te beheren bestaat nog niet. Neem contact op met uw webdesigner om dit probleem te verhelpen.'
+page.form_handler_not_exist: 'De module om deze pagina correct op te slaan ontbreekt. Neem contact op met uw webdesigner om dit probleem te verhelpen.'
+page.page_added: 'Pagina ''%page_title%'' is succesvol toegevoegd.'
+page.page_edited: 'Pagina ''%page_title%'' is succesvol gewijzigd.'
+page.remove.failed_not_exist: 'Fout bij het verwijderen van de pagina met id ''%page_id%''. Deze pagina bestaat niet (meer).'
+page.remove.failed_not_authorized: 'Fout bij het verwijderen van de pagina met id ''%page_id%''. U bent niet gemachtigd om deze pagina te verwijderen.'
+page.remove.success: 'De pagina met id ''%page_id%'' is succesvol verwijderd.'
+menu.name: Naam
+menu.description: Omschrijving
+menu.edit_menu: 'Menu wijzigen'
+menu.remove_menu: 'Menu verwijderen'
+menu.add_menu: 'Menu toevoegen'
+menu.index.header.menus: 'Menu''s'
+menu.back_to_menu_overview: 'Terug naar het menu overzicht'
+menu.remove_confirmation.title: 'Weet u zeker dat u dit menu wilt verwijderen?'
+menu.remove_confirmation.message: 'Alle eventueel gekoppelde pagina''s onder dit menu worden losse pagina''s! Deze dient u indien nodig zelf opnieuw te koppelen aan een andere pagina of menu.'
+menu.menu_added: 'Menu ''%menu_name%'' is succesvol toegevoegd.'
+menu.menu_edited: 'Menu ''%menu_name%'' is succesvol gewijzigd.'
+menu.remove.failed_not_exist: 'Fout bij het verwijderen van het menu met id ''%menu_id%''. Dit menu bestaat niet (meer).'
+menu.remove.failed_not_authorized: 'Fout bij het verwijderen van het menu met id ''%menu_id%''. U bent niet gemachtigd om dit menu te verwijderen.'
+menu.remove.success: 'Het menu met id ''%menu_id%'' is succesvol verwijderd.'
+page_type.name: Naam
+page_type.description: Omschrijving
+page_type.index.header.page_types: 'Pagina types'
+page_type.add_page_type: 'Pagina type toevoegen'
+page_type.edit_page_type: 'Pagina type wijzigen'
+page_type.remove_page_type: 'Pagina type verwijderen'
+page_type.no_page_types_added: 'Er zijn nog geen pagina types toegevoegd'
+page_type.back_to_page_type_overview: 'Terug naar het overzicht'
+page_type.remove_confirmation.title: 'Weet u zeker dat u deze pagina type wilt verwijderen?'
+page_type.remove_confirmation.message: 'Pagina''s die aangemaakt zijn onder dit type pagina zullen niet meer werken, u dient deze een ander pagina type te geven.'
+page_type.remove.failed_not_exist: 'Fout bij het verwijderen van het pagina type met id ''%page_type_id%''. Dit pagina type bestaat niet (meer).'
+page_type.remove.failed_not_authorized: 'Fout bij het verwijderen van het pagina type met id ''%page_type_id%''. U bent niet gemachtigd om pagina types te verwijderen.'
+page_type.remove.failed_pages_exist: 'Fout bij het verwijderen van het pagina type met id ''%page_type_id%''. Er zijn nog steeds pagina''s aan dit pagina type verbonden. Verplaats of verwijder deze pagina''s voordat u dit pagina type verwijderd.'
+page_type.remove.success: 'Pagina type met het id ''%page_type_id%'' is succesvol verwijderd.'
+file.index.header.manage_files: 'Bestanden beheren van pagina <small>%page_title%</small>'
+file.index.header.files: Bestanden
+file.add_file: 'Bestand toevoegen'
+file.edit_file: 'Bestand wijzigen'
+file.remove_file: 'Bestand verwijderen'
+file.file_added: 'Bestand is succesvol toegevoegd'
+file.file_removed: 'Bestand is succesvol verwijderd'
+file.file_not_exist: 'Bestand bestaat niet (meer)'
+file.page_not_exist: 'De pagina met id ''%page_id%'' bestaat niet (meer). Ververs de pagina en probeer het nog eens.'
+file.no_files: 'Er zijn nog geen bestanden aan deze pagina toegevoegd.'
+file.page_cannot_contain_files: 'Deze pagina mag geen bestanden bevatten. Ververs de pagina en probeer het nog eens.'
+file.browse: Bladeren
+file.remove_confirmation.title: 'Weet u zeker dat u dit bestand wilt verwijderen?'
+file.remove_confirmation.message: 'Het bestand wordt alleen van deze pagina verwijderd. Het bestand zelf blijft op het bestandssysteem staan. Gebruik het scherm ''bestanden beheren'' om het bestand ook van het bestandssyteem te verwijderen.'
+helpdesk.title: Helpdesk
+helpdesk.lead: 'Heeft u vragen over het beheren van uw website? Of wilt u een wijziging in uw website die u zelf niet kunt doen? Gebruik dan dit formulier om in contact te komen met uw website ontwikkelaar.'
+helpdesk.not_enabled: 'De helpdesk is niet geactiveerd.'
+helpdesk.question_submit_success: 'Uw vraag is verstuurd en wordt zo spoedig mogelijk behandeld.'
+helpdesk.name: Naam
+helpdesk.subject: Onderwerp
+helpdesk.email: 'E-mail adres'
+helpdesk.question: 'Uw vraag'
+helpdesk.submit: Versturen
+tinify.api_key_invalid: 'API-sleutel voor tinypng is niet geldig, update uw configuratiebestand'
+layout.slider.sliders: Sliders
+slider.add_slider: 'Slider toevoegen'
+slider.edit_slider: 'Slider bewerken'
+slider.back_to_slider_overview: 'Terug naar het slider overzicht'
+slider.index.header.sliders: Sliders
+slider.name: Naam
+slider.description: Omschrijving
+slider.manage_slider_images: 'Slides beheren'
+slider.remove_slider: 'Slider verwijderen'
+slider.remove_confirmation.title: 'Slider verwijderen'
+slider.remove_confirmation.message: 'Weet u zeker dat u deze slider wilt verwijderen?'
+sliderImage.index.header.manage_files: 'Slides beheren'
+sliderImage.index.header.sliderImages: Slides
+sliderImage.edit_file: 'Slide bewerken'
+sliderImage.remove_file: 'Slide verwijderen'
+sliderImage.no_files: 'Er zijn nog geen slides toegevoegd'
+sliderImage.add_file: 'Slide toevoegen'
+sliderImage.remove_confirmation.title: 'Slide verwijderen'
+sliderImage.remove_confirmation.message: 'Weet u zeker dat u deze slide wilt verwijderen?'
+sliderImage.file_removed: 'Slide succesvol verwijderd'
+sliderImage.file_not_exist: 'Slide bestaat niet (meer)'

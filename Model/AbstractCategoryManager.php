@@ -3,9 +3,9 @@
 namespace KRSolutions\Bundle\KRCMSBundle\Model;
 
 /**
- * Abstract site manager
+ * Abstract category manager
  */
-abstract class AbstractSiteManager implements SiteManagerInterface
+abstract class AbstractCategoryManager implements CategoryManagerInterface
 {
 
     /**
@@ -19,11 +19,11 @@ abstract class AbstractSiteManager implements SiteManagerInterface
     /**
      * {@inheritDoc}
      */
-    public function createSite()
+    public function createCategory()
     {
         $class = $this->getClass();
-        $site = new $class;
+        $category = new $class;
 
-        return $site;
+        return $category;
     }
 }

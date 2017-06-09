@@ -4,10 +4,10 @@ namespace KRSolutions\Bundle\KRCMSBundle\TwigExtension;
 
 use Exception;
 use KRSolutions\Bundle\KRCMSBundle\Entity\Page;
-use KRSolutions\Bundle\KRCMSBundle\Entity\Site;
 use KRSolutions\Bundle\KRCMSBundle\Repository\PageRepository;
 use Symfony\Bridge\Doctrine\ManagerRegistry;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * \KRSolutions\KRCMSBundle\TwigExtension\MenuTwigExtension
@@ -53,7 +53,6 @@ class MenuTwigExtension extends \Twig_Extension
     /**
      * Build the menu
      *
-     * @param Site   $site       Site entity
      * @param string $menuName   Menu name
      * @param Page   $activePage Active page entity
      * @param bool   $nested     Is menu nested or plain?
@@ -61,9 +60,9 @@ class MenuTwigExtension extends \Twig_Extension
      *
      * @return string
      */
-    public function menuFunction(Site $site, $menuName = '', Page $activePage = null, $nested = true, $class = '')
+    public function menuFunction($menuName = '', Page $activePage = null, $nested = true, $class = '')
     {
-        $pages = $this->getPageRepository()->getActivePagesFromSiteAndMenuName($site, $menuName);
+        $pages = $this->getPageRepository()->getActivePagesFromMenuName($menuName);
 
         if (trim($class) !== '') {
             $html = '<ul class="'.$class.'" data-type="navbar">';
@@ -72,7 +71,7 @@ class MenuTwigExtension extends \Twig_Extension
         }
 
         foreach ($pages as $page) {
-            /* @var $page \KRSolutions\Bundle\KRCMSBundle\Entity\Page */
+            /* @var $page Page */
             if ($page->getMenuTitle() !== null && trim($page->getMenuTitle()) != '') {
                 $this->renderItem($html, $page, $activePage, $nested);
             }
@@ -140,15 +139,17 @@ class MenuTwigExtension extends \Twig_Extension
     /**
      * Generates a URL from the given parameters.
      *
-     * @param string  $route      The name of the route
-     * @param mixed   $parameters An array of parameters
-     * @param Boolean $absolute   Whether to generate an absolute URL
+     * @param string $route         The name of the route
+     * @param mixed  $parameters    An array of parameters
+     * @param int    $referenceType The type of reference (one of the constants in UrlGeneratorInterface)
      *
      * @return string The generated URL
+     *
+     * @see UrlGeneratorInterface
      */
-    public function generateUrl($route, $parameters = array(), $absolute = false)
+    public function generateUrl($route, $parameters = array(), $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH)
     {
-        return $this->container->get('router')->generate($route, $parameters, $absolute);
+        return $this->container->get('router')->generate($route, $parameters, $referenceType);
     }
 
     /**
@@ -203,7 +204,7 @@ class MenuTwigExtension extends \Twig_Extension
             $html.= '<li>';
         }
 
-        $html.= '<a href="'.$this->generateUrl('kr_solutions_krcms_page', array('site_permalink' => $parent->getSite()->getPermalink(), 'permalink' => $parent->getPermalink()), true).'"><span>'.trim($parent->getMenuTitle()).'</span></a>';
+        $html.= '<a href="'.$this->generateUrl('kr_solutions_krcms_page', array('permalink' => $parent->getPermalink()), UrlGeneratorInterface::ABSOLUTE_URL).'"><span>'.trim($parent->getMenuTitle()).'</span></a>';
         $html.= $nestedHtml;
         $html.= '</li>';
 

@@ -21,7 +21,20 @@ class Category implements CategoryInterface
     /**
      * @var string
      */
-    protected $description;
+    protected $imageUri;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    protected $pages;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->pages = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * {@inheritDoc}
@@ -52,9 +65,9 @@ class Category implements CategoryInterface
     /**
      * {@inheritDoc}
      */
-    public function setDescription($description)
+    public function setImageUri($imageUri)
     {
-        $this->description = $description;
+        $this->imageUri = $imageUri;
 
         return $this;
     }
@@ -62,9 +75,35 @@ class Category implements CategoryInterface
     /**
      * {@inheritDoc}
      */
-    public function getDescription()
+    public function getImageUri()
     {
-        return $this->description;
+        return $this->imageUri;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addPage(PageInterface $page)
+    {
+        $this->pages[] = $page;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removePage(PageInterface $page)
+    {
+        $this->pages->removeElement($page);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPages()
+    {
+        return $this->pages;
     }
 
     /**

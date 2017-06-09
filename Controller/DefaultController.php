@@ -18,40 +18,22 @@ class DefaultController extends AbstractKRCMSController
      * Get a page
      *
      * @param Request $request       The request object
-     * @param string  $sitePermalink Permalink of the site (if any)
      * @param string  $permalink     Permalink of the page (or else we asume it's the homepage)
      *
      * @return Response
      * @throws Exception
      * @throws NotFoundHttpException
      */
-    public function pageAction(Request $request, $sitePermalink = '', $permalink = null)
+    public function pageAction(Request $request, $permalink = null)
     {
-        $site = $this->getSiteManager()->getActiveSiteByPermalink($sitePermalink);
-
-        if (null === $site) {
-            if ($this->getSiteManager()->getSiteByPermalink($sitePermalink) !== null) {
-                throw new Exception('Site \''.$sitePermalink.'\' not active');
-            } else {
-                throw new Exception('Site \''.$sitePermalink.'\' not found');
-            }
-        }
-
-        if (null === $permalink) {
-            $page = $site->getHomepage();
-        } else {
-            $page = $this->getPageRepository()->getActivePageFromSiteAndPermalink($site, $permalink);
-            if ($site->getHomepage() === $page) {
-                return $this->redirect($this->generateUrl('homepage'));
-            }
-        }
+        $page = $this->getPageRepository()->getActivePageFromPermalink($permalink);
 
         if (null === $page) {
-            $page404 = $this->getPageRepository()->getActivePageFromSiteAndPermalink($site, '404');
+            $page404 = $this->getPageRepository()->getActivePageFromPermalink('404');
             if (null !== $page404) {
                 $response = new Response();
 
-                $response->setContent($this->render('KRSolutionsKRCMSBundle:'.$site->getId().':page.html.twig', array('site' => $site, 'page' => $page)));
+                $response->setContent($this->render('KRSolutionsKRCMSBundle:'.$page404->getId().':page.html.twig', array('page' => $page)));
                 $response->setStatusCode(404);
 
                 return $response;
@@ -67,36 +49,23 @@ class DefaultController extends AbstractKRCMSController
         /* @var $pageHandler \KRSolutions\Bundle\KRCMSBundle\PageHandler\PageHandlerInterface */
         $pageHandler = $this->get($page->getPageType()->getPageHandler());
 
-        return $pageHandler->handlePage($site, $page, $request);
+        return $pageHandler->handlePage($page, $request);
     }
 
     /**
      * Get a sitemap
      *
-     * @param string $permalink
-     *
      * @return Response
-     * @throws Exception
      */
-    public function sitemapAction($permalink = '')
+    public function sitemapAction()
     {
-        $site = $this->getSiteRepository()->getActiveSiteByPermalink($permalink);
-
-        if (null === $site) {
-            if ($this->getSiteRepository()->getSiteByPermalink($permalink) !== null) {
-                throw new Exception('Site \''.$permalink.'\' not active');
-            } else {
-                throw new Exception('Site \''.$permalink.'\' not found');
-            }
-        }
-
-        $pages = $this->getPageRepository()->getActivePagesFromSite($site);
+        $pages = $this->getPageRepository()->getActivePages();
 
         $sitemapXml = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>';
         $urlset = new SimpleXMLElement($sitemapXml);
 
         foreach ($pages as $page) {
-            if ($page !== $site->getHomepage() && ($page->getPermalink() == null || trim($page->getPermalink() == ''))) {
+            if ($page->getPermalink() == null || trim($page->getPermalink() == '')) {
                 continue;
             }
             $url = $urlset->addChild('url');

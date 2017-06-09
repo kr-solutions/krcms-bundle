@@ -2,6 +2,7 @@
 
 namespace KRSolutions\Bundle\KRCMSBundle\Form\Type;
 
+use FM\ElfinderBundle\Form\Type\ElFinderType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -36,8 +37,13 @@ class KRCMSCategoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, array('label' => 'Naam', 'required' => true, 'error_bubbling' => true))
-            ->add('description', null, array('label' => 'Omschrijving', 'required' => false, 'error_bubbling' => true));
+            ->add('name', null, array('label' => 'form.type.category.name.label', 'required' => true, 'error_bubbling' => true))
+            ->add('imageUri', ElFinderType::class, array(
+                'label' => 'form.type.category.imageUri.label',
+                'required' => true,
+                'error_bubbling' => true,
+                'instance' => 'krcms_form',
+        ));
     }
 
     /**

@@ -17,8 +17,11 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Category:
             type: string
             nullable: false
             length: 255
-        description:
-            type: text
-            nullable: false
-            length: null
+        imageUri:
+            type: string
+            length: 255
+    oneToMany:
+        pages:
+            targetEntity: PageInterface
+            mappedBy: category
     lifecycleCallbacks: {  }

@@ -1,9 +1,9 @@
 services:
-    kr_solutions_krcms.site_manager:
-        class: KRSolutions\Bundle\KRCMSBundle\Doctrine\SiteManager
+    kr_solutions_krcms.slider_manager:
+        class: KRSolutions\Bundle\KRCMSBundle\Doctrine\SliderManager
         arguments:
             - "@doctrine.orm.entity_manager"
-            - "%kr_solutions_krcms.model.site_class%"
+            - "%kr_solutions_krcms.model.slider_class%"
 
     kr_solutions_krcms.page_manager:
         class: KRSolutions\Bundle\KRCMSBundle\Doctrine\PageManager
@@ -16,3 +16,9 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "%kr_solutions_krcms.model.menu_class%"
+
+    kr_solutions_krcms.category_manager:
+        class: KRSolutions\Bundle\KRCMSBundle\Doctrine\CategoryManager
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "%kr_solutions_krcms.model.category_class%"

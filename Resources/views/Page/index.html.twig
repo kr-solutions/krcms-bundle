@@ -26,7 +26,7 @@
 								{% if app.request.attributes.get('_route') == 'kr_solutions_krcms_pages_add' and app.request.attributes.get('pageType') == pageType.id %}
 									class="active"
 								{% endif %}>
-								<a href="{{ path('kr_solutions_krcms_pages_add', { 'siteId': site.id, 'pageTypeId': pageType.id }) }}" data-trigger="hover" data-placement="left" rel="popover" title="{{ pageType.name }}" data-container="body" data-content="{{ pageType.description }}"><i class="fa fa-fw fa-file-o"></i> {{ pageType.name }}</a>
+								<a href="{{ path('kr_solutions_krcms_pages_add', { 'pageTypeId': pageType.id }) }}" data-trigger="hover" data-placement="left" rel="popover" title="{{ pageType.name }}" data-container="body" data-content="{{ pageType.description }}"><i class="fa fa-fw fa-file-o"></i> {{ pageType.name }}</a>
 							</li>
 						{% endif %}
 					{% endfor %}
@@ -38,7 +38,7 @@
 				{% else %}
 					{% set parentPageId = null %}
 				{% endif %}
-				<a href="{{ url('kr_solutions_krcms_pages_index', { 'siteId': site.id, 'parentPageId': parentPageId }) }}" class="btn btn-default" type="button"><i class="fa fa-fw fa-caret-left"></i> {{ 'layout.back'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+				<a href="{{ url('kr_solutions_krcms_pages_index', { 'parentPageId': parentPageId }) }}" class="btn btn-default" type="button"><i class="fa fa-fw fa-caret-left"></i> {{ 'layout.back'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
 			{% endif %}
 		</div>
 	</div>
@@ -81,7 +81,7 @@
 										<td><a href="{{ path('kr_solutions_krcms_pages_edit', { 'pageId': page.id }) }}" title="{{ 'page.edit_page'|trans({}, 'KRSolutionsKRCMSBundle') }}"><b>{{ page.title }}</b></a></td>
 										<td>{{ page.pageType.name }}</td>
 										<td>{{ page.createdAt|localizeddate('medium', 'none') }}</td>
-										<td>{% if page.pageType.hasChildren == true %}<a href="{{ path('kr_solutions_krcms_pages_index', { 'siteId': site.id, 'parentPageId': page.id }) }}">{{ 'page.manage_subpages'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>{% else %}{{ 'page.no_subpages'|trans({}, 'KRSolutionsKRCMSBundle') }}{% endif %}</td>
+										<td>{% if page.pageType.hasChildren == true %}<a href="{{ path('kr_solutions_krcms_pages_index', { 'parentPageId': page.id }) }}">{{ 'page.manage_subpages'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>{% else %}{{ 'page.no_subpages'|trans({}, 'KRSolutionsKRCMSBundle') }}{% endif %}</td>
 										<td class="btn-toolbar">
 											<div class="btn-group pull-right">
 												{% if true == page.pageType.hasFiles %}
@@ -112,7 +112,7 @@
 									<td><a href="{{ path('kr_solutions_krcms_pages_edit', { 'pageId': page.id }) }}" title="{{ 'page.edit_page'|trans({}, 'KRSolutionsKRCMSBundle') }}"><b>{{ page.title }}</b></a></td>
 									<td>{{ page.pageType.name }}</td>
 									<td>{{ page.createdAt|localizeddate('medium', 'none') }}</td>
-									<td>{% if page.pageType.hasChildren == true %}<a href="{{ path('kr_solutions_krcms_pages_index', { 'siteId': site.id, 'parentPageId': page.id }) }}">{{ 'page.manage_subpages'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>{% else %}{{ 'page.no_subpages'|trans({}, 'KRSolutionsKRCMSBundle') }}{% endif %}</td>
+									<td>{% if page.pageType.hasChildren == true %}<a href="{{ path('kr_solutions_krcms_pages_index', { 'parentPageId': page.id }) }}">{{ 'page.manage_subpages'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>{% else %}{{ 'page.no_subpages'|trans({}, 'KRSolutionsKRCMSBundle') }}{% endif %}</td>
 									<td>
 										<div class="btn-group pull-right" role="group">
 											{% if true == page.pageType.hasFiles %}
