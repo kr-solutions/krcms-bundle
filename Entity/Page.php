@@ -367,7 +367,32 @@ class Page implements PageInterface
      */
     public function getPages()
     {
-        return $this->pages;
+        $pages = $this->pages->toArray();
+
+        if (isset($this->pageType)) {
+            $orderBy = $this->pageType->getChildrenOrderBy();
+            $orderDirection = $this->pageType->getChildrenOrderDirection();
+
+            switch ($orderBy) {
+                case 'createdAt':
+                    usort($pages, function ($item1, $item2) use ($orderDirection) {
+                        if ($item1->getCreatedAt() == $item2->getCreatedAt()) {
+                            return 0;
+                        }
+                        if ($orderDirection === 'asc') {
+                            return $item1->getCreatedAt() < $item2->getCreatedAt() ? -1 : 1;
+                        } else {
+                            return $item1->getCreatedAt() > $item2->getCreatedAt() ? -1 : 1;
+                        }
+                    });
+                    break;
+                default:
+                    die();
+                    break;
+            }
+        }
+
+        return $pages;
     }
 
     /**
