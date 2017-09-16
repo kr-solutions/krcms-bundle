@@ -24,7 +24,7 @@ class DefaultController extends AbstractKRCMSController
      * @throws Exception
      * @throws NotFoundHttpException
      */
-    public function pageAction(Request $request, $permalink = null)
+    public function pageAction(Request $request, $permalink = null, $pageNumber = null)
     {
         $page = $this->getPageRepository()->getActivePageFromPermalink($permalink);
 
@@ -42,12 +42,14 @@ class DefaultController extends AbstractKRCMSController
             throw $this->createNotFoundException('Page not found');
         }
 
-        if (!$this->has($page->getPageType()->getPageHandler())) {
-            throw new Exception('Page handler service \''.$page->getPageType()->getPageHandler().'\' does not exist');
+        $pageType = $page->getPageType();
+
+        if (!$this->has($pageType->getPageHandler())) {
+            throw new Exception('Page handler service \''.$pageType->getPageHandler().'\' does not exist');
         }
 
         /* @var $pageHandler \KRSolutions\Bundle\KRCMSBundle\PageHandler\PageHandlerInterface */
-        $pageHandler = $this->get($page->getPageType()->getPageHandler());
+        $pageHandler = $this->get($pageType->getPageHandler());
 
         return $pageHandler->handlePage($page, $request);
     }
@@ -65,9 +67,6 @@ class DefaultController extends AbstractKRCMSController
         $urlset = new SimpleXMLElement($sitemapXml);
 
         foreach ($pages as $page) {
-            if ($page->getPermalink() == null || trim($page->getPermalink() == '')) {
-                continue;
-            }
             $url = $urlset->addChild('url');
             $url->addChild('loc', $this->generateUrl('kr_solutions_krcms_page', array('permalink' => $page->getPermalink()), true));
         }

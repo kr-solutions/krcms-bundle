@@ -8,11 +8,8 @@
 		<title>{% block title %}K&amp;R - Content Management System{% endblock %}</title>
 
 		{% block stylesheets %}
-			<link href="{{ asset('bundles/krsolutionskrcms/vendor/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet" />
-			<link href="{{ asset('bundles/krsolutionskrcms/vendor/bootstrap/dist/css/bootstrap-theme.min.css') }}" rel="stylesheet" />
-			<link href="{{ asset('bundles/krsolutionskrcms/vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" />
-			<link href="{{ asset('bundles/krsolutionskrcms/css/sb-admin.css') }}" rel="stylesheet" />
-			<link href="{{ asset('bundles/krsolutionskrcms/css/application.css') }}" rel="stylesheet" />
+			<link href="{{ asset('bundles/krsolutionskrcms/dist/css/vendor.min.css') }}" rel="stylesheet" />
+			<link href="{{ asset('bundles/krsolutionskrcms/dist/css/app.min.css') }}" rel="stylesheet" />
 
 			<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 			<!--[if lt IE 9]>
@@ -41,7 +38,7 @@
 					</div>
 
 					<div id="page-footer" class="row">
-						<img src="{{ asset('bundles/krsolutionskrcms/images/logo-sm.png') }}" alt="K&amp;R" /> Content Management System
+						<img src="{{ asset('bundles/krsolutionskrcms/dist/img/logo-sm.png') }}" alt="K&amp;R" /> Content Management System
 					</div>
 				</div>
 			</div>
@@ -51,10 +48,8 @@
             <script type="text/javascript">
                 var krcms_generate_page_permalink_route = '{{ path('kr_solutions_krcms_pages_generate_permalink') }}';
             </script>
-			<script type="text/javascript" src="{{ asset('bundles/krsolutionskrcms/vendor/jquery/dist/jquery.min.js') }}"></script>
-			<script type="text/javascript" src="{{ asset('bundles/krsolutionskrcms/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-			<script type="text/javascript" src="{{ asset('bundles/krsolutionskrcms/vendor/TableDnD/js/jquery.tablednd.0.8.min.js') }}"></script>
-			<script type="text/javascript" src="{{ asset('bundles/krsolutionskrcms/js/application.js') }}"></script>
+			<script type="text/javascript" src="{{ asset('bundles/krsolutionskrcms/dist/js/vendor.min.js') }}"></script>
+			<script type="text/javascript" src="{{ asset('bundles/krsolutionskrcms/dist/js/app.min.js') }}"></script>
 		{% endblock %}
 
 	</body>
