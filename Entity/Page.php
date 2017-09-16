@@ -386,8 +386,49 @@ class Page implements PageInterface
                         }
                     });
                     break;
+                case 'updatedAt':
+                    usort($pages, function ($item1, $item2) use ($orderDirection) {
+                        if ($item1->getUpdatedAt() == $item2->getUpdatedAt()) {
+                            return 0;
+                        }
+                        if ($orderDirection === 'asc') {
+                            return $item1->getUpdatedAt() < $item2->getUpdatedAt() ? -1 : 1;
+                        } else {
+                            return $item1->getUpdatedAt() > $item2->getUpdatedAt() ? -1 : 1;
+                        }
+                    });
+                    break;
+                case 'orderId':
+                    usort($pages, function ($item1, $item2) use ($orderDirection) {
+                        if ($item1->getOrderId() == $item2->getOrderId()) {
+                            return 0;
+                        }
+                        if ($orderDirection === 'asc') {
+                            return $item1->getOrderId() < $item2->getOrderId() ? -1 : 1;
+                        } else {
+                            return $item1->getOrderId() > $item2->getOrderId() ? -1 : 1;
+                        }
+                    });
+                    break;
+                case 'title':
+                    usort($pages, function ($item1, $item2) use ($orderDirection) {
+                        if ($orderDirection == 'asc') {
+                            return strcasecmp($item1->getTitle(), $item2->getTitle());
+                        } else {
+                            return strcasecmp($item2->getTitle(), $item1->getTitle());
+                        }
+                    });
+                    break;
+                case 'permalink':
+                    usort($pages, function ($item1, $item2) use ($orderDirection) {
+                        if ($orderDirection == 'asc') {
+                            return strcasecmp($item1->getPermalink(), $item2->getPermalink());
+                        } else {
+                            return strcasecmp($item2->getPermalink(), $item1->getPermalink());
+                        }
+                    });
+                    break;
                 default:
-                    die();
                     break;
             }
         }
