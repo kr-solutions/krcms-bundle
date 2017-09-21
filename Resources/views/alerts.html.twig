@@ -1,17 +1,17 @@
 {% if app.session.flashbag.peekAll()|length > 0 %}
-	<div class="row">
-		<div class="col-lg-12">
-			{% for type, flashMessages in app.session.flashbag.all() %}
-				{% for flashMessage in flashMessages %}
-					{% if "alert-" == type|slice(0, 6) %}
-						<div class="alert {{ type }} alert-dismissible" role="alert">
-							<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'layout.close'|trans({}, 'KRSolutionsKRCMSBundle') }}</span></button>
-								{{ flashMessage|raw }}
-						</div>
-						<div class="clearfix"></div>
-					{% endif %}
-				{% endfor %}
-			{% endfor %}
-		</div>
-	</div>
+    <div class="row">
+        <div class="col-lg-12">
+            {% for type, flashMessages in app.session.flashbag.all() %}
+                {% for flashMessage in flashMessages %}
+                    {% if "alert-" == type|slice(0, 6) %}
+                        <div class="alert {{ type }} alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'layout.close'|trans({}, 'KRSolutionsKRCMSBundle') }}</span></button>
+                                {{ flashMessage|raw }}
+                        </div>
+                        <div class="clearfix"></div>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
 {% endif %}

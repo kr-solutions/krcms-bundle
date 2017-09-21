@@ -3,6 +3,7 @@
 namespace KRSolutions\Bundle\KRCMSBundle\Controller;
 
 use Exception;
+use KRSolutions\Bundle\KRCMSBundle\Entity\Page;
 use SimpleXMLElement;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,41 +18,57 @@ class DefaultController extends AbstractKRCMSController
     /**
      * Get a page
      *
-     * @param Request $request       The request object
-     * @param string  $permalink     Permalink of the page (or else we asume it's the homepage)
+     * @param Request $request The request object
+     * @param Page    $page    The page entity
      *
      * @return Response
      * @throws Exception
      * @throws NotFoundHttpException
      */
-    public function pageAction(Request $request, $permalink = null, $pageNumber = null)
+    public function pageAction(Request $request, \Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Orm\Route $routeDocument = null, $contentDocument = null, $template = null, $page = 1)
     {
-        $page = $this->getPageRepository()->getActivePageFromPermalink($permalink);
+        /* @var $contentDocument Page */
+        if ($contentDocument->getPageType()->getHasChildren()) {
+            /* @var $pageRepository \KRSolutions\Bundle\KRCMSBundle\Repository\PageRepository */
+            $pageRepository = $this->getDoctrine()->getRepository('KRSolutionsKRCMSBundle:Page');
 
-        if (null === $page) {
-            $page404 = $this->getPageRepository()->getActivePageFromPermalink('404');
-            if (null !== $page404) {
-                $response = new Response();
+            $childrenQB = $pageRepository->getActiveChildrenQB($contentDocument);
 
-                $response->setContent($this->render('KRSolutionsKRCMSBundle:'.$page404->getId().':page.html.twig', array('page' => $page)));
-                $response->setStatusCode(404);
+            $paginator = $this->get('knp_paginator');
+            $children = $paginator->paginate(
+                $childrenQB, $page < 1 ? 1 : $page, $contentDocument->getPageType()->getChildrenPerPage() < 1 ? 10 : $contentDocument->getPageType()->getChildrenPerPage()
+            );
 
-                return $response;
+            /* @var $children \Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination */
+
+            if ($children->getCurrentPageNumber() > 1) {
+                $next_page_url = $this->generateUrl($routeDocument->getName(), array(
+                    'page' => $children->getCurrentPageNumber() - 1
+                ));
+            } else {
+                $next_page_url = null;
             }
 
-            throw $this->createNotFoundException('Page not found');
+            if ($children->getCurrentPageNumber() <= $children->getPageCount()) {
+                $prev_page_url = $this->generateUrl($routeDocument->getName(), array(
+                    'page' => $children->getCurrentPageNumber() + 1
+                ));
+            } else {
+                $prev_page_url = null;
+            }
+        } else {
+            $children = array();
+            $next_page_url = null;
+            $prev_page_url = null;
         }
 
-        $pageType = $page->getPageType();
-
-        if (!$this->has($pageType->getPageHandler())) {
-            throw new Exception('Page handler service \''.$pageType->getPageHandler().'\' does not exist');
-        }
-
-        /* @var $pageHandler \KRSolutions\Bundle\KRCMSBundle\PageHandler\PageHandlerInterface */
-        $pageHandler = $this->get($pageType->getPageHandler());
-
-        return $pageHandler->handlePage($page, $request);
+        return $this->render($template, array(
+                'page' => $contentDocument,
+                'children' => $children,
+                'next_page_url' => $next_page_url,
+                'prev_page_url' => $prev_page_url,
+                'route' => $routeDocument,
+        ));
     }
 
     /**

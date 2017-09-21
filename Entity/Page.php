@@ -126,6 +126,11 @@ class Page implements PageInterface
     protected $tags;
 
     /**
+     * @var \Symfony\Cmf\Component\Routing\RouteObjectInterface[]|ArrayCollection
+     */
+    private $routes;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -133,6 +138,7 @@ class Page implements PageInterface
         $this->pages = new ArrayCollection();
         $this->files = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->routes = new ArrayCollection();
 
         $this->createdAt = new \DateTime('now');
         $this->updatedAt = new \DateTime('now');
@@ -630,6 +636,42 @@ class Page implements PageInterface
     public function getTags()
     {
         return $this->tags;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getRoutes()
+    {
+        return $this->routes;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setRoutes($routes)
+    {
+        $this->routes = $routes;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addRoute($route)
+    {
+        $this->routes[] = $route;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeRoute($route)
+    {
+        $this->routes->removeElement($route);
+
+        return $this;
     }
 
     /**

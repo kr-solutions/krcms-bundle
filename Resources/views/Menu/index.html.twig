@@ -5,96 +5,96 @@
 {% block title %}Menu's - Content Management Systeem{% endblock %}
 
 {% block header %}
-	<div class="col-lg-12">
-		<h1 class="page-header">{{ 'menu.index.header.menus'|trans({}, 'KRSolutionsKRCMSBundle') }}</h1>
-	</div>
+    <div class="col-lg-12">
+        <h1 class="page-header">{{ 'menu.index.header.menus'|trans({}, 'KRSolutionsKRCMSBundle') }}</h1>
+    </div>
 {% endblock %}
 
 {% block content %}
-	<div class="col-md-4">
-		<div class="well">
+    <div class="col-md-4">
+        <div class="well">
             {{ form_start(menuForm, {attr: {id: 'menuForm', novalidate: 'novalidate'} }) }}
-				<fieldset>
-					<legend>{{ 'menu.add_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}</legend>
+            <fieldset>
+                <legend>{{ 'menu.add_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}</legend>
 
-					{{ form_errors(menuForm) }}
-					{{ form_rest(menuForm) }}
-				</fieldset>
+                {{ form_errors(menuForm) }}
+                {{ form_rest(menuForm) }}
+            </fieldset>
 
-				<button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-save"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
-			{{ form_end(menuForm) }}
-		</div>
-	</div>
-	<div class="col-md-8">
-		<div class="well">
-			{% if menus|length > 0 %}
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th style="width: 20%;">{{ 'menu.name'|trans({}, 'KRSolutionsKRCMSBundle') }}</th>
-							<th>{{ 'menu.description'|trans({}, 'KRSolutionsKRCMSBundle') }}</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-						{% for menu in menus %}
-							<tr>
-								<td><a href="{{ path('kr_solutions_krcms_menus_edit', { 'menuId': menu.id }) }}" title="{{ 'menu.edit_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}"><b>{{ menu.name }}</b></a></td>
-								<td>{{ menu.description }}</td>
-								<td class="btn-toolbar">
-									<div class="btn-group pull-right">
-										<a href="{{ path('kr_solutions_krcms_menus_edit', { 'menuId': menu.id }) }}" class="btn btn-default" title="{{ 'menu.edit_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-fw fa-edit"></i> {{ 'layout.edit'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
-										<button type="button" class="btn btn-default" data-toggle="modal" data-target="#menu_remove_modal" data-menu_id="{{ menu.id }}" title="{{ 'menu.remove_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-fw fa-trash"></i> {{ 'layout.remove'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
-									</div>
-								</td>
-							</tr>
-						{% endfor %}
-					</tbody>
-				</table>
-			{% else %}
-				<p>Er zijn nog geen menu's toegevoegd.</p>
-				<p>Klik op <strong>"Menu toevoegen"</strong> aan de rechterkant om een menu toe te voegen.</p>
-			{% endif %}
-		</div>
-	</div>
+            <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-save"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
+            {{ form_end(menuForm) }}
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="well">
+            {% if menus|length > 0 %}
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th style="width: 20%;">{{ 'menu.name'|trans({}, 'KRSolutionsKRCMSBundle') }}</th>
+                            <th>{{ 'menu.description'|trans({}, 'KRSolutionsKRCMSBundle') }}</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for menu in menus %}
+                            <tr>
+                                <td><a href="{{ path('kr_solutions_krcms_menus_edit', { 'menuId': menu.id }) }}" title="{{ 'menu.edit_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}"><b>{{ menu.name }}</b></a></td>
+                                <td>{{ menu.description }}</td>
+                                <td class="btn-toolbar">
+                                    <div class="btn-group pull-right">
+                                        <a href="{{ path('kr_solutions_krcms_menus_edit', { 'menuId': menu.id }) }}" class="btn btn-default" title="{{ 'menu.edit_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-fw fa-edit"></i> {{ 'layout.edit'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+                                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#menu_remove_modal" data-menu_id="{{ menu.id }}" title="{{ 'menu.remove_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-fw fa-trash"></i> {{ 'layout.remove'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>Er zijn nog geen menu's toegevoegd.</p>
+                <p>Klik op <strong>"Menu toevoegen"</strong> aan de rechterkant om een menu toe te voegen.</p>
+            {% endif %}
+        </div>
+    </div>
 
-	{# Modals #}
-	<div class="modal fade" id="menu_remove_modal" tabindex="-1" role="dialog" aria-labelledby="menu_remove_modal_title" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="menu_remove_modal_title">{{ 'menu.remove_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}</h4>
-				</div>
-				<div class="modal-body">
-					<p>{{ 'menu.remove_confirmation.title'|trans({}, 'KRSolutionsKRCMSBundle') }}</p>
-					<p><small>{{ 'menu.remove_confirmation.message'|trans({}, 'KRSolutionsKRCMSBundle') }}</small></p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">{{ 'layout.cancel'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
-					<a href="#" type="button" class="btn btn-primary menu_remove_action">{{ 'layout.remove'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	{# End modals #}
+    {# Modals #}
+    <div class="modal fade" id="menu_remove_modal" tabindex="-1" role="dialog" aria-labelledby="menu_remove_modal_title" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="menu_remove_modal_title">{{ 'menu.remove_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>{{ 'menu.remove_confirmation.title'|trans({}, 'KRSolutionsKRCMSBundle') }}</p>
+                    <p><small>{{ 'menu.remove_confirmation.message'|trans({}, 'KRSolutionsKRCMSBundle') }}</small></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'layout.cancel'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
+                    <a href="#" type="button" class="btn btn-primary menu_remove_action">{{ 'layout.remove'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {# End modals #}
 
 {% endblock %}
 
 {% block javascripts %}
-	{{ parent() }}
+    {{ parent() }}
 
-	<script type="text/javascript" lang="javascript">
-		$(document).ready(function () {
-			$('#menu_remove_modal').on('show.bs.modal', function (event) {
-				var button = $(event.relatedTarget);
-				var menuId = button.data('menu_id');
-				var remove_url_holder = '{{ path('kr_solutions_krcms_menus_remove', {'menuId': 0}) }}';
+    <script type="text/javascript" lang="javascript">
+        $(document).ready(function () {
+            $('#menu_remove_modal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var menuId = button.data('menu_id');
+                var remove_url_holder = '{{ path('kr_solutions_krcms_menus_remove', {'menuId': 0}) }}';
 
-				var modal = $(this);
-				modal.find('.menu_remove_action').attr('href', remove_url_holder.replace('0', menuId));
-			});
-		});
-	</script>
+                var modal = $(this);
+                modal.find('.menu_remove_action').attr('href', remove_url_holder.replace('0', menuId));
+            });
+        });
+    </script>
 
 {% endblock %}

@@ -21,11 +21,10 @@ KRSolutions\Bundle\KRCMSBundle\Entity\PageType:
             type: text
             nullable: true
             length: null
-        pageHandler:
+        controller:
             type: string
             nullable: true
             length: 255
-            column: page_handler
         template:
             type: string
             nullable: true
@@ -70,6 +69,11 @@ KRSolutions\Bundle\KRCMSBundle\Entity\PageType:
             length: 4
             nullable: true
             column: children_order_direction
+        childrenPerPage:
+            type: integer
+            nullable: false
+            default: '10'
+            column: children_per_page
         hasCategory:
             type: boolean
             nullable: false

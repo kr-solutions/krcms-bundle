@@ -22,8 +22,9 @@ form.type.pageType.childrenOrderBy.choices.permalink: Permalink
 form.type.pageType.childrenOrderDirection.label: 'Subpages order direction'
 form.type.pageType.childrenOrderDirection.choices.desc: Descending
 form.type.pageType.childrenOrderDirection.choices.asc: Ascending
+form.type.pageType.childrenPerPage.label: 'Children per page'
 form.type.pageType.template.label: 'Template location'
-form.type.pageType.pageHandler.label: 'Service id for this page type'
+form.type.pageType.controller.label: 'Controller for this page type'
 form.type.pageType.pageTypeChildren.label: 'Possible subpages'
 form.type.page.title.label: Title
 form.type.page.permalink.label: Permalink

@@ -204,7 +204,7 @@ class MenuTwigExtension extends \Twig_Extension
             $html.= '<li>';
         }
 
-        $html.= '<a href="'.$this->generateUrl('kr_solutions_krcms_page', array('permalink' => $parent->getPermalink()), UrlGeneratorInterface::ABSOLUTE_URL).'"><span>'.trim($parent->getMenuTitle()).'</span></a>';
+        $html.= '<a href="'.$this->generateUrl($parent->getRoutes()->first(), array(), UrlGeneratorInterface::ABSOLUTE_URL).'"><span>'.trim($parent->getMenuTitle()).'</span></a>';
         $html.= $nestedHtml;
         $html.= '</li>';
 

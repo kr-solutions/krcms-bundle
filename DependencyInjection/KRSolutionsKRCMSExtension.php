@@ -86,8 +86,27 @@ class KRSolutionsKRCMSExtension extends Extension implements PrependExtensionInt
         $configs = $container->getExtensionConfig($this->getAlias());
         $config = $this->processConfiguration(new Configuration(), $configs);
 
+        $cmfRoutingBundleConfig = array();
         $ivoryCkEditorConfig = array();
         $fmElfinderConfig = array();
+
+        if (isset($bundles['CmfRoutingBundle'])) {
+            $cmfRoutingBundleConfig = array(
+                'chain' => array(
+                    'routers_by_id' => array(
+                        "router.default" => 200,
+                        "cmf_routing.dynamic_router" => 100,
+                    ),
+                ),
+                'dynamic' => array(
+                    "persistence" => array(
+                        "orm" => array(
+                            "enabled" => true,
+                        ),
+                    ),
+                ),
+            );
+        }
 
         if (isset($bundles['IvoryCKEditorBundle'])) {
             $ivoryCkEditorConfig = array(
@@ -152,6 +171,9 @@ class KRSolutionsKRCMSExtension extends Extension implements PrependExtensionInt
                     break;
                 case 'fm_elfinder':
                     $container->prependExtensionConfig($name, $fmElfinderConfig);
+                    break;
+                case 'cmf_routing':
+                    $container->prependExtensionConfig($name, $cmfRoutingBundleConfig);
                     break;
                 default:
                     break;

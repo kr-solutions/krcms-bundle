@@ -22,8 +22,9 @@ form.type.pageType.childrenOrderBy.choices.permalink: Permalink
 form.type.pageType.childrenOrderDirection.label: 'Subpagina sorteer richting'
 form.type.pageType.childrenOrderDirection.choices.desc: Aflopend
 form.type.pageType.childrenOrderDirection.choices.asc: Oplopend
+form.type.pageType.childrenPerPage.label: 'Aantal pagina''s tonen'
 form.type.pageType.template.label: 'Template locatie'
-form.type.pageType.pageHandler.label: 'Service id voor dit pagina type'
+form.type.pageType.controller.label: 'Controller voor dit pagina type'
 form.type.pageType.pageTypeChildren.label: 'Mogelijke subpagina''s'
 form.type.page.title.label: Titel
 form.type.page.permalink.label: Permalink

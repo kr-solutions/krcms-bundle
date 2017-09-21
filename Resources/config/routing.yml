@@ -1,17 +1,40 @@
-kr_solutions_krcms_homepage:
-    path:  /
-    defaults: { _controller: KRSolutionsKRCMSBundle:Default:page }
+elfinder:
+     resource: "@FMElfinderBundle/Resources/config/routing.yml"
 
-kr_solutions_krcms_sitemap:
-    path:  /sitemap.xml
-    defaults: { _controller: KRSolutionsKRCMSBundle:Default:sitemap }
+kr_solutions_krcms_dashboard:
+    path: /
+    defaults: { _controller: KRSolutionsKRCMSBundle:Dashboard:index }
 
-kr_solutions_krcms_page:
-    path:  /{permalink}
-    defaults: { _controller: KRSolutionsKRCMSBundle:Default:page, permalink: '' }
+kr_solutions_krcms_helpdesk:
+    path: /helpdesk
+    defaults: { _controller: KRSolutionsKRCMSBundle:Helpdesk:helpdesk }
 
-kr_solutions_krcms_blog:
-    path:  /{permalink}/{pageNumber}
-    defaults: { _controller: KRSolutionsKRCMSBundle:Default:page }
-    requirements:
-        pageNumber: \d+
+# Pages
+kr_solutions_krcms_pages:
+    resource: "@KRSolutionsKRCMSBundle/Resources/config/routing_pages.yml"
+    prefix: /pages
+
+# PageTypes
+kr_solutions_krcms_page_types:
+    resource: "@KRSolutionsKRCMSBundle/Resources/config/routing_page_types.yml"
+    prefix: /page-types
+
+# Files
+kr_solutions_krcms_files:
+    resource: "@KRSolutionsKRCMSBundle/Resources/config/routing_files.yml"
+    prefix: /files
+
+# Menus
+kr_solutions_krcms_menus:
+    resource: "@KRSolutionsKRCMSBundle/Resources/config/routing_menus.yml"
+    prefix: /menus
+
+# Categories
+kr_solutions_krcms_categories:
+    resource: "@KRSolutionsKRCMSBundle/Resources/config/routing_categories.yml"
+    prefix: /categories
+
+# Sliders
+kr_solutions_krcms_sliders:
+    resource: "@KRSolutionsKRCMSBundle/Resources/config/routing_sliders.yml"
+    prefix: /sliders

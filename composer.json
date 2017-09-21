@@ -12,8 +12,10 @@
     ],
     "require": {
         "twig/extensions": "^1.2",
+        "symfony-cmf/routing-bundle": "^2.0",
         "egeloen/ckeditor-bundle": "^4.0",
-        "helios-ag/fm-elfinder-bundle": "~6"
+        "helios-ag/fm-elfinder-bundle": "~6",
+        "knplabs/knp-paginator-bundle": "^2.6"
     },
     "suggest": {
         "tinify/tinify": "Create an account on https://tinypng.com/ and get an API key to compress all uploaded images"

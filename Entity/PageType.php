@@ -28,7 +28,7 @@ class PageType implements PageTypeInterface
     /**
      * @var string
      */
-    protected $pageHandler;
+    protected $controller;
 
     /**
      * @var string
@@ -74,6 +74,11 @@ class PageType implements PageTypeInterface
      * @var string
      */
     protected $childrenOrderDirection;
+
+    /**
+     * @var integer
+     */
+    protected $childrenPerPage;
 
     /**
      * @var boolean
@@ -127,8 +132,8 @@ class PageType implements PageTypeInterface
     {
         $this->pageTypeParents = new ArrayCollection();
         $this->pageTypeChildren = new ArrayCollection();
-
-        $this->pageHandler = 'kr_solutions_krcms.page_handler.page';
+        $this->childrenPerPage = 10;
+        $this->controller = 'KRSolutionsKRCMSBundle:Default:page';
     }
 
     /**
@@ -178,9 +183,9 @@ class PageType implements PageTypeInterface
     /**
      * {@inheritDoc}
      */
-    public function setPageHandler($pageHandler)
+    public function setController($controller)
     {
-        $this->pageHandler = $pageHandler;
+        $this->controller = $controller;
 
         return $this;
     }
@@ -188,9 +193,9 @@ class PageType implements PageTypeInterface
     /**
      * {@inheritDoc}
      */
-    public function getPageHandler()
+    public function getController()
     {
-        return $this->pageHandler;
+        return $this->controller;
     }
 
     /**
@@ -353,6 +358,24 @@ class PageType implements PageTypeInterface
     public function getChildrenOrderDirection()
     {
         return $this->childrenOrderDirection;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setChildrenPerPage($childrenPerPage)
+    {
+        $this->childrenPerPage = $childrenPerPage;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getChildrenPerPage()
+    {
+        return $this->childrenPerPage;
     }
 
     /**

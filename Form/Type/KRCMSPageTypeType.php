@@ -5,6 +5,7 @@ namespace KRSolutions\Bundle\KRCMSBundle\Form\Type;
 use KRSolutions\Bundle\KRCMSBundle\Form\DataTransformer\NullToEmptyNumberTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -124,8 +125,13 @@ class KRCMSPageTypeType extends AbstractType
             'error_bubbling' => true,
             'choices_as_values' => true,
         ));
+        $builder->add('childrenPerPage', IntegerType::class, array(
+            'label' => 'form.type.pageType.childrenPerPage.label',
+            'required' => true,
+            'error_bubbling' => true,
+        ));
+        $builder->add('controller', null, array('label' => 'form.type.pageType.controller.label', 'required' => false, 'error_bubbling' => true));
         $builder->add('template', null, array('label' => 'form.type.pageType.template.label', 'required' => false, 'error_bubbling' => true));
-        $builder->add('pageHandler', null, array('label' => 'form.type.pageType.pageHandler.label', 'required' => false, 'error_bubbling' => true));
         $builder->add('pageTypeChildren', null, array(
             'label' => 'form.type.pageType.pageTypeChildren.label',
             'required' => false,

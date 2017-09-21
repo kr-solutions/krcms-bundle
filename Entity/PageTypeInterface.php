@@ -48,20 +48,20 @@ interface PageTypeInterface
     public function getDescription();
 
     /**
-     * Set pageHandler
+     * Set controller
      *
-     * @param string $pageHandler
+     * @param string $controller
      *
      * @return PageTypeInterface
      */
-    public function setPageHandler($pageHandler);
+    public function setController($controller);
 
     /**
-     * Get pageHandler
+     * Get controller
      *
      * @return string
      */
-    public function getPageHandler();
+    public function getController();
 
     /**
      * Set template
@@ -206,6 +206,22 @@ interface PageTypeInterface
      * @return string
      */
     public function getChildrenOrderDirection();
+
+    /**
+     * Set childrenPerPage
+     *
+     * @param integer $childrenPerPage
+     *
+     * @return PageTypeInterface
+     */
+    public function setChildrenPerPage($childrenPerPage);
+
+    /**
+     * Get childrenPerPage
+     *
+     * @return integer
+     */
+    public function getChildrenPerPage();
 
     /**
      * Set hasCategory

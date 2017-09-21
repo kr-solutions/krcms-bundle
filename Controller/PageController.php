@@ -5,6 +5,8 @@ namespace KRSolutions\Bundle\KRCMSBundle\Controller;
 use DateTime;
 use KRSolutions\Bundle\KRCMSBundle\Form\Type\KRCMSPageType;
 use KRSolutions\Bundle\KRCMSBundle\FormHandler\FormHandlerInterface;
+use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Orm\Route;
+use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -186,13 +188,41 @@ class PageController extends AbstractKRCMSController
             } else {
                 $page->setUpdatedAt($now);
                 $page->setUpdatedBy($this->getUser());
-
                 $flashMessages['alert-success'][] = $this->getTranslator()->trans('page.page_edited', array('%page_title%' => $page->getTitle()), 'KRSolutionsKRCMSBundle');
             }
 
             foreach ($page->getFiles() as $file) {
                 $file->setUri(str_replace('/'.$this->container->getParameter('kr_solutions_krcms.upload_dir'), '', $file->getUri()));
             }
+
+            /**
+             * Flush the page to give it an id
+             */
+            $em->flush();
+
+            $route = $page->getRoutes()->first();
+
+            if (empty($route)) {
+                $route = new Route();
+                $page->addRoute($route); // Create the backlink from content to route
+            }
+
+            /////
+            $contentRepository = $this->container->get('cmf_routing.content_repository');
+
+            $route->setName($page->getPermalink() ? 'krcms_'.$page->getPermalink() : 'krcms_homepage');
+            if ($page->getPageType()->getHasChildren()) {
+                $route->setVariablePattern('/{page}');
+                $route->setRequirement('page', '\d+');
+                $route->setDefault('page', 1);
+            } else {
+                $route->setStaticPrefix('/'.$page->getPermalink());
+            }
+            $route->setDefault(RouteObjectInterface::CONTENT_ID, $contentRepository->getContentId($page));
+            $route->setContent($page);
+            $route->setDefault(RouteObjectInterface::CONTROLLER_NAME, $page->getPageType()->getController());
+            $route->setDefault(RouteObjectInterface::TEMPLATE_NAME, $page->getPageType()->getTemplate());
+            /////
 
             $em->flush();
 

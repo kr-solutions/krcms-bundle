@@ -389,6 +389,30 @@ interface PageInterface
     public function getTags();
 
     /**
+     * @return \Symfony\Cmf\Component\Routing\RouteObjectInterface[]|\Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getRoutes();
+
+    /**
+     * @param \Symfony\Cmf\Component\Routing\RouteObjectInterface[]|\Doctrine\Common\Collections\ArrayCollection $routes
+     */
+    public function setRoutes($routes);
+
+    /**
+     * @param \Symfony\Cmf\Component\Routing\RouteObjectInterface $route
+     *
+     * @return PageInterface
+     */
+    public function addRoute($route);
+
+    /**
+     * @param \Symfony\Cmf\Component\Routing\RouteObjectInterface $route
+     *
+     * @return PageInterface
+     */
+    public function removeRoute($route);
+
+    /**
      * Page title
      *
      * @return string

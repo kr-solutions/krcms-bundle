@@ -32,10 +32,10 @@
     <div class="col-md-12">
         <div class="well">
             {{ form_start(form, {attr: {id: 'form', novalidate: 'novalidate'} }) }}
-                {{ form_errors(form) }}
-                {{ form_rest(form) }}
+            {{ form_errors(form) }}
+            {{ form_rest(form) }}
 
-                <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-save"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
+            <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-save"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
             {{ form_end(form) }}
         </div>
     </div>

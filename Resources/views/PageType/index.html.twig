@@ -3,88 +3,88 @@
 {% block title %}{{ 'page_type.index.header.page_types'|trans({}, 'KRSolutionsKRCMSBundle') }} - Content Management Systeem{% endblock %}
 
 {% block header %}
-	<div class="col-lg-8">
-		<h1 class="page-header">{{ 'page_type.index.header.page_types'|trans({}, 'KRSolutionsKRCMSBundle') }}</h1>
-	</div>
-	<div class="col-lg-4">
-		<div class="page-header-buttons pull-right">
-			<a href="{{ path('kr_solutions_krcms_page_types_add') }}" class="btn btn-default"><i class="fa fa-fw fa-plus"></i> {{ 'page_type.add_page_type'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
-		</div>
-	</div>
+    <div class="col-lg-8">
+        <h1 class="page-header">{{ 'page_type.index.header.page_types'|trans({}, 'KRSolutionsKRCMSBundle') }}</h1>
+    </div>
+    <div class="col-lg-4">
+        <div class="page-header-buttons pull-right">
+            <a href="{{ path('kr_solutions_krcms_page_types_add') }}" class="btn btn-default"><i class="fa fa-fw fa-plus"></i> {{ 'page_type.add_page_type'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+        </div>
+    </div>
 {% endblock %}
 
 {% block content %}
-	<div class="col-md-12">
-		<div class="well">
-			<table id="page_types_table" class="table table-striped">
-				<thead>
-					<tr>
-						<th style="width: 20%;">{{ 'page_type.name'|trans({}, 'KRSolutionsKRCMSBundle') }}</th>
-						<th>{{ 'page_type.description'|trans({}, 'KRSolutionsKRCMSBundle') }}</th>
-						<th></th>
-					</tr>
-				</thead>
+    <div class="col-md-12">
+        <div class="well">
+            <table id="page_types_table" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th style="width: 20%;">{{ 'page_type.name'|trans({}, 'KRSolutionsKRCMSBundle') }}</th>
+                        <th>{{ 'page_type.description'|trans({}, 'KRSolutionsKRCMSBundle') }}</th>
+                        <th></th>
+                    </tr>
+                </thead>
 
-				<tbody>
-					{% if pageTypes|length > 0 %}
-						{% for pageType in pageTypes %}
-							<tr>
-								<td><a href="{{ path('kr_solutions_krcms_page_types_edit', { 'pageTypeId': pageType.id }) }}" title="{{ 'page_type.edit_page_type'|trans({}, 'KRSolutionsKRCMSBundle') }}"><b>{{ pageType.name }}</b></a></td>
-								<td>{{ pageType.description }}</td>
-								<td>
-									<div class="btn-group pull-right" role="group">
-										<a class="btn btn-default" href="{{ path('kr_solutions_krcms_page_types_edit', { 'pageTypeId': pageType.id }) }}" title="{{ 'page_type.edit_page_type'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-fw fa-edit"></i> {{ 'layout.edit'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
-										<button type="button" class="btn btn-default" data-toggle="modal" data-target="#page_type_remove_modal" data-page_type_id="{{ pageType.id }}" title="{{ 'page_type.remove_page_type'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-fw fa-trash"></i> {{ 'layout.remove'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
-									</div>
-								</td>
-							</tr>
-						{% endfor %}
-					{% else %}
-						<tr>
-							<td colspan="4">{{ 'page_type.no_page_types_added'|trans({}, 'KRSolutionsKRCMSBundle') }}</td>
-							<td><a class="btn btn-default" href="{{ path('kr_solutions_krcms_page_types_add') }}"><i class="fa fa-fw fa-plus"></i> {{ 'page_type.add_page_type'|trans({}, 'KRSolutionsKRCMSBundle') }}</a></td>
-						</tr>
-					{% endif %}
-				</tbody>
-			</table>
-		</div>
-	</div>
+                <tbody>
+                    {% if pageTypes|length > 0 %}
+                        {% for pageType in pageTypes %}
+                            <tr>
+                                <td><a href="{{ path('kr_solutions_krcms_page_types_edit', { 'pageTypeId': pageType.id }) }}" title="{{ 'page_type.edit_page_type'|trans({}, 'KRSolutionsKRCMSBundle') }}"><b>{{ pageType.name }}</b></a></td>
+                                <td>{{ pageType.description }}</td>
+                                <td>
+                                    <div class="btn-group pull-right" role="group">
+                                        <a class="btn btn-default" href="{{ path('kr_solutions_krcms_page_types_edit', { 'pageTypeId': pageType.id }) }}" title="{{ 'page_type.edit_page_type'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-fw fa-edit"></i> {{ 'layout.edit'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+                                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#page_type_remove_modal" data-page_type_id="{{ pageType.id }}" title="{{ 'page_type.remove_page_type'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-fw fa-trash"></i> {{ 'layout.remove'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="4">{{ 'page_type.no_page_types_added'|trans({}, 'KRSolutionsKRCMSBundle') }}</td>
+                            <td><a class="btn btn-default" href="{{ path('kr_solutions_krcms_page_types_add') }}"><i class="fa fa-fw fa-plus"></i> {{ 'page_type.add_page_type'|trans({}, 'KRSolutionsKRCMSBundle') }}</a></td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-	{# Modals #}
-	<div class="modal fade" id="page_type_remove_modal" tabindex="-1" role="dialog" aria-labelledby="page_type_remove_modal_title" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="page_type_remove_modal_title">{{ 'page_type.remove_page_type'|trans({}, 'KRSolutionsKRCMSBundle') }}</h4>
-				</div>
-				<div class="modal-body">
-					<p>{{ 'page_type.remove_confirmation.title'|trans({}, 'KRSolutionsKRCMSBundle') }}</p>
-					<p><small>{{ 'page_type.remove_confirmation.message'|trans({}, 'KRSolutionsKRCMSBundle') }}</small></p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">{{ 'layout.cancel'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
-					<a href="#" type="button" class="btn btn-primary page_type_remove_action">{{ 'layout.remove'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	{# End modals #}
+    {# Modals #}
+    <div class="modal fade" id="page_type_remove_modal" tabindex="-1" role="dialog" aria-labelledby="page_type_remove_modal_title" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="page_type_remove_modal_title">{{ 'page_type.remove_page_type'|trans({}, 'KRSolutionsKRCMSBundle') }}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>{{ 'page_type.remove_confirmation.title'|trans({}, 'KRSolutionsKRCMSBundle') }}</p>
+                    <p><small>{{ 'page_type.remove_confirmation.message'|trans({}, 'KRSolutionsKRCMSBundle') }}</small></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'layout.cancel'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
+                    <a href="#" type="button" class="btn btn-primary page_type_remove_action">{{ 'layout.remove'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {# End modals #}
 
 {% endblock %}
 
 {% block javascripts %}
-	{{ parent() }}
-	<script type="text/javascript">
-		$(document).ready(function () {
-			$('#page_type_remove_modal').on('show.bs.modal', function (event) {
-				var button = $(event.relatedTarget);
-				var pageTypeId = button.data('page_type_id');
-				var remove_url_holder = '{{ path('kr_solutions_krcms_page_types_remove', {'pageTypeId': 0}) }}';
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#page_type_remove_modal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var pageTypeId = button.data('page_type_id');
+                var remove_url_holder = '{{ path('kr_solutions_krcms_page_types_remove', {'pageTypeId': 0}) }}';
 
-				var modal = $(this);
-				modal.find('.page_type_remove_action').attr('href', remove_url_holder.replace('0', pageTypeId));
-			});
-		});
-	</script>
+                var modal = $(this);
+                modal.find('.page_type_remove_action').attr('href', remove_url_holder.replace('0', pageTypeId));
+            });
+        });
+    </script>
 {% endblock %}

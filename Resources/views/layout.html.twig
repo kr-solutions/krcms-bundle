@@ -1,56 +1,54 @@
 <!DOCTYPE html>
 <html lang="{{ app.request.locale }}">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>{% block title %}K&amp;R - Content Management System{% endblock %}</title>
+        <title>{% block title %}K&amp;R - Content Management System{% endblock %}</title>
 
-		{% block stylesheets %}
-			<link href="{{ asset('bundles/krsolutionskrcms/dist/css/vendor.min.css') }}" rel="stylesheet" />
-			<link href="{{ asset('bundles/krsolutionskrcms/dist/css/app.min.css') }}" rel="stylesheet" />
+        {% block stylesheets %}
+            <link href="{{ asset('bundles/krsolutionskrcms/dist/css/vendor.min.css') }}" rel="stylesheet" />
+            <link href="{{ asset('bundles/krsolutionskrcms/dist/css/app.min.css') }}" rel="stylesheet" />
 
-			<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-			<!--[if lt IE 9]>
-			  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-			  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-			<![endif]-->
-		{% endblock %}
-	</head>
-	<body>
+            <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+            <!--[if lt IE 9]>
+              <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+              <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+            <![endif]-->
+        {% endblock %}
+    </head>
+    <body>
+        <div id="wrapper">
+            {{ render(controller('KRSolutionsKRCMSBundle:Admin:menu', { 'route': app.request.attributes.get('_route') })) }}
 
-		<div id="wrapper">
-			{{ render(controller('KRSolutionsKRCMSBundle:Admin:menu', { 'route': app.request.attributes.get('_route') })) }}
+            <div id="page-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        {% block header %}
+                        {% endblock %}
+                    </div>
 
-			<div id="page-wrapper">
-				<div class="container-fluid">
-					<div class="row">
-						{% block header %}
-						{% endblock %}
-					</div>
+                    {% include 'KRSolutionsKRCMSBundle::alerts.html.twig' %}
 
-					{% include 'KRSolutionsKRCMSBundle::alerts.html.twig' %}
+                    <div class="row">
+                        {% block content %}
+                        {% endblock %}
+                    </div>
 
-					<div class="row">
-						{% block content %}
-						{% endblock %}
-					</div>
+                    <div id="page-footer" class="row">
+                        <img src="{{ asset('bundles/krsolutionskrcms/dist/img/logo-sm.png') }}" alt="K&amp;R" /> Content Management System
+                    </div>
+                </div>
+            </div>
+        </div>
 
-					<div id="page-footer" class="row">
-						<img src="{{ asset('bundles/krsolutionskrcms/dist/img/logo-sm.png') }}" alt="K&amp;R" /> Content Management System
-					</div>
-				</div>
-			</div>
-		</div>
-
-		{% block javascripts %}
+        {% block javascripts %}
             <script type="text/javascript">
                 var krcms_generate_page_permalink_route = '{{ path('kr_solutions_krcms_pages_generate_permalink') }}';
             </script>
-			<script type="text/javascript" src="{{ asset('bundles/krsolutionskrcms/dist/js/vendor.min.js') }}"></script>
-			<script type="text/javascript" src="{{ asset('bundles/krsolutionskrcms/dist/js/app.min.js') }}"></script>
-		{% endblock %}
-
-	</body>
+            <script type="text/javascript" src="{{ asset('bundles/krsolutionskrcms/dist/js/vendor.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/krsolutionskrcms/dist/js/app.min.js') }}"></script>
+        {% endblock %}
+    </body>
 </html>
