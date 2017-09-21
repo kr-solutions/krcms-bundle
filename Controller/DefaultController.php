@@ -49,7 +49,7 @@ class DefaultController extends AbstractKRCMSController
                 $next_page_url = null;
             }
 
-            if ($children->getCurrentPageNumber() <= $children->getPageCount()) {
+            if ($children->getCurrentPageNumber() < $children->getPageCount()) {
                 $prev_page_url = $this->generateUrl($routeDocument->getName(), array(
                     'page' => $children->getCurrentPageNumber() + 1
                 ));
