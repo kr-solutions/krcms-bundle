@@ -1,0 +1,25 @@
+KRSolutions\Bundle\KRCMSBundle\Entity\Language:
+    type: entity
+    repositoryClass: KRSolutions\Bundle\KRCMSBundle\Repository\LanguageRepository
+    table: krcms_languages
+    uniqueConstraints:
+        name:
+            columns:
+                - country
+                - locale
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        country:
+            type: string
+            nullable: false
+            length: 2
+        locale:
+            type: string
+            nullable: false
+            length: 5
+    lifecycleCallbacks: {  }

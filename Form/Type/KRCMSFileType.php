@@ -59,14 +59,4 @@ class KRCMSFileType extends AbstractType
             'translation_domain' => 'KRSolutionsKRCMSBundle',
         ));
     }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'krcms_file';
-    }
 }

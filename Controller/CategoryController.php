@@ -3,6 +3,7 @@
 namespace KRSolutions\Bundle\KRCMSBundle\Controller;
 
 use KRSolutions\Bundle\KRCMSBundle\Entity\Category;
+use KRSolutions\Bundle\KRCMSBundle\Form\Type\KRCMSCategoryType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -23,33 +24,19 @@ class CategoryController extends AbstractKRCMSController
     public function indexAction(Request $request)
     {
         $uploadDir = trim($this->container->getParameter('kr_solutions_krcms.upload_dir'));
-        $webRoot = trim($this->container->getParameter('kr_solutions_krcms.web_root'));
 
         $categories = $this->getCategoryRepository()->findAll();
 
         $newCategory = new Category();
-        $categoryForm = $this->createForm('krcms_category', $newCategory);
+        $categoryForm = $this->createForm(KRCMSCategoryType::class, $newCategory);
 
         $categoryForm->handleRequest($request);
 
         if ($categoryForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
-            $uriOrig = trim($newCategory->getImageUri());
-            $strippedUri = trim(substr($uriOrig, strpos(trim($uriOrig, '/'), trim($uploadDir, '/')) + strlen(trim($uploadDir, '/')) + 1), '/');
-
-            if (class_exists('\Tinify\Tinify') && !empty($this->container->getParameter('kr_solutions_krcms.tinify_api_key'))) {
-                $systemPath = rtrim($webRoot, '/').'/'.trim($uploadDir, '/').'/'.$strippedUri;
-                try {
-                    \Tinify\setKey($this->container->getParameter('kr_solutions_krcms.tinify_api_key'));
-                    \Tinify\validate();
-
-                    $source = \Tinify\fromFile($systemPath);
-                    $source->toFile($systemPath);
-                } catch (\Tinify\Exception $e) {
-                    $request->getSession()->getFlashBag()->add('alert-warning', $this->getTranslator()->trans('tinify.api_key_invalid', array(), 'KRSolutionsKRCMSBundle'));
-                }
-            }
+            $uriOrig = ltrim(trim($newCategory->getImageUri()), '/');
+            $strippedUri = ltrim(ltrim($uriOrig, $uploadDir), '/');
 
             $newCategory->setImageUri($strippedUri);
 
@@ -126,6 +113,8 @@ class CategoryController extends AbstractKRCMSController
             return $this->redirect($this->generateUrl('kr_solutions_krcms_dashboard'));
         }
 
+        $uploadDir = trim($this->container->getParameter('kr_solutions_krcms.upload_dir'));
+
         if (null !== $categoryId) {
             $category = $this->getCategoryRepository()->getCategoryById($categoryId);
             $action = 'edit';
@@ -144,15 +133,22 @@ class CategoryController extends AbstractKRCMSController
             return $this->redirect($this->generateUrl('kr_solutions_krcms_categories_index'));
         }
 
-        $form = $this->createForm(\KRSolutions\Bundle\KRCMSBundle\Form\Type\KRCMSCategoryType::class, $category, array(
+        $category->setImageUri('/'.$uploadDir.'/'.$category->getImageUri());
+
+        $form = $this->createForm(KRCMSCategoryType::class, $category, array(
             'method' => 'POST',
             'action' => $formAction,
         ));
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isValid()) {
             $flashMessages = array();
+
+            $uriOrig = ltrim(trim($category->getImageUri()), '/');
+            $strippedUri = ltrim(ltrim($uriOrig, $uploadDir), '/');
+
+            $category->setImageUri($strippedUri);
 
             if (null === $categoryId) {
                 $this->getDoctrine()->getManager()->persist($category);

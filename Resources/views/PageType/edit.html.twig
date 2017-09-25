@@ -29,14 +29,16 @@
 {% endblock %}
 
 {% block content %}
-    <div class="col-md-12">
-        <div class="well">
-            {{ form_start(pageTypeForm, {attr: {id: 'pageTypeForm', novalidate: 'novalidate'} }) }}
-            {{ form_errors(pageTypeForm) }}
-            {{ form_rest(pageTypeForm) }}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="well">
+                {{ form_start(pageTypeForm, {attr: {id: 'pageTypeForm', novalidate: 'novalidate'} }) }}
+                {{ form_errors(pageTypeForm) }}
+                {{ form_rest(pageTypeForm) }}
 
-            <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-save"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
-            {{ form_end(pageTypeForm) }}
+                <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-save"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
+                {{ form_end(pageTypeForm) }}
+            </div>
         </div>
     </div>
 {% endblock %}

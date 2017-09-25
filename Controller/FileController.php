@@ -3,6 +3,7 @@
 namespace KRSolutions\Bundle\KRCMSBundle\Controller;
 
 use KRSolutions\Bundle\KRCMSBundle\Entity\File;
+use KRSolutions\Bundle\KRCMSBundle\Form\Type\KRCMSFileType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -40,7 +41,7 @@ class FileController extends AbstractKRCMSController
         }
 
         $newFile = new File();
-        $fileForm = $this->createForm('krcms_file', $newFile);
+        $fileForm = $this->createForm(KRCMSFileType::class, $newFile);
 
         $fileForm->handleRequest($request);
 

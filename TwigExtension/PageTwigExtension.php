@@ -7,9 +7,9 @@ use Symfony\Bridge\Doctrine\ManagerRegistry;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * \KRSolutions\KRCMSBundle\TwigExtension\SliderTwigExtension
+ * \KRSolutions\KRCMSBundle\TwigExtension\PageTwigExtension
  */
-class SliderTwigExtension extends \Twig_Extension
+class PageTwigExtension extends \Twig_Extension
 {
 
     /**
@@ -23,7 +23,7 @@ class SliderTwigExtension extends \Twig_Extension
     private $container;
 
     /**
-     * SliderTwigExtension constructor
+     * PageTwigExtension constructor
      *
      * @param ContainerInterface $container
      */
@@ -41,7 +41,7 @@ class SliderTwigExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('slider', array($this, 'sliderFunction')),
+            new \Twig_SimpleFunction('krcms_children', array($this, 'childrenFunction')),
         );
     }
 
@@ -53,23 +53,18 @@ class SliderTwigExtension extends \Twig_Extension
      *
      * @return string
      */
-    public function sliderFunction(Page $page = null, $view = null)
+    public function childrenFunction($page_name, $view = null, $maxResults = 10)
     {
-        if ($page->getPageType()->getHasSlider()) {
-            $sliderImages = array();
+        $page = $this->getPageRepository()->getPageByPermalink($page_name);
 
-            if (null !== $page->getSlider()) {
-                $sliderImages = $this->getSliderImageRepository()->getSliderImagesBySlider($page->getSlider());
-            } else {
-                $slider = $this->getSliderRepository()->getDefaultSlider();
+        if ($page->getPageType()->getHasChildren()) {
+            $activeChildrenQB = $this->getPageRepository()->getActiveChildrenQB($page);
+            $activeChildrenQB->setMaxResults($maxResults);
 
-                if (null !== $slider) {
-                    $sliderImages = $this->getSliderImageRepository()->getSliderImagesBySlider($slider);
-                }
-            }
+            $pages = $activeChildrenQB->getQuery()->getResult();
 
             return $this->renderView($view, array(
-                    'sliderImages' => $sliderImages,
+                    'children' => $pages,
             ));
         } else {
             return '';
@@ -104,26 +99,16 @@ class SliderTwigExtension extends \Twig_Extension
      */
     public function getName()
     {
-        return 'kr_solutions_krcms.slider_twig_extension';
+        return 'kr_solutions_krcms.page_twig_extension';
     }
 
     /**
-     * Get the Slider Repository
+     * Get the Page Repository
      *
-     * @return \KRSolutions\Bundle\KRCMSBundle\Repository\SliderRepository
+     * @return \KRSolutions\Bundle\KRCMSBundle\Repository\PageRepository
      */
-    private function getSliderRepository()
+    private function getPageRepository()
     {
-        return $this->em->getRepository('KRSolutionsKRCMSBundle:Slider');
-    }
-
-    /**
-     * Get the Slider image Repository
-     *
-     * @return \KRSolutions\Bundle\KRCMSBundle\Repository\SliderImageRepository
-     */
-    private function getSliderImageRepository()
-    {
-        return $this->em->getRepository('KRSolutionsKRCMSBundle:SliderImage');
+        return $this->em->getRepository('KRSolutionsKRCMSBundle:Page');
     }
 }

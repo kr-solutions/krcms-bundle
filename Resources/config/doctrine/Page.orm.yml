@@ -189,7 +189,7 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Page:
                         referencedColumnName: id
             orderBy: null
         routes:
-            targetEntity: "Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Orm\Route"
+            targetEntity: "Symfony\\Cmf\\Bundle\\RoutingBundle\\Doctrine\\Orm\\Route"
             cascade: ["persist", "remove"]
     oneToMany:
         pages:

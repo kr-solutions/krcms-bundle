@@ -17,9 +17,6 @@
         "helios-ag/fm-elfinder-bundle": "~6",
         "knplabs/knp-paginator-bundle": "^2.6"
     },
-    "suggest": {
-        "tinify/tinify": "Create an account on https://tinypng.com/ and get an API key to compress all uploaded images"
-    },
     "autoload": {
         "psr-4": {
             "KRSolutions\\Bundle\\KRCMSBundle\\": ""

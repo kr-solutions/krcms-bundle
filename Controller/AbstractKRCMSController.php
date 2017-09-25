@@ -149,4 +149,14 @@ class AbstractKRCMSController extends Controller
     {
         return $this->container->get('kr_solutions_krcms.category_manager');
     }
+
+    /**
+     * Get the language manager
+     *
+     * @return \KRSolutions\Bundle\KRCMSBundle\Model\LanguageManagerInterface
+     */
+    protected function getLanguageManager()
+    {
+        return $this->container->get('kr_solutions_krcms.language_manager');
+    }
 }

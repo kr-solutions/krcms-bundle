@@ -29,14 +29,16 @@
 {% endblock %}
 
 {% block content %}
-    <div class="col-md-12">
-        <div class="well">
-            {{ form_start(sliderForm, {attr: {id: 'sliderForm', novalidate: 'novalidate'} }) }}
-            {{ form_errors(sliderForm) }}
-            {{ form_rest(sliderForm) }}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="well">
+                {{ form_start(sliderForm, {attr: {id: 'sliderForm', novalidate: 'novalidate'} }) }}
+                {{ form_errors(sliderForm) }}
+                {{ form_rest(sliderForm) }}
 
-            <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-save"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
-            {{ form_end(sliderForm) }}
+                <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-save"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
+                {{ form_end(sliderForm) }}
+            </div>
         </div>
     </div>
 {% endblock %}

@@ -215,9 +215,8 @@ class PageController extends AbstractKRCMSController
                 $route->setVariablePattern('/{page}');
                 $route->setRequirement('page', '\d+');
                 $route->setDefault('page', 1);
-            } else {
-                $route->setStaticPrefix('/'.$page->getPermalink());
             }
+            $route->setStaticPrefix('/'.$page->getPermalink());
             $route->setDefault(RouteObjectInterface::CONTENT_ID, $contentRepository->getContentId($page));
             $route->setContent($page);
             $route->setDefault(RouteObjectInterface::CONTROLLER_NAME, $page->getPageType()->getController());

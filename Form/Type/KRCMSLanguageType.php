@@ -2,15 +2,16 @@
 
 namespace KRSolutions\Bundle\KRCMSBundle\Form\Type;
 
-use FM\ElfinderBundle\Form\Type\ElFinderType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
+use Symfony\Component\Form\Extension\Core\Type\LocaleType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * \KRSolutions\Bundle\KRCMSBundle\Form\Type\KRCMSCategoryType
+ * KRCMSLanguageType
  */
-class KRCMSCategoryType extends AbstractType
+class KRCMSLanguageType extends AbstractType
 {
 
     /**
@@ -19,7 +20,7 @@ class KRCMSCategoryType extends AbstractType
     private $class;
 
     /**
-     * @param string $class The category class name
+     * @param string $class The language class name
      */
     public function __construct($class)
     {
@@ -37,13 +38,8 @@ class KRCMSCategoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, array('label' => 'form.type.category.name.label', 'required' => true, 'error_bubbling' => true))
-            ->add('imageUri', ElFinderType::class, array(
-                'label' => 'form.type.category.imageUri.label',
-                'required' => true,
-                'error_bubbling' => true,
-                'instance' => 'krcms_form',
-        ));
+            ->add('country', CountryType::class, array('label' => 'form.type.language.country.label', 'required' => true, 'error_bubbling' => true))
+            ->add('locale', LocaleType::class, array('label' => 'form.type.language.locale.label', 'required' => false, 'error_bubbling' => true));
     }
 
     /**

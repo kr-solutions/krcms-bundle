@@ -9,9 +9,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * KRSolutions\Bundle\KRCMSBundle\Controller\SliderController
+ * KRSolutions\Bundle\KRCMSBundle\Controller\HeaderController
  */
-class SliderController extends AbstractKRCMSController
+class HeaderController extends AbstractKRCMSController
 {
 
     /**

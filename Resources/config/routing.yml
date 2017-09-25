@@ -38,3 +38,13 @@ kr_solutions_krcms_categories:
 kr_solutions_krcms_sliders:
     resource: "@KRSolutionsKRCMSBundle/Resources/config/routing_sliders.yml"
     prefix: /sliders
+
+# Headers
+kr_solutions_krcms_headers:
+    resource: "@KRSolutionsKRCMSBundle/Resources/config/routing_headers.yml"
+    prefix: /headers
+
+# Languages
+kr_solutions_krcms_languages:
+    resource: "@KRSolutionsKRCMSBundle/Resources/config/routing_languages.yml"
+    prefix: /languages

@@ -9,41 +9,44 @@
 {% endblock %}
 
 {% block content %}
-    <div class="col-md-12">
-        <div class="well">
-            <h2>{{ 'sliderImage.index.header.sliderImages'|trans({ '%slider_name%': slider.name }, 'KRSolutionsKRCMSBundle')|raw }}</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="well">
+                <h2>{{ 'sliderImage.index.header.sliderImages'|trans({ '%slider_name%': slider.name }, 'KRSolutionsKRCMSBundle')|raw }}</h2>
 
-            {% if slider.sliderImages|length > 0 %}
-                {% for sliderImage in slider.sliderImages %}
-                    <div id="file_{{ sliderImage.id }}" class="col-sm-6 col-md-4 col-lg-3">
-                        <div class="thumbnail">
-                            <img src="{{ asset(uploadDir ~ '/' ~ sliderImage.uri) }}" alt="{{ sliderImage.title }}">
-                            <div class="caption">
-                                <h3>{{ sliderImage.title }}</h3>
-                                <p>{{ sliderImage.subtitle }}</p>
-                                <p>
-                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#file_edit_modal" data-file_id="{{ sliderImage.id }}" title="{{ 'sliderImage.edit_file'|trans({}, 'KRSolutionsKRCMSBundle') }}">
-                                        <i class="fa fa-fw fa-edit"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#file_remove_modal" data-file_id="{{ sliderImage.id }}" title="{{ 'sliderImage.remove_file'|trans({}, 'KRSolutionsKRCMSBundle') }}">
-                                        <i class="fa fa-fw fa-trash-o"></i>
-                                    </button>
-                                </p>
+                {% if slider.sliderImages|length > 0 %}
+                    {% for sliderImage in slider.sliderImages %}
+                        <div id="file_{{ sliderImage.id }}" class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="thumbnail">
+                                <img src="{{ asset(uploadDir ~ '/' ~ sliderImage.uri) }}" alt="{{ sliderImage.title }}">
+                                <div class="caption">
+                                    <h3>{{ sliderImage.title }}</h3>
+                                    <p>{{ sliderImage.subtitle }}</p>
+                                    <p>
+                                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#file_edit_modal" data-file_id="{{ sliderImage.id }}" title="{{ 'sliderImage.edit_file'|trans({}, 'KRSolutionsKRCMSBundle') }}">
+                                            <i class="fa fa-fw fa-edit"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#file_remove_modal" data-file_id="{{ sliderImage.id }}" title="{{ 'sliderImage.remove_file'|trans({}, 'KRSolutionsKRCMSBundle') }}">
+                                            <i class="fa fa-fw fa-trash-o"></i>
+                                        </button>
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
-            {% else %}
-                {{ 'sliderImage.no_files'|trans({ '%page_title%': slider.name }, 'KRSolutionsKRCMSBundle') }}
-            {% endif%}
+                    {% endfor %}
+                {% else %}
+                    {{ 'sliderImage.no_files'|trans({ '%page_title%': slider.name }, 'KRSolutionsKRCMSBundle') }}
+                {% endif%}
 
-            <div class="clearfix"></div>
+                <div class="clearfix"></div>
+            </div>
         </div>
     </div>
 
-    <div class="col-md-12">
-        <div class="well">
-            <form id="sliderImageForm" action="{{ path('kr_solutions_krcms_slider_images', { 'sliderId': slider.id }) }}" method="post" id="sliderImageForm" {{ form_enctype(sliderImageForm) }} novalidate="novalidate">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="well">
+                {{ form_start(sliderImageForm, {attr: {id: 'sliderImageForm', novalidate: 'novalidate'} }) }}
                 <fieldset>
                     <legend>{{ 'sliderImage.add_file'|trans({}, 'KRSolutionsKRCMSBundle') }}</legend>
 
@@ -73,7 +76,8 @@
                     {{ form_rest(sliderImageForm) }}
                 </fieldset>
                 <input class="btn btn-primary" type="submit" value="{{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}" />
-            </form>
+                {{ form_end(sliderImageForm) }}
+            </div>
         </div>
     </div>
 

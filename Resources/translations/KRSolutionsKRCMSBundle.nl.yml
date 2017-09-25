@@ -86,6 +86,8 @@ form.type.sliderImage.linkLabel.label: 'Label (naam van de link)'
 form.type.sliderImage.linkTitle.label: 'Titel van de link (niet zichtbaar tenzij de muis op de link staat)'
 form.type.sliderImage.linkClass.label: 'Link class'
 form.type.sliderImage.linkId.label: 'Link ID'
+form.type.category.name.label: Naam
+form.type.category.imageUri.label: Afbeelding
 layout.logout: Uitloggen
 layout.login: Inloggen
 layout.register: Registreer
@@ -110,6 +112,8 @@ layout.menu.helpdesk: Helpdesk
 layout.menu.categories: Categoriën
 layout.menu.menus: 'Menu''s'
 layout.menu.sliders: 'Sliders'
+layout.menu.headers: 'Headers'
+layout.menu.languages: 'Talen'
 layout.menu.page_types: 'Pagina types'
 layout.form_error_alert_heading: Oeps!
 layout.toggle_navigation: 'Schakel navigatie'
@@ -216,3 +220,13 @@ sliderImage.remove_confirmation.title: 'Slide verwijderen'
 sliderImage.remove_confirmation.message: 'Weet u zeker dat u deze slide wilt verwijderen?'
 sliderImage.file_removed: 'Slide succesvol verwijderd'
 sliderImage.file_not_exist: 'Slide bestaat niet (meer)'
+category.add_category: 'Categorie toevoegen'
+category.edit_category: 'Categorie bewerken'
+category.remove_category: 'Categorie verwijderen'
+category.remove_confirmation.title: 'Categorie verwijderen'
+category.remove_confirmation.message: 'Weet u zeker dat u deze categorie wilt verwijderen?'
+category.category_added: 'Categorie succesvul toegevoegd'
+category.category_removed: 'Categorie succesvol verwijderd'
+category.category_edited: 'Categorie succesvol aangepast'
+category.category_not_exist: 'Categorie bestaat niet (meer)'
+category.back_to_category_overview: 'Terug naar het categoriën overzicht'

@@ -40,16 +40,6 @@ class KRCMSTagType extends AbstractType
     }
 
     /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'krcms_tag';
-    }
-
-    /**
      * Set default options
      *
      * @param OptionsResolver $resolver

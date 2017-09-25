@@ -11,50 +11,52 @@
 {% endblock %}
 
 {% block content %}
-    <div class="col-md-4">
-        <div class="well">
-            {{ form_start(menuForm, {attr: {id: 'menuForm', novalidate: 'novalidate'} }) }}
-            <fieldset>
-                <legend>{{ 'menu.add_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}</legend>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="well">
+                {{ form_start(menuForm, {attr: {id: 'menuForm', novalidate: 'novalidate'} }) }}
+                <fieldset>
+                    <legend>{{ 'menu.add_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}</legend>
 
-                {{ form_errors(menuForm) }}
-                {{ form_rest(menuForm) }}
-            </fieldset>
+                    {{ form_errors(menuForm) }}
+                    {{ form_rest(menuForm) }}
+                </fieldset>
 
-            <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-save"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
-            {{ form_end(menuForm) }}
+                <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-save"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
+                {{ form_end(menuForm) }}
+            </div>
         </div>
-    </div>
-    <div class="col-md-8">
-        <div class="well">
-            {% if menus|length > 0 %}
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th style="width: 20%;">{{ 'menu.name'|trans({}, 'KRSolutionsKRCMSBundle') }}</th>
-                            <th>{{ 'menu.description'|trans({}, 'KRSolutionsKRCMSBundle') }}</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for menu in menus %}
+        <div class="col-md-8">
+            <div class="well">
+                {% if menus|length > 0 %}
+                    <table class="table table-striped">
+                        <thead>
                             <tr>
-                                <td><a href="{{ path('kr_solutions_krcms_menus_edit', { 'menuId': menu.id }) }}" title="{{ 'menu.edit_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}"><b>{{ menu.name }}</b></a></td>
-                                <td>{{ menu.description }}</td>
-                                <td class="btn-toolbar">
-                                    <div class="btn-group pull-right">
-                                        <a href="{{ path('kr_solutions_krcms_menus_edit', { 'menuId': menu.id }) }}" class="btn btn-default" title="{{ 'menu.edit_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-fw fa-edit"></i> {{ 'layout.edit'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
-                                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#menu_remove_modal" data-menu_id="{{ menu.id }}" title="{{ 'menu.remove_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-fw fa-trash"></i> {{ 'layout.remove'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
-                                    </div>
-                                </td>
+                                <th style="width: 20%;">{{ 'menu.name'|trans({}, 'KRSolutionsKRCMSBundle') }}</th>
+                                <th>{{ 'menu.description'|trans({}, 'KRSolutionsKRCMSBundle') }}</th>
+                                <th></th>
                             </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            {% else %}
-                <p>Er zijn nog geen menu's toegevoegd.</p>
-                <p>Klik op <strong>"Menu toevoegen"</strong> aan de rechterkant om een menu toe te voegen.</p>
-            {% endif %}
+                        </thead>
+                        <tbody>
+                            {% for menu in menus %}
+                                <tr>
+                                    <td><a href="{{ path('kr_solutions_krcms_menus_edit', { 'menuId': menu.id }) }}" title="{{ 'menu.edit_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}"><b>{{ menu.name }}</b></a></td>
+                                    <td>{{ menu.description }}</td>
+                                    <td class="btn-toolbar">
+                                        <div class="btn-group pull-right">
+                                            <a href="{{ path('kr_solutions_krcms_menus_edit', { 'menuId': menu.id }) }}" class="btn btn-default" title="{{ 'menu.edit_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-fw fa-edit"></i> {{ 'layout.edit'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+                                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#menu_remove_modal" data-menu_id="{{ menu.id }}" title="{{ 'menu.remove_menu'|trans({}, 'KRSolutionsKRCMSBundle') }}"><i class="fa fa-fw fa-trash"></i> {{ 'layout.remove'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>Er zijn nog geen menu's toegevoegd.</p>
+                    <p>Klik op <strong>"Menu toevoegen"</strong> aan de rechterkant om een menu toe te voegen.</p>
+                {% endif %}
+            </div>
         </div>
     </div>
 

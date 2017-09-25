@@ -17,6 +17,12 @@ services:
         tags:
             - { name: form.type, alias: krcms_header }
 
+    kr_solutions_krcms.form.type.krcms_language:
+        class: KRSolutions\Bundle\KRCMSBundle\Form\Type\KRCMSLanguageType
+        arguments: ["%kr_solutions_krcms.model.language_class%"]
+        tags:
+            - { name: form.type, alias: krcms_language }
+
     kr_solutions_krcms.form.type.krcms_menu:
         class: KRSolutions\Bundle\KRCMSBundle\Form\Type\KRCMSMenuType
         arguments: ["%kr_solutions_krcms.model.menu_class%"]

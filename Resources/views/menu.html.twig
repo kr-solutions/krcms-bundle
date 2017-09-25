@@ -20,6 +20,9 @@
                             <a href="{{ path('kr_solutions_krcms_page_types_index') }}"><i class="fa fa-fw fa-cog"></i> {{ 'layout.menu.page_types'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
                         </li>
                     {% endif %}
+                    <li{% if route == 'kr_solutions_krcms_languages_index' %} class="active" {% endif %}>
+                        <a href="{{ path('kr_solutions_krcms_languages_index') }}"><i class="fa fa-fw fa-language"></i> {{ 'layout.menu.languages'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+                    </li>
                 </ul>
             </li>
         {% endif %}
@@ -54,7 +57,10 @@
                 </li>
             {% endif %}
             <li{% if route == 'kr_solutions_krcms_sliders_index' %} class="active" {% endif %}>
-                <a href="{{ path('kr_solutions_krcms_sliders_index') }}"><i class="fa fa-fw fa-image"></i> {{ 'layout.menu.sliders'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+                <a href="{{ path('kr_solutions_krcms_sliders_index') }}"><i class="fa fa-angle-double-left"></i> <i class="fa fa-image"></i> <i class="fa fa-angle-double-right"></i> {{ 'layout.menu.sliders'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
+            </li>
+            <li{% if route == 'kr_solutions_krcms_headers_index' %} class="active" {% endif %}>
+                <a href="{{ path('kr_solutions_krcms_headers_index') }}"><i class="fa fa-fw fa-image"></i> {{ 'layout.menu.headers'|trans({}, 'KRSolutionsKRCMSBundle') }}</a>
             </li>
             {% if helpDeskEnabled %}
                 <li{% if route == 'kr_solutions_krcms_helpdesk' %} class="active" {% endif %}>

@@ -31,10 +31,8 @@
 
                     {% include 'KRSolutionsKRCMSBundle::alerts.html.twig' %}
 
-                    <div class="row">
-                        {% block content %}
-                        {% endblock %}
-                    </div>
+                    {% block content %}
+                    {% endblock %}
 
                     <div id="page-footer" class="row">
                         <img src="{{ asset('bundles/krsolutionskrcms/dist/img/logo-sm.png') }}" alt="K&amp;R" /> Content Management System

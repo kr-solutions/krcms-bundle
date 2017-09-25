@@ -1,0 +1,25 @@
+kr_solutions_krcms_headers_index:
+    path: /
+    defaults: { _controller: KRSolutionsKRCMSBundle:Header:index }
+
+kr_solutions_krcms_headers_remove:
+    path: /remove/{headerId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:Header:remove }
+    requirements:
+        headerId: \d+
+
+kr_solutions_krcms_headers_edit:
+    path: /edit/{headerId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:Header:edit }
+    requirements:
+        headerId: \d+
+
+kr_solutions_krcms_header_images:
+    path: /{headerId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:Header:headerImages }
+    requirements:
+        headerId: \d+
+
+kr_solutions_krcms_header_images_remove:
+    path: /remove-header-image
+    defaults: { _controller: KRSolutionsKRCMSBundle:Header:removeHeaderImage }

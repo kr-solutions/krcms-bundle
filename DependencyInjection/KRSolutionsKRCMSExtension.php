@@ -30,6 +30,7 @@ class KRSolutionsKRCMSExtension extends Extension implements PrependExtensionInt
         $container->setParameter('kr_solutions_krcms.model.category_class', $config['model']['category_class']);
         $container->setParameter('kr_solutions_krcms.model.file_class', $config['model']['file_class']);
         $container->setParameter('kr_solutions_krcms.model.header_class', $config['model']['header_class']);
+        $container->setParameter('kr_solutions_krcms.model.language_class', $config['model']['language_class']);
         $container->setParameter('kr_solutions_krcms.model.menu_class', $config['model']['menu_class']);
         $container->setParameter('kr_solutions_krcms.model.page_class', $config['model']['page_class']);
         $container->setParameter('kr_solutions_krcms.model.page_type_class', $config['model']['page_type_class']);

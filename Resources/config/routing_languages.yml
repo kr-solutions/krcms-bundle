@@ -1,0 +1,15 @@
+kr_solutions_krcms_languages_index:
+    path: /
+    defaults: { _controller: KRSolutionsKRCMSBundle:Language:index }
+
+kr_solutions_krcms_languages_remove:
+    path: /remove/{languageId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:Language:remove }
+    requirements:
+        languageId: \d+
+
+kr_solutions_krcms_languages_edit:
+    path: /edit/{languageId}
+    defaults: { _controller: KRSolutionsKRCMSBundle:Language:edit }
+    requirements:
+        languageId: \d+

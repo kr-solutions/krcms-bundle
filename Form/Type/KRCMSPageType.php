@@ -157,14 +157,4 @@ class KRCMSPageType extends AbstractType
             'translation_domain' => 'KRSolutionsKRCMSBundle',
         ));
     }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'krcms_page';
-    }
 }

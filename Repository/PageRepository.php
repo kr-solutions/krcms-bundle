@@ -166,7 +166,7 @@ class PageRepository extends EntityRepository
      *
      * @param Page $page
      *
-     * @return array
+     * @return \Doctrine\DBAL\Query\QueryBuilder
      */
     public function getActiveChildrenQB(Page $page)
     {

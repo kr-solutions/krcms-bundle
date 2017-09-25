@@ -33,96 +33,98 @@
 {% endblock %}
 
 {% block content %}
-    <div class="col-md-9">
-        {{ form_start(pageForm, {attr: {id: 'pageForm', novalidate: 'novalidate'} }) }}
-        <div class="well">
-            <fieldset>
-                {% if form_errors(pageForm) %}
-                    <div class="alert alert-danger">
-                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'layout.close'|trans({}, 'KRSolutionsKRCMSBundle') }}</span></button>
-                        <h4>{{ 'layout.form_error_alert_heading'|trans({}, 'KRSolutionsKRCMSBundle') }}</h4>
-                        {{ form_errors(pageForm) }}
-                    </div>
-                {% endif %}
-
-                <div class="form-group{% if pageForm.title.vars.errors|length %} has-error{% endif %}">
-                    {{ form_label(pageForm.title) }}
-                    {{ form_widget(pageForm.title, { 'attr': {'class': 'form-control', 'data-page_id': page.id} }) }}
-                </div>
-
-                <div class="form-group{% if pageForm.permalink.vars.errors|length %} has-error{% endif %}">
-                    {{ form_label(pageForm.permalink) }}
-                    {{ form_widget(pageForm.permalink, { 'attr': {'class': 'form-control'} }) }}
-                </div>
-
-                {% if pageForm.menu is defined %}
-                    <div class="form-group{% if pageForm.menu.vars.errors|length %} has-error{% endif %}">
-                        {{ form_label(pageForm.menu) }}
-                        {{ form_widget(pageForm.menu, { 'attr': {'class': 'form-control'} }) }}
-                    </div>
-                {% endif %}
-
-                {% if pageForm.menuTitle is defined %}
-                    <div class="form-group{% if pageForm.menuTitle.vars.errors|length %} has-error{% endif %}">
-                        {{ form_label(pageForm.menuTitle) }}
-                        {{ form_widget(pageForm.menuTitle, { 'attr': {'class': 'form-control'} }) }}
-                    </div>
-                {% endif %}
-
-                {% if pageForm.category is defined %}
-                    <div class="form-group{% if pageForm.category.vars.errors|length %} has-error{% endif %}">
-                        {{ form_label(pageForm.category) }}
-                        {{ form_widget(pageForm.category, { 'attr': {'class': 'form-control'} }) }}
-                    </div>
-                {% endif %}
-
-                {% if pageForm['parent'] is defined %}
-                    <div class="form-group{% if pageForm.parent.vars.errors|length %} has-error{% endif %}">
-                        {{ form_label(pageForm.parent) }}
-                        {{ form_widget(pageForm.parent, { 'attr': {'class': 'form-control'} }) }}
-                    </div>
-                {% endif %}
-
-                {% if pageForm.content is defined %}
-                    <div class="form-group{% if form_errors(pageForm.content) %} error{% endif %}">
-                        {{ form_label(pageForm.content) }}
-                        {{ form_widget(pageForm.content, { 'attr': {'class': 'form-control'} }) }}
-                    </div>
-                {% endif %}
-
-                <div class="form-group{% if form_errors(pageForm.metaDescription) %} error{% endif %}">
-                    {{ form_label(pageForm.metaDescription) }}
-                    {{ form_widget(pageForm.metaDescription, { 'attr': {'class': 'form-control'} }) }}
-                </div>
-
-            </fieldset>
-        </div>
-        {% if pageForm.header is defined %}
+    <div class="row">
+        <div class="col-md-9">
+            {{ form_start(pageForm, {attr: {id: 'pageForm', novalidate: 'novalidate'} }) }}
             <div class="well">
-                {{ form_row(pageForm.header) }}
+                <fieldset>
+                    {% if form_errors(pageForm) %}
+                        <div class="alert alert-danger">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'layout.close'|trans({}, 'KRSolutionsKRCMSBundle') }}</span></button>
+                            <h4>{{ 'layout.form_error_alert_heading'|trans({}, 'KRSolutionsKRCMSBundle') }}</h4>
+                            {{ form_errors(pageForm) }}
+                        </div>
+                    {% endif %}
+
+                    <div class="form-group{% if pageForm.title.vars.errors|length %} has-error{% endif %}">
+                        {{ form_label(pageForm.title) }}
+                        {{ form_widget(pageForm.title, { 'attr': {'class': 'form-control', 'data-page_id': page.id} }) }}
+                    </div>
+
+                    <div class="form-group{% if pageForm.permalink.vars.errors|length %} has-error{% endif %}">
+                        {{ form_label(pageForm.permalink) }}
+                        {{ form_widget(pageForm.permalink, { 'attr': {'class': 'form-control'} }) }}
+                    </div>
+
+                    {% if pageForm.menu is defined %}
+                        <div class="form-group{% if pageForm.menu.vars.errors|length %} has-error{% endif %}">
+                            {{ form_label(pageForm.menu) }}
+                            {{ form_widget(pageForm.menu, { 'attr': {'class': 'form-control'} }) }}
+                        </div>
+                    {% endif %}
+
+                    {% if pageForm.menuTitle is defined %}
+                        <div class="form-group{% if pageForm.menuTitle.vars.errors|length %} has-error{% endif %}">
+                            {{ form_label(pageForm.menuTitle) }}
+                            {{ form_widget(pageForm.menuTitle, { 'attr': {'class': 'form-control'} }) }}
+                        </div>
+                    {% endif %}
+
+                    {% if pageForm.category is defined %}
+                        <div class="form-group{% if pageForm.category.vars.errors|length %} has-error{% endif %}">
+                            {{ form_label(pageForm.category) }}
+                            {{ form_widget(pageForm.category, { 'attr': {'class': 'form-control'} }) }}
+                        </div>
+                    {% endif %}
+
+                    {% if pageForm['parent'] is defined %}
+                        <div class="form-group{% if pageForm.parent.vars.errors|length %} has-error{% endif %}">
+                            {{ form_label(pageForm.parent) }}
+                            {{ form_widget(pageForm.parent, { 'attr': {'class': 'form-control'} }) }}
+                        </div>
+                    {% endif %}
+
+                    {% if pageForm.content is defined %}
+                        <div class="form-group{% if form_errors(pageForm.content) %} error{% endif %}">
+                            {{ form_label(pageForm.content) }}
+                            {{ form_widget(pageForm.content, { 'attr': {'class': 'form-control'} }) }}
+                        </div>
+                    {% endif %}
+
+                    <div class="form-group{% if form_errors(pageForm.metaDescription) %} error{% endif %}">
+                        {{ form_label(pageForm.metaDescription) }}
+                        {{ form_widget(pageForm.metaDescription, { 'attr': {'class': 'form-control'} }) }}
+                    </div>
+
+                </fieldset>
             </div>
-        {% endif %}
-        {{ form_rest(pageForm) }}
-        <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-save"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
-        {{ form_end(pageForm) }}
-    </div>
-    <div class="col-md-3">
-        <div class="well">
-            <ul class="list-unstyled">
-                <li><h3>{{ 'page.details'|trans({}, 'KRSolutionsKRCMSBundle') }}</h3></li>
-                        {% if page.createdBy is not null %}
-                    <li style="margin-bottom: 10px;"><span class="clearfix">{{ 'layout.created_by'|trans({}, 'KRSolutionsKRCMSBundle') }}:</span> <strong>{% if page.createdBy.KRCMSUsername is defined %}{{ page.createdBy.KRCMSUsername }}{% elseif page.createdBy.username is defined %}{{ page.createdBy.username }}{% else %}{{ page.createdBy.id }}{% endif %}</strong></li>
-                    {% endif %}
-                    {% if page.createdAt is not null %}
-                    <li style="margin-bottom: 10px;"><span class="clearfix">{{ 'layout.created_at'|trans({}, 'KRSolutionsKRCMSBundle') }}:</span> <strong>{{ page.createdAt|localizeddate('medium', 'medium') }}</strong></li>
-                    {% endif %}
-                    {% if page.updatedBy is not null %}
-                    <li style="margin-bottom: 10px;"><span class="clearfix">{{ 'layout.updated_by'|trans({}, 'KRSolutionsKRCMSBundle') }}:</span> <strong>{% if page.createdBy.KRCMSUsername is defined %}{{ page.updatedBy.KRCMSUsername }}{% elseif page.createdBy.username is defined %}{{ page.createdBy.username }}{% else %}{{ page.createdBy.id }}{% endif %}</strong></li>
-                    {% endif %}
-                    {% if page.updatedAt is not null and page.updatedAt != page.createdAt %}
-                    <li style="margin-bottom: 10px;"><span class="clearfix">{{ 'layout.updated_at'|trans({}, 'KRSolutionsKRCMSBundle') }}:</span> <strong>{{ page.updatedAt|localizeddate('medium', 'medium') }}</strong></li>
-                    {% endif %}
-            </ul>
+            {% if pageForm.header is defined %}
+                <div class="well">
+                    {{ form_row(pageForm.header) }}
+                </div>
+            {% endif %}
+            {{ form_rest(pageForm) }}
+            <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-save"></i> {{ 'layout.save'|trans({}, 'KRSolutionsKRCMSBundle') }}</button>
+            {{ form_end(pageForm) }}
+        </div>
+        <div class="col-md-3">
+            <div class="well">
+                <ul class="list-unstyled">
+                    <li><h3>{{ 'page.details'|trans({}, 'KRSolutionsKRCMSBundle') }}</h3></li>
+                            {% if page.createdBy is not null %}
+                        <li style="margin-bottom: 10px;"><span class="clearfix">{{ 'layout.created_by'|trans({}, 'KRSolutionsKRCMSBundle') }}:</span> <strong>{% if page.createdBy.KRCMSUsername is defined %}{{ page.createdBy.KRCMSUsername }}{% elseif page.createdBy.username is defined %}{{ page.createdBy.username }}{% else %}{{ page.createdBy.id }}{% endif %}</strong></li>
+                        {% endif %}
+                        {% if page.createdAt is not null %}
+                        <li style="margin-bottom: 10px;"><span class="clearfix">{{ 'layout.created_at'|trans({}, 'KRSolutionsKRCMSBundle') }}:</span> <strong>{{ page.createdAt|localizeddate('medium', 'medium') }}</strong></li>
+                        {% endif %}
+                        {% if page.updatedBy is not null %}
+                        <li style="margin-bottom: 10px;"><span class="clearfix">{{ 'layout.updated_by'|trans({}, 'KRSolutionsKRCMSBundle') }}:</span> <strong>{% if page.createdBy.KRCMSUsername is defined %}{{ page.updatedBy.KRCMSUsername }}{% elseif page.createdBy.username is defined %}{{ page.createdBy.username }}{% else %}{{ page.createdBy.id }}{% endif %}</strong></li>
+                        {% endif %}
+                        {% if page.updatedAt is not null and page.updatedAt != page.createdAt %}
+                        <li style="margin-bottom: 10px;"><span class="clearfix">{{ 'layout.updated_at'|trans({}, 'KRSolutionsKRCMSBundle') }}:</span> <strong>{{ page.updatedAt|localizeddate('medium', 'medium') }}</strong></li>
+                        {% endif %}
+                </ul>
+            </div>
         </div>
     </div>
 

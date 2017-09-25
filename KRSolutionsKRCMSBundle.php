@@ -41,6 +41,7 @@ class KRSolutionsKRCMSBundle extends Bundle
             'KRSolutions\\Bundle\\KRCMSBundle\\Entity\\CategoryInterface' => 'kr_solutions_krcms.model.category_class',
             'KRSolutions\\Bundle\\KRCMSBundle\\Entity\\FileInterface' => 'kr_solutions_krcms.model.file_class',
             'KRSolutions\\Bundle\\KRCMSBundle\\Entity\\HeaderInterface' => 'kr_solutions_krcms.model.header_class',
+            'KRSolutions\\Bundle\\KRCMSBundle\\Entity\\LanguageInterface' => 'kr_solutions_krcms.model.language_class',
             'KRSolutions\\Bundle\\KRCMSBundle\\Entity\\MenuInterface' => 'kr_solutions_krcms.model.menu_class',
             'KRSolutions\\Bundle\\KRCMSBundle\\Entity\\PageInterface' => 'kr_solutions_krcms.model.page_class',
             'KRSolutions\\Bundle\\KRCMSBundle\\Entity\\PageTypeInterface' => 'kr_solutions_krcms.model.page_type_class',

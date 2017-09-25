@@ -22,3 +22,9 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "%kr_solutions_krcms.model.category_class%"
+
+    kr_solutions_krcms.language_manager:
+        class: KRSolutions\Bundle\KRCMSBundle\Doctrine\LanguageManager
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "%kr_solutions_krcms.model.language_class%"
