@@ -172,7 +172,7 @@ class MenuTwigExtension extends \Twig_Extension
      *
      * @return bool
      */
-    private function renderItem(&$html, Page $parent, Page $activePage, $nested = true)
+    private function renderItem(&$html, Page $parent, Page $activePage = null, $nested = true)
     {
         $isActive = false;
         $nestedHtml = '';
