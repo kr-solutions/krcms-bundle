@@ -3,11 +3,15 @@
 namespace KRSolutions\Bundle\KRCMSBundle\Controller;
 
 use Exception;
+use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use KRSolutions\Bundle\KRCMSBundle\Entity\Page;
+use KRSolutions\Bundle\KRCMSBundle\Repository\PageRepository;
 use SimpleXMLElement;
+use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Orm\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Controller to render a page by it's page handler
@@ -25,11 +29,11 @@ class DefaultController extends AbstractKRCMSController
      * @throws Exception
      * @throws NotFoundHttpException
      */
-    public function pageAction(Request $request, \Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Orm\Route $routeDocument = null, $contentDocument = null, $template = null, $page = 1)
+    public function pageAction(Request $request, Route $routeDocument = null, $contentDocument = null, $template = null, $page = 1)
     {
         /* @var $contentDocument Page */
         if ($contentDocument->getPageType()->getHasChildren()) {
-            /* @var $pageRepository \KRSolutions\Bundle\KRCMSBundle\Repository\PageRepository */
+            /* @var $pageRepository PageRepository */
             $pageRepository = $this->getDoctrine()->getRepository('KRSolutionsKRCMSBundle:Page');
 
             $childrenQB = $pageRepository->getActiveChildrenQB($contentDocument);
@@ -39,7 +43,7 @@ class DefaultController extends AbstractKRCMSController
                 $childrenQB, $page < 1 ? 1 : $page, $contentDocument->getPageType()->getChildrenPerPage() < 1 ? 10 : $contentDocument->getPageType()->getChildrenPerPage()
             );
 
-            /* @var $children \Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination */
+            /* @var $children SlidingPagination */
 
             if ($children->getCurrentPageNumber() > 1) {
                 $next_page_url = $this->generateUrl($routeDocument->getName(), array(
@@ -84,8 +88,10 @@ class DefaultController extends AbstractKRCMSController
         $urlset = new SimpleXMLElement($sitemapXml);
 
         foreach ($pages as $page) {
+            /* @var $page Page */
             $url = $urlset->addChild('url');
-            $url->addChild('loc', $this->generateUrl('kr_solutions_krcms_page', array('permalink' => $page->getPermalink()), true));
+
+            $url->addChild('loc', $this->generateUrl($page->getRoutes()->first()->getName(), array(), UrlGeneratorInterface::ABSOLUTE_URL));
         }
 
         $response = new Response();
