@@ -185,6 +185,28 @@ class PageRepository extends EntityRepository
     }
 
     /**
+     * Search active pages
+     *
+     * @param string $search_term
+     *
+     * @return \Doctrine\DBAL\Query\QueryBuilder
+     */
+    public function searchActivePagesQB($search_term = '')
+    {
+        $qb = $this->createQueryBuilder('pages');
+
+        $qb->where('pages.title LIKE :search_term');
+        $qb->orWhere('pages.content LIKE :search_term');
+        $qb->setParameter('search_term', '%'.$search_term.'%');
+
+        // Check if the page is active
+        $qb->andWhere('pages.publishAt < CURRENT_TIMESTAMP() OR pages.publishAt IS NULL');
+        $qb->andWhere('pages.publishTill > CURRENT_TIMESTAMP() OR pages.publishTill IS NULL');
+
+        return $qb;
+    }
+
+    /**
      * Get active pages with a menu title from parent page
      *
      * @param Page $page
