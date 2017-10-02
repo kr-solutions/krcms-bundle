@@ -9,6 +9,14 @@ KRSolutions\Bundle\KRCMSBundle\Entity\Slider:
             generator:
                 strategy: AUTO
     fields:
+        name:
+            type: string
+            nullable: false
+            length: 255
+        description:
+            type: string
+            nullable: false
+            length: 255
         isDefault:
             type: boolean
             nullable: false
