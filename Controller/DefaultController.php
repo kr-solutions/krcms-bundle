@@ -60,10 +60,13 @@ class DefaultController extends AbstractKRCMSController
             } else {
                 $prev_page_url = null;
             }
+
+            $current_page_number = $children->getCurrentPageNumber();
         } else {
             $children = array();
             $next_page_url = null;
             $prev_page_url = null;
+            $current_page_number = null;
         }
 
         return $this->render($template, array(
@@ -71,6 +74,7 @@ class DefaultController extends AbstractKRCMSController
                 'children' => $children,
                 'next_page_url' => $next_page_url,
                 'prev_page_url' => $prev_page_url,
+                'current_page_number' => $current_page_number,
                 'route' => $routeDocument,
         ));
     }
