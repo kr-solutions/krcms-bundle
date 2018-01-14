@@ -69,12 +69,26 @@ class DefaultController extends AbstractKRCMSController
             $current_page_number = null;
         }
 
+        if ($contentDocument->getPageType()->getHasSlider()) {
+            $slider = $contentDocument->getSlider();
+        } else {
+            $slider = null;
+        }
+
+        if ($contentDocument->getPageType()->getHasHeader()) {
+            $header = $contentDocument->getHeader();
+        } else {
+            $header = null;
+        }
+
         return $this->render($template, array(
                 'page' => $contentDocument,
                 'children' => $children,
                 'next_page_url' => $next_page_url,
                 'prev_page_url' => $prev_page_url,
                 'current_page_number' => $current_page_number,
+                'slider' => $slider,
+                'header' => $header,
                 'route' => $routeDocument,
         ));
     }
