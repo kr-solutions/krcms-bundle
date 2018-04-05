@@ -561,7 +561,7 @@ class PageType implements PageTypeInterface
      */
     public function isUserGranted(\Symfony\Component\Security\Core\User\UserInterface $user)
     {
-        if (0 === count($this->roles)) {
+        if (empty($this->roles)) {
             return true;
         }
 

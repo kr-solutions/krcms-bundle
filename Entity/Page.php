@@ -537,7 +537,7 @@ class Page implements PageInterface
      */
     public function getCategory()
     {
-        return $this->header;
+        return $this->category;
     }
 
     /**

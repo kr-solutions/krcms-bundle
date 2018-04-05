@@ -81,6 +81,8 @@ class DefaultController extends AbstractKRCMSController
             $header = null;
         }
 
+        $categories = $this->getDoctrine()->getRepository(\KRSolutions\Bundle\KRCMSBundle\Entity\Category::class)->findAll();
+
         return $this->render($template, array(
                 'page' => $contentDocument,
                 'children' => $children,
@@ -89,6 +91,7 @@ class DefaultController extends AbstractKRCMSController
                 'current_page_number' => $current_page_number,
                 'slider' => $slider,
                 'header' => $header,
+                'categories' => $categories,
                 'route' => $routeDocument,
         ));
     }
