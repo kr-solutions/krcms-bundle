@@ -11,7 +11,6 @@ var merge = require('gulp-merge');
 
 // Directory configuration
 var config = {
-    bowerDir: './bower_components',
     nodeDir: './node_modules',
     distDir: './Resources/public/dist'
 };
@@ -56,10 +55,10 @@ gulp.task('vendor-styles', function () {
 // Concatenate & Minify Vendor
 gulp.task('vendor-scripts', function () {
     return gulp.src([
-        config.nodeDir  + '/jquery/dist/jquery.min.js',
-        config.nodeDir  + '/jquery-migrate/dist/jquery-migrate.min.js',
-        config.nodeDir  + '/bootstrap/dist/js/bootstrap.min.js',
-        config.bowerDir + '/TableDnD/dist/jquery.tablednd.min.js'
+        config.nodeDir + '/jquery/dist/jquery.min.js',
+        config.nodeDir + '/jquery-migrate/dist/jquery-migrate.min.js',
+        config.nodeDir + '/bootstrap/dist/js/bootstrap.min.js',
+        config.nodeDir + '/tablednd/dist/jquery.tablednd.min.js'
     ])
             .pipe(concat('vendor.js'))
             .pipe(rename('vendor.min.js'))
