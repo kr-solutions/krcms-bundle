@@ -88,7 +88,7 @@ class KRSolutionsKRCMSExtension extends Extension implements PrependExtensionInt
         $config = $this->processConfiguration(new Configuration(), $configs);
 
         $cmfRoutingBundleConfig = array();
-        $ivoryCkEditorConfig = array();
+        $FOSCKEditorConfig = array();
         $fmElfinderConfig = array();
 
         if (isset($bundles['CmfRoutingBundle'])) {
@@ -109,8 +109,8 @@ class KRSolutionsKRCMSExtension extends Extension implements PrependExtensionInt
             );
         }
 
-        if (isset($bundles['IvoryCKEditorBundle'])) {
-            $ivoryCkEditorConfig = array(
+        if (isset($bundles['FOSCKEditorBundle'])) {
+            $FOSCKEditorConfig = array(
             );
         }
 
@@ -167,8 +167,8 @@ class KRSolutionsKRCMSExtension extends Extension implements PrependExtensionInt
 
         foreach ($container->getExtensions() as $name => $extension) {
             switch ($name) {
-                case 'ivory_ck_editor':
-                    $container->prependExtensionConfig($name, $ivoryCkEditorConfig);
+                case 'fos_ck_editor':
+                    $container->prependExtensionConfig($name, $FOSCKEditorConfig);
                     break;
                 case 'fm_elfinder':
                     $container->prependExtensionConfig($name, $fmElfinderConfig);
