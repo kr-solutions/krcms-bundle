@@ -3,7 +3,7 @@
 namespace KRSolutions\Bundle\KRCMSBundle\Form\Type;
 
 use Doctrine\ORM\EntityRepository;
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use KRSolutions\Bundle\KRCMSBundle\Entity\Header;
 use KRSolutions\Bundle\KRCMSBundle\Entity\PageInterface;
 use KRSolutions\Bundle\KRCMSBundle\Form\DataTransformer\NullToEmptyStringTransformer;
